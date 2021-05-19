@@ -1,0 +1,28 @@
+.mat-toolbar {
+	height: 55px;
+	padding-left: 1rem;
+	padding-right: 0.5rem;
+	color: #ccc;
+	font-size: 0.8rem;
+	background: #111;
+	border-top: 1px solid #333;
+
+	.copyright {
+		text-align: center;
+	}
+
+	.mat-icon-button {
+		color: #ccc;
+		height: 30px;
+		width: 30px;
+	}
+
+	.fab, .far {
+    margin-top: -10px;
+	}
+
+	.orange {
+		color: orange;
+	}
+
+}

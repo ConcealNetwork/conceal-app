@@ -1,1 +1,47 @@
-<p>header works!</p>
+<mat-toolbar class="header" fxLayout="row" color="primary">
+
+	<a routerLink="/home">
+		<h1>Conceal Network</h1>
+	</a>
+
+	<div class="title" fxHide fxShow.lt-md>
+	Conceal <strong>Hub</strong>
+	</div>
+
+	<div class="links" fxHide fxShow.gt-sm>
+		<a class="btn" href="https://conceal.network/">
+			<button mat-button class="navlink">Wallet</button>
+		</a>
+		<a class="btn" href="https://conceal.network/">
+			<button mat-button class="navlink">Deposits</button>
+		</a>
+		<a class="btn" href="https://conceal.network/">
+			<button mat-button class="navlink">Messaging</button>
+		</a>
+		<a class="btn" href="https://conceal.network/">
+			<button mat-button class="navlink">ID</button>
+		</a>
+		<a class="btn" href="https://conceal.network/">
+			<button mat-button class="navlink">Pay</button>
+		</a>
+		<a class="btn" href="https://conceal.network/">
+			<button mat-button class="navlink">Bridge</button>
+		</a>
+		<a class="btn" href="https://conceal.network/">
+			<button mat-button class="navlink">Explorer</button>
+		</a>
+		<a class="btn" href="https://conceal.network/">
+			<button mat-button class="navlink">Pool</button>
+		</a>
+	</div>
+
+	<span class="spacer" fxHide fxShow.lt-md></span>
+
+
+	<div class="vert" fxLayoutAlign="center center" fxHide fxShow.lt-md>
+		<button mat-icon-button class="vert_round" (click)="toggleSidenav()">
+			<mat-icon>menu</mat-icon>
+		</button>
+	</div>
+
+</mat-toolbar>
