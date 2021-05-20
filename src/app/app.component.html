@@ -1,8 +1,19 @@
-<!-- header -->
-<app-header></app-header>
+<mat-sidenav-container fullscreen>
 
-<!-- routes will be rendered here -->
-<router-outlet></router-outlet>
+  <mat-sidenav #sidenav opened position="end" role="navigation" mode="over">
+    <app-sidenav></app-sidenav> <!-- sidenav -->
+  </mat-sidenav>
 
-<!-- footer -->
-<app-footer></app-footer>
+  <mat-sidenav-content fxLayout="column">
+
+		<app-header></app-header> <!-- header -->
+
+    <main class="container">
+      <router-outlet></router-outlet> <!-- content -->
+    </main>
+
+		<app-footer></app-footer> <!-- footer -->
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
