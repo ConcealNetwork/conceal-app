@@ -1,9 +1,8 @@
 // Fix toolbar to the bottom and make it 55px in height
 footer {
-	height: 55px;
 	position: fixed;
   bottom: 0px;
-  overflow: hide;
+  overflow: hidden;
   width: 100%;
 	mat-toolbar {
 		background-color: #111;

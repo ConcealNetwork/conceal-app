@@ -11,7 +11,7 @@ mat-sidenav {
 
 // Component content area
 .container {
-  min-height: calc(100vh - 65px - 65px); // Component content fills entire vertical space
+	height: 100vh;
   overflow: auto; // Keeps header from scrolling away
 	background-color: #1a1a1a;
 	padding: 10px;
