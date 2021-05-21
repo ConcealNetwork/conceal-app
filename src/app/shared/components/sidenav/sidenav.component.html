@@ -1,34 +1,31 @@
-<button mat-button class="close">
+<button mat-button class="close" (click)="close()">
 	<mat-icon aria-hidden="false" aria-label="close">close</mat-icon>
 	<span class="text">Close</span>
 </button>
 
 <div class="links">
-	<a class="buttonLink" href="#">
-		<button mat-button>Wallets</button>
+	<a class="buttonLink" (click)="onLinks('wallet')">
+		<button mat-button>Wallet</button>
 	</a>
-	<a class="buttonLink" href="#">
+	<a class="buttonLink" (click)="onLinks('deposits')">
 		<button mat-button>Deposits</button>
 	</a>
-	<a class="buttonLink" href="#">
+	<a class="buttonLink" (click)="onLinks('live')">
 		<button mat-button>Live</button>
 	</a>
-	<a class="buttonLink" href="#">
-		<button mat-button>ID</button>
+	<a class="buttonLink" (click)="onLinks('id')">
+		<button mat-button>@ID</button>
 	</a>
-	<a class="buttonLink" href="#">
+	<a class="buttonLink" (click)="onLinks('pay')">
 		<button mat-button>Pay</button>
 	</a>
-	<a class="buttonLink" href="#">
+	<a class="buttonLink" (click)="onLinks('bridge')">
 		<button mat-button>Bridge</button>
 	</a>
-	<a class="buttonLink" href="#">
+	<a class="buttonLink" (click)="onLinks('explorer')">
 		<button mat-button>Explorer</button>
 	</a>
-	<a class="buttonLink" href="#">
-		<button mat-button>Pool</button>
-	</a>
-	<a class="buttonLink" routerLink="/home">
-		<button mat-button class="active">Dashboard</button>
+	<a class="buttonLink" (click)="onLinks('settings')">
+		<button mat-button>Settings</button>
 	</a>
 </div>

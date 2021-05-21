@@ -1,7 +1,7 @@
 <mat-sidenav-container fullscreen>
 
-  <mat-sidenav #sidenav opened position="end" role="navigation" mode="over">
-    <app-sidenav></app-sidenav> <!-- sidenav -->
+  <mat-sidenav #sidenav position="end" role="navigation" mode="push">
+    <app-sidenav (sideNavClosed)="sidenav.close()"></app-sidenav> <!-- sidenav -->
   </mat-sidenav>
 
   <mat-sidenav-content fxLayout="column">
@@ -12,7 +12,7 @@
       <router-outlet></router-outlet> <!-- content -->
     </main>
 
-		<app-footer></app-footer> <!-- footer -->
+		<app-footer (sidenavToggle)="sidenav.toggle()"></app-footer> <!-- footer -->
 
   </mat-sidenav-content>
 

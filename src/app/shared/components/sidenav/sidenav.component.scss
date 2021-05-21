@@ -1,6 +1,5 @@
 .close {
-	color: #666;
-	transform: scale(1.2);
+	color: orange;
 	.text {
 		margin-left: 15px;
 	}
@@ -27,7 +26,7 @@
 }
 
 .links {
-	margin-top: 3rem;
+	margin-top: 2rem;
 	.active {
 		color: orange !important;
 		border-bottom: 2px solid orange;
