@@ -1,53 +1,19 @@
-.mat-toolbar {
-	height: 95px;
-	padding: 0 0 0 1.5rem;
-	background: #111;
-	border-bottom: 1px solid #333;
-
-	h1 {
-		float: left;
-    width: 56px;
-    height: 56px;
-    text-indent: -999em;
-    background: url(../../../../assets/icons/icon-56x56.png) 0 0 no-repeat;
-    background-size: auto 100%;
-	}
-
-	.title {
-		font-size: 1.4rem;
-		margin-left: 1.6rem;
-		color: #fff;
-	}
-
-	.links {
-		margin-left: 1.5rem;
-	}
-
-	.navlink {
+// Fix toolbar to the top and make it 55px in height
+header {
+	mat-toolbar {
+		height: 55px;
+		background-color: #111;
 		color: #ccc;
-		margin-left: 5px;
-		font-weight: 400;
-		text-transform: uppercase;
-		letter-spacing: 1.8px;
-		font-size: 1.1rem;
+	}
+	.title {
+		font-size: 16px;
+		margin-left: 10px;
+	}
+	.toolbar-icon {
+		display: inline-flex; // Proper verticle alignment
 	}
 
-	.active {
-		color: orange !important;
-		border-bottom: 2px solid orange;
-		border-bottom-left-radius: 0px;
-		border-bottom-right-radius: 0px;
+	.fill-space {
+		flex: 1 1 auto; // Fill space between two icons
 	}
-
-	.vert {
-		cursor: pointer;
-		transform: scale(1.5);
-		color: #fff;
-		margin-right: 15px;
-	}
-
-	.spacer {
-		flex: auto;
-	}
-
 }

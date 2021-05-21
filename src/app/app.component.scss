@@ -11,17 +11,14 @@ mat-sidenav {
 
 // Component content area
 .container {
-  min-height: calc(100vh - 105px - 65px); // Component content fills entire vertical space
+  min-height: calc(100vh - 65px - 65px); // Component content fills entire vertical space
   overflow: auto; // Keeps header from scrolling away
-	background-color: #151515;
+	background-color: #1a1a1a;
 	padding: 10px;
 }
 
 @media only screen and (max-width: 960px) {
-	.container {
-		min-height: calc(100vh - 105px - 119px); // Component content fills entire vertical space
-	}
 	mat-sidenav {
-		width: 60vw;
+		width: 55vw;
 	}
 }

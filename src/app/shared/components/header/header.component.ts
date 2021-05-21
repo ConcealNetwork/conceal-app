@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+	 // You will want to hide and show a back-arrow depending on navigation state, if linking to other components from within the components
+  showBackArrow = false;
+
   constructor() { }
 
 	toggleSidenav() {	}

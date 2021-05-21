@@ -1,47 +1,17 @@
-<mat-toolbar class="header" fxLayout="row" color="primary">
+<header class="footer">
+	<mat-toolbar class="mat-elevation-z4">
 
-	<a routerLink="/home">
-		<h1>Conceal Network</h1>
-	</a>
+		<div class="toolbar-icon">
+			<img src="./assets/icons/icon-24x24.png" width="24px" height="24px">
+		</div>
 
-	<div class="title" fxHide fxShow.lt-md>
-	Conceal <strong>Hub</strong>
-	</div>
+		<span class="title">Home</span>
 
-	<div class="links" fxHide fxShow.gt-sm>
-		<a class="btn" href="https://conceal.network/">
-			<button mat-button class="navlink">Wallets</button>
-		</a>
-		<a class="btn" href="https://conceal.network/">
-			<button mat-button class="navlink">Deposits</button>
-		</a>
-		<a class="btn" href="https://conceal.network/">
-			<button mat-button class="navlink">Live</button>
-		</a>
-		<a class="btn" href="https://conceal.network/">
-			<button mat-button class="navlink">ID</button>
-		</a>
-		<a class="btn" href="https://conceal.network/">
-			<button mat-button class="navlink">Pay</button>
-		</a>
-		<a class="btn" href="https://conceal.network/">
-			<button mat-button class="navlink">Bridge</button>
-		</a>
-		<a class="btn" href="https://conceal.network/">
-			<button mat-button class="navlink">Explorer</button>
-		</a>
-		<a class="btn" href="https://conceal.network/">
-			<button mat-button class="navlink">Pool</button>
-		</a>
-	</div>
+		<span class="fill-space"></span>
 
-	<span class="spacer" fxHide fxShow.lt-md></span>
+		<div class="toolbar-icon">
+			<mat-icon *ngIf="showBackArrow" alt="back arrow">arrow_back</mat-icon>
+		</div>
 
-
-	<div class="vert" fxLayoutAlign="center center" fxHide fxShow.lt-md>
-		<button mat-icon-button class="vert_round" (click)="toggleSidenav()">
-			<mat-icon>menu</mat-icon>
-		</button>
-	</div>
-
-</mat-toolbar>
+	</mat-toolbar>
+</header>
