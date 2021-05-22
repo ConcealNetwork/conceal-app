@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { DepositsRoutingModule } from './deposits-routing.module';
+import { DepositsComponent } from './deposits.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DepositsComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    DepositsRoutingModule
   ]
 })
 export class DepositsModule { }

@@ -19,7 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './modules/home/home.component';
 import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { SidenavComponent } from './shared/components/sidenav/sidenav.component'
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    DashboardComponent,
+    HomeComponent,
     SidenavComponent
   ],
   imports: [
