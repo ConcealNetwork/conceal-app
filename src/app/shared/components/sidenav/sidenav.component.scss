@@ -1,36 +1,36 @@
-.close {
-	color: orange;
-	.text {
-		margin-left: 15px;
+.side {
+
+	.close {
+		color: orange;
+		.text {
+			margin-left: 15px;
+		}
+		:hover {
+			color: #999;
+		}
 	}
-}
 
-.close:hover {
-	color: #999;
-}
-
-.buttonLink {
-	color: #444;
-	display: block;
-	margin-top: 1.2rem;
-}
-
-.buttonLink:hover {
-	color: orange;
-}
-
-.mat-button {
-	font-weight: 400;
-	text-transform: uppercase;
-	letter-spacing: 1.8px;
-}
-
-.links {
-	margin-top: 2rem;
-	.active {
-		color: orange !important;
-		border-bottom: 2px solid orange;
-		border-bottom-left-radius: 0px;
-		border-bottom-right-radius: 0px;
+	.mat-button {
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 1.8px;
 	}
+
+	.links {
+		margin-top: 2rem;
+	}
+
+	.link {
+		color: #444;
+		display: block;
+		margin-top: 1.2rem;
+		:hover {
+			color: orange;
+		}
+	}
+
+	.active-menu-item {
+		color: orange;
+	}
+
 }
