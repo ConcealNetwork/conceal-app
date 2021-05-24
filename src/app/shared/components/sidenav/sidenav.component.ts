@@ -15,11 +15,6 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
   }
 
-	onLinks(link: string) {
-    this.router.navigateByUrl('/' + link);
-    this.sideNavClosed.emit(); // Emit event to parent component so it can tell sidenav to close
-  }
-
 	close() {
 		this.sideNavClosed.emit(); // Emit event to parent component so it can tell sidenav to close
 	}
