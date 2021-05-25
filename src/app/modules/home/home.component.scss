@@ -1,6 +1,6 @@
 .container {
-	height: 100%; // Component content fills entire vertical space
-	overflow: auto;
+	// height: 100%; // Component content fills entire vertical space
+	// overflow: auto;
 	color: #fff;
 
 	.headline {
@@ -22,6 +22,29 @@
 		margin-bottom: 100px;
 		color: rgb(240, 170, 41);
 		text-shadow: -0.15em 0.1em 0.5em rgb(100, 100, 100), 0.2em 0 0.4em rgb(100, 100, 100);
+	}
+
+	.mat-card {
+		border-radius: 10px;
+    background: rgba(154, 156, 158, 0.1);
+    border: solid 3px rgba(204, 204, 204, 0.2);
+		color: #fff;
+		.mat-card-title {
+			font-size: 1rem;
+		}
+		.price {
+			margin-top: 10px;
+		}
+	}
+
+	.mat-card-avatar {
+		width: 24px;
+		height: 24px;
+	}
+
+	.header-image {
+		background-image: url('/./assets/icons/icon-24x24.png');
+		background-size: cover;
 	}
 
 }
