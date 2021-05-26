@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 		this.getPrices();
 		this.getArticles();
-		console.log(this.posts);
   }
 
 	getPrices() {
