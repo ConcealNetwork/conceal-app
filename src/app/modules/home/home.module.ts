@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { TrendModule } from 'ngx-trend';
 
@@ -21,6 +22,7 @@ import { HomeComponent } from './home.component';
 		FlexLayoutModule,
 		MatCardModule,
 		MatIconModule,
+		MatButtonModule,
 		TrendModule
   ]
 })
