@@ -1,32 +1,72 @@
-<div class="container" fxLayout="column" fxLayoutGap="25px">
+<div class="container" fxLayout="column" fxLayoutGap="15x">
 
+	<h2 class="title">Markets</h2>
 	<div fxLayout="row" fxFlex fxLayoutGap="10px">
-		<mat-card fxLayout="column" fxFlex>
-			<mat-card-header>
-				<mat-card-title>$CCX</mat-card-title>
-				<div mat-card-avatar class="header-image"></div>
-			</mat-card-header>
-			<mat-card-content>
-				<div class="price">${{ccx | number : '1.1-2' }} USD</div>
-			</mat-card-content>
+		<mat-card class="rounded" fxLayout="column" fxFlex>
+			<div fxLayout="row">
+				<div class="icon">
+					<img src="./assets/icons/ccx.png" width="44px">
+				</div>
+				<div class="spark">
+					<ngx-trend [height]="32" [width]="80" [padding]="2" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[4,2,5,9,5,12,3,5,3,4,1,8,2,9,14]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="2" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
+				</div>
+			</div>
+			<div fxLayout="column">
+				<div class="label">Conceal</div>
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<div class="price">${{ccx | number : '1.2-2' }}</div>
+					<div class="trend"><mat-icon class="ico">arrow_drop_up</mat-icon>7.15%</div>
+				</div>
+			</div>
 		</mat-card>
-		<mat-card fxLayout="column" fxFlex>
-			<mat-card-header>
-				<mat-card-title>$wCCX</mat-card-title>
-				<div mat-card-avatar class="header-image"></div>
-			</mat-card-header>
-			<mat-card-content>
-				<div class="price">${{wccx | number : '1.1-2' }} USD</div>
-			</mat-card-content>
+		<mat-card class="rounded" fxLayout="column" fxFlex>
+			<div fxLayout="row">
+				<div class="icon">
+					<img src="./assets/icons/wccx.png" width="44px">
+				</div>
+				<div class="spark">
+					<ngx-trend [height]="32" [width]="80" [padding]="2" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[5,2,5,9,4,10,3,5,18,4,1,2,2,9,13]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="2" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
+				</div>
+			</div>
+			<div fxLayout="column">
+				<div class="label">Wrapped (wCCX)</div>
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<div class="price">${{wccx | number : '1.2-2' }}</div>
+					<div class="trend"><mat-icon class="ico">arrow_drop_up</mat-icon>6.45%</div>
+				</div>
+			</div>
 		</mat-card>
 	</div>
 
-	<div fxLayout="row" fxLayoutAlign="center stretch">
-		<div fxLayout="column" fxLayoutAlign="center center" fxFlex>
-			<h1 class="headline">Conceal <strong>Hub</strong></h1>
-			<p class="description">The one application to rule them all.</p>
-		</div>
+	<h2 class="title">Supply</h2>
+	<div fxLayout="column" fxFlex fxLayoutGap="10px">
+		<mat-card class="" fxLayout="column" fxFlex>
+			<div fxLayout="column">
+				<div class="label">Total Deposits</div>
+				<div class="sublabel">Funds locked in deposits and investments</div>
+			</div>
+			<div fxLayout="column" fxLayoutAlign="center center">
+				<div class="value">7,860,121 CCX</div>
+			</div>
+		</mat-card>
+		<mat-card class="" fxLayout="column" fxFlex>
+			<div fxLayout="column">
+				<div class="label">Circulating Supply</div>
+				<div class="sublabel">The total number of coins not banked</div>
+			</div>
+			<div fxLayout="column" fxLayoutAlign="center center">
+				<div class="value">11,171,516 CCX</div>
+			</div>
+		</mat-card>
+		<mat-card class="" fxLayout="column" fxFlex>
+			<div fxLayout="column">
+				<div class="label">Total Supply</div>
+				<div class="sublabel">The total supply minted to date</div>
+			</div>
+			<div fxLayout="column" fxLayoutAlign="center center">
+				<div class="value">19,031,643 CCX</div>
+			</div>
+		</mat-card>
 	</div>
-
 
 </div>

@@ -12,7 +12,7 @@
       <router-outlet></router-outlet> <!-- content -->
     </main>
 
-		<app-footer (sidenavToggle)="sidenav.toggle()"></app-footer> <!-- footer -->
+		<app-footer *ngIf="platform.ANDROID || platform.IOS" (sidenavToggle)="sidenav.toggle()"></app-footer> <!-- footer -->
 
   </mat-sidenav-content>
 
