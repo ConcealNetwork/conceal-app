@@ -1,17 +1,79 @@
 {
-  "name": "conceal-hub",
-  "short_name": "conceal-hub",
-  "theme_color": "#ffa500",
-  "background_color": "#111111",
-  "display": "standalone",
+  "name": "Conceal Hub",
+  "short_name": "Conceal Hub",
+	"description": "The one application to rule them all.",
+  "theme_color": "#111",
+  "background_color": "#111",
+  "display": "fullscreen",
+	"orientation": "portrait-primary",
   "scope": "./",
   "start_url": "./",
   "icons": [
-    {
-      "src": "assets/icons/icon-24x24.png",
+		{
+      "src": "assets/icons/maskable_icon_x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+		{
+      "src": "assets/icons/icon_x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+		{
+      "src": "assets/icons/icon_x64.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any"
+    },
+		{
+      "src": "assets/icons/maskable_icon_x72.png",
       "sizes": "72x72",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "maskable"
+    },
+		{
+      "src": "assets/icons/maskable_icon_x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+		{
+      "src": "assets/icons/maskable_icon_x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+		{
+      "src": "assets/icons/icon_x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+		{
+      "src": "assets/icons/icon_x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+		{
+      "src": "assets/icons/maskable_icon_x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+		{
+      "src": "assets/icons/maskable_icon_x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+		{
+      "src": "assets/icons/icon_x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
