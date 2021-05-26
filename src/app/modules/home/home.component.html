@@ -76,7 +76,8 @@
 				<mat-card-title>{{item.title}}</mat-card-title>
 				<mat-card-subtitle>{{item.pubDate}}</mat-card-subtitle>
 			</mat-card-header>
-			<img mat-card-image src="{{item.thumbnail}}" alt="Image">
+			<img *ngIf="item.thumbnail != 'https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=95c80f02f39f'" mat-card-image src="{{item.thumbnail}}" alt="Image">
+			<img *ngIf="item.thumbnail == 'https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=95c80f02f39f'" mat-card-image src="https://miro.medium.com/max/1024/0*3EfILMb_EljUUSOp" alt="Image">
 			<mat-card-actions>
 				<a mat-raised-button color="primary" href="{{item.link}}" target="_blank" fxFlex.lt-sm>Read</a>
 			</mat-card-actions>
