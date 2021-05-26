@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
-	{ path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule), data: { title: "Welcome to Conceal Hub" } },
+	{ path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule), data: { title: "Conceal Hub" } },
 	{ path: 'wallet', loadChildren: () => import('./modules/wallet/wallet.module').then(m => m.WalletModule), data: { title: "Conceal Wallet" } },
 	{ path: 'settings', loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsModule), data: { title: "Conceal Hub Settings" } },
 	{ path: 'pay', loadChildren: () => import('./modules/pay/pay.module').then(m => m.PayModule), data: { title: "Conceal Pay" } },

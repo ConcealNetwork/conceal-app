@@ -13,7 +13,7 @@
 			</div>
 			<div fxLayout="column">
 				<div class="label">Conceal (CCX)</div>
-				<div fxLayout="row" fxLayoutAlign="space-between center">
+				<div class="stats" fxLayout="row" fxLayoutAlign="space-between center">
 					<div class="price">${{ccx | number : '1.2-2' }}</div>
 					<div class="trend"><mat-icon class="ico">arrow_drop_up</mat-icon>7.15%</div>
 				</div>
@@ -30,7 +30,7 @@
 			</div>
 			<div fxLayout="column">
 				<div class="label">Wrapped (wCCX)</div>
-				<div fxLayout="row" fxLayoutAlign="space-between center">
+				<div class="stats" fxLayout="row" fxLayoutAlign="space-between center">
 					<div class="price">${{wccx | number : '1.2-2' }}</div>
 					<div class="trend"><mat-icon class="ico">arrow_drop_up</mat-icon>6.45%</div>
 				</div>
@@ -76,8 +76,7 @@
 				<mat-card-title>{{item.title}}</mat-card-title>
 				<mat-card-subtitle>{{item.pubDate}}</mat-card-subtitle>
 			</mat-card-header>
-			<img *ngIf="item.thumbnail != 'https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=95c80f02f39f'" mat-card-image src="{{item.thumbnail}}" alt="Image">
-			<img *ngIf="item.thumbnail == 'https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=95c80f02f39f'" mat-card-image src="https://miro.medium.com/max/1024/0*3EfILMb_EljUUSOp" alt="Image">
+			<img mat-card-image src="{{item.thumbnail}}" alt="Image">
 			<mat-card-actions>
 				<a mat-raised-button color="primary" href="{{item.link}}" target="_blank" fxFlex.lt-sm>Read</a>
 			</mat-card-actions>
