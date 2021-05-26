@@ -19,6 +19,9 @@ mat-sidenav {
 }
 
 @media only screen and (max-width: 960px) {
+	.container {
+		height: calc(100vh - 140px);
+	}
 	mat-sidenav {
 		width: 55vw;
 	}

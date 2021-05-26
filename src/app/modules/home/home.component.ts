@@ -12,11 +12,14 @@ export class HomeComponent implements OnInit {
 
 	ccx: number = 0;
 	wccx: number = 0;
+	posts: any = [];
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
 		this.getPrices();
+		this.getArticles();
+		console.log(this.posts);
   }
 
 	getPrices() {
@@ -24,6 +27,13 @@ export class HomeComponent implements OnInit {
 			let prices: any = data;
 			this.ccx = prices['conceal'].usd;
 			this.wccx = prices['wrapped-conceal'].usd;
+		})
+	}
+
+	getArticles() {
+		this.apiService.getMediumArticles().subscribe((data) => {
+			let feed: any = data;
+			this.posts.push(...feed.items);
 		})
 	}
 

@@ -1,8 +1,8 @@
-<div class="container" fxLayout="column" fxLayoutGap="15x">
+<div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15x">
 
 	<h2 class="title">Markets</h2>
-	<div fxLayout="row" fxFlex fxLayoutGap="10px">
-		<mat-card class="rounded" fxLayout="column" fxFlex>
+	<div fxLayout="row" fxFlex.lt-sm fxLayoutGap="10px">
+		<mat-card class="rounded" fxLayout="column" fxFlex.lt-sm>
 			<div fxLayout="row">
 				<div class="icon">
 					<img src="./assets/icons/ccx.png" width="44px">
@@ -19,7 +19,7 @@
 				</div>
 			</div>
 		</mat-card>
-		<mat-card class="rounded" fxLayout="column" fxFlex>
+		<mat-card class="rounded" fxLayout="column" fxFlex.lt-sm>
 			<div fxLayout="row">
 				<div class="icon">
 					<img src="./assets/icons/wccx.png" width="44px">
@@ -39,33 +39,47 @@
 	</div>
 
 	<h2 class="title">Supply</h2>
-	<div fxLayout="column" fxFlex fxLayoutGap="10px">
-		<mat-card class="" fxLayout="column" fxFlex>
+	<div fxLayout="row" fxLayout.lt-sm="column" fxFlex.lt-sm fxLayoutGap="10px">
+		<mat-card fxLayout="column" fxFlex.lt-sm>
 			<div fxLayout="column">
-				<div class="label">Total Deposits</div>
-				<div class="sublabel">Funds locked in deposits and investments</div>
+				<div class="label">Deposits</div>
+				<div class="sublabel">Funds locked in deposits</div>
 			</div>
-			<div fxLayout="column" fxLayoutAlign="center center">
+			<div fxLayout="column">
 				<div class="value">7,860,121 CCX</div>
 			</div>
 		</mat-card>
-		<mat-card class="" fxLayout="column" fxFlex>
+		<mat-card fxLayout="column" fxFlex.lt-sm>
 			<div fxLayout="column">
-				<div class="label">Circulating Supply</div>
-				<div class="sublabel">The total number of coins not banked</div>
+				<div class="label">Circulating</div>
+				<div class="sublabel">Funds not locked in deposits</div>
 			</div>
-			<div fxLayout="column" fxLayoutAlign="center center">
+			<div fxLayout="column">
 				<div class="value">11,171,516 CCX</div>
 			</div>
 		</mat-card>
-		<mat-card class="" fxLayout="column" fxFlex>
+		<mat-card fxLayout="column" fxFlex.lt-sm>
 			<div fxLayout="column">
-				<div class="label">Total Supply</div>
+				<div class="label">Total</div>
 				<div class="sublabel">The total supply minted to date</div>
 			</div>
-			<div fxLayout="column" fxLayoutAlign="center center">
+			<div fxLayout="column">
 				<div class="value">19,031,643 CCX</div>
 			</div>
+		</mat-card>
+	</div>
+
+	<h2 class="title">News</h2>
+	<div fxLayout="row" fxLayout.lt-sm="column" fxFlex.lt-sm fxLayoutGap="15px">
+		<mat-card *ngFor="let item of (posts ? posts.slice(0,4): [])" fxLayout="column" fxFlex.lt-sm>
+			<mat-card-header>
+				<mat-card-title>{{item.title}}</mat-card-title>
+				<mat-card-subtitle>{{item.pubDate}}</mat-card-subtitle>
+			</mat-card-header>
+			<img mat-card-image src="{{item.thumbnail}}" alt="Image">
+			<mat-card-actions>
+				<a mat-raised-button color="primary" href="{{item.link}}" target="_blank" fxFlex.lt-sm>Read</a>
+			</mat-card-actions>
 		</mat-card>
 	</div>
 

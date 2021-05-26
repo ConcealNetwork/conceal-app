@@ -43,3 +43,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     /* Dark mode variables go here */
   }
 }
+
+
+.mat-card-header-text {
+	margin: 0px !important
+}
+
+.mat-card-actions {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	padding: 0 0 10px !important;
+}
