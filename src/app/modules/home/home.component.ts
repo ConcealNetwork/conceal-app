@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 // Services
 import { ApiService } from '../../shared/services/api.service';
@@ -13,12 +14,25 @@ export class HomeComponent implements OnInit {
 	ccx: number = 0;
 	wccx: number = 0;
 	posts: any = [];
+	stroke: number = 6;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+		public breakpointObserver: BreakpointObserver,
+		private apiService: ApiService
+	) { }
 
   ngOnInit(): void {
 		this.getPrices();
 		this.getArticles();
+		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+		.subscribe((state: BreakpointState) => {
+			if (state.matches) {
+				// Matches small viewport or handset in portrait mode
+				this.stroke = 6;
+			} else {
+				this.stroke = 3;
+			}
+		});
   }
 
 	getPrices() {

@@ -1,15 +1,13 @@
-<div class="container" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15x">
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start" fxLayoutGap="10px">
 
-	<h2 class="title">Markets</h2>
-	<div fxLayout="row" fxFlex.lt-sm fxLayoutGap="10px">
-		<mat-card class="rounded" fxLayout="column" fxFlex.lt-sm>
-			<div fxLayout="row">
+	<h2 class="title">Price</h2>
+	<div fxLayout="row" fxFlex.lt-md fxLayoutGap="10px">
+		<mat-card class="rounded" fxLayout="column" fxFlex.lt-md>
+			<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
 				<div class="icon">
 					<img src="./assets/icons/ccx.png" width="44px">
 				</div>
-				<div class="spark">
-					<ngx-trend [height]="32" [width]="80" [padding]="2" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[4,2,5,9,5,12,3,5,3,4,1,8,2,9,14]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="2" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
-				</div>
+				<ngx-trend fxFlex [padding]="15" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[4,2,5,9,5,12,3,5,3,4,1,8,2,9,14]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="stroke" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
 			</div>
 			<div fxLayout="column">
 				<div class="label">Conceal (CCX)</div>
@@ -19,14 +17,12 @@
 				</div>
 			</div>
 		</mat-card>
-		<mat-card class="rounded" fxLayout="column" fxFlex.lt-sm>
-			<div fxLayout="row">
+		<mat-card class="rounded" fxLayout="column" fxFlex.lt-md>
+			<div class="tops" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
 				<div class="icon">
 					<img src="./assets/icons/wccx.png" width="44px">
 				</div>
-				<div class="spark">
-					<ngx-trend [height]="32" [width]="80" [padding]="2" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[5,2,5,9,4,10,3,5,18,4,1,2,2,9,13]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="2" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
-				</div>
+				<ngx-trend fxFlex [padding]="15" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[5,2,5,9,4,10,3,5,18,4,1,2,2,9,13]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="stroke" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
 			</div>
 			<div fxLayout="column">
 				<div class="label">Wrapped (wCCX)</div>
@@ -39,8 +35,8 @@
 	</div>
 
 	<h2 class="title">Supply</h2>
-	<div fxLayout="row" fxLayout.lt-sm="column" fxFlex.lt-sm fxLayoutGap="10px">
-		<mat-card fxLayout="column" fxFlex.lt-sm>
+	<div fxLayout="row" fxLayout.lt-md="column" fxFlex.lt-md fxLayoutGap="10px">
+		<mat-card fxLayout="column" fxFlex.lt-md>
 			<div fxLayout="column">
 				<div class="label">Deposits</div>
 				<div class="sublabel">Funds locked in deposits</div>
@@ -49,7 +45,7 @@
 				<div class="value">7,860,121 CCX</div>
 			</div>
 		</mat-card>
-		<mat-card fxLayout="column" fxFlex.lt-sm>
+		<mat-card fxLayout="column" fxFlex.lt-md>
 			<div fxLayout="column">
 				<div class="label">Circulating</div>
 				<div class="sublabel">Funds not locked in deposits</div>
@@ -58,7 +54,7 @@
 				<div class="value">11,171,516 CCX</div>
 			</div>
 		</mat-card>
-		<mat-card fxLayout="column" fxFlex.lt-sm>
+		<mat-card fxLayout="column" fxFlex.lt-md>
 			<div fxLayout="column">
 				<div class="label">Total</div>
 				<div class="sublabel">Funds minted to date</div>
@@ -70,15 +66,15 @@
 	</div>
 
 	<h2 class="title">News</h2>
-	<div fxLayout="row" fxLayout.lt-sm="column" fxFlex.lt-sm fxLayoutGap="15px">
-		<mat-card *ngFor="let item of (posts ? posts.slice(0,4): [])" fxLayout="column" fxFlex.lt-sm>
+	<div fxLayout="row" fxLayout.lt-md="column" fxFlex.lt-md fxLayoutGap="15px">
+		<mat-card *ngFor="let item of (posts ? posts.slice(0,4): [])" fxLayout="column" fxFlex.lt-md>
 			<mat-card-header>
 				<mat-card-title>{{item.title}}</mat-card-title>
-				<mat-card-subtitle>{{item.pubDate}}</mat-card-subtitle>
+				<mat-card-subtitle>Posted {{item.pubDate | amTimeAgo}}</mat-card-subtitle>
 			</mat-card-header>
 			<img mat-card-image src="{{item.thumbnail}}" alt="Image">
 			<mat-card-actions>
-				<a mat-raised-button color="primary" href="{{item.link}}" target="_blank" fxFlex.lt-sm>Read</a>
+				<a mat-raised-button color="primary" href="{{item.link}}" target="_blank" fxFlex.lt-md>Read</a>
 			</mat-card-actions>
 		</mat-card>
 	</div>

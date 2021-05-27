@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { TrendModule } from 'ngx-trend';
+import { MomentModule } from 'ngx-moment';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -23,7 +24,8 @@ import { HomeComponent } from './home.component';
 		MatCardModule,
 		MatIconModule,
 		MatButtonModule,
-		TrendModule
+		TrendModule,
+		MomentModule
   ]
 })
 export class HomeModule { }
