@@ -1,0 +1,21 @@
+// Fix toolbar to the top and make it 55px in height
+header {
+	mat-toolbar {
+		background-color: #111;
+		color: #ccc;
+	}
+	.title {
+		font-size: 16px;
+	}
+	.login {
+		display: flex;
+		justify-content: center;
+	}
+	.toolbar-icon {
+		display: inline-flex; // Proper verticle alignment
+	}
+
+	.fill-space {
+		flex: 1 1 auto; // Fill space between two icons
+	}
+}

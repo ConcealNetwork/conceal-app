@@ -1,82 +1,86 @@
-<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.lt-md="start" fxLayoutGap="10px">
+<div class="container" fxLayout="column">
 
-	<h2 class="title">Price</h2>
-	<div fxLayout="row" fxFlex.lt-md fxLayoutGap="10px">
-		<mat-card class="rounded" fxLayout="column" fxFlex.lt-md>
-			<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
-				<div class="icon">
-					<img src="./assets/icons/ccx.png" width="44px">
-				</div>
-				<ngx-trend fxFlex [padding]="15" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[4,2,5,9,5,12,3,5,3,4,1,8,2,9,14]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="stroke" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
-			</div>
-			<div fxLayout="column">
-				<div class="label">Conceal (CCX)</div>
-				<div class="stats" fxLayout="row" fxLayoutAlign="space-between center">
-					<div class="price">${{ccx | number : '1.2-2' }}</div>
-					<div class="trend"><mat-icon class="ico">arrow_drop_up</mat-icon>7.15%</div>
-				</div>
-			</div>
-		</mat-card>
-		<mat-card class="rounded" fxLayout="column" fxFlex.lt-md>
-			<div class="tops" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
-				<div class="icon">
-					<img src="./assets/icons/wccx.png" width="44px">
-				</div>
-				<ngx-trend fxFlex [padding]="15" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[5,2,5,9,4,10,3,5,18,4,1,2,2,9,13]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="stroke" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
-			</div>
-			<div fxLayout="column">
-				<div class="label">Wrapped (wCCX)</div>
-				<div class="stats" fxLayout="row" fxLayoutAlign="space-between center">
-					<div class="price">${{wccx | number : '1.2-2' }}</div>
-					<div class="trend"><mat-icon class="ico">arrow_drop_up</mat-icon>6.45%</div>
-				</div>
-			</div>
-		</mat-card>
-	</div>
+	<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="25px">
 
-	<h2 class="title">Supply</h2>
-	<div fxLayout="row" fxLayout.lt-md="column" fxFlex.lt-md fxLayoutGap="10px">
-		<mat-card fxLayout="column" fxFlex.lt-md>
-			<div fxLayout="column">
-				<div class="label">Deposits</div>
-				<div class="sublabel">Funds locked in deposits</div>
+		<div fxLayout="column" fxFlex="30" fxLayoutAlign="start" fxLayoutGap="15px">
+			<h2 class="title">Price</h2>
+			<div fxLayout="row" fxLayoutGap="15px">
+				<mat-card class="rounded" fxLayout="column" fxFlex.lt-md>
+					<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+						<div class="icon">
+							<img src="./assets/icons/ccx.png" width="44px">
+						</div>
+						<ngx-trend fxFlex [padding]="15" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[4,2,5,9,5,12,3,5,3,4,1,8,2,9,14]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="stroke" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
+					</div>
+					<div fxLayout="column">
+						<div class="label">Conceal (CCX)</div>
+						<div class="stats" fxLayout="row" fxLayoutAlign="space-between center">
+							<div class="price">${{ccx | number : '1.2-2' }}</div>
+							<div class="trend"><mat-icon class="ico">arrow_drop_up</mat-icon>7.15%</div>
+						</div>
+					</div>
+				</mat-card>
+				<mat-card class="rounded" fxLayout="column" fxFlex.lt-md>
+					<div class="tops" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+						<div class="icon">
+							<img src="./assets/icons/wccx.png" width="44px">
+						</div>
+						<ngx-trend fxFlex [padding]="15" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[5,2,5,9,4,10,3,5,18,4,1,2,2,9,13]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="stroke" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
+					</div>
+					<div fxLayout="column">
+						<div class="label">Wrapped (wCCX)</div>
+						<div class="stats" fxLayout="row" fxLayoutAlign="space-between center">
+							<div class="price">${{wccx | number : '1.2-2' }}</div>
+							<div class="trend"><mat-icon class="ico">arrow_drop_up</mat-icon>6.45%</div>
+						</div>
+					</div>
+				</mat-card>
 			</div>
-			<div fxLayout="column">
-				<div class="value">7,860,121 CCX</div>
+			<h2 class="title">Supply</h2>
+			<div fxLayout="column" fxLayoutGap="15px">
+				<mat-card class="rounded" fxLayout="column" fxFlex>
+					<div fxLayout="column">
+						<div class="label">Deposits</div>
+					</div>
+					<div fxLayout="column">
+						<div class="value">7,860,121 CCX</div>
+					</div>
+				</mat-card>
+				<mat-card class="rounded" fxLayout="column" fxFlex>
+					<div fxLayout="column">
+						<div class="label">Circulating</div>
+					</div>
+					<div fxLayout="column">
+						<div class="value">11,171,516 CCX</div>
+					</div>
+				</mat-card>
+				<mat-card class="rounded" fxLayout="column" fxFlex>
+					<div fxLayout="column">
+						<div class="label">Total</div>
+					</div>
+					<div fxLayout="column">
+						<div class="value">19,031,643 CCX</div>
+					</div>
+				</mat-card>
 			</div>
-		</mat-card>
-		<mat-card fxLayout="column" fxFlex.lt-md>
-			<div fxLayout="column">
-				<div class="label">Circulating</div>
-				<div class="sublabel">Funds not locked in deposits</div>
-			</div>
-			<div fxLayout="column">
-				<div class="value">11,171,516 CCX</div>
-			</div>
-		</mat-card>
-		<mat-card fxLayout="column" fxFlex.lt-md>
-			<div fxLayout="column">
-				<div class="label">Total</div>
-				<div class="sublabel">Funds minted to date</div>
-			</div>
-			<div fxLayout="column">
-				<div class="value">19,031,643 CCX</div>
-			</div>
-		</mat-card>
-	</div>
+		</div>
 
-	<h2 class="title">News</h2>
-	<div fxLayout="row" fxLayout.lt-md="column" fxFlex.lt-md fxLayoutGap="15px">
-		<mat-card *ngFor="let item of (posts ? posts.slice(0,4): [])" fxLayout="column" fxFlex.lt-md>
-			<mat-card-header>
-				<mat-card-title>{{item.title}}</mat-card-title>
-				<mat-card-subtitle>Posted {{item.pubDate | amTimeAgo}}</mat-card-subtitle>
-			</mat-card-header>
-			<img mat-card-image src="{{item.thumbnail}}" alt="Image">
-			<mat-card-actions>
-				<a mat-raised-button color="primary" href="{{item.link}}" target="_blank" fxFlex.lt-md>Read</a>
-			</mat-card-actions>
-		</mat-card>
+		<div fxLayout="column" fxFlex="grow" fxLayoutAlign="start" fxLayoutGap="15px">
+			<h2 class="title">News</h2>
+			<div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="15px">
+				<mat-card class="article" *ngFor="let item of (posts ? posts.slice(0,4): [])" fxFlex="0 1 calc(50% - 15px)" fxFlex.lt-sm="100%">
+					<mat-card-header>
+						<mat-card-title>{{item.title}}</mat-card-title>
+						<mat-card-subtitle>Posted {{item.pubDate | amTimeAgo}}</mat-card-subtitle>
+					</mat-card-header>
+					<img mat-card-image src="{{item.thumbnail}}" alt="Image">
+					<mat-card-actions>
+						<a mat-raised-button color="primary" href="{{item.link}}" target="_blank" fxFlex>Read</a>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+		</div>
+
 	</div>
 
 </div>

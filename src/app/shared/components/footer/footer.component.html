@@ -1,52 +1,38 @@
-<footer class="footer">
-  <mat-toolbar class="footer" color="primary">
-    <div fxFlex fxLayout="row" fxLayoutAlign="space-between">
+<mat-toolbar class="footer" fxLayout="row wrap" color="primary">
 
-      <button mat-button routerLink="/home" routerLinkActive="active-menu-item">
-        <div class="toolbar-icon">
-          <mat-icon>home</mat-icon>
-        </div>
-        <div class="toolbar-icon-text">
-          <span>home</span>
-        </div>
-      </button>
+	<div class="version" fxFlex="25" fxFlex.lt-md="grow">
+		Version: <span class="orange">1.0.0</span>
+	</div>
 
-      <button mat-button routerLink="/wallet" routerLinkActive="active-menu-item">
-        <div class="toolbar-icon">
-          <mat-icon>account_balance_wallet</mat-icon>
-        </div>
-        <div class="toolbar-icon-text">
-          <span>wallet</span>
-        </div>
-      </button>
+	<div class="copyright" fxFlex fxFlex.lt-md="grow">
+		Copyright © {{this.year}} Conceal Network. All rights reserved.
+	</div>
 
-      <button mat-button routerLink="/deposits" routerLinkActive="active-menu-item">
-        <div class="toolbar-icon">
-          <mat-icon>savings</mat-icon>
-        </div>
-        <div class="toolbar-icon-text">
-          <span>deposits</span>
-        </div>
-      </button>
+	<div class="links" fxFlex="25" fxFlex.lt-md="grow" fxLayoutAlign.gt-sm="end">
+		<a href="https://www.facebook.com/concealnetwork" mat-icon-button aria-label="socials" rel="noreferrer" target="_blank">
+			<i class="fab fa-facebook-f"></i>
+		</a>
+		<a href="https://twitter.com/ConcealNetwork" mat-icon-button aria-label="socials" rel="noreferrer" target="_blank">
+			<i class="fab fa-twitter"></i>
+		</a>
+		<a href="https://medium.com/@ConcealNetwork" mat-icon-button aria-label="socials" rel="noreferrer" target="_blank">
+			<i class="fab fa-medium-m"></i>
+		</a>
+		<a href="https://www.reddit.com/r/ConcealNetwork/" mat-icon-button aria-label="socials" rel="noreferrer" target="_blank">
+			<i class="fab fa-reddit"></i>
+		</a>
+		<a href="https://bitcointalk.org/index.php?topic=5086106" mat-icon-button aria-label="socials" rel="noreferrer" target="_blank">
+			<i class="fab fa-bitcoin"></i>
+		</a>
+		<a href="https://github.com/ConcealNetwork" mat-icon-button aria-label="socials" rel="noreferrer" target="_blank">
+			<i class="fab fa-github"></i>
+		</a>
+		<a href="http://discord.conceal.network" mat-icon-button aria-label="socials" rel="noreferrer" target="_blank">
+			<i class="fab fa-discord"></i>
+		</a>
+		<a href="https://t.me/concealnetworkusers" mat-icon-button aria-label="socials" rel="noreferrer" target="_blank">
+			<i class="fab fa-telegram"></i>
+		</a>
+	</div>
 
-			<button mat-button routerLink="/live" routerLinkActive="active-menu-item">
-        <div class="toolbar-icon">
-          <mat-icon>call</mat-icon>
-        </div>
-        <div class="toolbar-icon-text">
-          <span>live</span>
-        </div>
-      </button>
-
-      <button mat-button (click)="onToggleSidenav()">
-        <div class="toolbar-icon">
-          <mat-icon>more_horiz</mat-icon>
-        </div>
-        <div class="toolbar-icon-text">
-          <span>more</span>
-        </div>
-      </button>
-
-    </div>
-  </mat-toolbar>
-</footer>
+</mat-toolbar>

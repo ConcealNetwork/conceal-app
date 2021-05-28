@@ -1,16 +1,13 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  selector: 'app-mobile-footer',
+  templateUrl: './mobile-footer.component.html',
+  styleUrls: ['./mobile-footer.component.scss']
 })
-
-export class FooterComponent implements OnInit {
+export class MobileFooterComponent implements OnInit {
 
 	@Output() public sidenavToggle = new EventEmitter();
-
-	year: number = new Date().getFullYear();
 
   constructor() { }
 

@@ -1,21 +1,27 @@
-// Fix toolbar to the bottom and make it 55px in height
-footer {
-  overflow: hidden;
-	mat-toolbar {
-		background-color: #111;
-		color: #ccc;
-		//padding: 0 5px;
-	}
-	.toolbar-icon {
-		line-height:1; // Set to zero or will affect spacing between icon and text
+.mat-toolbar {
+	height: 35px;
+	padding-left: 1rem;
+	padding-right: 0.5rem;
+	color: #ccc;
+	font-size: 0.8rem;
+	background: #111;
+	border-top: 1px solid #333;
+
+	.copyright {
+		text-align: center;
 	}
 
-	.toolbar-icon-text {
-		line-height: 1.8; // Proper spacing between icon and text
-		font-size: 70%; // Smaller text size for proper display under icon
+	.mat-icon-button {
+		height: 30px;
+		width: 30px;
 	}
 
-	.active-menu-item {
+	.fab, .far {
+    margin-top: -10px;
+	}
+
+	.orange {
 		color: orange;
 	}
+
 }

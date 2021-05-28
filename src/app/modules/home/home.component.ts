@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 				// Matches small viewport or handset in portrait mode
 				this.stroke = 6;
 			} else {
-				this.stroke = 3;
+				this.stroke = 2;
 			}
 		});
   }
