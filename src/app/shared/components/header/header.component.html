@@ -1,15 +1,42 @@
-<header class="footer">
-	<mat-toolbar class="mat-elevation-z4">
+<mat-toolbar class="header" fxLayout="row" color="primary">
 
-		<span class="title">{{pageTitle}}</span>
+	<a routerLink="/home">
+		<h1>Conceal Network</h1>
+	</a>
 
-		<span class="fill-space"></span>
+	<div class="links" fxHide fxShow.gt-sm>
+		<a class="btn" routerLink="/home">
+			<button mat-button class="navlink" routerLinkActive="active">Home</button>
+		</a>
+		<a class="btn" routerLink="/wallet">
+			<button mat-button class="navlink" routerLinkActive="active">Wallet</button>
+		</a>
+		<a class="btn" routerLink="/deposits">
+			<button mat-button class="navlink" routerLinkActive="active">Deposits</button>
+		</a>
+		<a class="btn" routerLink="/live">
+			<button mat-button class="navlink" routerLinkActive="active">Live</button>
+		</a>
+		<a class="btn" routerLink="/id">
+			<button mat-button class="navlink" routerLinkActive="active">ID</button>
+		</a>
+		<a class="btn" routerLink="/pay">
+			<button mat-button class="navlink" routerLinkActive="active">Pay</button>
+		</a>
+		<a class="btn" routerLink="/bridge">
+			<button mat-button class="navlink" routerLinkActive="active">Bridge</button>
+		</a>
+		<a class="btn" routerLink="/explorer">
+			<button mat-button class="navlink" routerLinkActive="active">Explorer</button>
+		</a>
+	</div>
 
-		<div class="login">
-			<button mat-icon-button aria-label="login">
-				<mat-icon>login</mat-icon>
-			</button>
-		</div>
+	<span class="fill-space"></span>
 
-	</mat-toolbar>
-</header>
+	<div class="login">
+		<button mat-icon-button aria-label="login" routerLink="/settings" routerLinkActive="active">
+			<mat-icon>settings</mat-icon>
+		</button>
+	</div>
+
+</mat-toolbar>

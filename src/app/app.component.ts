@@ -21,7 +21,7 @@ export class AppComponent {
 	) {	}
 
 	ngOnInit() {
-		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall])
 		.subscribe((state: BreakpointState) => {
 			if (state.matches) {
 				// Matches small viewport or handset in portrait mode

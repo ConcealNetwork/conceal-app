@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open --host 0.0.0.0 --disable-host-check",
-    "build": "ng build",
+    "build": "ng build --configuration production",
     "deploy": "ng build --configuration production --base-href . --output-path ../cordova/www/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

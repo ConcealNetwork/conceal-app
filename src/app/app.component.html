@@ -6,13 +6,15 @@
 
   <mat-sidenav-content fxLayout="column">
 
-		<app-header></app-header> <!-- header -->
+		<app-header *ngIf="!isSmallScreen"></app-header> <!-- header -->
+		<app-mobile-header *ngIf="isSmallScreen"></app-mobile-header> <!-- mobile header -->
 
     <main class="container">
       <router-outlet></router-outlet> <!-- content -->
     </main>
 
-		<app-footer *ngIf="platform.ANDROID || platform.IOS || isSmallScreen" (sidenavToggle)="sidenav.toggle()"></app-footer> <!-- footer -->
+		<app-footer *ngIf="!isSmallScreen" (sidenavToggle)="sidenav.toggle()"></app-footer> <!-- footer -->
+		<app-mobile-footer *ngIf="isSmallScreen" (sidenavToggle)="sidenav.toggle()"></app-mobile-footer> <!-- mobile footer -->
 
   </mat-sidenav-content>
 

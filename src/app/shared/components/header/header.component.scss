@@ -1,21 +1,49 @@
-// Fix toolbar to the top and make it 55px in height
-header {
-	mat-toolbar {
-		background-color: #111;
+.mat-toolbar {
+	height: 75px;
+	padding: 0 0 0 1rem;
+	background: #111;
+	border-bottom: 1px solid #333;
+
+	h1 {
+		float: left;
+    width: 48px;
+    height: 48px;
+    text-indent: -999em;
+    background: url(../../../../assets/icons/icon_x48.png) 0 0 no-repeat;
+    background-size: auto 100%;
+	}
+
+	.links {
+		margin-left: 45px;
+		.active {
+			color: orange !important;
+			border: 1px solid orange;
+		}
+	}
+
+	.navlink {
 		color: #ccc;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		margin-left: 5px;
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 1.8px;
+		font-size: 1.1rem;
 	}
-	.title {
-		font-size: 16px;
-	}
+
 	.login {
 		display: flex;
 		justify-content: center;
-	}
-	.toolbar-icon {
-		display: inline-flex; // Proper verticle alignment
+		color: #ccc;
+		margin-right: 20px;
+		.active {
+			color: orange !important;
+		}
 	}
 
 	.fill-space {
 		flex: 1 1 auto; // Fill space between two icons
 	}
+
 }
