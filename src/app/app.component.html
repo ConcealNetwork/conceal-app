@@ -13,7 +13,6 @@
       <router-outlet></router-outlet> <!-- content -->
     </main>
 
-		<app-footer *ngIf="!isSmallScreen" (sidenavToggle)="sidenav.toggle()"></app-footer> <!-- footer -->
 		<app-mobile-footer *ngIf="isSmallScreen" (sidenavToggle)="sidenav.toggle()"></app-mobile-footer> <!-- mobile footer -->
 
   </mat-sidenav-content>

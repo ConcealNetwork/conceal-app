@@ -25,7 +25,6 @@ import { AppRoutingModule } from './app-routing.module';
 // Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
 import { MobileFooterComponent } from './shared/components/footer/mobile-footer.component';
 import { MobileHeaderComponent } from './shared/components/header/mobile-header.component';
 import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
@@ -37,7 +36,6 @@ import { ApiService } from './shared/services/api.service';
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
     SidenavComponent,
     MobileFooterComponent,
     MobileHeaderComponent

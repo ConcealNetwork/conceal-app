@@ -6,8 +6,21 @@
 		color: #fff;
 	}
 
-	.article {
-		margin-bottom: 15px;
+	.card-container .card-content {
+		position: absolute;
+		width: calc(100% - 30px);
+		padding: 15px;
+		left: 0px;
+		bottom: 0px;
+	}
+
+	.card-content {
+		background: rgba(#222, 0.8);
+		text-decoration: none;
+	}
+
+	.card-image {
+		margin:	-16px -16px -22px -16px;
 	}
 
 	.rounded {
@@ -17,7 +30,7 @@
 
 	.title {
 		font-size: 1.4rem;
-		color: orange;
+		color: #fff;
 	}
 
 	.mat-card-header {
@@ -25,13 +38,15 @@
 	}
 
 	.mat-card-title {
-    font-size: 1rem;
+    font-size: 1.1rem;
+		line-height: 1.5;
 		color: #fff;
 	}
 
 	.mat-card-subtitle {
-		font-size: 0.8rem;
-		color: #888;
+		font-size: 1rem;
+		color: rgb(185, 185, 185);
+		margin-bottom: 0px;
 	}
 
 	.label {
@@ -80,6 +95,6 @@
 /* Large devices (laptops/desktops, 960px and up) */
 @media only screen and (min-width: 960px) {
 	.container {
-		padding: 0 25px 0 25px;
+		padding: 25px;
 	}
 }
