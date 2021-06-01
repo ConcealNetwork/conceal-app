@@ -1,56 +1,12 @@
 .container {
-	//height: 100%;
-
-	.mat-card {
-		background: rgba(40, 40, 40, 0.9);
-		color: #fff;
-	}
-
-	.card-container .card-content {
-		position: absolute;
-		width: calc(100% - 30px);
-		padding: 15px;
-		left: 0px;
-		bottom: 0px;
-	}
-
-	.card-content {
-		background: rgba(#222, 0.8);
-		text-decoration: none;
-	}
-
-	.card-image {
-		margin:	-16px -16px -22px -16px;
-	}
-
-	.rounded {
-		border-radius: 10px;
-		//border: 2px solid #666;
-	}
 
 	.title {
-		font-size: 1.4rem;
+		font-size: 1.35rem;
 		color: #fff;
-	}
-
-	.mat-card-header {
-		padding: none;
-	}
-
-	.mat-card-title {
-    font-size: 1.1rem;
-		line-height: 1.5;
-		color: #fff;
-	}
-
-	.mat-card-subtitle {
-		font-size: 1rem;
-		color: rgb(185, 185, 185);
-		margin-bottom: 0px;
 	}
 
 	.label {
-		font-size: 1.1rem;
+		font-size: 1rem;
 		color: #fff;
 	}
 
@@ -90,11 +46,4 @@
 		height: 10px;
 	}
 
-}
-
-/* Large devices (laptops/desktops, 960px and up) */
-@media only screen and (min-width: 960px) {
-	.container {
-		padding: 25px;
-	}
 }
