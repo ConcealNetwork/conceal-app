@@ -6,6 +6,7 @@
 
 	h1 {
 		float: left;
+		margin-left: 10px;
     width: 48px;
     height: 48px;
     text-indent: -999em;
@@ -14,10 +15,9 @@
 	}
 
 	.links {
-		margin-left: 45px;
+		margin-left: 15px;
 		.active {
 			color: orange !important;
-			border: 1px solid orange;
 		}
 	}
 

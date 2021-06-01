@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 	wccx: number = 0;
 	posts: any = [];
 	stroke: number = 6;
+	gridColumns: number = 0;
 
   constructor(
 		public breakpointObserver: BreakpointObserver,
@@ -24,13 +25,36 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 		this.getPrices();
 		this.getArticles();
-		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall])
 		.subscribe((state: BreakpointState) => {
 			if (state.matches) {
-				// Matches small viewport or handset in portrait mode
 				this.stroke = 6;
-			} else {
+				this.gridColumns = 1;
+				console.log('Breakpoint: Small');
+			}
+		});
+		this.breakpointObserver.observe([Breakpoints.Medium])
+		.subscribe((state: BreakpointState) => {
+			if (state.matches) {
+				this.stroke = 4;
+				this.gridColumns = 1;
+				console.log('Breakpoint: Medium');
+			}
+		});
+		this.breakpointObserver.observe([Breakpoints.Large])
+		.subscribe((state: BreakpointState) => {
+			if (state.matches) {
+				this.stroke = 3;
+				this.gridColumns = 2;
+				console.log('Breakpoint: Large');
+			}
+		});
+		this.breakpointObserver.observe([Breakpoints.XLarge])
+		.subscribe((state: BreakpointState) => {
+			if (state.matches) {
 				this.stroke = 2;
+				this.gridColumns = 3;
+				console.log('Breakpoint: XLarge');
 			}
 		});
   }
