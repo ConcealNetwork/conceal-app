@@ -1,8 +1,11 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
+
+// Light & Dark
+@import './styles/themes/dark.scss';
+@import './styles/themes/light.scss';
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -33,23 +36,16 @@ $conceal-hub-theme: mat-light-theme((
 // that you are using.
 @include angular-material-theme($conceal-hub-theme);
 
-/* You can add global styles to this file, and also import other style files */
+// Material Components
+@import './styles/cards.scss';
 
+/* You can add global styles to this file, and also import other style files */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark mode variables go here */
-  }
-}
-
-.mat-card-header-text {
-	margin: 0px !important
-}
-
-.mat-card-actions {
-	margin-left: 0 !important;
-	margin-right: 0 !important;
-	padding: 0 0 10px !important;
+/* Large devices (laptops/desktops, 960px and up) */
+@media only screen and (min-width: 960px) {
+	.container {
+		padding: 25px;
+	}
 }

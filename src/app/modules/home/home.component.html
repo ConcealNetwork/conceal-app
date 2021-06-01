@@ -1,11 +1,11 @@
 <div class="container" fxLayout="column">
 
-	<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="25px">
+	<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="45px">
 
-		<div fxLayout="column" fxFlex="35" fxLayoutAlign="start" fxLayoutGap="15px">
+		<div fxLayout="column" fxFlex="35" fxLayoutAlign="start" fxLayoutGap="25px">
 			<h2 class="title">Price</h2>
 			<div fxLayout="row" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="15px">
-				<mat-card class="rounded" fxLayout="column" fxFlex>
+				<mat-card class="mat-elevation-z5" fxLayout="column" fxFlex>
 					<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
 						<div class="icon">
 							<img src="./assets/icons/ccx.png" width="44px">
@@ -20,7 +20,7 @@
 						</div>
 					</div>
 				</mat-card>
-				<mat-card class="rounded" fxLayout="column" fxFlex>
+				<mat-card class="mat-elevation-z5" fxLayout="column" fxFlex>
 					<div class="tops" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
 						<div class="icon">
 							<img src="./assets/icons/wccx.png" width="44px">
@@ -38,7 +38,7 @@
 			</div>
 			<h2 class="title">Supply</h2>
 			<div fxLayout="column" fxLayoutGap="15px">
-				<mat-card class="rounded" fxLayout="column" fxFlex>
+				<mat-card class="mat-elevation-z4" fxLayout="column" fxFlex>
 					<div fxLayout="column">
 						<div class="label">Deposits</div>
 					</div>
@@ -46,7 +46,7 @@
 						<div class="value">7,860,121 CCX</div>
 					</div>
 				</mat-card>
-				<mat-card class="rounded" fxLayout="column" fxFlex>
+				<mat-card class="mat-elevation-z4" fxLayout="column" fxFlex>
 					<div fxLayout="column">
 						<div class="label">Circulating</div>
 					</div>
@@ -54,7 +54,7 @@
 						<div class="value">11,171,516 CCX</div>
 					</div>
 				</mat-card>
-				<mat-card class="rounded" fxLayout="column" fxFlex>
+				<mat-card class="mat-elevation-z4" fxLayout="column" fxFlex>
 					<div fxLayout="column">
 						<div class="label">Total</div>
 					</div>
@@ -65,11 +65,11 @@
 			</div>
 		</div>
 
-		<div fxLayout="column" fxFlex="grow" fxLayoutAlign="start" fxLayoutGap="15px">
+		<div fxLayout="column" fxFlex="grow" fxLayoutAlign="start" fxLayoutGap="25px">
 			<h2 class="title">News</h2>
 			<div fxLayout="row wrap" fxLayoutGap="15px grid">
 				<div [fxFlex]="(100/gridColumns) + '%'" fxFlex="100%" *ngFor="let item of posts">
-					<mat-card class="article" class="mat-elevation-z4">
+					<mat-card class="article mat-elevation-z4">
 						<div class="card-container">
 							<img mat-card-image class="card-image" [src]="item.thumbnail" alt="Image">
 							<a href="{{item.link}}" target="_blank" class="card-content">
