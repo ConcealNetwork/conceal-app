@@ -17,13 +17,19 @@
 // hue. Available color palettes: https://material.io/design/color/
 $conceal-hub-primary: mat-palette($mat-orange);
 $conceal-hub-accent: mat-palette($mat-blue, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
 $conceal-hub-warn: mat-palette($mat-red);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $conceal-hub-theme: mat-light-theme((
+  color: (
+    primary: $conceal-hub-primary,
+    accent: $conceal-hub-accent,
+    warn: $conceal-hub-warn,
+  )
+));
+
+$conceal-hub-theme: mat-dark-theme((
   color: (
     primary: $conceal-hub-primary,
     accent: $conceal-hub-accent,
