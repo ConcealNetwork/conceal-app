@@ -1,16 +1,54 @@
+// Price Cards
+.price {
+	.icon {
+		padding-right: 5px;
+		margin-bottom: 5px;
+	}
+
+	.label {
+		font-size: 1rem;
+	}
+
+	.stats {
+		margin-top: 5px;
+
+		.price {
+			color: orange;
+			font-size: 0.9rem;
+		}
+
+		.trend {
+			color: #38d2389e;
+			font-size: 0.8rem;
+		}
+
+		.ico {
+			font-size: 14px;
+			width: 15px;
+			height: 10px;
+		}
+	}
+}
+
+// Supply Cards
+.supply {
+	.value {
+		margin-top: 10px;
+		font-size: 1rem;
+		color: orange;
+	}
+}
+
+// Default Cards
 .mat-card {
-	background: rgba(40, 40, 40, 0.9);
-	color: #fff;
 
 	.mat-card-title {
-    font-size: 1rem;
+		font-size: 1rem;
 		line-height: 1.5;
-		color: #fff;
 	}
 
 	.mat-card-subtitle {
 		font-size: 0.9rem;
-		color: #ccc;
 		margin-bottom: 0px;
 	}
 
@@ -35,7 +73,7 @@
 	}
 
 	.card-image {
-		margin:	-16px -16px -22px -16px;
+		margin: -16px -16px -22px -16px;
 		border-radius: 4px;
 	}
 
