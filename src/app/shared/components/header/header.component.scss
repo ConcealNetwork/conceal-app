@@ -1,10 +1,9 @@
 .mat-toolbar {
 	height: 75px;
-	padding: 0 0 0 1rem;
+	padding: 0 1rem 0 1rem;
 
 	h1 {
 		float: left;
-		margin-left: 10px;
     width: 48px;
     height: 48px;
     text-indent: -999em;
@@ -13,7 +12,7 @@
 	}
 
 	.links {
-		margin-left: 10px;
+		margin-left: 20px;
 	}
 
 	.navlink {
@@ -25,10 +24,9 @@
 		font-size: 1.1rem;
 	}
 
-	.login {
+	.settings {
 		display: flex;
 		justify-content: center;
-		margin-right: 20px;
 	}
 
 	.fill-space {

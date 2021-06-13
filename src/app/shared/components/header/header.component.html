@@ -1,45 +1,30 @@
-<mat-toolbar class="header" fxLayout="row">
+<mat-toolbar role="heading" class="header" fxLayout="row">
 
-	<a routerLink="/home">
+	<a routerLink="/">
 		<h1>Conceal Network</h1>
 	</a>
 
-	<div class="links">
-		<a class="btn" routerLink="/">
-			<button mat-button class="navlink" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</button>
-		</a>
-		<a class="btn" routerLink="/wallet">
-			<button mat-button class="navlink" routerLinkActive="active">Wallet</button>
-		</a>
-		<a class="btn" routerLink="/deposits">
-			<button mat-button class="navlink" routerLinkActive="active">Deposits</button>
-		</a>
-		<a class="btn" routerLink="/live">
-			<button mat-button class="navlink" routerLinkActive="active">Live</button>
-		</a>
-		<a class="btn" routerLink="/id">
-			<button mat-button class="navlink" routerLinkActive="active">ID</button>
-		</a>
-		<a class="btn" routerLink="/pay">
-			<button mat-button class="navlink" routerLinkActive="active">Pay</button>
-		</a>
-		<a class="btn" routerLink="/bridge">
-			<button mat-button class="navlink" routerLinkActive="active">Bridge</button>
-		</a>
-		<a class="btn" routerLink="/explorer">
-			<button mat-button class="navlink" routerLinkActive="active">Explorer</button>
-		</a>
+	<div class="links" fxLayoutGap="10px">
+		<button class="navlink" mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</button>
+		<button class="navlink" mat-button routerLink="/wallet" routerLinkActive="active">Wallet</button>
+		<button class="navlink" mat-button routerLink="/deposits" routerLinkActive="active">Deposits</button>
+		<button class="navlink" mat-button routerLink="/live" routerLinkActive="active">Live</button>
+		<button class="navlink" mat-button routerLink="/id" routerLinkActive="active">ID</button>
+		<button class="navlink" mat-button routerLink="/pay" routerLinkActive="active">Pay</button>
+		<button class="navlink" mat-button routerLink="/bridge" routerLinkActive="active">Bridge</button>
+		<button class="navlink" mat-button routerLink="/explorer" routerLinkActive="active">Explorer</button>
 	</div>
 
 	<span class="fill-space"></span>
 
-	<button mat-icon-button [matMenuTriggerFor]="menu" mdTooltip="Change theme"><mat-icon>format_color_fill</mat-icon></button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="changeTheme('light-theme')">Light</button>
-    <button mat-menu-item (click)="changeTheme('dark-theme')">Dark</button>
-  </mat-menu>
-
-	<div class="login">
+	<div class="settings" fxLayoutGap="15px">
+		<button mat-icon-button [matMenuTriggerFor]="menu" mdTooltip="Change theme">
+			<mat-icon>format_color_fill</mat-icon>
+		</button>
+		<mat-menu #menu="matMenu">
+			<button mat-menu-item (click)="changeTheme('light-theme')">Light</button>
+			<button mat-menu-item (click)="changeTheme('dark-theme')">Dark</button>
+		</mat-menu>
 		<button mat-icon-button aria-label="login" routerLink="/settings" routerLinkActive="active">
 			<mat-icon>settings</mat-icon>
 		</button>

@@ -1,12 +1,14 @@
 footer {
 
-	.toolbar-icon {
-		line-height:1; // Set to zero or will affect spacing between icon and text
-	}
+	.menu {
+		.toolbar-icon {
+			line-height:1; // Set to zero or will affect spacing between icon and text
+		}
 
-	.toolbar-icon-text {
-		line-height: 1.8; // Proper spacing between icon and text
-		font-size: 70%; // Smaller text size for proper display under icon
+		.toolbar-icon-text {
+			line-height: 1.8; // Proper spacing between icon and text
+			font-size: 70%; // Smaller text size for proper display under icon
+		}
 	}
 
 }

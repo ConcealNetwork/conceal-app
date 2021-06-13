@@ -1,26 +1,16 @@
-<aside class="side">
+<aside>
 
-	<button class="close" mat-button (click)="close()">
+	<button mat-stroked-button color="primary" (click)="close()">
 		<mat-icon aria-hidden="false" aria-label="close">close</mat-icon>
 		<span class="text">Close</span>
 	</button>
 
-	<div class="links">
-		<a class="link" (click)="close()" routerLink="/id" routerLinkActive="active-menu-item">
-			<button mat-button>@ID</button>
-		</a>
-		<a class="link" (click)="close()" routerLink="/pay" routerLinkActive="active-menu-item">
-			<button mat-button>Pay</button>
-		</a>
-		<a class="link" (click)="close()" routerLink="/bridge"routerLinkActive="active-menu-item">
-			<button mat-button>Bridge</button>
-		</a>
-		<a class="link" (click)="close()" routerLink="/explorer" routerLinkActive="active-menu-item">
-			<button mat-button>Explorer</button>
-		</a>
-		<a class="link" (click)="close()" routerLink="/settings" routerLinkActive="active-menu-item">
-			<button mat-button>Settings</button>
-		</a>
+	<div class="links" fxLayoutGap="15px">
+		<a mat-button class="link" (click)="close()" routerLink="/id" routerLinkActive="active">@ID</a>
+		<a mat-button class="link" (click)="close()" routerLink="/pay" routerLinkActive="active">Pay</a>
+		<a mat-button class="link" (click)="close()" routerLink="/bridge"routerLinkActive="active">Bridge</a>
+		<a mat-button class="link" (click)="close()" routerLink="/explorer" routerLinkActive="active">Explorer</a>
+		<a mat-button class="link" (click)="close()" routerLink="/settings" routerLinkActive="active">Settings</a>
 	</div>
 
 </aside>
