@@ -31,6 +31,7 @@ import { SidenavComponent } from './shared/components/sidenav/sidenav.component'
 
 // Services
 import { ApiService } from './shared/services/api.service';
+import { ThemingService } from './shared/services/theming.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import { ApiService } from './shared/services/api.service';
 		MatMenuModule,
 		FlexLayoutModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, ThemingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

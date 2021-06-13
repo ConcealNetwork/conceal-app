@@ -1,8 +1,6 @@
 .mat-toolbar {
 	height: 75px;
 	padding: 0 0 0 1rem;
-	background: #111;
-	border-bottom: 1px solid #333;
 
 	h1 {
 		float: left;
@@ -16,13 +14,9 @@
 
 	.links {
 		margin-left: 15px;
-		.active {
-			color: orange !important;
-		}
 	}
 
 	.navlink {
-		color: #ccc;
 		padding-top: 5px;
 		padding-bottom: 5px;
 		margin-left: 5px;
@@ -35,11 +29,7 @@
 	.login {
 		display: flex;
 		justify-content: center;
-		color: #ccc;
 		margin-right: 20px;
-		.active {
-			color: orange !important;
-		}
 	}
 
 	.fill-space {

@@ -1,10 +1,10 @@
-<mat-toolbar class="header" fxLayout="row" color="primary">
+<mat-toolbar class="header" fxLayout="row">
 
 	<a routerLink="/home">
 		<h1>Conceal Network</h1>
 	</a>
 
-	<div class="links" fxHide fxShow.gt-sm>
+	<div class="links">
 		<a class="btn" routerLink="/">
 			<button mat-button class="navlink" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</button>
 		</a>
@@ -32,6 +32,12 @@
 	</div>
 
 	<span class="fill-space"></span>
+
+	<button mat-icon-button [matMenuTriggerFor]="menu" mdTooltip="Change theme"><mat-icon>format_color_fill</mat-icon></button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="changeTheme('light-theme')">Light</button>
+    <button mat-menu-item (click)="changeTheme('dark-theme')">Dark</button>
+  </mat-menu>
 
 	<div class="login">
 		<button mat-icon-button aria-label="login" routerLink="/settings" routerLinkActive="active">
