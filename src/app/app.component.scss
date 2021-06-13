@@ -1,12 +1,10 @@
 mat-sidenav-container, mat-sidenav-content, mat-sidenav {
   height: 100%; // Component content fills entire vertical space
-	background-color: #111;
 }
 
 mat-sidenav {
 	width: 30vw;
 	padding: 2.5rem 1.5rem;
-	background: #fff;
 	text-transform: uppercase;
 }
 
@@ -19,8 +17,6 @@ mat-sidenav-content  {
 .container {
 	height: 100vh;
   overflow: auto; // Keeps header from scrolling away
-	background-color: #1a1a1a;
-	color: #fff;
 	padding: 15px;
 }
 

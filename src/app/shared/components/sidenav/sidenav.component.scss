@@ -1,12 +1,8 @@
 .side {
 
 	.close {
-		color: orange;
 		.text {
 			margin-left: 15px;
-		}
-		:hover {
-			color: #999;
 		}
 	}
 
@@ -21,16 +17,8 @@
 	}
 
 	.link {
-		color: #444;
 		display: block;
 		margin-top: 1.2rem;
-		:hover {
-			color: orange;
-		}
-	}
-
-	.active-menu-item {
-		color: orange;
 	}
 
 }
