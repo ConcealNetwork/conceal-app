@@ -9,6 +9,7 @@ import { ThemingService } from '../../../shared/services/theming.service';
 export class HeaderComponent implements OnInit {
 
 	themes: string[] = [];
+	activeTheme: string = '';
 
   constructor(
 		private theming: ThemingService
@@ -16,10 +17,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 		this.themes = this.theming.themes;
+		this.activeTheme = this.theming.theme.value;
 	}
 
 	changeTheme(theme: string) {
     this.theming.theme.next(theme);
+		this.activeTheme = this.theming.theme.value;
   }
 
 }

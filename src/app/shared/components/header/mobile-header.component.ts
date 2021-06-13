@@ -12,6 +12,7 @@ export class MobileHeaderComponent implements OnInit {
 
 	pageTitle: string = '';
 	themes: string[] = [];
+	activeTheme: string = '';
 
   constructor(
 		private activatedRoute: ActivatedRoute,
@@ -22,6 +23,7 @@ export class MobileHeaderComponent implements OnInit {
   ngOnInit(): void {
 		this.setPageTitle();
 		this.themes = this.theming.themes;
+		this.activeTheme = this.theming.theme.value;
 	}
 
 	setPageTitle(): void {
@@ -47,6 +49,7 @@ export class MobileHeaderComponent implements OnInit {
 
 	changeTheme(theme: string) {
     this.theming.theme.next(theme);
+		this.activeTheme = this.theming.theme.value;
   }
 
 }
