@@ -8,45 +8,49 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
-// Custom themable components
-// @import "app/sidenav/sidenav.component";
-// @mixin custom-components-theme($theme) {
-//   @include sidenav-theme($theme);
-// }
-
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$conceal-hub-primary: mat-palette($mat-orange);
-$conceal-hub-accent: mat-palette($mat-blue, A200, A100, A400);
-$conceal-hub-warn: mat-palette($mat-red);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$conceal-hub-light-theme: mat-light-theme((
-  color: (
-    primary: $conceal-hub-primary,
-    accent: $conceal-hub-accent,
-    warn: $conceal-hub-warn,
+$mat-primary-light-scheme: (
+  100: #334955,
+  500: #334955,
+  700: #424242,
+  contrast: (
+    100: rgba(0,0,0,0.87),
+    500: #ffffff,
+    700: #ffffff,
   )
-));
-
-$conceal-hub-dark-theme: mat-dark-theme((
-  color: (
-    primary: $conceal-hub-primary,
-    accent: $conceal-hub-accent,
-    warn: $conceal-hub-warn,
+);
+$mat-primary-dark-scheme: (
+  100: #212121,
+  contrast: (
+    100: rgba(0,0,0,0.87),
   )
-));
+);
+$mat-accent-scheme: (
+  100: #faa933,
+  500: #faa933,
+  700: #ffa500,
+  contrast: (
+    100: rgba(0,0,0,0.87),
+    500: rgba(0,0,0,0.87),
+    700: #ffffff,
+  )
+);
+
+$mat-primary-light-palette: mat-palette($mat-primary-light-scheme);
+$mat-primary-dark-palette: mat-palette($mat-primary-dark-scheme);
+$mat-accent-palette: mat-palette($mat-accent-scheme);
+
+$app-light-theme: mat-light-theme($mat-primary-light-palette, $mat-accent-palette);
+$app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette);
 
 .light-theme {
-  @include angular-material-theme($conceal-hub-light-theme);
-	//@include custom-components-theme($conceal-hub-light-theme);
+  @include angular-material-theme($app-light-theme);
 }
 
-.dark-theme {
-  @include angular-material-theme($conceal-hub-dark-theme);
-	//@include custom-components-theme($conceal-hub-dark-theme);
+.dark-theme{
+  @include angular-material-theme($app-dark-theme);
 }
 
 // Material Components
@@ -54,7 +58,7 @@ $conceal-hub-dark-theme: mat-dark-theme((
 
 /* You can add global styles to this file, and also import other style files */
 .active {
-	color: orange !important;
+	color: #faa933 !important;
 }
 
 /* Large devices (laptops/desktops, 960px and up) */
