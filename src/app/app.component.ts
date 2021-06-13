@@ -14,7 +14,7 @@ import { ThemingService } from './shared/services/theming.service';
 export class AppComponent implements OnInit, OnDestroy {
 
   themingSubscription!: Subscription;
-	@HostBinding('class') public cssClass: string = '';
+	@HostBinding('class') className = '';
 
 	// check platform properties
   supportedInputTypes = Array.from(getSupportedInputTypes()).join(', ');
@@ -32,9 +32,8 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-
 		this.themingSubscription = this.themingService.theme.subscribe((theme: string) => {
-      this.cssClass = theme;
+      this.className = theme;
       this.applyThemeOnOverlays();
     });
 
@@ -47,7 +46,6 @@ export class AppComponent implements OnInit, OnDestroy {
 				this.isSmallScreen = false;
 			}
 		});
-
 	}
 
   /**
@@ -61,7 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
 		if (themeClassesToRemove.length) {
 			overlayContainerClasses.remove(...themeClassesToRemove);
 		}
-		overlayContainerClasses.add(this.cssClass);
+		overlayContainerClasses.add(this.className);
 	}
 
 	ngOnDestroy() {

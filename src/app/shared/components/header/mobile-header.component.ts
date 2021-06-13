@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { ThemingService } from '../../../shared/services/theming.service';
 
 @Component({
   selector: 'app-mobile-header',
@@ -10,13 +11,20 @@ import { filter, map } from 'rxjs/operators';
 export class MobileHeaderComponent implements OnInit {
 
 	pageTitle: string = '';
+	themes: string[] = [];
 
   constructor(
 		private activatedRoute: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private theming: ThemingService
 	) { }
 
-	private setPageTitle(): void {
+  ngOnInit(): void {
+		this.setPageTitle();
+		this.themes = this.theming.themes;
+	}
+
+	setPageTitle(): void {
 		this.router.events.pipe(
 			filter(event => event instanceof NavigationEnd),
 			map(() => {
@@ -37,8 +45,8 @@ export class MobileHeaderComponent implements OnInit {
 		).subscribe((title: string) => this.pageTitle = title);
 	}
 
-  ngOnInit(): void {
-		this.setPageTitle();
-	}
+	changeTheme(theme: string) {
+    this.theming.theme.next(theme);
+  }
 
 }
