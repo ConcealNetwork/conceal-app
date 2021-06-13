@@ -18,13 +18,12 @@
 	<span class="fill-space"></span>
 
 	<div class="settings" fxLayoutGap="15px">
-		<button mat-icon-button [matMenuTriggerFor]="menu" mdTooltip="Change theme">
-			<mat-icon>format_color_fill</mat-icon>
+		<button *ngIf="activeTheme == 'dark-theme'" mat-icon-button mdTooltip="Change theme" (click)="changeTheme('light-theme')">
+			<mat-icon>dark_mode</mat-icon>
 		</button>
-		<mat-menu #menu="matMenu">
-			<button mat-menu-item (click)="changeTheme('light-theme')">Light</button>
-			<button mat-menu-item (click)="changeTheme('dark-theme')">Dark</button>
-		</mat-menu>
+		<button *ngIf="activeTheme == 'light-theme'" mat-icon-button mdTooltip="Change theme" (click)="changeTheme('dark-theme')">
+			<mat-icon>light_mode</mat-icon>
+		</button>
 		<button mat-icon-button aria-label="login" routerLink="/settings" routerLinkActive="active">
 			<mat-icon>settings</mat-icon>
 		</button>
