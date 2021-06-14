@@ -19,6 +19,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
+// 3rd Party
+import { JwtModule } from "@auth0/angular-jwt";
+
 // Router
 import { AppRoutingModule } from './app-routing.module';
 
@@ -32,6 +35,10 @@ import { SidenavComponent } from './shared/components/sidenav/sidenav.component'
 // Services
 import { ApiService } from './shared/services/api.service';
 import { ThemingService } from './shared/services/theming.service';
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -50,6 +57,14 @@ import { ThemingService } from './shared/services/theming.service';
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
+    }),
+		JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["api.wallet.conceal.network"],
+        headerName: "token",
+        authScheme: ""
+      },
     }),
     LayoutModule,
 		HttpClientModule,
