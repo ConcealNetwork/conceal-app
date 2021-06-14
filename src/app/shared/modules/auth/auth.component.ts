@@ -17,6 +17,35 @@ export class AuthComponent implements OnInit {
 		private router: Router
 	) { }
 
+	signIn: FormGroup = new FormGroup({
+    emailFormControl: new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]),
+    passwordFormControl: new FormControl('', [
+      Validators.required
+    ]),
+    twofaFormControl: new FormControl('', [
+      Validators.minLength(6),
+      Validators.maxLength(6),
+      Validators.pattern('^[0-9]*$')
+    ])
+	});
+
+	signUp: FormGroup = new FormGroup({
+		usernameFormControl: new FormControl('', [
+      Validators.minLength(1),
+      Validators.maxLength(24),
+    ]),
+    emailFormControl: new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]),
+    passwordFormControl: new FormControl('', [
+      Validators.required
+    ])
+	});
+
   ngOnInit(): void {
 
   }

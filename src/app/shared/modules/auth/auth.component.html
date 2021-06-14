@@ -1,1 +1,58 @@
-<p>auth works!</p>
+<div class="container" fxLayout="column" fxLayoutAlign="center stretch">
+
+	<div fxLayout="row" fxLayoutAlign="center center">
+		<div fxLayout="column" class="login" fxLayoutAlign="center" fxLayoutGap="25px">
+
+			<form [formGroup]="signIn" fxLayout="column" fxLayoutGap="15px">
+
+				<h2 id="title" class="subtitle">Sign In</h2>
+				<p id="title" class="subtext">Please sign in to continue.</p>
+
+					<mat-form-field fxFill appearance="fill" hintLabel="Your email address">
+						<mat-label>Email Address</mat-label>
+						<input type="email" matInput placeholder="you@youremail.com" formControlName="emailFormControl">
+						<mat-error *ngIf="signIn.controls.emailFormControl.hasError('email') && !signIn.controls.emailFormControl.hasError('required')">
+							Please enter a valid email address
+						</mat-error>
+						<mat-error *ngIf="signIn.controls.emailFormControl.hasError('required')">
+							Email address is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+
+					<mat-form-field fxFill appearance="fill" hintLabel="Your password">
+						<mat-label>Password</mat-label>
+						<input type="password" matInput placeholder="password" formControlName="passwordFormControl">
+						<mat-error *ngIf="signIn.controls.passwordFormControl.hasError('required')">
+							Password is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+
+					<mat-form-field fxFill appearance="fill" hintLabel="6 Numbers">
+						<mat-label>2FA Code (Optional)</mat-label>
+						<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="twofaFormControl">
+						<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+						<mat-error *ngIf="signIn.controls.twofaFormControl.hasError('minlength') || signIn.controls.twofaFormControl.hasError('maxlength')">
+							2FA code should be <strong>6 numbers</strong>
+						</mat-error>
+						<mat-error *ngIf="signIn.controls.twofaFormControl.hasError('pattern')">
+							2FA code should be <strong>only numbers</strong>
+						</mat-error>
+					</mat-form-field>
+
+				<div class="actions" fxLayout="row" fxLayoutGap="15px">
+					<button mat-stroked-button color="primary" fxFlex="50">Login</button>
+					<button mat-stroked-button color="warn" fxFlex="50" (click)="this.signIn.reset()">Clear</button>
+				</div>
+
+			</form>
+
+			<div class="other" fxLayout="column" fxLayoutAlign="space-between center">
+				<div class="links">New User? Sign Up</div>
+				<div class="links">Forgot Password? Reset Now</div>
+				<div class="links">Go Back</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>
