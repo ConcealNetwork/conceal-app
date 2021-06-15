@@ -12,20 +12,20 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $mat-primary-light-scheme: (
-  100: #334955,
-  500: #334955,
-  700: #424242,
+  100: #212121,
   contrast: (
-    100: rgba(0,0,0,0.87),
-    500: #ffffff,
-    700: #ffffff,
+    100: rgba(0,0,0,0.9),
+    500: rgba(0,0,0,0.7),
+    700: #000000,
   )
 );
 
 $mat-primary-dark-scheme: (
   100: #212121,
   contrast: (
-    100: rgba(0,0,0,0.87),
+		100: rgba(255,255,255,0.9),
+    500: rgba(255,255,255,0.7),
+    700: #ffffff,
   )
 );
 
@@ -34,9 +34,9 @@ $mat-accent-scheme: (
   500: #faa933,
   700: #ffa500,
   contrast: (
-    100: rgba(0,0,0,0.87),
-    500: rgba(0,0,0,0.87),
-    700: #ffffff,
+    100: rgba(0,0,0,0.9),
+    500: rgba(0,0,0,0.7),
+    700: #000000,
   )
 );
 
@@ -58,6 +58,9 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
+	.active {
+		color: #f8ac22 !important;
+	}
 }
 
 .dark-theme {
@@ -68,15 +71,15 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
+	.active {
+		color: #faa933 !important;
+	}
 }
 
 // Material Components
 @import './styles/cards.scss';
 
 /* You can add global styles to this file, and also import other style files */
-.active {
-	color: #faa933 !important;
-}
 
 /* Large devices (laptops/desktops, 960px and up) */
 @media only screen and (min-width: 960px) {
