@@ -1,17 +1,28 @@
 .container {
 	height: 100%;
 
-	.title {
-		margin-block-start: 0em;
-		margin-block-end: 0em;
-	}
-
 	.login {
 		max-width: 450px;
 	}
 
-	.card {
-		padding: 25px;
+	.mat-card {
+		padding: 0;
+	}
+
+	.mat-card-header {
+		padding-top: 10px;
+		padding-bottom: 5px;
+		padding-left: 25px;
+		padding-right: 25px;
+		margin-bottom: 0px;
+		background-color: rgba($color: #000000, $alpha: 0.2);
+	}
+
+	.mat-card-content {
+		padding-left: 25px;
+		padding-right: 25px;
+		padding-top: 10px;
+		padding-bottom: 25px;
 	}
 
 }

@@ -2,60 +2,58 @@
 
 	<div fxLayout="row" fxLayoutAlign="center center">
 
-		<div class="login" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="25px" fxFlex>
+		<mat-card class="login mat-elevation-z5" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="20px" fxFlex>
 
-			<h2 class="title">Log in</h2>
-			<p>Please login to continue.</p>
+			<mat-card-header fxLayout="column" fxLayoutGap="5px">
+				<h2 class="title">Log in</h2>
+				<p>Please login to continue.</p>
+			</mat-card-header>
 
-			<mat-card class="card mat-elevation-z5">
-				<mat-card-content>
+			<mat-card-content fxLayout="column" fxLayoutGap="25px">
+				<form [formGroup]="signIn" fxLayout="column" fxLayoutGap="25px">
 
-					<form [formGroup]="signIn" fxLayout="column" fxLayoutGap="25px">
+					<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
+						<mat-label>Email Address</mat-label>
+						<input matInput type="email" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="username">
+						<mat-error *ngIf="signIn.controls.emailFormControl.hasError('email') && !signIn.controls.emailFormControl.hasError('required')">
+							Please enter a valid email address
+						</mat-error>
+						<mat-error *ngIf="signIn.controls.emailFormControl.hasError('required')">
+							Email address is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
 
-						<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
-							<mat-label>Email Address</mat-label>
-							<input matInput type="email" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="username">
-							<mat-error *ngIf="signIn.controls.emailFormControl.hasError('email') && !signIn.controls.emailFormControl.hasError('required')">
-								Please enter a valid email address
-							</mat-error>
-							<mat-error *ngIf="signIn.controls.emailFormControl.hasError('required')">
-								Email address is <strong>required</strong>
-							</mat-error>
-						</mat-form-field>
+					<mat-form-field fxFill hintLabel="Your password" appearance="fill" color="accent">
+						<mat-label>Password</mat-label>
+						<input matInput type="password" placeholder="password" formControlName="passwordFormControl" autocomplete="current-password">
+						<mat-error *ngIf="signIn.controls.passwordFormControl.hasError('required')">
+							Password is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
 
-						<mat-form-field fxFill hintLabel="Your password" appearance="fill" color="accent">
-							<mat-label>Password</mat-label>
-							<input matInput type="password" placeholder="password" formControlName="passwordFormControl" autocomplete="current-password">
-							<mat-error *ngIf="signIn.controls.passwordFormControl.hasError('required')">
-								Password is <strong>required</strong>
-							</mat-error>
-						</mat-form-field>
+					<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill" color="accent">
+						<mat-label>2FA (Optional)</mat-label>
+						<input #twofa matInput type="text" inputmode="numeric" minlength="6" maxlength="6" placeholder="00000" pattern="[0-9]*" formControlName="twofaFormControl" autocomplete="one-time-code">
+						<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+						<mat-error *ngIf="signIn.controls.twofaFormControl.hasError('minlength') || signIn.controls.twofaFormControl.hasError('maxlength')">
+							2FA code should be <strong>6 numbers</strong>
+						</mat-error>
+						<mat-error *ngIf="signIn.controls.twofaFormControl.hasError('pattern')">
+							2FA code should be <strong>only numbers</strong>
+						</mat-error>
+					</mat-form-field>
 
-						<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill" color="accent">
-							<mat-label>2FA (Optional)</mat-label>
-							<input #twofa matInput type="text" inputmode="numeric" minlength="6" maxlength="6" placeholder="00000" pattern="[0-9]*" formControlName="twofaFormControl" autocomplete="one-time-code">
-							<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
-							<mat-error *ngIf="signIn.controls.twofaFormControl.hasError('minlength') || signIn.controls.twofaFormControl.hasError('maxlength')">
-								2FA code should be <strong>6 numbers</strong>
-							</mat-error>
-							<mat-error *ngIf="signIn.controls.twofaFormControl.hasError('pattern')">
-								2FA code should be <strong>only numbers</strong>
-							</mat-error>
-						</mat-form-field>
+					<button mat-flat-button color="accent">Login</button>
 
-						<button mat-flat-button color="accent">Login</button>
+				</form>
 
-					</form>
+				<div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+					<a >New User? Sign Up</a>
+					<a >Forgot Password? Reset Now</a>
+				</div>
+			</mat-card-content>
 
-				</mat-card-content>
-			</mat-card>
-
-			<div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-				<a >New User? Sign Up</a>
-				<a >Forgot Password? Reset Now</a>
-			</div>
-
-		</div>
+		</mat-card>
 
 	</div>
 
