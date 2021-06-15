@@ -46,7 +46,7 @@ export function tokenGetter() {
     HeaderComponent,
     SidenavComponent,
     MobileFooterComponent,
-    MobileHeaderComponent
+    MobileHeaderComponent,
   ],
   imports: [
     BrowserModule,

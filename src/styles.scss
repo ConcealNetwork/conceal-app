@@ -21,12 +21,14 @@ $mat-primary-light-scheme: (
     700: #ffffff,
   )
 );
+
 $mat-primary-dark-scheme: (
   100: #212121,
   contrast: (
     100: rgba(0,0,0,0.87),
   )
 );
+
 $mat-accent-scheme: (
   100: #faa933,
   500: #faa933,
@@ -38,18 +40,21 @@ $mat-accent-scheme: (
   )
 );
 
+$mat-dark-warn: mat-palette($mat-red, 300);
+$mat-light-warn: mat-palette($mat-red, 600);
+
+$mat-accent-palette: mat-palette($mat-accent-scheme);
 $mat-primary-light-palette: mat-palette($mat-primary-light-scheme);
 $mat-primary-dark-palette: mat-palette($mat-primary-dark-scheme);
-$mat-accent-palette: mat-palette($mat-accent-scheme);
 
-$app-light-theme: mat-light-theme($mat-primary-light-palette, $mat-accent-palette);
-$app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette);
+$app-light-theme: mat-light-theme($mat-primary-light-palette, $mat-accent-palette, $mat-light-warn);
+$app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, $mat-dark-warn);
 
 .light-theme {
   @include angular-material-theme($app-light-theme);
 }
 
-.dark-theme{
+.dark-theme {
   @include angular-material-theme($app-dark-theme);
 }
 
