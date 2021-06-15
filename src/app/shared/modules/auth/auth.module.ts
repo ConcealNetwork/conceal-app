@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
@@ -21,6 +22,7 @@ import { AuthComponent } from './auth.component';
 		MatButtonModule,
 		MatInputModule,
 		MatCardModule,
+		MatIconModule,
 		FormsModule,
     ReactiveFormsModule
   ]
