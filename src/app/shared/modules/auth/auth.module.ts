@@ -10,10 +10,16 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
+import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
+import { ResetComponent } from './reset/reset.component';
 
 @NgModule({
   declarations: [
-    AuthComponent
+    AuthComponent,
+    SigninComponent,
+    SignupComponent,
+    ResetComponent
   ],
   imports: [
     CommonModule,
