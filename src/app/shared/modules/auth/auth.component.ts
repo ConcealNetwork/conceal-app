@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
-	current: string = 'signin'
+	current: string = '';
 
   constructor() { }
 
