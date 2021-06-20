@@ -87,3 +87,12 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 		padding: 25px;
 	}
 }
+
+/* Change Autocomplete styles in Chrome*/
+:-webkit-autofill,
+:-webkit-autofill:hover,
+:-webkit-autofill:focus {
+  -webkit-text-fill-color: orange;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0,0,0,0) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}

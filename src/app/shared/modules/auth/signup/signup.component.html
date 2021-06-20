@@ -1,1 +1,50 @@
-<p>signup works!</p>
+<mat-card class="signup mat-elevation-z6">
+
+	<mat-card-header fxLayout="column" fxLayoutGap="5px">
+		<h2 class="title">Sign Up</h2>
+		<p>Please create an account to continue.</p>
+	</mat-card-header>
+
+	<mat-card-content fxLayout="column" fxLayoutGap="25px">
+
+		<form [formGroup]="signUp" fxLayout="column" fxLayoutGap="25px">
+
+			<mat-form-field fxFill hintLabel="New username" appearance="fill" color="accent">
+				<mat-label>Username</mat-label>
+				<input matInput type="text" minlength="6" maxlength="24" formControlName="usernameFormControl" autocomplete="username">
+				<mat-error *ngIf="signUp.controls.usernameFormControl.hasError('minlength') || signUp.controls.usernameFormControl.hasError('maxlength')">
+					Username should be at least <strong>6 characters</strong>
+				</mat-error>
+				<mat-error *ngIf="signUp.controls.usernameFormControl.hasError('required')">
+					Uername is <strong>required</strong>
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
+				<mat-label>Email Address</mat-label>
+				<input matInput type="email" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="username">
+				<mat-error *ngIf="signUp.controls.emailFormControl.hasError('email') && !signUp.controls.emailFormControl.hasError('required')">
+					Please enter a valid email address
+				</mat-error>
+				<mat-error *ngIf="signUp.controls.emailFormControl.hasError('required')">
+					Email address is <strong>required</strong>
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field fxFill hintLabel="New password" appearance="fill" color="accent">
+				<mat-label>Password</mat-label>
+				<input matInput type="password" placeholder="password" formControlName="passwordFormControl" autocomplete="new-password">
+				<mat-error *ngIf="signUp.controls.passwordFormControl.hasError('required')">
+					Password is <strong>required</strong>
+				</mat-error>
+			</mat-form-field>
+
+			<button mat-flat-button color="accent">Signup</button>
+			<button mat-flat-button color="warn">Go Back</button>
+
+		</form>
+
+	</mat-card-content>
+
+</mat-card>
+
