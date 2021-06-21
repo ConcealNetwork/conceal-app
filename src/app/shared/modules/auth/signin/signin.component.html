@@ -10,7 +10,7 @@
 
 			<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
 				<mat-label>Email Address</mat-label>
-				<input matInput type="email" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="username">
+				<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="email">
 				<mat-error *ngIf="signIn.controls.emailFormControl.hasError('email') && !signIn.controls.emailFormControl.hasError('required')">
 					Please enter a valid email address
 				</mat-error>
@@ -21,7 +21,7 @@
 
 			<mat-form-field fxFill hintLabel="Your password" appearance="fill" color="accent">
 				<mat-label>Password</mat-label>
-				<input matInput type="password" placeholder="password" formControlName="passwordFormControl" autocomplete="current-password">
+				<input matInput type="password" name="password" placeholder="password" formControlName="passwordFormControl" autocomplete="current-password">
 				<mat-error *ngIf="signIn.controls.passwordFormControl.hasError('required')">
 					Password is <strong>required</strong>
 				</mat-error>
@@ -39,14 +39,15 @@
 				</mat-error>
 			</mat-form-field>
 
-			<button mat-flat-button color="accent">Login</button>
+			<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">Login</button>
 
 		</form>
 
 		<div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-			<a >New User? Sign Up</a>
-			<a >Forgot Password? Reset Now</a>
+			<a>New User? Sign Up</a>
+			<a>Forgot Password? Reset Now</a>
 		</div>
+
 	</mat-card-content>
 
 </mat-card>
