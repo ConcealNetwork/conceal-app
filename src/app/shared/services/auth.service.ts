@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+import { BehaviorSubject, Observable } from "rxjs";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../../environments/environment';
 
@@ -18,12 +20,17 @@ export class AuthService {
 	) {}
 
 	api = environment.walletAPI;
+	isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
 	token: any;
 
 	login(email: string, password: string, twofa: string) {
 		const body = { email,	password,	rememberme: false, code: twofa }
 		return this.http.post(this.api + '/auth', JSON.stringify(body));
 	};
+
+  isLoggedIn(): Observable<boolean> {
+    return this.isLoginSubject.asObservable();
+  }
 
 	loggedIn() {
 		return this.jwtHelper.isTokenExpired();
@@ -35,14 +42,20 @@ export class AuthService {
 
 	setToken(token: any) {
 		localStorage.setItem('access_token', token);
+		this.isLoginSubject.next(true);
 	}
 
 	getToken() :any {
 		return localStorage.getItem('access_token');
 	}
 
+	hasToken() : boolean {
+		return !!localStorage.getItem('access_token');
+	}
+
 	logout() {
 		localStorage.removeItem('access_token');
+		this.isLoginSubject.next(false);
 	}
 
   decodeToken() {

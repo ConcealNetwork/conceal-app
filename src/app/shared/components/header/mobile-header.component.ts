@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+
 import { filter, map } from 'rxjs/operators';
+import { Subscription } from "rxjs";
+
+import { AuthService } from '../../../shared/services/auth.service';
 import { ThemingService } from '../../../shared/services/theming.service';
 
 @Component({
@@ -13,17 +17,19 @@ export class MobileHeaderComponent implements OnInit {
 	pageTitle: string = '';
 	themes: string[] = [];
 	activeTheme: string = '';
+	watcherSubscription!: Subscription;
+	isLoggedIn: boolean = false;
 
   constructor(
 		private activatedRoute: ActivatedRoute,
 		private router: Router,
+		private authService: AuthService,
 		private theming: ThemingService
 	) { }
 
-  ngOnInit(): void {
-		this.setPageTitle();
-		this.themes = this.theming.themes;
-		this.activeTheme = this.theming.theme.value;
+	logout() {
+		this.authService.logout();
+		this.router.navigate(['/']);
 	}
 
 	setPageTitle(): void {
@@ -51,5 +57,16 @@ export class MobileHeaderComponent implements OnInit {
     this.theming.theme.next(theme);
 		this.activeTheme = this.theming.theme.value;
   }
+
+	ngOnInit(): void {
+		this.setPageTitle();
+		this.themes = this.theming.themes;
+		this.activeTheme = this.theming.theme.value;
+		this.watcherSubscription = this.authService.isLoginSubject.subscribe(
+			(isLoggedIn: boolean) => {
+				this.isLoggedIn = isLoggedIn;
+			}
+		);
+	}
 
 }

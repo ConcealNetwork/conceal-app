@@ -31,6 +31,14 @@ export class SignupComponent implements OnInit {
     ])
 	});
 
+	submit() {
+		console.log(
+			this.signUp.value.emailFormControl,
+			this.signUp.value.usernameFormControl,
+			this.signUp.value.passwordFormControl
+		);
+	}
+
   ngOnInit(): void {
   }
 
