@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // Services
@@ -13,9 +13,11 @@ import { AuthService } from '../../../../shared/services/auth.service';
 export class SigninComponent implements OnInit {
 
 	isLoading: boolean = false;
+	returnURL: string = '';
 
   constructor(
 		private authService: AuthService,
+		private route: ActivatedRoute,
 		private router: Router
 	) { }
 
@@ -46,7 +48,7 @@ export class SigninComponent implements OnInit {
 					if (data.message.token && data.result === 'success') {
 						this.authService.setToken(data.message.token);
 						this.isLoading = false;
-						this.router.navigate(['/']);
+						this.router.navigate([this.returnURL]);
 					}
 					else {
 						this.isLoading = false;
@@ -62,7 +64,7 @@ export class SigninComponent implements OnInit {
 	}
 
   ngOnInit(): void {
-
+		this.route.queryParams.subscribe(x => {this.returnURL = x.returnUrl});
 	}
 
 }
