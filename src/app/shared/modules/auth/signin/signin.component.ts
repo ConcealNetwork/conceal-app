@@ -64,7 +64,7 @@ export class SigninComponent implements OnInit {
 	}
 
   ngOnInit(): void {
-		this.route.queryParams.subscribe(x => {this.returnURL = x.returnUrl});
+		this.route.queryParams.subscribe(x => {this.returnURL = x.return});
 	}
 
 }
