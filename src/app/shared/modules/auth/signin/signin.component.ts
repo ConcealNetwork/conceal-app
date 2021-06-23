@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../../../services/data.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { SnackbarService } from '../../../../shared/services/snackbar.service';
+import { DialogService } from '../../../../shared/services/dialog.service';
 
 @Component({
   selector: 'app-auth-signin',
@@ -21,6 +22,7 @@ export class SigninComponent implements OnInit {
 		private authService: AuthService,
 		private dataService: DataService,
 		private snackbarService: SnackbarService,
+		private dialogService: DialogService,
 		private route: ActivatedRoute,
 		private router: Router
 	) { }
@@ -54,6 +56,7 @@ export class SigninComponent implements OnInit {
 			).subscribe((data: any) => {
 				if (data.message.token && data.result === 'success') {
 					this.authService.setToken(data.message.token);
+					this.authService.check2fa().subscribe((result: any) => {if(!result.message.enabled) this.dialogService.openTwoFactorDialog()});
 					this.isLoading = false;
 					this.router.navigate([this.returnURL]);
 					this.snackbarService.openSnackBar('👋 Welcome back! (Logged in)', 'Dismiss');
@@ -66,7 +69,7 @@ export class SigninComponent implements OnInit {
 	}
 
   ngOnInit(): void {
-		this.route.queryParams.subscribe(x => {this.returnURL = x.return});
+		this.route.queryParams.subscribe(x => {this.returnURL = x.return || ''});
 	}
 
 }

@@ -66,6 +66,10 @@ export class AuthService {
 		return this.http.post(`${this.api}/two-factor-authentication`, null);
 	};
 
+	check2fa() {
+		return this.http.get(`${this.api}/two-factor-authentication/enabled`);
+	}
+
 	enable2FA(code: string, enable: boolean) {
 		const body = { code, enable };
 		return this.http.put(`${this.api}/two-factor-authentication`, JSON.stringify(body));

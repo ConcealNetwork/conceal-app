@@ -19,6 +19,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // 3rd Party
 import { JwtModule } from "@auth0/angular-jwt";
@@ -32,9 +33,9 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { MobileFooterComponent } from './shared/components/footer/mobile-footer.component';
 import { MobileHeaderComponent } from './shared/components/header/mobile-header.component';
 import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
+import { TwoFactorDialog } from "./shared/dialogs/twofactor.component";
 
 // Services
-import { ApiService } from './shared/services/api.service';
 import { ThemingService } from './shared/services/theming.service';
 
 export function tokenGetter() {
@@ -48,6 +49,7 @@ export function tokenGetter() {
     SidenavComponent,
     MobileFooterComponent,
     MobileHeaderComponent,
+		TwoFactorDialog
   ],
   imports: [
     BrowserModule,
@@ -74,11 +76,12 @@ export function tokenGetter() {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-		MatSnackBarModule,
 		MatMenuModule,
-		FlexLayoutModule
+		FlexLayoutModule,
+		MatSnackBarModule,
+		MatDialogModule
   ],
-  providers: [ApiService, ThemingService],
+  providers: [ThemingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
