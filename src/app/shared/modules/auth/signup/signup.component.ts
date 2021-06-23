@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // Services
+import { DataService } from '../../../services/data.service';
 import { AuthService } from '../../../../shared/services/auth.service';
-import { DataService } from '../../../../shared/services/data.service';
+import { SnackbarService } from '../../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-auth-signup',
@@ -13,15 +14,20 @@ import { DataService } from '../../../../shared/services/data.service';
 })
 export class SignupComponent implements OnInit {
 
+	isLoading: boolean = false;
+	returnURL: string = '';
+
   constructor(
 		private authService: AuthService,
 		private dataService: DataService,
+		private snackbarService: SnackbarService,
+		private route: ActivatedRoute,
 		private router: Router
 	) { }
 
-	signUp: FormGroup = new FormGroup({
+	form: FormGroup = new FormGroup({
 		usernameFormControl: new FormControl('', [
-      Validators.minLength(1),
+      Validators.minLength(3),
       Validators.maxLength(24),
     ]),
     emailFormControl: new FormControl('', [
@@ -38,14 +44,27 @@ export class SignupComponent implements OnInit {
   }
 
 	submit() {
-		console.log(
-			this.signUp.value.emailFormControl,
-			this.signUp.value.usernameFormControl,
-			this.signUp.value.passwordFormControl
-		);
+		if(this.form.valid) {
+			this.isLoading = true;
+			this.authService.signUpUser(
+				this.form.value.usernameFormControl,
+				this.form.value.emailFormControl,
+				this.form.value.passwordFormControl
+			).subscribe((data: any) => {
+				if (data.result === 'success') {
+					this.isLoading = false;
+					this.changeAuthType('signIn');
+					this.snackbarService.openSnackBar('Account Created! Pease check your email to activate.', 'Dismiss');
+				}	else {
+					this.isLoading = false;
+					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+				}
+			});
+		}
 	}
 
   ngOnInit(): void {
-  }
+		this.route.queryParams.subscribe(x => {this.returnURL = x.return});
+	}
 
 }
