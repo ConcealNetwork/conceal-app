@@ -7,40 +7,40 @@
 
 	<mat-card-content fxLayout="column" fxLayoutGap="25px">
 
-		<form [formGroup]="signUp" fxLayout="column" fxLayoutGap="25px">
+		<form [formGroup]="form" fxLayout="column" fxLayoutGap="25px">
 
 			<mat-form-field fxFill hintLabel="New username" appearance="fill" color="accent">
 				<mat-label>Username</mat-label>
-				<input matInput type="text" minlength="6" maxlength="24" formControlName="usernameFormControl" autocomplete="username">
-				<mat-error *ngIf="signUp.controls.usernameFormControl.hasError('minlength') || signUp.controls.usernameFormControl.hasError('maxlength')">
-					Username should be at least <strong>6 characters</strong>
+				<input matInput type="text" minlength="3" maxlength="24" formControlName="usernameFormControl" autocomplete="nickname">
+				<mat-error *ngIf="form.controls.usernameFormControl.hasError('minlength') || form.controls.usernameFormControl.hasError('maxlength')">
+					Username should be at least <strong>3 characters</strong>
 				</mat-error>
-				<mat-error *ngIf="signUp.controls.usernameFormControl.hasError('required')">
-					Uername is <strong>required</strong>
+				<mat-error *ngIf="form.controls.usernameFormControl.hasError('required')">
+					Username is <strong>required</strong>
 				</mat-error>
 			</mat-form-field>
 
 			<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
 				<mat-label>Email Address</mat-label>
-				<input matInput type="email" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="username">
-				<mat-error *ngIf="signUp.controls.emailFormControl.hasError('email') && !signUp.controls.emailFormControl.hasError('required')">
+				<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="email">
+				<mat-error *ngIf="form.controls.emailFormControl.hasError('email') && !form.controls.emailFormControl.hasError('required')">
 					Please enter a valid email address
 				</mat-error>
-				<mat-error *ngIf="signUp.controls.emailFormControl.hasError('required')">
+				<mat-error *ngIf="form.controls.emailFormControl.hasError('required')">
 					Email address is <strong>required</strong>
 				</mat-error>
 			</mat-form-field>
 
 			<mat-form-field fxFill hintLabel="New password" appearance="fill" color="accent">
 				<mat-label>Password</mat-label>
-				<input matInput type="password" placeholder="password" formControlName="passwordFormControl" autocomplete="new-password">
-				<mat-error *ngIf="signUp.controls.passwordFormControl.hasError('required')">
+				<input matInput type="password" name="password" placeholder="password" formControlName="passwordFormControl" autocomplete="new-password">
+				<mat-error *ngIf="form.controls.passwordFormControl.hasError('required')">
 					Password is <strong>required</strong>
 				</mat-error>
 			</mat-form-field>
 
 			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
-				<button mat-flat-button color="accent" (click)="submit">Create Account</button>
+				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Create Account' : 'Loading' }}</button>
 				<a mat-stroked-button (click)="changeAuthType('signIn')">Go Back</a>
 			</div>
 

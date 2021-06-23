@@ -25,7 +25,7 @@ export class SigninComponent implements OnInit {
 		private router: Router
 	) { }
 
-	signIn: FormGroup = new FormGroup({
+	form: FormGroup = new FormGroup({
     emailFormControl: new FormControl('', [
       Validators.required,
       Validators.email,
@@ -45,12 +45,12 @@ export class SigninComponent implements OnInit {
   }
 
 	submit() {
-		if(this.signIn.valid) {
+		if(this.form.valid) {
 			this.isLoading = true;
 			this.authService.login(
-				this.signIn.value.emailFormControl,
-				this.signIn.value.passwordFormControl,
-				this.signIn.value.twofaFormControl
+				this.form.value.emailFormControl,
+				this.form.value.passwordFormControl,
+				this.form.value.twofaFormControl
 			).subscribe((data: any) => {
 				if (data.message.token && data.result === 'success') {
 					this.authService.setToken(data.message.token);

@@ -19,7 +19,7 @@ export class ResetComponent implements OnInit {
 		private router: Router
 	) { }
 
-	reset: FormGroup = new FormGroup({
+	form: FormGroup = new FormGroup({
     emailFormControl: new FormControl('', [
       Validators.required,
       Validators.email,
