@@ -1,18 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+// Angular Core
+import { Component, OnDestroy } from '@angular/core';
+
+// 3rd Party
+import { Subscription } from 'rxjs';
+
+// Services
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnDestroy {
 
-	current: string = '';
+	subscription: Subscription;
+	authType: string = 'signIn';
 
-  constructor() { }
+  constructor(private dataService: DataService) {
+		this.subscription = this.dataService.authTypeAnnounce$.subscribe(
+      type => { this.authType = type }
+		);
+	}
 
-  ngOnInit(): void {
-
+	ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    this.subscription.unsubscribe();
   }
 
 }
