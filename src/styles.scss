@@ -52,28 +52,12 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 
 .light-theme {
   @include angular-material-theme($app-light-theme);
-	.mat-drawer-container {
-		background-image: url(./assets/images/bg-light.webp);
-		background-position: center;
-		background-size: cover;
-		background-repeat: no-repeat;
-	}
-	.active {
-		color: #f8ac22 !important;
-	}
+	@import './styles/themes/light.scss';
 }
 
 .dark-theme {
   @include angular-material-theme($app-dark-theme);
-	.mat-drawer-container {
-		background-image: url(./assets/images/bg-dark.webp);
-		background-position: center;
-		background-size: cover;
-		background-repeat: no-repeat;
-	}
-	.active {
-		color: #faa933 !important;
-	}
+	@import './styles/themes/dark.scss';
 }
 
 // Material Components

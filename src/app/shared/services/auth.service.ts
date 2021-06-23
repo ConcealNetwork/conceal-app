@@ -28,6 +28,10 @@ export class AuthService {
 		return this.http.post(this.api + '/auth', JSON.stringify(body));
 	};
 
+	getUser() {
+    return this.http.get(`${this.api}/user`);
+	};
+
   isLoggedIn(): Observable<boolean> {
     return this.isLoginSubject.asObservable();
   }

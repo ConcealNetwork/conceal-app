@@ -1,8 +1,9 @@
-.light {
-
-	.mat-card {
-		background: rgba(255, 255, 255, 0.9);
-		color: #222;
-	}
-
+.mat-drawer-container {
+	background-image: url(./../../assets/images/bg-light.webp);
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.active {
+	color: #f8ac22 !important;
 }

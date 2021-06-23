@@ -17,6 +17,8 @@ export class SigninComponent implements OnInit {
 
 	isLoading: boolean = false;
 	returnURL: string = '';
+	date: Date = new Date();
+	timeOfDay: number = this.date.getHours();
 
   constructor(
 		private authService: AuthService,
@@ -55,11 +57,19 @@ export class SigninComponent implements OnInit {
 				this.form.value.twofaFormControl
 			).subscribe((data: any) => {
 				if (data.message.token && data.result === 'success') {
-					this.authService.setToken(data.message.token);
-					this.authService.check2fa().subscribe((result: any) => {if(!result.message.enabled) this.dialogService.openTwoFactorDialog()});
 					this.isLoading = false;
+					// set auth token
+					this.authService.setToken(data.message.token);
+					// Check if 2fa is enabled
+					this.authService.check2fa().subscribe((result: any) => {
+						if(!result.message.enabled) this.dialogService.openTwoFactorDialog()
+					});
+					// Login message
+					this.authService.getUser().subscribe((result: any) => {
+						if(result.message.name) this.snackbarService.openSnackBar(`👋 ${this.timeOfDay < 12 ? 'Good morning' : 'Good evening'}, ${result.message.name} (Logged in)`, 'Dismiss')
+					});
+					// navigate to previous route
 					this.router.navigate([this.returnURL]);
-					this.snackbarService.openSnackBar('👋 Welcome back! (Logged in)', 'Dismiss');
 				}	else {
 					this.isLoading = false;
 					this.snackbarService.openSnackBar(data.message, 'Dismiss');
