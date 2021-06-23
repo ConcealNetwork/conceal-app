@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 // Services
 import { DataService } from '../../../services/data.service';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { SnackbarService } from '../../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-auth-signin',
@@ -19,6 +20,7 @@ export class SigninComponent implements OnInit {
   constructor(
 		private authService: AuthService,
 		private dataService: DataService,
+		private snackbarService: SnackbarService,
 		private route: ActivatedRoute,
 		private router: Router
 	) { }
@@ -43,8 +45,8 @@ export class SigninComponent implements OnInit {
   }
 
 	submit() {
-		this.isLoading = true;
 		if(this.signIn.valid) {
+			this.isLoading = true;
 			this.authService.login(
 				this.signIn.value.emailFormControl,
 				this.signIn.value.passwordFormControl,
@@ -54,9 +56,10 @@ export class SigninComponent implements OnInit {
 					this.authService.setToken(data.message.token);
 					this.isLoading = false;
 					this.router.navigate([this.returnURL]);
+					this.snackbarService.openSnackBar('👋 Welcome back! (Logged in)', 'Dismiss');
 				}	else {
 					this.isLoading = false;
-					console.log(data.message);
+					this.snackbarService.openSnackBar(data.message, 'Dismiss');
 				}
 			});
 		}

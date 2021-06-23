@@ -6,6 +6,7 @@ import { Subscription } from "rxjs";
 
 import { AuthService } from '../../../shared/services/auth.service';
 import { ThemingService } from '../../../shared/services/theming.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-mobile-header',
@@ -24,13 +25,9 @@ export class MobileHeaderComponent implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		private router: Router,
 		private authService: AuthService,
-		private theming: ThemingService
+		private theming: ThemingService,
+		private snackbarService: SnackbarService
 	) { }
-
-	logout() {
-		this.authService.logout();
-		this.router.navigate(['/']);
-	}
 
 	setPageTitle(): void {
 		this.router.events.pipe(
@@ -53,9 +50,16 @@ export class MobileHeaderComponent implements OnInit {
 		).subscribe((title: string) => this.pageTitle = title);
 	}
 
+	logout() {
+		this.authService.logout();
+		this.router.navigate(['/']);
+		this.snackbarService.openSnackBar('👋 See you soon. (Logged out)', 'Dismiss');
+	}
+
 	changeTheme(theme: string) {
     this.theming.theme.next(theme);
 		this.activeTheme = this.theming.theme.value;
+		this.snackbarService.openSnackBar(`You just switched to ${this.activeTheme === 'light-theme' ? '☀️ Light Mode' : '🌒 Dark Mode'}`, 'Dismiss');
   }
 
 	ngOnInit(): void {

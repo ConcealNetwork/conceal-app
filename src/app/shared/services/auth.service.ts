@@ -16,7 +16,7 @@ export interface Data {
 export class AuthService {
 	constructor(
 		private http: HttpClient,
-		public jwtHelper: JwtHelperService,
+		public jwtHelper: JwtHelperService
 	) {}
 
 	api = environment.walletAPI;
