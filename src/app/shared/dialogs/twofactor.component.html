@@ -1,0 +1,11 @@
+<div class="content" fxLayout="column" fxLayoutAlign="center stretch">
+	<h1 mat-dialog-title class="title">Two-Factor Authentication</h1>
+	<div mat-dialog-content>
+		<h4>Two-Factor Authentication is not enabled.</h4>
+		<p>For maximum security please enable it in settings.</p>
+	</div>
+	<div mat-dialog-actions>
+		<button mat-flat-button color="warn" (click)="close()">No Thanks</button>
+		<button mat-flat-button color="accent" [mat-dialog-close] routerLink="/settings" cdkFocusInitial>Open Settings</button>
+	</div>
+</div>

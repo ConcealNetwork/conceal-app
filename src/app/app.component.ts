@@ -2,8 +2,13 @@ import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { getSupportedInputTypes, Platform, supportsPassiveEventListeners, supportsScrollBehavior } from '@angular/cdk/platform';
+
+// 3rd Party Modules
 import { Subscription } from 'rxjs';
+
+// Services
 import { ThemingService } from './shared/services/theming.service';
+
 
 @Component({
   selector: 'app-root',
