@@ -6,6 +6,7 @@ import { Subscription } from "rxjs";
 // Services
 import { AuthService } from '../../../shared/services/auth.service';
 import { ThemingService } from '../../../shared/services/theming.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-header',
@@ -22,17 +23,20 @@ export class HeaderComponent implements OnInit {
   constructor(
 		private router: Router,
 		private authService: AuthService,
-		private theming: ThemingService
+		private theming: ThemingService,
+		private snackbarService: SnackbarService
 	) { }
 
 	changeTheme(theme: string) {
     this.theming.theme.next(theme);
 		this.activeTheme = this.theming.theme.value;
+		this.snackbarService.openSnackBar(`You just switched to ${this.activeTheme === 'light-theme' ? '☀️ Light Mode' : '🌒 Dark Mode'}`, 'Dismiss');
   }
 
 	logout() {
 		this.authService.logout();
 		this.router.navigate(['/']);
+		this.snackbarService.openSnackBar('👋 See you soon. (Logged out)', 'Dismiss');
 	}
 
 	ngOnInit(): void {
