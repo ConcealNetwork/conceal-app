@@ -11,7 +11,7 @@
 
 			<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
 				<mat-label>Email Address</mat-label>
-				<input matInput type="email" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="username">
+				<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="email">
 				<mat-error *ngIf="form.controls.emailFormControl.hasError('email') && !form.controls.emailFormControl.hasError('required')">
 					Please enter a valid email address
 				</mat-error>
@@ -21,7 +21,7 @@
 			</mat-form-field>
 
 			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
-				<button mat-flat-button color="accent" (click)="submit">Create Account</button>
+				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Recover Password' : 'Loading' }}</button>
 				<a mat-stroked-button (click)="changeAuthType('signIn')">Go Back</a>
 			</div>
 

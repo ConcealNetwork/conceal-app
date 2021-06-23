@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit {
 				if (data.result === 'success') {
 					this.isLoading = false;
 					this.changeAuthType('signIn');
-					this.snackbarService.openSnackBar('Account Created! Pease check your email to activate.', 'Dismiss');
+					this.snackbarService.openSnackBar('Account Created! Please check your email to activate.', 'Dismiss');
 				}	else {
 					this.isLoading = false;
 					this.snackbarService.openSnackBar(data.message, 'Dismiss');
