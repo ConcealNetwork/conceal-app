@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // Services
 import { AuthService } from '../../../../shared/services/auth.service';
+import { DataService } from '../../../../shared/services/data.service';
 
 @Component({
   selector: 'app-auth-signup',
@@ -14,6 +15,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
 		private authService: AuthService,
+		private dataService: DataService,
 		private router: Router
 	) { }
 
@@ -30,6 +32,10 @@ export class SignupComponent implements OnInit {
       Validators.required
     ])
 	});
+
+	changeAuthType(type: string) {
+    this.dataService.announceAuthType(type);
+  }
 
 	submit() {
 		console.log(

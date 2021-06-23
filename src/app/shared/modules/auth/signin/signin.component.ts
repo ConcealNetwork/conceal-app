@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // Services
+import { DataService } from '../../../services/data.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class SigninComponent implements OnInit {
 
   constructor(
 		private authService: AuthService,
+		private dataService: DataService,
 		private route: ActivatedRoute,
 		private router: Router
 	) { }
@@ -36,6 +38,10 @@ export class SigninComponent implements OnInit {
     ])
 	});
 
+	changeAuthType(type: string) {
+    this.dataService.announceAuthType(type);
+  }
+
 	submit() {
 		this.isLoading = true;
 		if(this.signIn.valid) {
@@ -43,23 +49,16 @@ export class SigninComponent implements OnInit {
 				this.signIn.value.emailFormControl,
 				this.signIn.value.passwordFormControl,
 				this.signIn.value.twofaFormControl
-			).subscribe(
-				(data: any) => {
-					if (data.message.token && data.result === 'success') {
-						this.authService.setToken(data.message.token);
-						this.isLoading = false;
-						this.router.navigate([this.returnURL]);
-					}
-					else {
-						this.isLoading = false;
-						console.log(data.message);
-					}
-				},
-				error => {
+			).subscribe((data: any) => {
+				if (data.message.token && data.result === 'success') {
+					this.authService.setToken(data.message.token);
 					this.isLoading = false;
-					console.log(error.message);
+					this.router.navigate([this.returnURL]);
+				}	else {
+					this.isLoading = false;
+					console.log(data.message);
 				}
-			)
+			});
 		}
 	}
 

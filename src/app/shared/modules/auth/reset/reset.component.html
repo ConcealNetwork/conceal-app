@@ -20,10 +20,12 @@
 				</mat-error>
 			</mat-form-field>
 
-		</form>
+			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
+				<button mat-flat-button color="accent" (click)="submit">Create Account</button>
+				<a mat-stroked-button (click)="changeAuthType('signIn')">Go Back</a>
+			</div>
 
-		<button mat-flat-button color="accent">Reset</button>
-		<button mat-flat-button color="warn">Go Back</button>
+		</form>
 
 	</mat-card-content>
 

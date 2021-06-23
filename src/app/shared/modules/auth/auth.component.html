@@ -2,9 +2,9 @@
 
 	<div fxLayout="row" fxLayoutAlign="center center">
 
-		<app-auth-signin *ngIf="this.current == 'signin' || this.current == ''" class="signin" fxLayout="column" fxFlex></app-auth-signin> <!-- Sign In -->
-		<app-auth-signup *ngIf="this.current == 'signup'" class="signup" fxLayout="column" fxFlex></app-auth-signup> <!-- Sign Up -->
-		<app-auth-reset *ngIf="this.current == 'reset'" class="reset" fxLayout="column" fxFlex></app-auth-reset> <!-- Password Reset -->
+		<app-auth-signin *ngIf="this.authType === 'signIn'" class="signin" fxLayout="column" fxFlex></app-auth-signin> <!-- Sign In -->
+		<app-auth-signup *ngIf="this.authType === 'signUp'" class="signup" fxLayout="column" fxFlex></app-auth-signup> <!-- Sign Up -->
+		<app-auth-reset *ngIf="this.authType === 'reset'" class="reset" fxLayout="column" fxFlex></app-auth-reset> <!-- Password Reset -->
 
 	</div>
 
