@@ -1,8 +1,9 @@
-.dark {
-
-	.mat-card {
-		background: rgba(40, 40, 40, 0.9);
-		color: #fff;
-	}
-
+.mat-drawer-container {
+	background-image: url(./../../assets/images/bg-dark.webp);
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.active {
+	color: #faa933 !important;
 }
