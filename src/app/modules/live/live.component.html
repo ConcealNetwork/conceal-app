@@ -2,23 +2,30 @@
 
 	<div fxLayout="row" fxLayoutAlign="center center">
 
-		<div class="live mat-elevation-z6" fxLayout="column" fxFlex fxLayoutGap="15px">
+		<mat-card class="live mat-elevation-z6" fxLayout="column" fxFlex>
 
-			<h3 class="title">Conceal Live</h3>
+			<mat-card-header fxLayout="column" fxLayoutGap="5px">
+				<h2 class="title">Conceal Live</h2>
+				<p>Video conferencing system</p>
+			</mat-card-header>
 
-			<div fxLayout="column">
-				<video class="local" #local_video [autoplay]="true" [muted]="true"></video>
-				<video class="remote" #received_video [autoplay]="true"></video>
-			</div>
+			<mat-card-content fxLayout="column" fxLayoutGap="15px">
 
-			<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="10px">
-				<button mat-flat-button color="accent" (click)="startLocalVideo()" [disabled]="localVideoActive">Start</button>
-				<button mat-flat-button color="warn" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">Stop</button>
-				<button mat-flat-button color="accent" (click)="call()" [disabled]="inCall || !localVideoActive">Call</button>
-				<button mat-flat-button color="warn" (click)="hangUp()" [disabled]="!inCall">Hang Up</button>
-			</div>
+				<div class="video" fxLayout="column">
+					<video class="local" #local_video [autoplay]="true" [muted]="true"></video>
+					<video class="remote" #received_video [autoplay]="true"></video>
+				</div>
 
-		</div>
+				<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="10px">
+					<button mat-flat-button color="accent" (click)="startLocalVideo()" [disabled]="localVideoActive">Start</button>
+					<button mat-flat-button color="warn" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">Stop</button>
+					<button mat-flat-button color="accent" (click)="call()" [disabled]="inCall || !localVideoActive">Call</button>
+					<button mat-flat-button color="warn" (click)="hangUp()" [disabled]="!inCall">Hang Up</button>
+				</div>
+
+			</mat-card-content>
+
+		</mat-card>
 
 	</div>
 
