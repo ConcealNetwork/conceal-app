@@ -1,18 +1,28 @@
-.remote {
-  width: 100%;
-  background: rgba($color: #000000, $alpha: 0.5);
-}
+.container {
+	height: 100%;
 
-.local {
-  position: absolute;
-  bottom: 45px;
-  right: 45px;
-	width: 20%;
-	height: 20%;
-	background: rgba($color: #000000, $alpha: 0.5);
-	border: 1px solid orange;
-}
+	.live {
+		position: relative;
+		display: block;
+		max-width: 50%;
+		background: #424242;
+		padding: 1rem;
+		border-radius: 5px;
+	}
 
-button {
-  margin: 1em;
+	.remote {
+		width: 100%;
+		background: rgba($color: #000000, $alpha: 0.5);
+	}
+
+	.local {
+		position: absolute;
+		bottom: 5rem;
+		right: 2rem;
+		width: 25%;
+		opacity: 0.5;
+		padding: none;
+		border: 1px solid rgba($color: #fff, $alpha: 0.2);
+	}
+
 }

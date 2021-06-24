@@ -1,15 +1,25 @@
-<div class="container" fxLayout="column">
+<div class="container" fxLayout="column" fxLayoutAlign="center stretch">
 
-	<mat-card class="login mat-elevation-z6">
-		<video class="local" #local_video [autoplay]="true" [muted]="true"></video>
-		<video class="remote" #received_video [autoplay]="true"></video>
-	</mat-card>
+	<div fxLayout="row" fxLayoutAlign="center center">
 
-	<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
-		<button mat-flat-button color="accent" (click)="startLocalVideo()" [disabled]="localVideoActive">Start Local</button>
-		<button mat-flat-button color="warn" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">Stop Local</button>
-		<button mat-flat-button color="accent" (click)="call()" [disabled]="inCall || !localVideoActive">Call</button>
-		<button mat-flat-button color="warn" (click)="hangUp()" [disabled]="!inCall">HangUp</button>
+		<div class="live mat-elevation-z6" fxLayout="column" fxFlex fxLayoutGap="15px">
+
+			<h3 class="title">Conceal Live</h3>
+
+			<div fxLayout="column">
+				<video class="local" #local_video [autoplay]="true" [muted]="true"></video>
+				<video class="remote" #received_video [autoplay]="true"></video>
+			</div>
+
+			<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="10px">
+				<button mat-flat-button color="accent" (click)="startLocalVideo()" [disabled]="localVideoActive">Start</button>
+				<button mat-flat-button color="warn" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">Stop</button>
+				<button mat-flat-button color="accent" (click)="call()" [disabled]="inCall || !localVideoActive">Call</button>
+				<button mat-flat-button color="warn" (click)="hangUp()" [disabled]="!inCall">Hang Up</button>
+			</div>
+
+		</div>
+
 	</div>
 
 </div>
