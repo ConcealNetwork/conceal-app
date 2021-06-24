@@ -59,7 +59,7 @@ export class MobileHeaderComponent implements OnInit {
 	changeTheme(theme: string) {
     this.theming.theme.next(theme);
 		this.activeTheme = this.theming.theme.value;
-		this.snackbarService.openSnackBar(`You just switched to ${this.activeTheme === 'light-theme' ? '☀️ Light Mode' : '🌒 Dark Mode'}`, 'Dismiss');
+		this.snackbarService.openSnackBar(`${this.activeTheme === 'light-theme' ? ' ☀️ Light Mode' : '🌙 Dark Mode'} Activated`, 'Dismiss');
   }
 
 	ngOnInit(): void {
