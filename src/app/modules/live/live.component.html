@@ -1,1 +1,15 @@
-<p>live works!</p>
+<div class="container" fxLayout="column">
+
+	<mat-card class="login mat-elevation-z6">
+		<video class="local" #local_video [autoplay]="true" [muted]="true"></video>
+		<video class="remote" #received_video [autoplay]="true"></video>
+	</mat-card>
+
+	<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
+		<button mat-flat-button color="accent" (click)="startLocalVideo()" [disabled]="localVideoActive">Start Local</button>
+		<button mat-flat-button color="warn" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">Stop Local</button>
+		<button mat-flat-button color="accent" (click)="call()" [disabled]="inCall || !localVideoActive">Call</button>
+		<button mat-flat-button color="warn" (click)="hangUp()" [disabled]="!inCall">HangUp</button>
+	</div>
+
+</div>
