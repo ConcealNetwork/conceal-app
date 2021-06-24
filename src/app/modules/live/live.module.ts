@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -18,6 +19,7 @@ import { LiveComponent } from './live.component';
   imports: [
     CommonModule,
     LiveRoutingModule,
+		FlexLayoutModule,
 		MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
