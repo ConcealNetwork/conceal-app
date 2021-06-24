@@ -17,9 +17,9 @@
 				</div>
 
 				<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="10px">
-					<button mat-flat-button color="accent" (click)="startLocalVideo()" [disabled]="localVideoActive">Start</button>
-					<button mat-flat-button color="warn" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">Stop</button>
-					<button mat-flat-button color="accent" (click)="call()" [disabled]="inCall || !localVideoActive">Call</button>
+					<button *ngIf="!localVideoActive" mat-flat-button color="accent" (click)="startLocalVideo()" [disabled]="localVideoActive">Start Video</button>
+					<button *ngIf="localVideoActive" mat-flat-button color="warn" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">Stop Video</button>
+					<button mat-flat-button color="accent" (click)="call()" [disabled]="inCall || !localVideoActive">Place Call</button>
 					<button mat-flat-button color="warn" (click)="hangUp()" [disabled]="!inCall">Hang Up</button>
 				</div>
 
