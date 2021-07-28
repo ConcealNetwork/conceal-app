@@ -11,10 +11,6 @@ export const ENV_RTCPeerConfiguration = environment.RTCPeerConfiguration;
 const mediaConstraints = {
   audio: true,
   video: {width: 1280, height: 720}
-  // video: {width: 1280, height: 720} // 16:9
-  // video: {width: 960, height: 540}  // 16:9
-  // video: {width: 640, height: 480}  //  4:3
-  // video: {width: 160, height: 120}  //  4:3
 };
 
 const offerOptions = {
@@ -97,6 +93,7 @@ export class LiveComponent implements AfterViewInit {
             break;
           default:
             console.log('unknown message of type ' + msg.type);
+						this.snackbarService.openSnackBar('Unknown message of type ' + msg.type, 'Dismiss');
         }
       },
       error => console.log(error)
@@ -107,6 +104,7 @@ export class LiveComponent implements AfterViewInit {
 
   private handleOfferMessage(msg: RTCSessionDescriptionInit): void {
     console.log('handle incoming offer');
+		this.snackbarService.openSnackBar(`Handle incoming offer`, 'Dismiss');
     if (!this.peerConnection) {
       this.createPeerConnection();
     }
@@ -148,11 +146,13 @@ export class LiveComponent implements AfterViewInit {
 
   private handleAnswerMessage(msg: RTCSessionDescriptionInit): void {
     console.log('handle incoming answer');
+		this.snackbarService.openSnackBar(`Handle incoming answer`, 'Dismiss');
     this.peerConnection.setRemoteDescription(msg);
   }
 
   private handleHangupMessage(msg: Message): void {
     console.log(msg);
+		this.snackbarService.openSnackBar(`${msg}`, 'Dismiss');
     this.closeVideoCall();
   }
 
@@ -174,6 +174,7 @@ export class LiveComponent implements AfterViewInit {
 
   startLocalVideo(): void {
     console.log('starting local stream');
+		this.snackbarService.openSnackBar(`Starting local stream`, 'Dismiss');
     this.localStream.getTracks().forEach(track => {
       track.enabled = true;
     });
@@ -184,6 +185,7 @@ export class LiveComponent implements AfterViewInit {
 
   pauseLocalVideo(): void {
     console.log('pause local stream');
+		this.snackbarService.openSnackBar(`Pause local stream`, 'Dismiss');
     this.localStream.getTracks().forEach(track => {
       track.enabled = false;
     });
@@ -194,6 +196,7 @@ export class LiveComponent implements AfterViewInit {
 
   private createPeerConnection(): void {
     console.log('creating PeerConnection...');
+		this.snackbarService.openSnackBar(`Creating PeerConnection`, 'Dismiss');
     this.peerConnection = new RTCPeerConnection(ENV_RTCPeerConfiguration);
 
     this.peerConnection.onicecandidate = this.handleICECandidateEvent;
@@ -204,9 +207,11 @@ export class LiveComponent implements AfterViewInit {
 
   private closeVideoCall(): void {
     console.log('Closing call');
+		this.snackbarService.openSnackBar(`Closing call`, 'Dismiss');
 
     if (this.peerConnection) {
       console.log('--> Closing the peer connection');
+			this.snackbarService.openSnackBar(`Closing the peer connection`, 'Dismiss');
 
       this.peerConnection.ontrack = null;
       this.peerConnection.onicecandidate = null;
