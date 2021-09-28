@@ -12,13 +12,18 @@ export class DataService {
 
   // Observable string sources
   private authType = new Subject<string>();
-
   // Observable string streams
   authTypeAnnounce$ = this.authType.asObservable();
-
   // Service message commands
   announceAuthType(type: string) {
     this.authType.next(type);
   }
+
+	// Transactions
+	public transactions = new Subject<string>();
+	transactions$ = this.transactions.asObservable();
+	getTransactions(transaction: any) {
+		this.transactions.next(transaction);
+	}
 
 }
