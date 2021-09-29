@@ -9,15 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 // Services
 import { HelperService } from './../../shared/services/helper.service';
 import { DataService } from './../../shared/services/data.service';
-
-export interface Transactions {
-	type: string;
-	status: string;
-	amount: number;
-	fee: number;
-	timestamp: string;
-	address: string;
-}
+import { CloudService } from './../../shared/services/cloud.service';
 
 @Component({
   selector: 'app-wallet',
@@ -31,8 +23,9 @@ export class WalletComponent implements OnInit {
 	pageSize: number = 10;
 	pageSizeOptions: number[] = [5, 10, 25, 100];
 	displayedColumns: string[] = ['type', 'status', 'amount', 'fee', 'timestamp', 'address'];
-	dataSource: MatTableDataSource<Transactions>;
+	dataSource: MatTableDataSource<any>;
 	isLoading: boolean = true;
+	transactions: any;
 
 	@ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
@@ -40,10 +33,11 @@ export class WalletComponent implements OnInit {
   constructor(
 		private changeDetectorRefs: ChangeDetectorRef,
 		private helperService: HelperService,
-		private dataService: DataService
+		private dataService: DataService,
+		private cloudService: CloudService
 	) {
 		// Assign the data to the data source for the table to render
-		this.dataSource = new MatTableDataSource();
+		this.dataSource = new MatTableDataSource(this.transactions);
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
 		this.isLoading = false;
@@ -54,7 +48,24 @@ export class WalletComponent implements OnInit {
 	}
 
   ngOnInit(): void {
-
+		// Wallets
+		this.cloudService.getWalletsData().subscribe((data:any) => {
+			this.dataService.getWallets(data.message.wallets);
+		});
+		// Transactions
+		this.dataService.wallets.subscribe((wallets:any) => {
+			let transactions: any = Object.values(wallets);
+			let arr = [];
+			for(let i = 0; i < transactions.length; i++) {
+				arr.push(transactions[i]['transactions']);
+			}
+			const merge = Array.prototype.concat(...arr);
+			this.dataService.getTransactions(merge);
+		});
+		this.dataService.transactions.subscribe((data:any) => {
+			this.transactions = data;
+			console.log(this.transactions);
+		});
   }
 
 	applyFilter(event: Event) {
