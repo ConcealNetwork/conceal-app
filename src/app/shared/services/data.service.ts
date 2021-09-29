@@ -20,6 +20,13 @@ export class DataService {
   }
 
 	// Transactions
+	public wallets = new Subject<string>();
+	wallets$ = this.wallets.asObservable();
+	getWallets(wallet: any) {
+		this.wallets.next(wallet);
+	}
+
+	// Transactions
 	public transactions = new Subject<string>();
 	transactions$ = this.transactions.asObservable();
 	getTransactions(transaction: any) {
