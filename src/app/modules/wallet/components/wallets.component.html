@@ -1,0 +1,54 @@
+<mat-card class="mat-elevation-z6">
+
+	<mat-card-header fxLayout="column">
+		<div fxLayout="row" fxLayoutAlign="space-between center">
+			<h2 class="title">ccx7TSS...ZhHXHL2</h2>
+			<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options">
+				<mat-icon>more_vert</mat-icon>
+			</button>
+			<mat-menu #menu="matMenu">
+				<button mat-menu-item>
+					<mat-icon color="primary">lock_open</mat-icon>
+					<span>Export Private Keys</span>
+				</button>
+				<button mat-menu-item>
+					<mat-icon color="primary">camera</mat-icon>
+					<span>Generate QR Code</span>
+				</button>
+				<button mat-menu-item>
+					<mat-icon color="primary">assignment</mat-icon>
+					<span>Copy Address</span>
+				</button>
+				<button mat-menu-item>
+					<mat-icon color="warn">delete</mat-icon>
+					<span>Delete Wallet</span>
+				</button>
+			</mat-menu>
+		</div>
+	</mat-card-header>
+
+	<mat-card-content fxLayout="column">
+		<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
+			<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+				<span>Available</span>
+				<span>0.00 CCX</span>
+			</div>
+			<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+				<span>Pending</span>
+				<span>0.00 CCX</span>
+			</div>
+			<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+				<span>Withdrawable</span>
+				<span>0.00 CCX</span>
+			</div>
+		</div>
+	</mat-card-content>
+
+	<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+		<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
+			<button color="accent" mat-flat-button>Pay</button>
+			<button color="accent" mat-flat-button>Transfer</button>
+		</div>
+	</mat-card-actions>
+
+</mat-card>

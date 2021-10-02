@@ -11,14 +11,19 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { WalletRoutingModule } from './wallet-routing.module';
 import { WalletComponent } from './wallet.component';
+import { TransactionsComponent } from './components/transactions.component';
+import { WalletsComponent } from './components/wallets.component';
 
 
 @NgModule({
   declarations: [
-    WalletComponent
+    WalletComponent,
+    TransactionsComponent,
+    WalletsComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +37,7 @@ import { WalletComponent } from './wallet.component';
 		MatPaginatorModule,
 		MatSortModule,
 		CdkTableModule,
+		MatProgressBarModule,
     WalletRoutingModule
   ]
 })
