@@ -22,7 +22,7 @@ export class HelperService {
 	};
 
 	formatAddress(address:string) {
-		return address.slice(0,7) + '...' + address.slice(-7);
+		return address.slice(0,5) + '...' + address.slice(-5);
 	}
 
 	formatDatetime(datetime:Date) {
