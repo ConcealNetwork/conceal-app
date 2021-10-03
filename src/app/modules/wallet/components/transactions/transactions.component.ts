@@ -1,5 +1,6 @@
 // Angular Core
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 // Angular Material
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -8,7 +9,6 @@ import { MatTableDataSource } from '@angular/material/table';
 
 // Services
 import { HelperService } from './../../../../shared/services/helper.service';
-import { DataService } from './../../../../shared/services/data.service';
 import { CloudService } from './../../../../shared/services/cloud.service';
 
 export interface Transactions {
@@ -28,75 +28,79 @@ export interface Transactions {
 
 export class TransactionsComponent implements OnInit {
 
-
 	// MatPaginator Output
 	pageEvent!: PageEvent;
 	pageSize: number = 10;
 	pageSizeOptions: number[] = [5, 10, 25, 100];
-	displayedColumns: string[] = ['type', 'status', 'amount', 'fee', 'timestamp', 'address'];
-	dataSource: MatTableDataSource<Transactions>;
-	isLoading: boolean = true;
+	displayedColumns: string[] = ['timestamp', 'type', 'amount'];
+	dataSource!: MatTableDataSource<Transactions>;
+	isLoadingResults: boolean = true;
+	isRefreshingResults: boolean = true;
+	wallets: any;
 	transactions: any;
 
 	@ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
   constructor(
+		public breakpointObserver: BreakpointObserver,
 		private changeDetectorRefs: ChangeDetectorRef,
 		private helperService: HelperService,
-		private dataService: DataService,
 		private cloudService: CloudService
 	) {
-		this.dataService.transactions.subscribe((data:any) => {
-			this.transactions = data;
-		});
 		// Assign the data to the data source for the table to render
-		this.dataSource = new MatTableDataSource(this.transactions);
-		this.dataSource.paginator = this.paginator;
-		this.dataSource.sort = this.sort;
+		setTimeout(() => {
+			this.dataSource = new MatTableDataSource(this.transactions);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+			this.isLoadingResults = false;
+			this.isRefreshingResults = false;
+		}, 2000);
 	}
 
 	getHelperService() {
 		return this.helperService;
 	}
 
-  ngOnInit(): void {
+	ngOnInit() {
 		this.refresh();
+		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall])
+		.subscribe((state: BreakpointState) => {
+			if (state.matches) {
+				// Matches small viewport or handset in portrait mode
+				this.pageSize = 5;
+				this.displayedColumns = ['timestamp', 'type', 'amount'];
+			} else {
+				this.pageSize = 10;
+				this.displayedColumns = ['timestamp', 'type', 'amount', 'fee', 'status'];
+			}
+		});
   }
 
 	getWalletData() {
-		// Wallets
 		this.cloudService.getWalletsData().subscribe((data:any) => {
-			this.dataService.getWallets(data.message.wallets);
-		});
-		// Transactions
-		this.dataService.wallets.subscribe((wallets:any) => {
-			let transactions: any = Object.values(wallets);
+			this.wallets = data.message.wallets;
+			let transactions: any = Object.values(this.wallets);
 			let arr = [];
 			for(let i = 0; i < transactions.length; i++) {
 				arr.push(transactions[i]['transactions']);
 			}
-			const merge = Array.prototype.concat(...arr);
-			this.dataService.getTransactions(merge);
-		});
-		this.dataService.transactions.subscribe((data:any) => {
-			this.transactions = data;
-			console.log(this.transactions);
+			let mergedTransactions = Array.prototype.concat(...arr);
+			this.transactions = mergedTransactions;
 		});
 	}
 
 	refresh() {
-		this.isLoading = true;
+		this.isRefreshingResults = true;
 		this.getWalletData();
 		setTimeout(() => {
 			this.dataSource = new MatTableDataSource(this.transactions);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
 			this.changeDetectorRefs.detectChanges();
-			this.isLoading = false;
-		}, 3000);
+			this.isRefreshingResults = false;
+		}, 2000);
 	}
-
 
 	applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

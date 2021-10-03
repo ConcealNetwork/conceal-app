@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { WalletRoutingModule } from './wallet-routing.module';
 import { WalletComponent } from './wallet.component';
@@ -38,6 +39,7 @@ import { WalletsComponent } from './components/wallets/wallets.component';
 		MatSortModule,
 		CdkTableModule,
 		MatProgressBarModule,
+		MatProgressSpinnerModule,
     WalletRoutingModule
   ]
 })
