@@ -7,9 +7,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 // Services
-import { HelperService } from './../../../shared/services/helper.service';
-import { DataService } from './../../../shared/services/data.service';
-import { CloudService } from './../../../shared/services/cloud.service';
+import { HelperService } from './../../../../shared/services/helper.service';
+import { DataService } from './../../../../shared/services/data.service';
+import { CloudService } from './../../../../shared/services/cloud.service';
 
 export interface Transactions {
 	type: string;
