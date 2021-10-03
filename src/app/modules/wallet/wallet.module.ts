@@ -15,8 +15,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { WalletRoutingModule } from './wallet-routing.module';
 import { WalletComponent } from './wallet.component';
-import { TransactionsComponent } from './components/transactions.component';
-import { WalletsComponent } from './components/wallets.component';
+import { TransactionsComponent } from './components/transactions/transactions.component';
+import { WalletsComponent } from './components/wallets/wallets.component';
 
 
 @NgModule({
