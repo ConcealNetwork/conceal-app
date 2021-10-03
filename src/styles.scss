@@ -68,6 +68,11 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
   to {transform: rotate(360deg);}
 }
 
+.mat-paginator-container {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
 .spinner:before {
   content: '';
   box-sizing: border-box;
