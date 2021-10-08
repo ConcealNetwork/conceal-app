@@ -1,6 +1,11 @@
 // Fix toolbar to the top and make it 55px in height
 header {
 
+	.mat-toolbar {
+    background: none;
+		color: #fff;
+	}
+
 	.title {
 		font-size: 1rem;
 	}
