@@ -55,7 +55,7 @@ export class TransactionsComponent implements OnInit {
 			this.dataSource.sort = this.sort;
 			this.isLoadingResults = false;
 			this.isRefreshingResults = false;
-		}, 2000);
+		}, 3000);
 	}
 
 	getHelperService() {
@@ -99,7 +99,7 @@ export class TransactionsComponent implements OnInit {
 			this.dataSource.sort = this.sort;
 			this.changeDetectorRefs.detectChanges();
 			this.isRefreshingResults = false;
-		}, 2000);
+		}, 3000);
 	}
 
 	applyFilter(event: Event) {

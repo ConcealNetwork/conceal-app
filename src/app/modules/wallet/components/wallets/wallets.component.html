@@ -1,9 +1,9 @@
-<mat-card class="mat-elevation-z6">
+<mat-card class="mat-elevation-z6" *ngFor="let item of this.wallets | keyvalue" fxFlex="0 1 calc(33.3% - 25px)" fxFlex.lt-md="0 1 calc(50% - 25px)" fxFlex.lt-sm="100%">
 
 	<mat-card-header fxLayout="column">
 		<div fxLayout="row" fxLayoutAlign="space-between center">
-			<h2 class="title">ccx7TSS...ZhHXHL2</h2>
-			<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options">
+			<h2 class="title">{{ this.getHelperService().formatAddress(item.key) }}</h2>
+			<button color="accent" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options">
 				<mat-icon>more_vert</mat-icon>
 			</button>
 			<mat-menu #menu="matMenu">
@@ -31,23 +31,24 @@
 		<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
 			<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
 				<span>Available</span>
-				<span>0.00 CCX</span>
+				<span>{{ this.getHelperService().formatAmount(item.value.total, 1, 6) }} CCX</span>
 			</div>
 			<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
 				<span>Pending</span>
-				<span>0.00 CCX</span>
+				<span>{{ getHelperService().formatAmount(item.value.locked, 1, 6) }} CCX</span>
 			</div>
 			<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
 				<span>Withdrawable</span>
-				<span>0.00 CCX</span>
+				<span>{{ getHelperService().formatAmount(item.value.balance, 1, 6) }} CCX</span>
 			</div>
 		</div>
 	</mat-card-content>
 
 	<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 		<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
-			<button color="accent" mat-flat-button>Pay</button>
-			<button color="accent" mat-flat-button>Transfer</button>
+			<button color="accent" mat-flat-button>Send</button>
+			<button color="accent" mat-flat-button>Receive</button>
+			<button color="accent" mat-flat-button>Refresh</button>
 		</div>
 	</mat-card-actions>
 

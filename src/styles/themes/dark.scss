@@ -1,9 +1,26 @@
 .mat-drawer-container {
-	//background-image: url(./../../assets/images/bg-dark.webp);
+	background-image: url(./../../assets/images/bg-dark.webp);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
 .active {
 	color: #faa933 !important;
+}
+
+.mat-card {
+	.mat-card-header {
+		background-color: #222;
+	}
+}
+
+.mat-menu-panel {
+	background: #fff;
+	.mat-menu-item {
+		color: #333;
+	}
+}
+
+.mat-menu-item:hover:not([disabled]) {
+	background: #ddd;
 }

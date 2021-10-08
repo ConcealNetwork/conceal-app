@@ -5,10 +5,10 @@
 			<mat-form-field color="accent" fxFlex="auto" class="filter" appearance="standard">
 				<mat-label>Search Transactions</mat-label>
 				<input matInput (keyup)="applyFilter($event)" placeholder="" [disabled]="isRefreshingResults || isLoadingResults">
+				<button matSuffix color="accent" mat-icon-button aria-label="Refresh transactions" matTooltip="Refresh transactions" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="refresh()" [disabled]="isRefreshingResults || isLoadingResults">
+					<mat-icon>refresh</mat-icon>
+				</button>
 			</mat-form-field>
-			<div fxFlex="noshrink" class="button-control" fxLayoutAlign="end">
-				<button color="accent" mat-flat-button aria-hidden="false" aria-label="Refresh transactions" matTooltip="Refresh transactions" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="refresh()" [disabled]="isRefreshingResults || isLoadingResults">Refresh</button>
-			</div>
 		</div>
 	</mat-card-header>
 
