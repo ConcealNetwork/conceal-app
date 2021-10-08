@@ -21,7 +21,7 @@ export class HelperService {
 		return `${parseFloat(amount).toLocaleString('en', formatOptions)}`;
 	};
 
-	formatAddress(address:string) {
+	formatAddress(address:any) {
 		return address.slice(0,5) + '...' + address.slice(-5);
 	}
 

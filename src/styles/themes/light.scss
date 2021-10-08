@@ -1,9 +1,39 @@
 .mat-drawer-container {
-	//background-image: url(./../../assets/images/bg-light.webp);
+	background-image: url(./../../assets/images/bg-light.webp);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
 .active {
 	color: #f8ac22 !important;
+}
+
+.mat-card {
+	.mat-card-header {
+		background-color: #5a5a5a;
+		color: #eee;
+	}
+}
+
+.mat-form-field-label {
+  color: #eee;
+}
+.mat-form-field-underline {
+  background-color: #eee !important;
+}
+
+.mat-form-field-ripple {
+	/*change color of underline when focused*/
+	background-color: white !important;
+}
+
+.mat-menu-panel {
+	background: #5a5a5a;
+	.mat-menu-item {
+		color: #fff;
+	}
+}
+
+.mat-menu-item:hover:not([disabled]) {
+	background: #666;
 }

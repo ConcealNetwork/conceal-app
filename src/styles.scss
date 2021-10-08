@@ -96,6 +96,11 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 	}
 }
 
+.mat-menu-content:not(:empty) {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+
 /* Change Autocomplete styles in Chrome*/
 :-webkit-autofill,
 :-webkit-autofill:hover,
