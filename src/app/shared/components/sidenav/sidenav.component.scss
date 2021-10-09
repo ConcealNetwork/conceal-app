@@ -1,10 +1,16 @@
-.links {
-	margin-top: 2rem;
+aside {
+	height:100%;
+}
 
-	.link {
-		display: block;
-		text-align: left;
-		margin-top: 1.2rem;
-	}
+.link {
+	display: block;
+	text-align: left;
+}
 
+.close {
+	margin-left: 10px;
+}
+
+.fill-space {
+	flex: 1 1 auto; // Fill space between two icons
 }

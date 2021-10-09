@@ -2,7 +2,7 @@
 
 	<div class="news" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="45px">
 
-		<div fxLayout="column" fxFlex="35" fxLayoutAlign="start" fxLayoutGap="25px">
+		<!-- <div fxLayout="column" fxFlex="35" fxLayoutAlign="start" fxLayoutGap="25px">
 			<h2 class="title">Price</h2>
 			<div fxLayout="row" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="15px">
 				<mat-card class="price mat-elevation-z5" fxLayout="column" fxFlex>
@@ -63,11 +63,10 @@
 					</div>
 				</mat-card>
 			</div>
-		</div>
+		</div> -->
 
-		<div fxLayout="column" fxFlex="grow" fxLayoutAlign="start" fxLayoutGap="25px">
-			<h2 class="title">News</h2>
-			<div fxLayout="row wrap" fxLayoutGap="15px grid">
+		<div fxLayout="column" fxFlex="grow" fxLayoutAlign="start" fxLayoutGap="10px">
+			<div fxLayout="row wrap" fxLayoutGap="10px grid">
 				<div [fxFlex]="(100/gridColumns) + '%'" fxFlex="100%" *ngFor="let item of posts">
 					<mat-card class="article mat-elevation-z5">
 						<div class="card-container">

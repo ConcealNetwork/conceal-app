@@ -11,8 +11,7 @@ export class MobileFooterComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 	onToggleSidenav = () => {
     this.sidenavToggle.emit(); // Emit event to parent component so it can open/close sidenav

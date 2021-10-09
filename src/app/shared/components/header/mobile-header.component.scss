@@ -2,12 +2,13 @@
 header {
 
 	.mat-toolbar {
-    background: none;
-		color: #fff;
+    background: rgba($color: #000000, $alpha: 0);
+		height: 50px;
+		padding-top: 10px;
 	}
 
 	.title {
-		font-size: 1rem;
+		font-size: 1.4rem;
 	}
 
 	.fill-space {
