@@ -16,4 +16,9 @@ export class ApiService {
 	getMediumArticles() {
 		return this.http.get(`https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@concealnetwork`);
 	}
+
+	getPrice(currency:any) {
+		return this.http.get(`https://api.coingecko.com/api/v3/simple/price?ids=conceal&vs_currencies=${currency}&include_last_updated_at=false`);
+  };
+
 }

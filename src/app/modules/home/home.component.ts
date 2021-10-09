@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 		.subscribe((state: BreakpointState) => {
 			if (state.matches) {
 				this.stroke = 3;
-				this.gridColumns = 1;
+				this.gridColumns = 2;
 				console.log('Breakpoint: Medium');
 			}
 		});
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
 		.subscribe((state: BreakpointState) => {
 			if (state.matches) {
 				this.stroke = 5;
-				this.gridColumns = 2;
+				this.gridColumns = 3;
 				console.log('Breakpoint: Large');
 			}
 		});
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
 		.subscribe((state: BreakpointState) => {
 			if (state.matches) {
 				this.stroke = 5;
-				this.gridColumns = 3;
+				this.gridColumns = 4;
 				console.log('Breakpoint: XLarge');
 			}
 		});

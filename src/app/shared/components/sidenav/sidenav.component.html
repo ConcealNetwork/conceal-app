@@ -1,13 +1,6 @@
 <aside fxLayout="column" fxLayoutGap="25px">
 
 		<div fxLayout="column" fxLayoutGap="15px">
-			<button mat-button color="accent" class="link" (click)="close()">
-				<mat-icon>cancel</mat-icon>
-				<span class="close">Close Menu</span>
-			</button>
-		</div>
-
-		<div fxLayout="column" fxLayoutGap="15px">
 			<a mat-button class="link" (click)="close()" routerLink="/id" routerLinkActive="active">@ID</a>
 			<a mat-button class="link" (click)="close()" routerLink="/pay" routerLinkActive="active">Pay</a>
 			<a mat-button class="link" (click)="close()" routerLink="/bridge"routerLinkActive="active">Bridge</a>
