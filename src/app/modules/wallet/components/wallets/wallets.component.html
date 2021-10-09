@@ -1,54 +1,96 @@
-<mat-card class="mat-elevation-z6" *ngFor="let item of this.wallets | keyvalue" fxFlex="0 1 calc(33.3% - 25px)" fxFlex.lt-md="0 1 calc(50% - 25px)" fxFlex.lt-sm="100%">
+<div fxLayout="row wrap" fxLayoutGap="10px grid">
 
-	<mat-card-header fxLayout="column">
-		<div fxLayout="row" fxLayoutAlign="space-between center">
-			<h2 class="title">{{ this.getHelperService().formatAddress(item.key) }}</h2>
-			<button color="accent" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options">
-				<mat-icon>more_vert</mat-icon>
-			</button>
-			<mat-menu #menu="matMenu">
-				<button mat-menu-item>
-					<mat-icon color="primary">lock_open</mat-icon>
-					<span>Export Private Keys</span>
-				</button>
-				<button mat-menu-item>
-					<mat-icon color="primary">camera</mat-icon>
-					<span>Generate QR Code</span>
-				</button>
-				<button mat-menu-item>
-					<mat-icon color="primary">assignment</mat-icon>
-					<span>Copy Address</span>
-				</button>
-				<button mat-menu-item>
-					<mat-icon color="warn">delete</mat-icon>
-					<span>Delete Wallet</span>
-				</button>
-			</mat-menu>
-		</div>
-	</mat-card-header>
+	<div [fxFlex]="(100/gridColumns) + '%'" fxFlex="100%">
+		<mat-card class="mat-elevation-z6">
 
-	<mat-card-content fxLayout="column">
-		<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
-			<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
-				<span>Available</span>
-				<span>{{ this.getHelperService().formatAmount(item.value.total, 1, 6) }} CCX</span>
-			</div>
-			<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
-				<span>Pending</span>
-				<span>{{ getHelperService().formatAmount(item.value.locked, 1, 6) }} CCX</span>
-			</div>
-			<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
-				<span>Withdrawable</span>
-				<span>{{ getHelperService().formatAmount(item.value.balance, 1, 6) }} CCX</span>
-			</div>
-		</div>
-	</mat-card-content>
+			<mat-card-header fxLayout="column">
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<h2 class="title">My Portfolio</h2>
+					<button color="accent" mat-icon-button aria-label="Options">
+						<mat-icon>person</mat-icon>
+					</button>
+				</div>
+			</mat-card-header>
 
-	<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
-		<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
-			<button color="accent" mat-flat-button>Send</button>
-			<button color="accent" mat-flat-button>Receive</button>
-		</div>
-	</mat-card-actions>
+			<mat-card-content fxLayout="column">
+				<div class="portfolio"  fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
+					<div fxLayout="row" fxFlex="25">
+						<span>$ {{getHelperService().formatAmount(this.portfolioUSD, 2, 2) || 0}}</span>
+					</div>
+					<div fxLayout="row" fxFlex="25">
+						<span>₿ {{getHelperService().formatAmount(this.portfolioBTC, 8, 8) || 0}} </span>
+					</div>
+					<div fxLayout="row" fxFlex="25">
+						<span>{{getHelperService().formatAmount(this.portfolioCCX, 1, 6) || 0}} CCX</span>
+					</div>
+				</div>
+			</mat-card-content>
 
-</mat-card>
+			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+				<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
+					<button color="accent" mat-flat-button>Refresh</button>
+				</div>
+			</mat-card-actions>
+
+		</mat-card>
+	</div>
+
+	<div [fxFlex]="(100/gridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.wallets | keyvalue">
+		<mat-card class="mat-elevation-z6">
+
+			<mat-card-header fxLayout="column">
+				<div fxLayout="row" fxLayoutAlign="space-between center">
+					<h2 class="title">{{ this.getHelperService().formatAddress(item.key) }}</h2>
+					<button color="accent" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options">
+						<mat-icon>more_vert</mat-icon>
+					</button>
+					<mat-menu #menu="matMenu">
+						<button mat-menu-item>
+							<mat-icon color="primary">lock_open</mat-icon>
+							<span>Export Private Keys</span>
+						</button>
+						<button mat-menu-item>
+							<mat-icon color="primary">camera</mat-icon>
+							<span>Generate QR Code</span>
+						</button>
+						<button mat-menu-item>
+							<mat-icon color="primary">assignment</mat-icon>
+							<span>Copy Address</span>
+						</button>
+						<button mat-menu-item>
+							<mat-icon color="warn">delete</mat-icon>
+							<span>Delete Wallet</span>
+						</button>
+					</mat-menu>
+				</div>
+			</mat-card-header>
+
+			<mat-card-content fxLayout="column">
+				<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
+					<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+						<span>Available</span>
+						<span class="amount">{{ this.getHelperService().formatAmount(item.value.total, 6, 6) }} CCX</span>
+					</div>
+					<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+						<span>Pending</span>
+						<span class="amount">{{ getHelperService().formatAmount(item.value.locked, 6, 6) }} CCX</span>
+					</div>
+					<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+						<span>Withdrawable</span>
+						<span class="amount">{{ getHelperService().formatAmount(item.value.balance, 6, 6) }} CCX</span>
+					</div>
+				</div>
+			</mat-card-content>
+
+			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+				<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
+					<button color="accent" mat-flat-button>Send</button>
+					<button color="accent" mat-flat-button>Receive</button>
+				</div>
+			</mat-card-actions>
+
+		</mat-card>
+	</div>
+
+</div>
+

@@ -68,7 +68,7 @@
 		<div fxLayout="column" fxFlex="grow" fxLayoutAlign="start" fxLayoutGap="10px">
 			<div fxLayout="row wrap" fxLayoutGap="10px grid">
 				<div [fxFlex]="(100/gridColumns) + '%'" fxFlex="100%" *ngFor="let item of posts">
-					<mat-card class="article mat-elevation-z5">
+					<mat-card class="article mat-elevation-z6">
 						<div class="card-container">
 							<img mat-card-image class="card-image" [src]="item.thumbnail" alt="Image">
 							<a class="card-content" href="{{item.link}}" target="_blank">
