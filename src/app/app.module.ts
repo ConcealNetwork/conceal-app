@@ -31,7 +31,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { MobileFooterComponent } from './shared/components/footer/mobile-footer.component';
-import { MobileHeaderComponent } from './shared/components/header/mobile-header.component';
 import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
 import { TwoFactorDialog } from "./shared/dialogs/twofactor.component";
 
@@ -48,7 +47,6 @@ export function tokenGetter() {
     HeaderComponent,
     SidenavComponent,
     MobileFooterComponent,
-    MobileHeaderComponent,
 		TwoFactorDialog
   ],
   imports: [
