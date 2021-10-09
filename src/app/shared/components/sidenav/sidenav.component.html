@@ -1,15 +1,34 @@
-<aside>
+<aside fxLayout="column" fxLayoutGap="25px">
 
-	<button mat-flat-button color="accent" (click)="close()">
-		<span class="text">Close</span>
-	</button>
+		<div fxLayout="column" fxLayoutGap="15px">
+			<button mat-button color="accent" class="link" (click)="close()">
+				<mat-icon>cancel</mat-icon>
+				<span class="close">Close Menu</span>
+			</button>
+		</div>
 
-	<div class="links" fxLayoutGap="15px">
-		<a mat-button class="link" (click)="close()" routerLink="/id" routerLinkActive="active">@ID</a>
-		<a mat-button class="link" (click)="close()" routerLink="/pay" routerLinkActive="active">Pay</a>
-		<a mat-button class="link" (click)="close()" routerLink="/bridge"routerLinkActive="active">Bridge</a>
-		<a mat-button class="link" (click)="close()" routerLink="/explorer" routerLinkActive="active">Explorer</a>
-		<a mat-button class="link" (click)="close()" routerLink="/settings" routerLinkActive="active">Settings</a>
-	</div>
+		<div fxLayout="column" fxLayoutGap="15px">
+			<a mat-button class="link" (click)="close()" routerLink="/id" routerLinkActive="active">@ID</a>
+			<a mat-button class="link" (click)="close()" routerLink="/pay" routerLinkActive="active">Pay</a>
+			<a mat-button class="link" (click)="close()" routerLink="/bridge"routerLinkActive="active">Bridge</a>
+			<a mat-button class="link" (click)="close()" routerLink="/explorer" routerLinkActive="active">Explorer</a>
+		</div>
+
+		<div class="fill-space"></div>
+
+		<div fxLayout="row" fxLayoutAlign="space-around">
+			<a mat-icon-button (click)="close()" routerLink="/settings" routerLinkActive="active">
+				<mat-icon>settings</mat-icon>
+			</a>
+			<a mat-icon-button (click)="changeTheme('dark-theme')" *ngIf="activeTheme == 'light-theme'">
+				<mat-icon>dark_mode</mat-icon>
+			</a>
+			<a mat-icon-button (click)="changeTheme('light-theme')" *ngIf="activeTheme == 'dark-theme'">
+				<mat-icon>light_mode</mat-icon>
+			</a>
+			<a mat-icon-button (click)="logout()" *ngIf="isLoggedIn">
+				<mat-icon>logout</mat-icon>
+			</a>
+		</div>
 
 </aside>
