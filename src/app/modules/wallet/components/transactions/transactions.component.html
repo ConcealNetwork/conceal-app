@@ -5,9 +5,7 @@
 			<mat-form-field color="accent" fxFlex="auto" class="filter" appearance="standard">
 				<mat-label>Search Transactions</mat-label>
 				<input matInput (keyup)="applyFilter($event)" placeholder="" [disabled]="isRefreshingResults || isLoadingResults">
-				<button matSuffix color="accent" mat-icon-button aria-label="Refresh transactions" matTooltip="Refresh transactions" matTooltipPosition="above" matTooltipClass="custom-tooltip" (click)="refresh()" [disabled]="isRefreshingResults || isLoadingResults">
-					<mat-icon>refresh</mat-icon>
-				</button>
+				<mat-icon color="accent" matSuffix>search</mat-icon>
 			</mat-form-field>
 		</div>
 	</mat-card-header>
