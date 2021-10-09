@@ -4,7 +4,7 @@ mat-sidenav-container, mat-sidenav-content, mat-sidenav {
 
 mat-sidenav {
 	width: 30vw;
-	padding: 1rem;
+	padding: 2.5rem 1.5rem;
 	text-transform: uppercase;
 }
 
@@ -17,9 +17,6 @@ mat-sidenav-content  {
 .container {
 	height: 100vh;
   overflow: auto; // Keeps header from scrolling away
-}
-
-.content {
 	padding: 10px;
 }
 
