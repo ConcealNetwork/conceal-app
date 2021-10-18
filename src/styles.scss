@@ -62,6 +62,7 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 
 // Material Components
 @import './styles/cards.scss';
+@import './styles/buttons.scss';
 
 /* You can add global styles to this file, and also import other style files */
 @keyframes spinner {
