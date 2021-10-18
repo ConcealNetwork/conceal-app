@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 
 // Services
 import { HelperService } from './../../../../shared/services/helper.service';
+import { DialogService } from './../../../../shared/services/dialog.service';
 import { CloudService } from './../../../../shared/services/cloud.service';
 import { ApiService } from './../../../../shared/services/api.service';
 
@@ -26,6 +27,7 @@ export class WalletsComponent implements OnInit {
 
   constructor (
 		private helperService: HelperService,
+		private dialogService: DialogService,
 		private cloudService: CloudService,
 		private apiService: ApiService,
 		public breakpointObserver: BreakpointObserver
@@ -35,6 +37,10 @@ export class WalletsComponent implements OnInit {
 
 	getHelperService() {
 		return this.helperService;
+	}
+
+	getDialogService() {
+		return this.dialogService;
 	}
 
 	getWalletData() {
