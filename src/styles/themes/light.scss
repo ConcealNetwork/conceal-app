@@ -11,12 +11,12 @@
 .mat-card {
 	.mat-card-header {
 		background-color: #5a5a5a;
-		color: #eee;
+		color: #fff;
 	}
 }
 
 .mat-form-field-label {
-  color: #eee;
+  color: #888;
 }
 .mat-form-field-underline {
   background-color: #eee !important;
@@ -36,4 +36,8 @@
 
 .mat-menu-item:hover:not([disabled]) {
 	background: #666;
+}
+
+.amount {
+	color: #777;
 }
