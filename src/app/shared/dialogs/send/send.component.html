@@ -1,0 +1,77 @@
+<form [formGroup]="pay">
+	<div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="15px">
+		<h1 mat-dialog-title class="title">Send Funds</h1>
+
+		<div mat-dialog-content>
+			<div fxLayout="row" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
+				<div class="form-fields" fxFlex fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
+
+					<div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap.gt-sm="15px">
+
+							<mat-form-field color="accent" appearance="fill" fxFlex="auto">
+								<mat-label>Amount</mat-label>
+								<input matInput #amount type="number" formControlName="amountFormControl">
+								<span matSuffix>CCX</span>
+								<mat-error *ngIf="pay.controls.amountFormControl.hasError('required')">
+									Amount is <strong>required</strong>
+								</mat-error>
+								<mat-error *ngIf="pay.controls.amountFormControl.hasError('pattern')">
+									Amount is <strong>not a valid</strong> number
+								</mat-error>
+							</mat-form-field>
+
+							<div *ngIf="!isSmallScreen" fxLayout="row" fxLayoutGap="15px" fxFlex="auto">
+								<button color="accent" class="button-lg" mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(25)">25%</button>
+								<button color="accent" class="button-lg" mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(50)">50%</button>
+								<button color="accent" class="button-lg" mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(100)">Max</button>
+							</div>
+
+					</div>
+
+					<mat-form-field color="accent" hintLabel="98 characters" appearance="fill">
+						<mat-label>Address</mat-label>
+						<input matInput #address type="text" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl" [matAutocomplete]="auto">
+						<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+							<mat-option>
+								example address book wallet
+							</mat-option>
+						</mat-autocomplete>
+						<mat-icon class="icon-button" matSuffix></mat-icon>
+						<mat-hint align="end">{{address.value.length}} / 98</mat-hint>
+						<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('required')">
+							Address selection is <strong>required</strong>
+						</mat-error>
+						<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('match')">
+							<strong>From</strong> and <strong>To</strong> addresses cannot be the same.
+						</mat-error>
+						<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('minlength')">
+							Address must be <strong>98 characters</strong>
+						</mat-error>
+					</mat-form-field>
+
+					<mat-form-field color="accent" hintLabel="64 characters" appearance="fill">
+						<mat-label>Payment ID (Optional)</mat-label>
+						<input matInput #payid type="text" maxlength="64" placeholder="Payment ID" formControlName="paymentidFormControl">
+						<mat-hint align="end">{{payid.value.length}} / 64</mat-hint>
+						<mat-error *ngIf="pay.controls.paymentidFormControl.hasError('minlength')">
+							Address must be <strong>64 characters</strong>
+						</mat-error>
+					</mat-form-field>
+
+					<mat-form-field hintLabel="Max 260 characters" appearance="fill">
+						<mat-label>Message (Optional)</mat-label>
+						<textarea rows="7" matInput #message type="text" maxlength="260" placeholder="Message" formControlName="messageFormControl"></textarea>
+						<mat-hint align="end">{{message.value.length}} / 260</mat-hint>
+					</mat-form-field>
+
+				</div>
+			</div>
+		</div>
+
+		<div mat-dialog-actions>
+			<button mat-flat-button color="accent" type="submit" (click)="submit()" [disabled]="!pay.valid">Send</button>
+			<button mat-flat-button color="warn" (click)="close()">Cancel</button>
+		</div>
+
+	</div>
+</form>

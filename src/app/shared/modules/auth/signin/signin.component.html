@@ -40,9 +40,9 @@
 			</mat-form-field>
 
 			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
-				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Login' : 'Loading' }}</button>
-				<a mat-stroked-button (click)="changeAuthType('signUp')">Create New Account</a>
-				<a mat-stroked-button (click)="changeAuthType('reset')">Password Recovery</a>
+				<button mat-flat-button class="button-lg" color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Login' : 'Loading' }}</button>
+				<a mat-stroked-button class="button-lg" (click)="changeAuthType('signUp')">Create New Account</a>
+				<a mat-stroked-button class="button-lg" (click)="changeAuthType('reset')">Password Recovery</a>
 			</div>
 
 		</form>

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CdkTableModule } from '@angular/cdk/table';
 
@@ -13,22 +15,33 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 import { WalletRoutingModule } from './wallet-routing.module';
 import { WalletComponent } from './wallet.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { WalletsComponent } from './components/wallets/wallets.component';
 
+// Dialogs
+import { SendDialog } from "../../shared/dialogs/send/send.component";
+import { ReceiveDialog } from "../../shared/dialogs/receive/receive.component";
+
 
 @NgModule({
   declarations: [
     WalletComponent,
     TransactionsComponent,
-    WalletsComponent
+    WalletsComponent,
+		SendDialog,
+		ReceiveDialog
   ],
   imports: [
     CommonModule,
 		FlexLayoutModule,
+		FormsModule,
+    ReactiveFormsModule,
+		MatAutocompleteModule,
 		MatButtonModule,
 		MatInputModule,
 		MatCardModule,
@@ -40,7 +53,9 @@ import { WalletsComponent } from './components/wallets/wallets.component';
 		CdkTableModule,
 		MatProgressBarModule,
 		MatProgressSpinnerModule,
-    WalletRoutingModule
+    WalletRoutingModule,
+		MatDialogModule,
+		MatSelectModule
   ]
 })
 export class WalletModule { }

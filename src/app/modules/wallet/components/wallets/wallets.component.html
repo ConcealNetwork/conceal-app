@@ -84,8 +84,8 @@
 
 			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 				<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
-					<button color="accent" mat-flat-button>Send</button>
-					<button color="accent" mat-flat-button>Receive</button>
+					<button color="accent" mat-flat-button (click)="getDialogService().openSendDialog()">Send</button>
+					<button color="accent" mat-flat-button (click)="getDialogService().openReceiveDialog()">Receive</button>
 				</div>
 			</mat-card-actions>
 
