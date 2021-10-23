@@ -65,6 +65,10 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 @import './styles/buttons.scss';
 
 /* You can add global styles to this file, and also import other style files */
+.cdk-overlay-dark-backdrop {
+	background: rgb(0 0 0 / 80%);
+}
+
 @keyframes spinner {
   to {transform: rotate(360deg);}
 }
