@@ -22,10 +22,26 @@
 	.header {
 		background-color: rgba($color: #000000, $alpha: 0.15);
 	}
-	.mat-cell.mat-column-address, .mat-cell.mat-column-type, .mat-cell.mat-column-status {
+	.mat-row {
+		cursor: pointer;
+	}
+	.mat-row:hover {
+		background-color: #5e5e5e;
+	}
+	.mat-cell.mat-column-address, .mat-cell.mat-column-type {
 		text-transform: uppercase;
 	}
+	.capitalize {
+		text-transform: capitalize;
+	}
+	.icon {
+		position: relative;
+		/* Adjust these values accordingly */
+    top: 7px;
+    right: 5px;
+	}
 }
+
 
 .mat-paginator {
 	background: none;
