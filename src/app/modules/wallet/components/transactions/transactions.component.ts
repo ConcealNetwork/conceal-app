@@ -18,6 +18,7 @@ export interface Transactions {
 	fee: number;
 	timestamp: string;
 	address: string;
+	hash: string;
 }
 
 @Component({
@@ -38,6 +39,7 @@ export class TransactionsComponent implements OnInit {
 	isRefreshingResults: boolean = true;
 	wallets: any;
 	transactions: any;
+	isSmallScreen: boolean = false;
 
 	@ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
@@ -68,11 +70,13 @@ export class TransactionsComponent implements OnInit {
 		.subscribe((state: BreakpointState) => {
 			if (state.matches) {
 				// Matches small viewport or handset in portrait mode
+				this.isSmallScreen = true;
 				this.pageSize = 5;
 				this.displayedColumns = ['timestamp', 'type', 'amount'];
 			} else {
+				this.isSmallScreen = false;
 				this.pageSize = 10;
-				this.displayedColumns = ['timestamp', 'type', 'amount', 'fee', 'status'];
+				this.displayedColumns = ['timestamp', 'type', 'amount', 'address', 'fee', 'status'];
 			}
 		});
   }
@@ -109,5 +113,9 @@ export class TransactionsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+	openExplorer(hash:string) {
+		window.open("https://explorer.conceal.network/index.html?hash=" + hash + "#blockchain_transaction", '_blank');
+	}
 
 }
