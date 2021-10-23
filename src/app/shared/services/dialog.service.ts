@@ -5,8 +5,8 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 
 // Dialog Components
 import { TwoFactorDialog } from '../dialogs/twofactor/twofactor.component';
-import { SendDialog } from '../dialogs/send/send.component';
-import { ReceiveDialog } from '../dialogs/receive/receive.component';
+import { SendDialog } from '../../modules/wallet/dialogs/send/send.component';
+import { ReceiveDialog } from '../../modules/wallet/dialogs/receive/receive.component';
 
 @Injectable({
 	providedIn: 'root'

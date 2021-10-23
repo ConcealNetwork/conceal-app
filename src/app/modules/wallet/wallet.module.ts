@@ -24,8 +24,8 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { WalletsComponent } from './components/wallets/wallets.component';
 
 // Dialogs
-import { SendDialog } from "../../shared/dialogs/send/send.component";
-import { ReceiveDialog } from "../../shared/dialogs/receive/receive.component";
+import { SendDialog } from "./dialogs/send/send.component";
+import { ReceiveDialog } from "./dialogs/receive/receive.component";
 
 
 @NgModule({
