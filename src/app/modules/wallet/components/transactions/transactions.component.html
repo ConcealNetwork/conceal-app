@@ -12,42 +12,57 @@
 
 	<mat-card-content fxLayout="column">
 		<mat-progress-bar color="accent" mode="indeterminate" *ngIf="isRefreshingResults"></mat-progress-bar>
-		<table [dataSource]="dataSource" mat-table matSort matSortDisableClear matSortActive="timestamp" matSortDirection="desc">
+		<table mat-table [dataSource]="dataSource" matSort matSortDisableClear matSortActive="timestamp" matSortDirection="desc">
 
-			<!-- timestamp Column -->
+			<!-- timestamp column -->
 			<ng-container matColumnDef="timestamp">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
-				<td mat-cell *matCellDef="let row">{{getHelperService().formatDatetime(row.timestamp)}}</td>
-			</ng-container>
-
-			<!-- status Column -->
-			<ng-container matColumnDef="status">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-				<td mat-cell *matCellDef="let row" class="capitalize">
-					<span [ngClass]="{'processed': (row.status === 'processed'), 'notprocessed': (row.status !== 'processed')}">{{row.status}}</span>
+				<td mat-cell *matCellDef="let row">
+					<mat-icon *ngIf="!isSmallScreen" class="icon" aria-hidden="true">event</mat-icon>
+					{{getHelperService().formatDatetime(row.timestamp)}}
 				</td>
 			</ng-container>
 
-			<!-- type Column -->
-			<ng-container matColumnDef="type">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header>Direction</th>
-				<td mat-cell *matCellDef="let row" class="capitalize">{{row.type}}</td>
+			<!-- status column {'success': (row.status === 'processed'), 'warn': (row.status !== 'processed')} -->
+			<ng-container matColumnDef="status">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+				<td mat-cell *matCellDef="let row" class="capitalize">
+					<mat-icon class="icon" *ngIf="row.status === 'processed'" color="accent" aria-hidden="true">gpp_good</mat-icon>
+					<mat-icon class="icon" *ngIf="row.status !== 'processed'" color="warn" aria-hidden="true">report</mat-icon>
+					{{row.status}}
+				</td>
 			</ng-container>
 
-			<!-- amount Column -->
+			<!-- type column -->
+			<ng-container matColumnDef="type">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Direction</th>
+				<td mat-cell *matCellDef="let row" class="capitalize">
+					<mat-icon class="icon" *ngIf="row.type === 'sent'" color="warn" aria-hidden="true">call_made</mat-icon>
+					<mat-icon class="icon" *ngIf="row.type === 'received'" color="accent" aria-hidden="true">call_received</mat-icon>
+					<span *ngIf="!isSmallScreen">{{row.type}}</span>
+				</td>
+			</ng-container>
+
+			<!-- address column -->
+			<ng-container matColumnDef="address">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+				<td mat-cell *matCellDef="let row">{{ this.getHelperService().formatAddress(row.address) }}</td>
+			</ng-container>
+
+			<!-- amount column -->
 			<ng-container matColumnDef="amount">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
 				<td mat-cell *matCellDef="let row">{{getHelperService().formatAmount(row.amount, 1, 6)}} CCX</td>
 			</ng-container>
 
-			<!-- fee Column -->
+			<!-- fee column -->
 			<ng-container matColumnDef="fee">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header>Fee</th>
 				<td mat-cell *matCellDef="let row">{{getHelperService().formatAmount(row.fee, 1, 6)}} CCX</td>
 			</ng-container>
 
-			<tr mat-header-row class="header" *matHeaderRowDef="displayedColumns; sticky: false"></tr>
-			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			<tr mat-header-row class="header" *matHeaderRowDef="displayedColumns;"></tr>
+			<tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;" (click)="openExplorer(row.hash)"></tr>
 
 		</table>
 
