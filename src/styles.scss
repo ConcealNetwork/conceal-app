@@ -53,18 +53,30 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 .light-theme {
   @include angular-material-theme($app-light-theme);
 	@import './styles/themes/light.scss';
+	@import './styles/cards.scss';
+	@import './styles/buttons.scss';
+	@import './styles/fields.scss';
+	@import './styles/tables.scss';
 }
 
 .dark-theme {
   @include angular-material-theme($app-dark-theme);
 	@import './styles/themes/dark.scss';
+	@import './styles/cards.scss';
+	@import './styles/buttons.scss';
+	@import './styles/fields.scss';
+	@import './styles/tables.scss';
 }
 
-// Material Components
-@import './styles/cards.scss';
-@import './styles/buttons.scss';
-
 /* You can add global styles to this file, and also import other style files */
+.capitalize {
+	text-transform: capitalize;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
 .cdk-overlay-dark-backdrop {
 	background: rgb(0 0 0 / 80%);
 }
