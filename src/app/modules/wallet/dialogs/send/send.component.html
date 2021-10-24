@@ -40,7 +40,7 @@
 						<mat-icon matSuffix>import_contacts</mat-icon>
 						<mat-hint align="end">{{address.value.length}} / 98</mat-hint>
 						<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('required')">
-							Address selection is <strong>required</strong>
+							Address is <strong>required</strong>
 						</mat-error>
 						<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('match')">
 							<strong>From</strong> and <strong>To</strong> addresses cannot be the same.
