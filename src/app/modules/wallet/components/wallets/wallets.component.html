@@ -6,9 +6,19 @@
 			<mat-card-header fxLayout="column">
 				<div fxLayout="row" fxLayoutAlign="space-between center">
 					<h2 class="title">My Portfolio</h2>
-					<button color="accent" mat-icon-button aria-label="Options">
-						<mat-icon>account_balance_wallet</mat-icon>
+					<button color="accent" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options">
+						<mat-icon>more_vert</mat-icon>
 					</button>
+					<mat-menu #menu="matMenu">
+						<button mat-menu-item>
+							<mat-icon color="accent">key</mat-icon>
+							<span>Import Keys</span>
+						</button>
+						<button mat-menu-item routerLink="/id">
+							<mat-icon color="accent">badge</mat-icon>
+							<span>Create ID</span>
+						</button>
+					</mat-menu>
 				</div>
 			</mat-card-header>
 
@@ -28,7 +38,8 @@
 
 			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 				<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
-					<button color="accent" mat-flat-button>Refresh</button>
+					<button color="accent" mat-flat-button routerLink="/deposits">Make Deposit</button>
+					<button color="accent" mat-flat-button>Create Wallet</button>
 				</div>
 			</mat-card-actions>
 
@@ -46,15 +57,15 @@
 					</button>
 					<mat-menu #menu="matMenu">
 						<button mat-menu-item>
-							<mat-icon color="primary">lock_open</mat-icon>
-							<span>Export Private Keys</span>
+							<mat-icon color="accent">vpn_key</mat-icon>
+							<span>Export Keys</span>
 						</button>
 						<button mat-menu-item>
-							<mat-icon color="primary">camera</mat-icon>
-							<span>Generate QR Code</span>
+							<mat-icon color="accent">qr_code</mat-icon>
+							<span>QR Code</span>
 						</button>
 						<button mat-menu-item>
-							<mat-icon color="primary">assignment</mat-icon>
+							<mat-icon color="accent">content_copy</mat-icon>
 							<span>Copy Address</span>
 						</button>
 						<button mat-menu-item>
@@ -84,8 +95,8 @@
 
 			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 				<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
-					<button color="accent" mat-flat-button (click)="getDialogService().openSendDialog()">Send</button>
-					<button color="accent" mat-flat-button (click)="getDialogService().openReceiveDialog()">Receive</button>
+					<button color="accent" mat-flat-button (click)="getDialogService().openSendDialog()">Send Funds</button>
+					<button color="accent" mat-flat-button (click)="getDialogService().openReceiveDialog()">Request Funds</button>
 				</div>
 			</mat-card-actions>
 
