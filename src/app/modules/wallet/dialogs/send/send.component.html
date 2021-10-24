@@ -10,7 +10,7 @@
 
 							<mat-form-field hintLabel="Amount to send" color="accent" appearance="outline" fxFlex="auto">
 								<mat-label>Amount</mat-label>
-								<input matInput numeric steps="0" #amount placeholder="100" formControlName="amountFormControl">
+								<input matInput numeric steps="0" type="number" name="amount" #amount placeholder="100" formControlName="amountFormControl">
 								<span matSuffix>CCX</span>
 								<mat-error *ngIf="pay.controls.amountFormControl.hasError('required')">
 									Amount is <strong>required</strong>
@@ -30,7 +30,7 @@
 
 					<mat-form-field color="accent" hintLabel="Address to send funds" appearance="outline">
 						<mat-label>Address</mat-label>
-						<input matInput #address type="text" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl" [matAutocomplete]="auto">
+						<input matInput #address type="text" name="address" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl" [matAutocomplete]="auto">
 						<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
 							<mat-option>
 								<mat-icon aria-hidden="true" color="accent">account_balance_wallet</mat-icon>
@@ -52,7 +52,7 @@
 
 					<mat-form-field hintLabel="Payment ID for this address" color="accent" appearance="outline">
 						<mat-label>Payment ID (Optional)</mat-label>
-						<input matInput #payid type="text" maxlength="64" placeholder="Payment ID" formControlName="paymentidFormControl">
+						<input matInput #payid type="text" name="paymentid" maxlength="64" placeholder="Payment ID" formControlName="paymentidFormControl" autocomplete="disabled">
 						<mat-icon matSuffix>fingerprint</mat-icon>
 						<mat-hint align="end">{{payid.value.length}} / 64</mat-hint>
 						<mat-error *ngIf="pay.controls.paymentidFormControl.hasError('minlength')">
@@ -60,9 +60,9 @@
 						</mat-error>
 					</mat-form-field>
 
-					<mat-form-field hintLabel="Message to include in this transaction" color="accent" appearance="fill">
+					<mat-form-field hintLabel="Include a message in the transaction" color="accent" appearance="fill">
 						<mat-label>Message (Optional)</mat-label>
-						<textarea rows="6" matInput #message type="text" maxlength="260" placeholder="Your message here..." formControlName="messageFormControl"></textarea>
+						<textarea rows="6" matInput #message type="text" name="message" maxlength="260" placeholder="Your message here..." formControlName="messageFormControl" autocomplete="disabled"></textarea>
 						<mat-icon matSuffix>message</mat-icon>
 						<mat-hint align="end">{{message.value.length}} / 260</mat-hint>
 					</mat-form-field>

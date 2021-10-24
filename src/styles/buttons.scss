@@ -1,4 +1,7 @@
-.button-lg {
-	min-height: 45px;
-	line-height: 3 !important;
+.mat-raised-button,
+.mat-stroked-button,
+.mat-flat-button {
+	padding: 0.2em 1.15em;
+	min-width: 3em;
+	line-height: 36.4px;
 }
