@@ -1,21 +1,21 @@
-<form [formGroup]="pay">
-	<div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="15px">
+<form [formGroup]="formTransaction" *ngIf="!transaction">
+
 		<h1 mat-dialog-title class="title">Send Funds</h1>
 
-		<div mat-dialog-content>
+		<div mat-dialog-content fxLayout="column">
 			<div fxLayout="row" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
-				<div class="form-fields" fxFlex fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
+				<div fxFlex fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
 
 					<div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap.gt-sm="15px">
 
 							<mat-form-field hintLabel="Amount to send" color="accent" appearance="outline" fxFlex="auto">
 								<mat-label>Amount</mat-label>
-								<input matInput numeric steps="0" type="number" name="amount" #amount placeholder="100" formControlName="amountFormControl">
+								<input matInput numeric steps="0" type="number" name="amount" #amount placeholder="100" formControlName="amount">
 								<span matSuffix>CCX</span>
-								<mat-error *ngIf="pay.controls.amountFormControl.hasError('required')">
+								<mat-error *ngIf="formTransaction.controls.amount.hasError('required')">
 									Amount is <strong>required</strong>
 								</mat-error>
-								<mat-error *ngIf="pay.controls.amountFormControl.hasError('pattern')">
+								<mat-error *ngIf="formTransaction.controls.amount.hasError('pattern')">
 									Amount is <strong>not a valid</strong> number
 								</mat-error>
 							</mat-form-field>
@@ -30,7 +30,7 @@
 
 					<mat-form-field color="accent" hintLabel="Address to send funds" appearance="outline">
 						<mat-label>Address</mat-label>
-						<input matInput #address type="text" name="address" maxlength="98" placeholder="CCX Address" formControlName="toaddressFormControl" [matAutocomplete]="auto">
+						<input matInput #toAddress type="text" name="toAddress" maxlength="98" placeholder="CCX Address" formControlName="toAddress" [matAutocomplete]="auto">
 						<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
 							<mat-option>
 								<mat-icon aria-hidden="true" color="accent">account_balance_wallet</mat-icon>
@@ -38,31 +38,31 @@
 							</mat-option>
 						</mat-autocomplete>
 						<mat-icon matSuffix>import_contacts</mat-icon>
-						<mat-hint align="end">{{address.value.length}} / 98</mat-hint>
-						<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('required')">
+						<mat-hint align="end">{{toAddress.value.length}} / 98</mat-hint>
+						<mat-error *ngIf="formTransaction.controls.toAddress.hasError('required')">
 							Address is <strong>required</strong>
 						</mat-error>
-						<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('match')">
+						<mat-error *ngIf="formTransaction.controls.toAddress.hasError('match')">
 							<strong>From</strong> and <strong>To</strong> addresses cannot be the same.
 						</mat-error>
-						<mat-error *ngIf="pay.controls.toaddressFormControl.hasError('minlength')">
+						<mat-error *ngIf="formTransaction.controls.toAddress.hasError('minlength')">
 							Address must be <strong>98 characters</strong>
 						</mat-error>
 					</mat-form-field>
 
 					<mat-form-field hintLabel="Payment ID for this address" color="accent" appearance="outline">
 						<mat-label>Payment ID (Optional)</mat-label>
-						<input matInput #payid type="text" name="paymentid" maxlength="64" placeholder="Payment ID" formControlName="paymentidFormControl" autocomplete="disabled">
+						<input matInput #paymentid type="text" name="paymentid" maxlength="64" placeholder="Payment ID" formControlName="paymentID" autocomplete="disabled">
 						<mat-icon matSuffix>fingerprint</mat-icon>
-						<mat-hint align="end">{{payid.value.length}} / 64</mat-hint>
-						<mat-error *ngIf="pay.controls.paymentidFormControl.hasError('minlength')">
+						<mat-hint align="end">{{paymentid.value.length}} / 64</mat-hint>
+						<mat-error *ngIf="formTransaction.controls.paymentID.hasError('minlength')">
 							Address must be <strong>64 characters</strong>
 						</mat-error>
 					</mat-form-field>
 
 					<mat-form-field hintLabel="Include a message in the transaction" color="accent" appearance="fill">
 						<mat-label>Message (Optional)</mat-label>
-						<textarea rows="6" matInput #message type="text" name="message" maxlength="260" placeholder="Your message here..." formControlName="messageFormControl" autocomplete="disabled"></textarea>
+						<textarea rows="6" matInput #message type="text" name="message" maxlength="260" placeholder="Your message here..." formControlName="message" autocomplete="disabled"></textarea>
 						<mat-icon matSuffix>message</mat-icon>
 						<mat-hint align="end">{{message.value.length}} / 260</mat-hint>
 					</mat-form-field>
@@ -72,9 +72,107 @@
 		</div>
 
 		<div mat-dialog-actions>
-			<button mat-flat-button color="accent" type="submit" (click)="submit()" [disabled]="!pay.valid">Send Funds</button>
 			<button mat-flat-button color="warn" (click)="close()">Cancel</button>
+			<button mat-flat-button color="accent" type="submit" (click)="review()" [disabled]="!formTransaction.valid">Review</button>
 		</div>
 
+</form>
+
+<form [formGroup]="formConfirm" *ngIf="!confirmed && transaction">
+
+	<h1 mat-dialog-title class="title">Confirmation</h1>
+	<p>Please review your transaction</p>
+
+	<div mat-dialog-content fxLayout="column">
+
+		<div fxFlex="100" fxLayout="row" fxLayoutGap="15px">
+			<div fxFlex="50" fxLayout="column">
+				<mat-form-field appearance="fill" color="accent">
+					<mat-label>Amount</mat-label>
+					<input matInput formControlName="amount">
+					<span matSuffix>CCX</span>
+				</mat-form-field>
+			</div>
+			<div fxFlex="50" fxLayout="column">
+				<mat-form-field appearance="fill" color="accent">
+					<mat-label>Fee</mat-label>
+					<input matInput formControlName="fee">
+					<span matSuffix>CCX</span>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<mat-form-field appearance="fill" color="accent">
+			<mat-label>From Wallet</mat-label>
+			<input matInput formControlName="fromAddress">
+		</mat-form-field>
+
+
+		<mat-form-field appearance="fill" color="accent">
+			<mat-label>To Address</mat-label>
+			<input matInput formControlName="toAddress">
+		</mat-form-field>
+
+		<mat-form-field appearance="fill" color="accent" *ngIf="this.formConfirm.value.paymentID">
+			<mat-label>Payment ID</mat-label>
+			<input matInput formControlName="paymentID">
+		</mat-form-field>
+
+		<mat-form-field appearance="fill" color="accent" *ngIf="this.formConfirm.value.message">
+			<mat-label>Message</mat-label>
+			<textarea rows="6" matInput formControlName="message"></textarea>
+		</mat-form-field>
+
 	</div>
+
+	<div mat-dialog-actions>
+		<button mat-flat-button color="warn" (click)="close()">Cancel</button>
+		<button mat-stroked-button color="accent" (click)="this.transaction=false">Modify</button>
+		<button mat-flat-button color="accent" type="submit" (click)="confirm()" [disabled]="!formConfirm.valid">Authorise</button>
+	</div>
+
+</form>
+
+<form [formGroup]="formAuthorise" *ngIf="confirmed && transaction">
+
+	<h1 mat-dialog-title class="title">Authorization</h1>
+	<p *ngIf="this.hasTwoFa">Please enter your 2FA code to authorize your message</p>
+	<p *ngIf="!this.hasTwoFa">Please enter your password to authorize your message</p>
+
+	<div mat-dialog-content>
+		<div fxFlex="100" fxLayout="row" fxLayoutGap="15px">
+			<div fxFlex fxLayout="column" *ngIf="this.hasTwoFa">
+				<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
+					<mat-label>2FA Code</mat-label>
+					<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="twofaFormControl">
+					<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+					<mat-error *ngIf="formAuthorise.controls.twofaFormControl.hasError('minlength') || formAuthorise.controls.twofaFormControl.hasError('maxlength')">
+						2FA code should be <strong>6 numbers</strong>
+					</mat-error>
+					<mat-error *ngIf="formAuthorise.controls.twofaFormControl.hasError('pattern')">
+						2FA code should be <strong>numbers only</strong>
+					</mat-error>
+					<mat-error *ngIf="formAuthorise.controls.twofaFormControl.hasError('required')">
+						2FA Code is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+			</div>
+			<div fxFlex fxLayout="column" *ngIf="!this.hasTwoFa">
+				<mat-form-field fxFill appearance="fill" hintLabel="Your password">
+					<mat-label>Password</mat-label>
+					<input type="password" matInput placeholder="password" formControlName="passwordFormControl">
+					<mat-error *ngIf="formAuthorise.controls.passwordFormControl.hasError('required')">
+						Password is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+	</div>
+
+	<div mat-dialog-actions>
+		<button mat-flat-button color="warn" (click)="close()">Cancel</button>
+		<button mat-stroked-button color="accent" (click)="this.confirmed=false">Review</button>
+		<button mat-flat-button color="accent" type="submit" (click)="authorise()" [disabled]="!formAuthorise.valid">Submit</button>
+	</div>
+
 </form>
