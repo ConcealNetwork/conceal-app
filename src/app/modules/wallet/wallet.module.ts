@@ -17,6 +17,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { WalletRoutingModule } from './wallet-routing.module';
 import { WalletComponent } from './wallet.component';
@@ -55,7 +56,8 @@ import { ReceiveDialog } from "./dialogs/receive/receive.component";
 		MatProgressSpinnerModule,
     WalletRoutingModule,
 		MatDialogModule,
-		MatSelectModule
+		MatSelectModule,
+		MatSlideToggleModule
   ]
 })
 export class WalletModule { }

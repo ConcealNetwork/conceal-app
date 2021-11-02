@@ -2,78 +2,76 @@
 
 		<h1 mat-dialog-title class="title">Send Funds</h1>
 
-		<div mat-dialog-content fxLayout="column">
-			<div fxLayout="row" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
-				<div fxFlex fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
+		<div mat-dialog-content fxLayout="column" fxLayoutGap="15px">
 
-					<div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap.gt-sm="15px">
+			<div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap.gt-sm="15px">
 
-							<mat-form-field hintLabel="Amount to send" color="accent" appearance="outline" fxFlex="auto">
-								<mat-label>Amount</mat-label>
-								<input matInput numeric steps="0" type="number" name="amount" #amount placeholder="100" formControlName="amount">
-								<span matSuffix>CCX</span>
-								<mat-error *ngIf="formTransaction.controls.amount.hasError('required')">
-									Amount is <strong>required</strong>
-								</mat-error>
-								<mat-error *ngIf="formTransaction.controls.amount.hasError('pattern')">
-									Amount is <strong>not a valid</strong> number
-								</mat-error>
-							</mat-form-field>
+				<mat-form-field hintLabel="Amount to send" color="accent" appearance="outline" fxFlex="auto">
+					<mat-label>Amount</mat-label>
+					<input matInput numeric steps="0" type="number" name="amount" #amount placeholder="100" formControlName="amount">
+					<span matSuffix>CCX</span>
+					<mat-error *ngIf="formTransaction.controls.amount.hasError('required')">
+						Amount is <strong>required</strong>
+					</mat-error>
+					<mat-error *ngIf="formTransaction.controls.amount.hasError('pattern')">
+						Amount is <strong>not a valid</strong> number
+					</mat-error>
+				</mat-form-field>
 
-							<div *ngIf="!isSmallScreen" fxLayout="row" fxLayoutAlign="space-around stretch" fxFlex="auto">
-								<button color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(25)">25%</button>
-								<button color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(50)">50%</button>
-								<button color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(100)">Max</button>
-							</div>
-
-					</div>
-
-					<mat-form-field color="accent" hintLabel="Address to send funds" appearance="outline">
-						<mat-label>Address</mat-label>
-						<input matInput #toAddress type="text" name="toAddress" maxlength="98" placeholder="CCX Address" formControlName="toAddress" [matAutocomplete]="auto">
-						<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-							<mat-option>
-								<mat-icon aria-hidden="true" color="accent">account_balance_wallet</mat-icon>
-								<span>example address book wallet</span>
-							</mat-option>
-						</mat-autocomplete>
-						<mat-icon matSuffix>import_contacts</mat-icon>
-						<mat-hint align="end">{{toAddress.value.length}} / 98</mat-hint>
-						<mat-error *ngIf="formTransaction.controls.toAddress.hasError('required')">
-							Address is <strong>required</strong>
-						</mat-error>
-						<mat-error *ngIf="formTransaction.controls.toAddress.hasError('match')">
-							<strong>From</strong> and <strong>To</strong> addresses cannot be the same.
-						</mat-error>
-						<mat-error *ngIf="formTransaction.controls.toAddress.hasError('minlength')">
-							Address must be <strong>98 characters</strong>
-						</mat-error>
-					</mat-form-field>
-
-					<mat-form-field hintLabel="Payment ID for this address" color="accent" appearance="outline">
-						<mat-label>Payment ID (Optional)</mat-label>
-						<input matInput #paymentid type="text" name="paymentid" maxlength="64" placeholder="Payment ID" formControlName="paymentID" autocomplete="disabled">
-						<mat-icon matSuffix>fingerprint</mat-icon>
-						<mat-hint align="end">{{paymentid.value.length}} / 64</mat-hint>
-						<mat-error *ngIf="formTransaction.controls.paymentID.hasError('minlength')">
-							Address must be <strong>64 characters</strong>
-						</mat-error>
-					</mat-form-field>
-
-					<mat-form-field hintLabel="Include a message in the transaction" color="accent" appearance="fill">
-						<mat-label>Message (Optional)</mat-label>
-						<textarea rows="6" matInput #message type="text" name="message" maxlength="260" placeholder="Your message here..." formControlName="message" autocomplete="disabled"></textarea>
-						<mat-icon matSuffix>message</mat-icon>
-						<mat-hint align="end">{{message.value.length}} / 260</mat-hint>
-					</mat-form-field>
-
+				<div fxFlex fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+					<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(25)">25%</button>
+					<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(50)">50%</button>
+					<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(100)">Max</button>
 				</div>
+
 			</div>
+
+			<mat-form-field color="accent" hintLabel="Address to send funds" appearance="outline">
+				<mat-label>Address</mat-label>
+				<input matInput #toAddress type="text" name="toAddress" maxlength="98" placeholder="CCX Address" formControlName="toAddress" [matAutocomplete]="auto">
+				<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+					<mat-option>
+						<mat-icon aria-hidden="true" color="accent">account_balance_wallet</mat-icon>
+						<span>example address book wallet</span>
+					</mat-option>
+				</mat-autocomplete>
+				<mat-icon matSuffix>import_contacts</mat-icon>
+				<mat-hint align="end">{{toAddress.value.length}} / 98</mat-hint>
+				<mat-error *ngIf="formTransaction.controls.toAddress.hasError('required')">
+					Address is <strong>required</strong>
+				</mat-error>
+				<mat-error *ngIf="formTransaction.controls.toAddress.hasError('match')">
+					<strong>From</strong> and <strong>To</strong> addresses cannot be the same.
+				</mat-error>
+				<mat-error *ngIf="formTransaction.controls.toAddress.hasError('minlength')">
+					Address must be <strong>98 characters</strong>
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field hintLabel="Payment ID / Memo for this address" color="accent" appearance="outline">
+				<mat-label>Payment ID (Optional)</mat-label>
+				<input matInput #paymentid type="text" name="paymentid" maxlength="64" placeholder="Payment ID" formControlName="paymentID" autocomplete="disabled">
+				<mat-icon matSuffix>fingerprint</mat-icon>
+				<mat-hint align="end">{{paymentid.value.length}} / 64</mat-hint>
+				<mat-error *ngIf="formTransaction.controls.paymentID.hasError('minlength')">
+					Address must be <strong>64 characters</strong>
+				</mat-error>
+			</mat-form-field>
+
+			<mat-slide-toggle formControlName="includeMsg">Optional message</mat-slide-toggle>
+
+			<mat-form-field hintLabel="Include a message in the transaction" color="accent" appearance="fill" *ngIf="this.formTransaction.value.includeMsg">
+				<mat-label>Message</mat-label>
+				<textarea rows="5" matInput #message type="text" name="message" maxlength="260" placeholder="Your message here..." formControlName="message" autocomplete="disabled"></textarea>
+				<mat-icon matSuffix>message</mat-icon>
+				<mat-hint align="end">{{message.value.length}} / 260</mat-hint>
+			</mat-form-field>
+
 		</div>
 
 		<div mat-dialog-actions>
 			<button mat-flat-button color="warn" (click)="close()">Cancel</button>
-			<button mat-flat-button color="accent" type="submit" (click)="review()" [disabled]="!formTransaction.valid">Review</button>
+			<button mat-flat-button color="accent" type="submit" (click)="review()" [disabled]="!formTransaction.valid">Save & Review</button>
 		</div>
 
 </form>
@@ -85,15 +83,15 @@
 
 	<div mat-dialog-content fxLayout="column">
 
-		<div fxFlex="100" fxLayout="row" fxLayoutGap="15px">
-			<div fxFlex="50" fxLayout="column">
+		<div fxLayout="row" fxLayoutGap="15px grid">
+			<div fxLayout="column" fxFlex="50">
 				<mat-form-field appearance="fill" color="accent">
 					<mat-label>Amount</mat-label>
 					<input matInput formControlName="amount">
 					<span matSuffix>CCX</span>
 				</mat-form-field>
 			</div>
-			<div fxFlex="50" fxLayout="column">
+			<div fxLayout="column" fxFlex="50">
 				<mat-form-field appearance="fill" color="accent">
 					<mat-label>Fee</mat-label>
 					<input matInput formControlName="fee">
@@ -107,7 +105,6 @@
 			<input matInput formControlName="fromAddress">
 		</mat-form-field>
 
-
 		<mat-form-field appearance="fill" color="accent">
 			<mat-label>To Address</mat-label>
 			<input matInput formControlName="toAddress">
@@ -120,15 +117,14 @@
 
 		<mat-form-field appearance="fill" color="accent" *ngIf="this.formConfirm.value.message">
 			<mat-label>Message</mat-label>
-			<textarea rows="6" matInput formControlName="message"></textarea>
+			<textarea rows="5" matInput formControlName="message"></textarea>
 		</mat-form-field>
 
 	</div>
 
 	<div mat-dialog-actions>
-		<button mat-flat-button color="warn" (click)="close()">Cancel</button>
-		<button mat-stroked-button color="accent" (click)="this.transaction=false">Modify</button>
-		<button mat-flat-button color="accent" type="submit" (click)="confirm()" [disabled]="!formConfirm.valid">Authorise</button>
+		<button mat-stroked-button color="accent" (click)="this.transaction=false">Edit</button>
+		<button mat-flat-button color="accent" (click)="confirm()">Confirm & Continue</button>
 	</div>
 
 </form>
@@ -170,9 +166,8 @@
 	</div>
 
 	<div mat-dialog-actions>
-		<button mat-flat-button color="warn" (click)="close()">Cancel</button>
 		<button mat-stroked-button color="accent" (click)="this.confirmed=false">Review</button>
-		<button mat-flat-button color="accent" type="submit" (click)="authorise()" [disabled]="!formAuthorise.valid">Submit</button>
+		<button mat-flat-button color="accent" type="submit" (click)="authorise()" [disabled]="!formAuthorise.valid">Send Funds</button>
 	</div>
 
 </form>

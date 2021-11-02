@@ -66,6 +66,7 @@ export class SendDialog {
 			Validators.minLength(64),
 			Validators.maxLength(64),
 		]),
+		includeMsg: new FormControl('', []),
 		message: new FormControl('', [
 			Validators.minLength(1),
 			Validators.maxLength(260),
@@ -73,12 +74,12 @@ export class SendDialog {
 	});
 
 	formConfirm: FormGroup = new FormGroup({
-		amount: new FormControl({disabled: true}, Validators.required),
-		fee: new FormControl({disabled: true}, Validators.required),
-		fromAddress: new FormControl({disabled: true}, Validators.required),
-		toAddress: new FormControl({disabled: true}, Validators.required),
-		paymentID: new FormControl({disabled: true}),
-		message: new FormControl({disabled: true}),
+		amount: new FormControl(),
+		fee: new FormControl(),
+		fromAddress: new FormControl(),
+		toAddress: new FormControl(),
+		paymentID: new FormControl(),
+		message: new FormControl(),
 	});
 
 	formAuthorise: FormGroup = new FormGroup({});
@@ -97,14 +98,13 @@ export class SendDialog {
 			this.formConfirm.controls.fromAddress.patchValue(this.fromAddress, { emitEvent: true });
 			this.formConfirm.controls.paymentID.patchValue(this.formTransaction.value.paymentID, { emitEvent: true });
 			this.formConfirm.controls.message.patchValue(this.formTransaction.value.message, { emitEvent: true });
+			this.formConfirm.disable({emitEvent: false});
 			this.transaction = true;
 		}
 	}
 
 	confirm() {
-		if (this.formConfirm.valid) {
-			this.confirmed = true;
-		}
+		this.confirmed = true;
 	}
 
 	authorise() {
