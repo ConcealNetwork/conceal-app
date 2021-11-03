@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
 
+## Install Notes
+
+Due to a conflicting peer dependency you may need to install with `npm install --legacy-peer-deps`
+
 ## Development server
 
 Run `ng serve --open --host 0.0.0.0 --disable-host-check` for a dev server. The app will automatically reload if you change any of the source files.
