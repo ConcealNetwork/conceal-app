@@ -23,6 +23,7 @@ chrome-profiler-events*.json
 *.sublime-workspace
 .firebase
 .angular
+.cache
 
 # IDE - VSCode
 .vscode/*
