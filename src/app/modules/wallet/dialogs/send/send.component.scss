@@ -1,6 +1,19 @@
+.title {
+	margin-block-end: 0.3em;
+}
+
+.subtitle {
+	margin-bottom: 20px;
+	filter: brightness(85%);
+}
+
 .balance {
 	margin-top: 5px;
 	min-height: 50px;
+}
+
+.mat-dialog-actions{
+	padding: 15px 0;
 }
 
 mat-slide-toggle {

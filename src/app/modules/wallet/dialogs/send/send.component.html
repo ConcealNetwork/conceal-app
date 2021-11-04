@@ -1,12 +1,13 @@
 <form [formGroup]="formTransaction" *ngIf="!transaction">
 
 		<h1 mat-dialog-title class="title">Send Funds</h1>
+		<p class="subtitle">Send funds from your wallet to another</p>
 
-		<div mat-dialog-content fxLayout="column" fxLayoutGap="15px">
+		<div mat-dialog-content fxLayout="column" fxLayoutGap="25px">
 
 			<div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap.gt-sm="15px">
 
-				<mat-form-field hintLabel="Amount to send" color="accent" appearance="outline" fxFlex="auto">
+				<mat-form-field hintLabel="Amount to send" color="accent" appearance="outline" fxFlex>
 					<mat-label>Amount</mat-label>
 					<input matInput numeric steps="0" type="number" name="amount" #amount placeholder="100" formControlName="amount">
 					<span matSuffix>CCX</span>
@@ -26,7 +27,7 @@
 
 			</div>
 
-			<mat-form-field color="accent" hintLabel="Address to send funds" appearance="outline">
+			<mat-form-field color="accent" hintLabel="Address to send funds" appearance="fill">
 				<mat-label>Address</mat-label>
 				<input matInput #toAddress type="text" name="toAddress" maxlength="98" placeholder="CCX Address" formControlName="toAddress" [matAutocomplete]="auto">
 				<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -35,7 +36,9 @@
 						<span>example address book wallet</span>
 					</mat-option>
 				</mat-autocomplete>
-				<mat-icon matSuffix>import_contacts</mat-icon>
+				<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste('toAddress')">
+					<mat-icon>content_paste</mat-icon>
+				</button>
 				<mat-hint align="end">{{toAddress.value.length}} / 98</mat-hint>
 				<mat-error *ngIf="formTransaction.controls.toAddress.hasError('required')">
 					Address is <strong>required</strong>
@@ -48,29 +51,30 @@
 				</mat-error>
 			</mat-form-field>
 
-			<mat-form-field hintLabel="Payment ID / Memo for this address" color="accent" appearance="outline">
+			<mat-form-field hintLabel="Payment ID / Memo for this address" color="accent" appearance="fill">
 				<mat-label>Payment ID (Optional)</mat-label>
 				<input matInput #paymentid type="text" name="paymentid" maxlength="64" placeholder="Payment ID" formControlName="paymentID" autocomplete="disabled">
-				<mat-icon matSuffix>fingerprint</mat-icon>
+				<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste('paymentID')">
+					<mat-icon>content_paste</mat-icon>
+				</button>
 				<mat-hint align="end">{{paymentid.value.length}} / 64</mat-hint>
 				<mat-error *ngIf="formTransaction.controls.paymentID.hasError('minlength')">
 					Address must be <strong>64 characters</strong>
 				</mat-error>
 			</mat-form-field>
 
-			<mat-slide-toggle formControlName="includeMsg">Optional message</mat-slide-toggle>
+			<mat-slide-toggle formControlName="includeMsg" *ngIf="!this.formTransaction.value.includeMsg">Include Message</mat-slide-toggle>
 
 			<mat-form-field hintLabel="Include a message in the transaction" color="accent" appearance="fill" *ngIf="this.formTransaction.value.includeMsg">
-				<mat-label>Message</mat-label>
-				<textarea rows="5" matInput #message type="text" name="message" maxlength="260" placeholder="Your message here..." formControlName="message" autocomplete="disabled"></textarea>
-				<mat-icon matSuffix>message</mat-icon>
+				<mat-label>Message (Optional)</mat-label>
+				<textarea rows="4" matInput #message type="text" name="message" maxlength="260" placeholder="Your message here..." formControlName="message" autocomplete="disabled"></textarea>
 				<mat-hint align="end">{{message.value.length}} / 260</mat-hint>
 			</mat-form-field>
 
 		</div>
 
 		<div mat-dialog-actions>
-			<button mat-flat-button color="warn" (click)="close()">Cancel</button>
+			<button mat-flat-button color="warn" type="button" (click)="close()">Cancel</button>
 			<button mat-flat-button color="accent" type="submit" (click)="review()" [disabled]="!formTransaction.valid">Save & Review</button>
 		</div>
 
@@ -79,7 +83,7 @@
 <form [formGroup]="formConfirm" *ngIf="!confirmed && transaction">
 
 	<h1 mat-dialog-title class="title">Confirmation</h1>
-	<p>Please review your transaction</p>
+	<p class="subtitle">Please review the transaction</p>
 
 	<div mat-dialog-content fxLayout="column">
 
@@ -124,7 +128,7 @@
 
 	<div mat-dialog-actions>
 		<button mat-stroked-button color="accent" (click)="this.transaction=false">Edit</button>
-		<button mat-flat-button color="accent" (click)="confirm()">Confirm & Continue</button>
+		<button mat-flat-button color="accent" (click)="confirm()">Confirm</button>
 	</div>
 
 </form>
@@ -132,8 +136,8 @@
 <form [formGroup]="formAuthorise" *ngIf="confirmed && transaction">
 
 	<h1 mat-dialog-title class="title">Authorization</h1>
-	<p *ngIf="this.hasTwoFa">Please enter your 2FA code to authorize your message</p>
-	<p *ngIf="!this.hasTwoFa">Please enter your password to authorize your message</p>
+	<p class="subtitle" *ngIf="this.hasTwoFa">Please provide your 2FA code</p>
+	<p class="subtitle" *ngIf="!this.hasTwoFa">Please provide your password</p>
 
 	<div mat-dialog-content>
 		<div fxFlex="100" fxLayout="row" fxLayoutGap="15px">
@@ -141,6 +145,9 @@
 				<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
 					<mat-label>2FA Code</mat-label>
 					<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="twofaFormControl">
+					<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste('twofa')">
+						<mat-icon>content_paste</mat-icon>
+					</button>
 					<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
 					<mat-error *ngIf="formAuthorise.controls.twofaFormControl.hasError('minlength') || formAuthorise.controls.twofaFormControl.hasError('maxlength')">
 						2FA code should be <strong>6 numbers</strong>

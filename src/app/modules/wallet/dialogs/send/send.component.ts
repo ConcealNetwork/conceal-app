@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
+import { SnackbarService } from '../../../../shared/services/snackbar.service';
+
 // Dialogs
 @Component({
   selector: 'send',
@@ -26,7 +28,8 @@ export class SendDialog {
 
 	constructor (
 		public breakpointObserver: BreakpointObserver,
-		public dialogRef: MatDialogRef<SendDialog>, @Inject(MAT_DIALOG_DATA) public data: any
+		public dialogRef: MatDialogRef<SendDialog>, @Inject(MAT_DIALOG_DATA) public data: any,
+		private snackbarService: SnackbarService,
 	) {
 		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall])
 		.subscribe((state: BreakpointState) => {
@@ -100,16 +103,33 @@ export class SendDialog {
 			this.formConfirm.controls.message.patchValue(this.formTransaction.value.message, { emitEvent: true });
 			this.formConfirm.disable({emitEvent: false});
 			this.transaction = true;
+			this.dialogRef.updateSize('500px', 'auto');
 		}
 	}
 
 	confirm() {
 		this.confirmed = true;
+		this.dialogRef.updateSize('350px', 'auto');
 	}
 
 	authorise() {
 		if (this.formAuthorise.valid) {
 			this.dialogRef.close(true);
+		}
+	}
+
+	paste(item:string) {
+		if (navigator.clipboard) {
+			navigator.clipboard.readText()
+			.then(text => {
+				if (item == 'toAddress') {this.formTransaction.controls.toAddress.setValue(text)}
+				if (item == 'paymentID') {this.formTransaction.controls.paymentID.setValue(text)}
+				if (item == 'twofa') {this.formAuthorise.controls.twofaFormControl.setValue(text)}
+				this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+			})
+			.catch(err => {
+				this.snackbarService.openSnackBar(err, 'Dismiss');
+			});
 		}
 	}
 
