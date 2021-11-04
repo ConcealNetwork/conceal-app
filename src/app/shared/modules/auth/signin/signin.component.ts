@@ -16,6 +16,7 @@ import { DialogService } from '../../../../shared/services/dialog.service';
 export class SigninComponent implements OnInit {
 
 	isLoading: boolean = false;
+	clipboard: boolean = false;
 	returnURL: string = '';
 	date: Date = new Date();
 	timeOfDay: number = this.date.getHours();
@@ -78,8 +79,25 @@ export class SigninComponent implements OnInit {
 		}
 	}
 
+	paste2fa() {
+		if (navigator.clipboard) {
+			navigator.clipboard.readText()
+			.then(text => {
+				this.form.controls.twofaFormControl.setValue(text);
+				this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss')
+			})
+			.catch(err => {
+				this.snackbarService.openSnackBar(err, 'Dismiss');
+			});
+		}
+	}
+
   ngOnInit(): void {
 		this.route.queryParams.subscribe(x => {this.returnURL = x.return || ''});
+		if (navigator.clipboard) {
+			//this.snackbarService.openSnackBar('Clipboard API available', 'Dismiss');
+			this.clipboard = true;
+		}
 	}
 
 }
