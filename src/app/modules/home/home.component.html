@@ -3,10 +3,10 @@
 	<div class="news" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="45px">
 
 		<div fxLayout="column" fxFlex="grow" fxLayoutAlign="start" fxLayoutGap="10px">
-			<div fxLayout="row wrap" fxLayoutGap="10px grid">
+			<div fxLayout="row wrap" fxLayoutGap="25px grid" [@listAnimation]="posts.length">
 				<div [fxFlex]="(100/getThemingService().articleGridColumns) + '%'" fxFlex="100%" *ngFor="let item of posts">
 
-					<mat-card class="article mat-elevation-z6">
+					<mat-card id="cards" class="article mat-elevation-z6">
 						<div class="card-container">
 							<img mat-card-image class="card-image" [src]="item.thumbnail" alt="Image">
 							<a class="card-content" href="{{item.link}}" target="_blank">

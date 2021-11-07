@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
 // Services
 import { HelperService } from './../../../../shared/services/helper.service';
@@ -14,7 +15,27 @@ export interface Wallets {
 @Component({
   selector: 'app-wallets',
   templateUrl: './wallets.component.html',
-  styleUrls: ['./wallets.component.scss']
+  styleUrls: ['./wallets.component.scss'],
+	animations: [
+		trigger('transition', [
+			transition(':enter', [
+				query('#cards', [
+					style({ opacity: 0}),
+					animate('0.2s ease-in', style({ opacity: 1}))
+				])
+			])
+		]),
+		trigger('listAnimation', [
+			transition('* => *', [ // each time the binding value changes
+				query(':enter', [
+					style({ opacity: 0 }),
+					stagger(100, [
+						animate('0.2s', style({ opacity: 1 }))
+					])
+				], {optional: true})
+			])
+		])
+	]
 })
 export class WalletsComponent implements OnInit {
 
