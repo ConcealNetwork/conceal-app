@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   environment: 'DEV',
   walletAPI: 'https://api.wallet.conceal.network/api',
-	defaultFee: 0.001000000,
+	defaultFee: 0.001000,
 };
 
 /*

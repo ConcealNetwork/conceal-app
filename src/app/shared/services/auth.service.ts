@@ -49,11 +49,11 @@ export class AuthService {
 		this.isLoginSubject.next(true);
 	}
 
-	getToken() :any {
+	getToken():any {
 		return localStorage.getItem('access_token');
 	}
 
-	hasToken() : boolean {
+	hasToken():boolean {
 		return !!localStorage.getItem('access_token');
 	}
 
