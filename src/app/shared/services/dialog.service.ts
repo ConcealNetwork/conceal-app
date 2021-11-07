@@ -47,13 +47,14 @@ export class DialogService {
 		dialogRef.afterClosed().subscribe(result => { })
   }
 
-	openSendDialog(): void {
+	openSendDialog(fromAddress:string): void {
 		const dialogRef = this.dialog.open(SendDialog, {
 			width: this.width,
 			maxWidth: this.maxWidth,
 			height: this.height,
 			maxHeight: this.maxHeight,
-			disableClose: true
+			disableClose: true,
+			data: {fromAddress: fromAddress}
 		})
 		dialogRef.afterClosed().subscribe(result => { })
   }

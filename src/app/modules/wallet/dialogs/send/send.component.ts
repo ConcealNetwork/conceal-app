@@ -1,9 +1,14 @@
-// Angular
+// App Variables
+import { environment } from '../../../../../environments/environment';
+
+// Angular Core
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
+// Services
+import { DataService } from './../../../../shared/services/data.service';
 import { SnackbarService } from '../../../../shared/services/snackbar.service';
 
 // Dialogs
@@ -18,19 +23,21 @@ export class SendDialog {
 	isSmallScreen: boolean = false;
 	transaction: boolean = false;
 	confirmed: boolean = false;
+	wallets: any;
 
 	// form values
 	amount: number = 0;
-	fee: number = 0.001;
-	fromAddress: string = 'ccx7Nvoi2iYj7uw4k5EEGCN6ogBPzGrDMY6Lnj16ZwSKZrHZ5zVh29HXtznxBsofFP8JB32YYBmtwLdoEirjAbYo4DBZfA4r7X';
-
+	fee: number = environment.defaultFee;
 	hasTwoFa: boolean = true;
 
 	constructor (
 		public breakpointObserver: BreakpointObserver,
 		public dialogRef: MatDialogRef<SendDialog>, @Inject(MAT_DIALOG_DATA) public data: any,
+		private dataService: DataService,
 		private snackbarService: SnackbarService,
 	) {
+
+		// Breakpoints
 		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall])
 		.subscribe((state: BreakpointState) => {
 			if (state.matches) {
@@ -40,6 +47,8 @@ export class SendDialog {
 				this.isSmallScreen = false;
 			}
 		})
+
+		// Forms
 		if (this.hasTwoFa) {
 			this.formAuthorise.addControl('twofaFormControl', new FormControl('', [
 				Validators.minLength(6),
@@ -87,7 +96,10 @@ export class SendDialog {
 
 	formAuthorise: FormGroup = new FormGroup({});
 
-	setAmount(value:number) {}
+	setAmount(percent:number) {
+		let balance = 0.0001;
+		this.formTransaction.controls.amount.patchValue((percent / 100) * balance);
+	}
 
 	close() {
 		this.dialogRef.close(true);
@@ -98,18 +110,16 @@ export class SendDialog {
 			this.formConfirm.controls.amount.patchValue(this.formTransaction.value.amount, { emitEvent: true });
 			this.formConfirm.controls.fee.patchValue(this.fee, { emitEvent: true });
 			this.formConfirm.controls.toAddress.patchValue(this.formTransaction.value.toAddress, { emitEvent: true });
-			this.formConfirm.controls.fromAddress.patchValue(this.fromAddress, { emitEvent: true });
+			this.formConfirm.controls.fromAddress.patchValue(this.data.fromAddress, { emitEvent: true });
 			this.formConfirm.controls.paymentID.patchValue(this.formTransaction.value.paymentID, { emitEvent: true });
 			this.formConfirm.controls.message.patchValue(this.formTransaction.value.message, { emitEvent: true });
 			this.formConfirm.disable({emitEvent: false});
 			this.transaction = true;
-			this.dialogRef.updateSize('500px', 'auto');
 		}
 	}
 
 	confirm() {
 		this.confirmed = true;
-		this.dialogRef.updateSize('350px', 'auto');
 	}
 
 	authorise() {
