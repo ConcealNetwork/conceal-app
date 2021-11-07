@@ -1,51 +1,70 @@
 // App Variables
-import { environment } from '../../../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 // Angular Core
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 // Services
-import { SnackbarService } from '../../../../shared/services/snackbar.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { CloudService } from 'src/app/shared/services/cloud.service';
 
 // Dialogs
 @Component({
   selector: 'send',
   templateUrl: 'send.component.html',
 	styleUrls: ['./send.component.scss'],
+	animations: [
+		trigger('transition', [
+			transition(':enter', [
+				style({ opacity: 0}),
+				animate('0.3s ease-in', style({ opacity: 1}))
+			])
+		])
+	]
 })
 
-export class SendDialog implements OnInit {
+export class SendDialog {
 
 	// Variables
 	transaction: boolean = false;
 	confirmed: boolean = false;
 	amount: number = 0;
 	fee: number = environment.defaultFee;
-	hasTwoFa: boolean = true;
+	hasTwoFa: boolean = false;
+	wallet: any;
+	isLoading: boolean = false;
 
 	constructor (
 		public dialogRef: MatDialogRef<SendDialog>,
 		@Inject(MAT_DIALOG_DATA) public data: any,
 		private snackbarService: SnackbarService,
-	) {	}
-
-	ngOnInit(): void {
-		// Forms
-		if (this.hasTwoFa) {
-			this.formAuthorise.addControl('twofaFormControl', new FormControl('', [
-				Validators.minLength(6),
-				Validators.maxLength(6),
-				Validators.pattern('^[0-9]*$'),
-				Validators.required,
-			]))
-		}
-		if (!this.hasTwoFa) {
-			this.formAuthorise.addControl('passwordFormControl', new FormControl('', [
-				Validators.required,
-			]))
-		}
+		private authService: AuthService,
+		private cloudService: CloudService
+	) {
+		this.wallet = this.data.wallet;
+		// Check if 2fa is enabled
+		this.authService.check2fa().subscribe((result: any) => {
+			if(result.message.enabled) {
+				this.hasTwoFa = true;
+				console.log(result.message.enabled);
+				this.formAuthorise.addControl('code', new FormControl('', [
+					Validators.minLength(6),
+					Validators.maxLength(6),
+					Validators.pattern('^[0-9]*$'),
+					Validators.required,
+				]))
+			} else {
+				this.hasTwoFa = false;
+				console.log(result.message.enabled);
+				this.formAuthorise.addControl('password', new FormControl('', [
+					Validators.required,
+				]))
+			}
+		});
 	}
 
 	formTransaction: FormGroup = new FormGroup({
@@ -81,8 +100,7 @@ export class SendDialog implements OnInit {
 	formAuthorise: FormGroup = new FormGroup({});
 
 	setAmount(percent:number) {
-		let balance = 0.0001;
-		this.formTransaction.controls.amount.patchValue((percent / 100) * balance);
+		this.formTransaction.controls.amount.patchValue((percent / 100) * this.wallet.value.balance, { emitEvent: true });
 	}
 
 	close() {
@@ -94,7 +112,7 @@ export class SendDialog implements OnInit {
 			this.formConfirm.controls.amount.patchValue(this.formTransaction.value.amount, { emitEvent: true });
 			this.formConfirm.controls.fee.patchValue(this.fee, { emitEvent: true });
 			this.formConfirm.controls.toAddress.patchValue(this.formTransaction.value.toAddress, { emitEvent: true });
-			this.formConfirm.controls.fromAddress.patchValue(this.data.fromAddress, { emitEvent: true });
+			this.formConfirm.controls.fromAddress.patchValue(this.wallet.key, { emitEvent: true });
 			this.formConfirm.controls.paymentID.patchValue(this.formTransaction.value.paymentID, { emitEvent: true });
 			this.formConfirm.controls.message.patchValue(this.formTransaction.value.message, { emitEvent: true });
 			this.formConfirm.disable({emitEvent: false});
@@ -108,7 +126,28 @@ export class SendDialog implements OnInit {
 
 	authorise() {
 		if (this.formAuthorise.valid) {
-			this.dialogRef.close(true);
+			this.isLoading = true;
+			this.cloudService.createTransaction(
+				this.formConfirm.value.amount.toFixed(6),
+				this.formConfirm.value.fromAddress,
+				this.formConfirm.value.toAddress,
+				this.formConfirm.value.paymentID || '',
+				this.formConfirm.value.message || '',
+				this.formAuthorise.value.code || '',
+				this.formAuthorise.value.password || ''
+			).subscribe((data: any) => {
+				if (data.result === 'success') {
+					this.snackbarService.openSnackBar('Transaction successfully sent!', 'Dismiss');
+					this.isLoading = false;
+					this.dialogRef.close(true);
+				} else if (data.result === 'error') {
+					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+					this.isLoading = false;
+				} else {
+					this.snackbarService.openSnackBar('Whoops, something went wrong', 'Dismiss');
+					this.isLoading = false;
+				}
+			});
 		}
 	}
 
