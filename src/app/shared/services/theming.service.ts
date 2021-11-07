@@ -9,6 +9,9 @@ export class ThemingService {
   themes = ["dark-theme", "light-theme"];
   theme = new BehaviorSubject("light-theme");
 	stroke: number = 6;
+	dialogWidth: string = '600px';
+	dialogMaxWidth: string = '600px';
+	dialogHeight: string = 'auto';
 	walletGridColumns: number = 0;
 	articleGridColumns: number = 0;
 
@@ -41,26 +44,41 @@ export class ThemingService {
 			if (state.matches) {
 				if (state.breakpoints[Breakpoints.XSmall]) {
 					this.stroke = 6;
+					this.dialogWidth = '95vw';
+					this.dialogMaxWidth = '95vw';
+					this.dialogHeight = 'auto';
 					this.articleGridColumns = 1;
 					this.walletGridColumns = 1;
 					console.log('XSmall');
 				} else if (state.breakpoints[Breakpoints.Small]) {
 					this.stroke = 6;
+					this.dialogWidth = '95vw';
+					this.dialogMaxWidth = '95vw';
+					this.dialogHeight = 'auto';
 					this.articleGridColumns = 1;
 					this.walletGridColumns = 2;
 					console.log('Small');
 				} else if (state.breakpoints[Breakpoints.Medium]) {
 					this.stroke = 3;
+					this.dialogWidth = '600px';
+					this.dialogMaxWidth = '600px';
+					this.dialogHeight = 'auto';
 					this.articleGridColumns = 2;
 					this.walletGridColumns = 3;
 					console.log('Medium');
 				} else if (state.breakpoints[Breakpoints.Large]) {
 					this.stroke = 5;
+					this.dialogWidth = '600px';
+					this.dialogMaxWidth = '600px';
+					this.dialogHeight = 'auto';
 					this.articleGridColumns = 3;
 					this.walletGridColumns = 3;
 					console.log('Large');
 				} else if (state.breakpoints[Breakpoints.XLarge]) {
 					this.stroke = 5;
+					this.dialogWidth = '600px';
+					this.dialogMaxWidth = '600px';
+					this.dialogHeight = 'auto';
 					this.articleGridColumns = 4;
 					this.walletGridColumns = 3;
 					console.log('XLarge');
