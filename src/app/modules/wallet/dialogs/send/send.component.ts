@@ -2,13 +2,11 @@
 import { environment } from '../../../../../environments/environment';
 
 // Angular Core
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 // Services
-import { DataService } from './../../../../shared/services/data.service';
 import { SnackbarService } from '../../../../shared/services/snackbar.service';
 
 // Dialogs
@@ -18,36 +16,22 @@ import { SnackbarService } from '../../../../shared/services/snackbar.service';
 	styleUrls: ['./send.component.scss'],
 })
 
-export class SendDialog {
+export class SendDialog implements OnInit {
 
-	isSmallScreen: boolean = false;
+	// Variables
 	transaction: boolean = false;
 	confirmed: boolean = false;
-	wallets: any;
-
-	// form values
 	amount: number = 0;
 	fee: number = environment.defaultFee;
 	hasTwoFa: boolean = true;
 
 	constructor (
-		public breakpointObserver: BreakpointObserver,
-		public dialogRef: MatDialogRef<SendDialog>, @Inject(MAT_DIALOG_DATA) public data: any,
-		private dataService: DataService,
+		public dialogRef: MatDialogRef<SendDialog>,
+		@Inject(MAT_DIALOG_DATA) public data: any,
 		private snackbarService: SnackbarService,
-	) {
+	) {	}
 
-		// Breakpoints
-		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall])
-		.subscribe((state: BreakpointState) => {
-			if (state.matches) {
-				// Matches small viewport or handset in portrait mode
-				this.isSmallScreen = true;
-			} else {
-				this.isSmallScreen = false;
-			}
-		})
-
+	ngOnInit(): void {
 		// Forms
 		if (this.hasTwoFa) {
 			this.formAuthorise.addControl('twofaFormControl', new FormControl('', [
