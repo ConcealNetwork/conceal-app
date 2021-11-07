@@ -2,72 +2,10 @@
 
 	<div class="news" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="45px">
 
-		<!-- <div fxLayout="column" fxFlex="35" fxLayoutAlign="start" fxLayoutGap="25px">
-			<h2 class="title">Price</h2>
-			<div fxLayout="row" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="15px">
-				<mat-card class="price mat-elevation-z5" fxLayout="column" fxFlex>
-					<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
-						<div class="icon">
-							<img src="./assets/icons/ccx.png" width="44px">
-						</div>
-						<ngx-trend fxFlex [padding]="15" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[4,2,5,9,5,12,3,5,3,4,1,8,2,9,14]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="stroke" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
-					</div>
-					<div fxLayout="column">
-						<div class="label">Conceal (CCX)</div>
-						<div class="stats" fxLayout="row" fxLayoutAlign="space-between center">
-							<div class="price">${{ccx | number : '1.2-2' }}</div>
-							<div class="trend"><mat-icon class="ico">arrow_drop_up</mat-icon>7.15%</div>
-						</div>
-					</div>
-				</mat-card>
-				<mat-card class="price mat-elevation-z5" fxLayout="column" fxFlex>
-					<div class="tops" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
-						<div class="icon">
-							<img src="./assets/icons/wccx.png" width="44px">
-						</div>
-						<ngx-trend fxFlex [padding]="15" [autoDraw]="true" [autoDrawDuration]="1000" [data]="[5,2,5,9,4,10,3,5,18,4,1,2,2,9,13]" [gradient]="['#38d2389e']" [smooth]="true" [radius]="5" [strokeWidth]="stroke" autoDrawEasing="linear" strokeLinecap="round"></ngx-trend>
-					</div>
-					<div fxLayout="column">
-						<div class="label">Wrapped (wCCX)</div>
-						<div class="stats" fxLayout="row" fxLayoutAlign="space-between center">
-							<div class="price">${{wccx | number : '1.2-2' }}</div>
-							<div class="trend"><mat-icon class="ico">arrow_drop_up</mat-icon>6.45%</div>
-						</div>
-					</div>
-				</mat-card>
-			</div>
-			<h2 class="title">Supply</h2>
-			<div fxLayout="column" fxLayoutGap="15px">
-				<mat-card class="supply mat-elevation-z5" fxLayout="column" fxFlex>
-					<div fxLayout="column">
-						<div class="label">Deposits</div>
-					</div>
-					<div fxLayout="column">
-						<div class="value">7,860,121 CCX</div>
-					</div>
-				</mat-card>
-				<mat-card class="supply mat-elevation-z5" fxLayout="column" fxFlex>
-					<div fxLayout="column">
-						<div class="label">Circulating</div>
-					</div>
-					<div fxLayout="column">
-						<div class="value">11,171,516 CCX</div>
-					</div>
-				</mat-card>
-				<mat-card class="supply mat-elevation-z5" fxLayout="column" fxFlex>
-					<div fxLayout="column">
-						<div class="label">Total</div>
-					</div>
-					<div fxLayout="column">
-						<div class="value">19,031,643 CCX</div>
-					</div>
-				</mat-card>
-			</div>
-		</div> -->
-
 		<div fxLayout="column" fxFlex="grow" fxLayoutAlign="start" fxLayoutGap="10px">
 			<div fxLayout="row wrap" fxLayoutGap="10px grid">
-				<div [fxFlex]="(100/gridColumns) + '%'" fxFlex="100%" *ngFor="let item of posts">
+				<div [fxFlex]="(100/getThemingService().articleGridColumns) + '%'" fxFlex="100%" *ngFor="let item of posts">
+
 					<mat-card class="article mat-elevation-z6">
 						<div class="card-container">
 							<img mat-card-image class="card-image" [src]="item.thumbnail" alt="Image">
@@ -77,6 +15,7 @@
 							</a>
 						</div>
 					</mat-card>
+
 				</div>
 			</div>
 		</div>

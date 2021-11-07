@@ -1,6 +1,6 @@
 <div fxLayout="row wrap" fxLayoutGap="10px grid">
 
-	<div [fxFlex]="(100/gridColumns) + '%'" fxFlex="100%">
+	<div [fxFlex]="(100/getThemingService().walletGridColumns) + '%'" fxFlex="100%">
 		<mat-card class="mat-elevation-z6">
 
 			<mat-card-header fxLayout="column">
@@ -49,7 +49,7 @@
 		</mat-card>
 	</div>
 
-	<div [fxFlex]="(100/gridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.wallets | keyvalue">
+	<div [fxFlex]="(100/getThemingService().walletGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.wallets | keyvalue">
 		<mat-card class="mat-elevation-z6">
 
 			<mat-card-header fxLayout="column">
@@ -98,7 +98,7 @@
 
 			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 				<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
-					<button color="accent" mat-flat-button (click)="getDialogService().openSendDialog()">Send Funds</button>
+					<button color="accent" mat-flat-button (click)="getDialogService().openSendDialog(item.key)">Send Funds</button>
 				</div>
 			</mat-card-actions>
 
