@@ -1,7 +1,7 @@
-<div fxLayout="row wrap" fxLayoutGap="10px grid">
+<div fxLayout="row wrap" fxLayoutGap="25px grid" [@listAnimation]="this.wallets" @transition>
 
 	<div [fxFlex]="(100/getThemingService().walletGridColumns) + '%'" fxFlex="100%">
-		<mat-card class="mat-elevation-z6">
+		<mat-card id="cards" class="mat-elevation-z6">
 
 			<mat-card-header fxLayout="column">
 				<div fxLayout="row" fxLayoutAlign="space-between center">

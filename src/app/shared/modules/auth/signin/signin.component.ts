@@ -63,7 +63,7 @@ export class SigninComponent implements OnInit {
 					this.authService.setToken(data.message.token);
 					// Check if 2fa is enabled
 					this.authService.check2fa().subscribe((result: any) => {
-						if(!result.message.enabled) this.dialogService.openTwoFactorDialog()
+						if(!result.message.enabled) this.dialogService.openTwoFactorDialog();
 					});
 					// Login message
 					this.authService.getUser().subscribe((result: any) => {

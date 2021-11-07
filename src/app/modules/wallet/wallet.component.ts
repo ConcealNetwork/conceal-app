@@ -7,7 +7,7 @@ import { DataService } from './../../shared/services/data.service';
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
-  styleUrls: ['./wallet.component.scss']
+  styleUrls: ['./wallet.component.scss'],
 })
 
 export class WalletComponent implements OnInit {
