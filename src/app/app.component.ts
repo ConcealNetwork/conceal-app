@@ -1,6 +1,5 @@
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { getSupportedInputTypes, Platform, supportsPassiveEventListeners, supportsScrollBehavior } from '@angular/cdk/platform';
 
 // 3rd Party Modules
@@ -25,15 +24,15 @@ export class AppComponent implements OnInit, OnDestroy {
   supportedInputTypes = Array.from(getSupportedInputTypes()).join(', ');
   supportsPassiveEventListeners = supportsPassiveEventListeners();
   supportsScrollBehavior = supportsScrollBehavior();
-	isSmallScreen: boolean = false;
 
   constructor(
 		private themingService: ThemingService,
 		private overlayContainer: OverlayContainer,
-		public breakpointObserver: BreakpointObserver,
 		public platform: Platform
-	) {
+	) {}
 
+	getThemingService() {
+		return this.themingService;
 	}
 
 	ngOnInit() {
@@ -41,16 +40,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.className = theme;
       this.applyThemeOnOverlays();
     });
-
-		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall])
-		.subscribe((state: BreakpointState) => {
-			if (state.matches) {
-				// Matches small viewport or handset in portrait mode
-				this.isSmallScreen = true;
-			} else {
-				this.isSmallScreen = false;
-			}
-		});
 	}
 
   /**
