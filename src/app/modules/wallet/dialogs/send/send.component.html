@@ -1,4 +1,4 @@
-<form [formGroup]="formTransaction" *ngIf="!transaction">
+<form [formGroup]="formTransaction" *ngIf="!transaction" @transition>
 
 		<h1 mat-dialog-title class="title">Send Funds</h1>
 		<p class="subtitle">Send funds from your wallet to another</p>
@@ -73,14 +73,14 @@
 
 		</div>
 
-		<div mat-dialog-actions>
-			<button mat-flat-button color="warn" type="button" (click)="close()">Cancel</button>
-			<button mat-flat-button color="accent" type="submit" (click)="review()" [disabled]="!formTransaction.valid">Save & Review</button>
+		<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+			<button mat-stroked-button color="warn" type="button" fxFlex (click)="close()">Cancel</button>
+			<button mat-flat-button color="accent" type="submit" fxFlex (click)="review()" [disabled]="!formTransaction.valid">Save & Review</button>
 		</div>
 
 </form>
 
-<form [formGroup]="formConfirm" *ngIf="!confirmed && transaction">
+<form [formGroup]="formConfirm" *ngIf="!confirmed && transaction" @transition>
 
 	<h1 mat-dialog-title class="title">Confirmation</h1>
 	<p class="subtitle">Please review the transaction</p>
@@ -126,14 +126,15 @@
 
 	</div>
 
-	<div mat-dialog-actions>
-		<button mat-stroked-button color="accent" (click)="this.transaction=false">Edit</button>
-		<button mat-flat-button color="accent" (click)="confirm()">Confirm</button>
+	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+		<button mat-stroked-button color="warn" type="button" fxFlex="25" (click)="close()">Cancel</button>
+		<button mat-stroked-button type="button" fxFlex="25" (click)="this.transaction=false">Edit</button>
+		<button mat-flat-button color="accent" type="button" fxFlex (click)="confirm()">Confirm</button>
 	</div>
 
 </form>
 
-<form [formGroup]="formAuthorise" *ngIf="confirmed && transaction">
+<form [formGroup]="formAuthorise" *ngIf="confirmed && transaction" @transition>
 
 	<h1 mat-dialog-title class="title">Authorization</h1>
 	<p class="subtitle" *ngIf="this.hasTwoFa">Please provide your 2FA code</p>
@@ -163,7 +164,8 @@
 			<div fxFlex fxLayout="column" *ngIf="!this.hasTwoFa">
 				<mat-form-field fxFill appearance="fill" hintLabel="Your password">
 					<mat-label>Password</mat-label>
-					<input type="password" matInput placeholder="password" formControlName="passwordFormControl">
+					<input type='text' hidden name='email' autoComplete='username email' />
+					<input type="password" autocomplete="current-password" matInput placeholder="password" formControlName="passwordFormControl">
 					<mat-error *ngIf="formAuthorise.controls.passwordFormControl.hasError('required')">
 						Password is <strong>required</strong>
 					</mat-error>
@@ -172,9 +174,10 @@
 		</div>
 	</div>
 
-	<div mat-dialog-actions>
-		<button mat-stroked-button color="accent" (click)="this.confirmed=false">Review</button>
-		<button mat-flat-button color="accent" type="submit" (click)="authorise()" [disabled]="!formAuthorise.valid">Send Funds</button>
+	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+		<button mat-stroked-button color="warn" type="button" fxFlex="25" (click)="close()">Cancel</button>
+		<button mat-stroked-button type="button" fxFlex="25" (click)="this.confirmed=false">Review</button>
+		<button mat-flat-button color="accent" type="submit" fxFlex (click)="authorise()" [disabled]="!formAuthorise.valid">Authorise & Send</button>
 	</div>
 
 </form>

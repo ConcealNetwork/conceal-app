@@ -4,19 +4,31 @@
 
 .subtitle {
 	margin-bottom: 20px;
-	filter: brightness(85%);
+	filter: brightness(80%);
+}
+
+.mat-dialog-content {
+	.mat-form-field {
+		font-size: 1rem;
+	}
 }
 
 .balance {
 	margin-top: 5px;
-	min-height: 50px;
+	min-height: 58px;
 }
 
-.mat-dialog-actions{
+.mat-dialog-actions {
+	margin-top: 10px;
 	padding: 15px 0;
+	button {
+		font-size: 1rem;
+		padding: .4rem;
+	}
 }
 
 mat-slide-toggle {
+	font-size: 1rem;
 	min-height: 30px;
 	padding-top: 5px;
 	padding-bottom: 5px;
