@@ -183,7 +183,7 @@
 	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
 		<button mat-stroked-button color="warn" type="button" fxFlex="25" (click)="close()">Cancel</button>
 		<button mat-stroked-button type="button" fxFlex="25" (click)="this.confirmed=false">Review</button>
-		<button mat-flat-button color="accent" type="submit" fxFlex (click)="authorise()" [disabled]="!formAuthorise.valid || this.isLoading">Authorise & Send</button>
+		<button mat-flat-button color="accent" type="submit" fxFlex (click)="authorise()" [disabled]="!formAuthorise.valid || this.isLoading">Send</button>
 	</div>
 
 </form>
