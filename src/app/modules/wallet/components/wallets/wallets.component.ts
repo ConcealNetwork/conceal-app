@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
 // Services
-import { HelperService } from './../../../../shared/services/helper.service';
-import { DialogService } from './../../../../shared/services/dialog.service';
-import { ApiService } from './../../../../shared/services/api.service';
-import { DataService } from './../../../../shared/services/data.service';
-import { ThemingService } from './../../../../shared/services/theming.service';
+import { HelperService } from 'src/app/shared/services/helper.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
+import { ApiService } from 'src/app/shared/services/api.service';
+import { DataService } from 'src/app/shared/services/data.service';
+import { ThemingService } from 'src/app/shared/services/theming.service';
 
 export interface Wallets {
   item: any;

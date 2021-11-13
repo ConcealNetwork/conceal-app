@@ -59,7 +59,7 @@
 						<mat-icon>more_vert</mat-icon>
 					</button>
 					<mat-menu #menu="matMenu">
-						<button mat-menu-item>
+						<button mat-menu-item (click)="this.getHelperService().copyToClipboard(item.key, 'Address copied to clipboard')">
 							<mat-icon color="accent">content_copy</mat-icon>
 							<span>Copy Address</span>
 						</button>
