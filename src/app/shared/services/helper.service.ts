@@ -2,6 +2,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+// Services
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+
 // 3rd Party
 import * as moment from 'moment';
 
@@ -10,6 +13,11 @@ import * as moment from 'moment';
 })
 
 export class HelperService {
+
+	constructor (
+		private snackbarService: SnackbarService,
+		private router: Router
+	) { }
 
 	formattedStringAmount(amount:string, currency:string, symbol:string): any {
 		const formatOptions = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
@@ -26,13 +34,19 @@ export class HelperService {
 	}
 
 	formatDatetime(datetime:Date) {
-		return moment(datetime).fromNow(); //eg. 1 day ago, 2 hours ago etc
+		return moment(datetime).fromNow(); // eg. 1 day ago, 2 hours ago etc
+	}
+
+	copyToClipboard(value: string, message: string): void {
+		if (!navigator.clipboard) return;
+		navigator.clipboard.writeText(value);
+		this.snackbarService.openSnackBar(message, 'Dismiss');
 	}
 
 	formatTypeText(type:string) {
 		if (type === 'in') return 'Received';
 		if (type === 'out') return 'Sent';
-		else { return }
+		else return;
 	}
 
 }
