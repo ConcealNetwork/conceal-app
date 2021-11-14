@@ -27,6 +27,7 @@ import { WalletsComponent } from './components/wallets/wallets.component';
 // Dialogs
 import { SendDialog } from "./dialogs/send/send.component";
 import { ReceiveDialog } from "./dialogs/receive/receive.component";
+import { ExportDialog } from './dialogs/export/export.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ReceiveDialog } from "./dialogs/receive/receive.component";
     TransactionsComponent,
     WalletsComponent,
 		SendDialog,
-		ReceiveDialog
+		ReceiveDialog,
+		ExportDialog
   ],
   imports: [
     CommonModule,

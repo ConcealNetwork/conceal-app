@@ -1,0 +1,73 @@
+<div *ngIf="!hasTwoFa && !haveKeys" @transition>
+
+	<h1 mat-dialog-title class="title">2FA Required</h1>
+	<p class="subtitle">You must enable two factor authentication.</p>
+
+	<div mat-dialog-content fxLayout="column" fxLayoutGap="25px">
+		<p>Please go to settings and enable two factor authentication to retrieve your keys.</p>
+	</div>
+
+		<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+			<button mat-stroked-button color="warn" type="button" (click)="close()" fxFlex>Cancel</button>
+			<button mat-flat-button color="accent" type="submit" [mat-dialog-close]="true" routerLink="/settings" fxFlex>Settings</button>
+		</div>
+
+</div>
+
+<form [formGroup]="export" *ngIf="hasTwoFa && !haveKeys" @transition>
+
+	<h1 mat-dialog-title class="title">Export Private Keys</h1>
+	<p class="subtitle">Please enter your two factor authentication code to continue</p>
+
+	<div mat-dialog-content fxLayout="column" fxLayoutGap="25px">
+
+		<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
+			<mat-label>2FA Code</mat-label>
+			<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="code">
+			<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste('twofa')">
+				<mat-icon>content_paste</mat-icon>
+			</button>
+			<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+			<mat-error *ngIf="export.controls.code.hasError('minlength') || export.controls.code.hasError('maxlength')">
+				2FA code should be <strong>6 numbers</strong>
+			</mat-error>
+			<mat-error *ngIf="export.controls.code.hasError('pattern')">
+				2FA code should be <strong>numbers only</strong>
+			</mat-error>
+			<mat-error *ngIf="export.controls.code.hasError('required')">
+				2FA Code is <strong>required</strong>
+			</mat-error>
+		</mat-form-field>
+
+	</div>
+
+	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+		<button mat-stroked-button color="warn" type="button" fxFlex (click)="close()">Cancel</button>
+		<button mat-flat-button color="accent" type="submit" fxFlex (click)="submit()" [disabled]="!export.valid || this.isLoading">Export Keys</button>
+	</div>
+
+</form>
+
+<div *ngIf="hasTwoFa && haveKeys" @transition>
+
+	<h1 mat-dialog-title class="title">Your Private Keys</h1>
+	<p class="subtitle">Please save your keys to a secure location</p>
+
+	<div mat-dialog-content fxLayout="column" fxLayoutGap="5px">
+		<div *ngFor="let item of keys | keyvalue">
+			<mat-form-field appearance="fill" color="accent" fxFlex>
+				<mat-label>{{ item.key }}</mat-label>
+				<input matInput type="text" [value]="item.value" [readonly]="true">
+				<button type="button" matSuffix mat-icon-button color="accent" aria-label="copy" (click)="this.getHelperService().copyToClipboard(item.value, 'Key copied to clipboard')">
+					<mat-icon>content_copy</mat-icon>
+				</button>
+			</mat-form-field>
+		</div>
+	</div>
+
+	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+		<button mat-stroked-button color="warn" type="button" fxFlex (click)="close()">Close</button>
+		<button mat-flat-button color="accent" type="submit" fxFlex (click)="download()">Download as file</button>
+	</div>
+
+</div>
