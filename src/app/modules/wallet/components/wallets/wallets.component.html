@@ -1,6 +1,6 @@
 <div fxLayout="row wrap" fxLayoutGap="25px grid" [@listAnimation]="this.wallets" @transition>
 
-	<div [fxFlex]="(100/getThemingService().walletGridColumns) + '%'" fxFlex="100%">
+	<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'" fxFlex="100%">
 		<mat-card id="cards" class="mat-elevation-z6">
 
 			<mat-card-header fxLayout="column">
@@ -49,7 +49,7 @@
 		</mat-card>
 	</div>
 
-	<div [fxFlex]="(100/getThemingService().walletGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.wallets | keyvalue">
+	<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.wallets | keyvalue">
 		<mat-card class="mat-elevation-z6">
 
 			<mat-card-header fxLayout="column">
@@ -63,11 +63,11 @@
 							<mat-icon color="accent">content_copy</mat-icon>
 							<span>Copy Address</span>
 						</button>
-						<button mat-menu-item (click)="getDialogService().openReceiveDialog()">
+						<button mat-menu-item (click)="this.getDialogService().openReceiveDialog()">
 							<mat-icon color="accent">qr_code</mat-icon>
 							<span>Show QR Code</span>
 						</button>
-						<button mat-menu-item>
+						<button mat-menu-item (click)="this.getDialogService().openExportDialog(item.key)">
 							<mat-icon color="accent">vpn_key</mat-icon>
 							<span>Export Keys</span>
 						</button>
@@ -87,18 +87,18 @@
 					</div>
 					<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
 						<span>Pending</span>
-						<span class="amount">{{ getHelperService().formatAmount(item.value.locked, 6, 6) }} CCX</span>
+						<span class="amount">{{ this.getHelperService().formatAmount(item.value.locked, 6, 6) }} CCX</span>
 					</div>
 					<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
 						<span>Withdrawable</span>
-						<span class="amount">{{ getHelperService().formatAmount(item.value.balance, 6, 6) }} CCX</span>
+						<span class="amount">{{ this.getHelperService().formatAmount(item.value.balance, 6, 6) }} CCX</span>
 					</div>
 				</div>
 			</mat-card-content>
 
 			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 				<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
-					<button color="accent" mat-flat-button (click)="getDialogService().openSendDialog(item)">Send Funds</button>
+					<button color="accent" mat-flat-button (click)="this.getDialogService().openSendDialog(item)">Send Funds</button>
 				</div>
 			</mat-card-actions>
 
