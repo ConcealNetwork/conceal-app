@@ -11,6 +11,7 @@ export class ThemingService {
 	isSmallScreen: boolean = false;
 	stroke: number = 6;
 	dialogWidth: string = '600px';
+	exportDialogWidth: string = '600px';
 	dialogMaxWidth: string = '600px';
 	dialogHeight: string = 'auto';
 	walletGridColumns: number = 0;
@@ -47,6 +48,7 @@ export class ThemingService {
 					this.isSmallScreen = true;
 					this.stroke = 6;
 					this.dialogWidth = '95vw';
+					this.exportDialogWidth = '95vw';
 					this.dialogMaxWidth = '95vw';
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 1;
@@ -57,6 +59,7 @@ export class ThemingService {
 					this.stroke = 6;
 					this.dialogWidth = '95vw';
 					this.dialogMaxWidth = '95vw';
+					this.exportDialogWidth = '95vw';
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 1;
 					this.walletGridColumns = 2;
@@ -66,6 +69,7 @@ export class ThemingService {
 					this.stroke = 3;
 					this.dialogWidth = '600px';
 					this.dialogMaxWidth = '600px';
+					this.exportDialogWidth = '400px';
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 2;
 					this.walletGridColumns = 3;
@@ -74,6 +78,7 @@ export class ThemingService {
 					this.isSmallScreen = false;
 					this.stroke = 5;
 					this.dialogWidth = '600px';
+					this.exportDialogWidth = '400px';
 					this.dialogMaxWidth = '600px';
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 3;
@@ -83,6 +88,7 @@ export class ThemingService {
 					this.isSmallScreen = false;
 					this.stroke = 5;
 					this.dialogWidth = '600px';
+					this.exportDialogWidth = '400px';
 					this.dialogMaxWidth = '600px';
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 4;

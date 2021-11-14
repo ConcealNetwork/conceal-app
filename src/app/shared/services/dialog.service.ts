@@ -9,6 +9,7 @@ import { ThemingService } from './theming.service';
 import { TwoFactorDialog } from '../dialogs/twofactor/twofactor.component';
 import { SendDialog } from '../../modules/wallet/dialogs/send/send.component';
 import { ReceiveDialog } from '../../modules/wallet/dialogs/receive/receive.component';
+import { ExportDialog } from '../../modules/wallet/dialogs/export/export.component';
 
 @Injectable({
 	providedIn: 'root'
@@ -28,6 +29,18 @@ export class DialogService {
 			height: this.themingService.dialogHeight,
 			maxHeight: this.themingService.dialogHeight,
 			disableClose: false
+		})
+		dialogRef.afterClosed().subscribe(result => { })
+  }
+
+	openExportDialog(address:any): void {
+		const dialogRef = this.dialog.open(ExportDialog, {
+			width: this.themingService.exportDialogWidth,
+			maxWidth: this.themingService.dialogMaxWidth,
+			height: this.themingService.dialogHeight,
+			maxHeight: this.themingService.dialogHeight,
+			disableClose: true,
+			data: {address: address}
 		})
 		dialogRef.afterClosed().subscribe(result => { })
   }
