@@ -37,7 +37,7 @@ export class HelperService {
 		return moment(datetime).fromNow(); // eg. 1 day ago, 2 hours ago etc
 	}
 
-	copyToClipboard(value: string, message: string): void {
+	copyToClipboard(value: any, message: string): void {
 		if (!navigator.clipboard) return;
 		navigator.clipboard.writeText(value);
 		this.snackbarService.openSnackBar(message, 'Dismiss');
