@@ -63,7 +63,7 @@
 							<mat-icon color="accent">content_copy</mat-icon>
 							<span>Copy Address</span>
 						</button>
-						<button mat-menu-item (click)="this.getDialogService().openReceiveDialog()">
+						<button mat-menu-item (click)="this.getDialogService().openQrcodeDialog(item.key)">
 							<mat-icon color="accent">qr_code</mat-icon>
 							<span>Show QR Code</span>
 						</button>
