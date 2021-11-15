@@ -28,6 +28,7 @@ import { WalletsComponent } from './components/wallets/wallets.component';
 import { SendDialog } from "./dialogs/send/send.component";
 import { ReceiveDialog } from "./dialogs/receive/receive.component";
 import { ExportDialog } from './dialogs/export/export.component';
+import { QrcodeDialog } from './dialogs/qrcode/qrcode.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ExportDialog } from './dialogs/export/export.component';
     WalletsComponent,
 		SendDialog,
 		ReceiveDialog,
-		ExportDialog
+		ExportDialog,
+  	QrcodeDialog
   ],
   imports: [
     CommonModule,

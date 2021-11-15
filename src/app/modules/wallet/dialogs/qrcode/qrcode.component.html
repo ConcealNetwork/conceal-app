@@ -1,0 +1,14 @@
+<div @transition>
+
+	<h1 mat-dialog-title class="title">Wallet QR Code</h1>
+	<p class="subtitle">Scan this code on your device</p>
+
+	<div mat-dialog-content fxLayout="column" fxLayoutGap="5px">
+		<div #qrcode class="code"></div>
+	</div>
+
+	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+		<button mat-flat-button color="accent" type="button" fxFlex (click)="close()">Close</button>
+	</div>
+
+</div>
