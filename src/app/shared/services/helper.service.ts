@@ -1,6 +1,5 @@
 // Angular Core
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 // Services
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
@@ -15,8 +14,7 @@ import * as moment from 'moment';
 export class HelperService {
 
 	constructor (
-		private snackbarService: SnackbarService,
-		private router: Router
+		private snackbarService: SnackbarService
 	) { }
 
 	formattedStringAmount(amount:string, currency:string, symbol:string): any {

@@ -11,6 +11,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CloudService } from 'src/app/shared/services/cloud.service';
+import { DataService } from 'src/app/shared/services/data.service';
 
 // Dialogs
 @Component({
@@ -43,7 +44,8 @@ export class SendDialog {
 		@Inject(MAT_DIALOG_DATA) public data: any,
 		private snackbarService: SnackbarService,
 		private authService: AuthService,
-		private cloudService: CloudService
+		private cloudService: CloudService,
+		private dataService: DataService
 	) {
 		this.wallet = this.data.wallet;
 		// Check if 2fa is enabled
@@ -138,6 +140,9 @@ export class SendDialog {
 			).subscribe((data: any) => {
 				if (data.result === 'success') {
 					this.snackbarService.openSnackBar('Transaction successfully sent!', 'Dismiss');
+					this.cloudService.getWalletsData().subscribe((data:any) => {
+						this.dataService.setWallets(data.message.wallets);
+					});
 					this.isLoading = false;
 					this.dialogRef.close(true);
 				} else if (data.result === 'error') {
