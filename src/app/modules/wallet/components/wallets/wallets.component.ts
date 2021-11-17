@@ -80,7 +80,6 @@ export class WalletsComponent implements OnInit {
 		this.dataService.wallets$.subscribe((wallets:any) => {
 			this.wallets = wallets;
 			this.activeWallets = Object.keys(this.wallets).length;
-			console.log(this.activeWallets);
 			this.portfolioCCX = Object.keys(wallets).reduce((acc, curr) => acc + wallets[curr].balance + wallets[curr].locked || acc, 0);
 			this.apiService.getPrice('btc').subscribe((price:any) => {
 				this.portfolioBTC = (price.conceal.btc * this.portfolioCCX);

@@ -16,7 +16,6 @@ export class DataService {
   authTypeAnnounce$ = this.authType.asObservable();
   // Service message commands
   announceAuthType(type: string) {
-		console.log(type);
     this.authType.next(type);
   }
 
