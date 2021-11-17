@@ -24,6 +24,13 @@ export class CloudService {
 		return this.http.get(`${this.api}/deposits/list`);
 	}
 
+	addDeposit(amount:number, wallet:string, term:number, code:string, password:string) {
+		const body = {
+			amount, wallet, term, code, password
+		}
+		return this.http.post(`${this.api}/deposits`, JSON.stringify(body));
+	}
+
 	getWalletKeys(address: string, code: string) {
 		return this.http.get(`${this.api}/wallet/keys?address=${address}&code=${code}`);
 	};
