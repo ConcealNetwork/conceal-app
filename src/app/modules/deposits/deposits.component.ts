@@ -1,3 +1,6 @@
+// App Variables
+import { environment } from 'src/environments/environment';
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deposits.component.scss']
 })
 export class DepositsComponent implements OnInit {
+
+	interestRates = environment.interestRates;
 
   constructor() { }
 
