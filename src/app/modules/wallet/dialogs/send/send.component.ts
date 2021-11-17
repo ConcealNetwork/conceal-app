@@ -52,7 +52,6 @@ export class SendDialog {
 		this.authService.check2fa().subscribe((result: any) => {
 			if(result.message.enabled) {
 				this.hasTwoFa = true;
-				console.log(result.message.enabled);
 				this.formAuthorise.addControl('code', new FormControl('', [
 					Validators.minLength(6),
 					Validators.maxLength(6),
@@ -61,7 +60,6 @@ export class SendDialog {
 				]))
 			} else {
 				this.hasTwoFa = false;
-				console.log(result.message.enabled);
 				this.formAuthorise.addControl('password', new FormControl('', [
 					Validators.required,
 				]))
