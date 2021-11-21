@@ -2,57 +2,36 @@
 
 	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
 
-		<div fxLayout="row wrap" fxLayoutGap="25px grid">
+		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap.gt-md="15px grid">
 
-			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'" fxFlex="100%">
-				<!-- Deposit Calculator -->
+			<!-- New Deposit -->
+			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'">
 				<mat-card id="cards" class="mat-elevation-z6">
-					<mat-card-header fxLayout="column">
-						<h2 class="title">Deposit Calculator</h2>
-					</mat-card-header>
-					<mat-card-content>
-						<div fxLayout="row" fxLayoutGap="25px">
-							<div fxLayout="column" fxFlex="50">
-								<mat-form-field color="accent" appearance="standard">
-									<mat-label>Amount</mat-label>
-									<input matInput #amount maxlength="5" placeholder="100">
-									<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-									<mat-hint align="end">{{amount.value.length}} / 5</mat-hint>
-								</mat-form-field>
-							</div>
-							<div fxLayout="column" fxFlex="50">
-								<p>Term in Months?</p>
-								<mat-slider color="accent" thumbLabel [displayWith]="formatLabel" tickInterval="1" step="1" min="1" max="12" aria-label="units"></mat-slider>
-							</div>
-						</div>
-					</mat-card-content>
-				</mat-card>
-			</div>
 
-			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'" fxFlex="100%">
-				<!-- New Deposit -->
-				<mat-card id="cards" class="mat-elevation-z6">
 					<mat-card-header fxLayout="column">
 						<h2 class="title">New Deposit</h2>
 					</mat-card-header>
+
 					<mat-card-content fxLayout="column">
+
 					</mat-card-content>
+
 				</mat-card>
 			</div>
 
-			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'" fxFlex="100%">
-				<!-- Current Deposits -->
+			<!-- Current Deposits -->
+			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'">
 				<mat-card id="cards" class="mat-elevation-z6" fxFlex="100%">
 					<mat-card-header fxLayout="column">
-						<h2 class="title">Current Deposits</h2>
+						<h2 class="title">Active Deposits</h2>
 					</mat-card-header>
 					<mat-card-content fxLayout="column">
 					</mat-card-content>
 				</mat-card>
 			</div>
 
-			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'" fxFlex="100%">
-				<!-- Deposit History -->
+			<!-- Deposit History -->
+			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'">
 				<mat-card id="cards" class="mat-elevation-z6" fxFlex="100%">
 					<mat-card-header fxLayout="column">
 						<h2 class="title">Deposit History</h2>

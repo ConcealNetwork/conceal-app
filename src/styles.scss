@@ -126,3 +126,13 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
   -webkit-box-shadow: 0 0 0px 1000px rgba(0,0,0,0) inset;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+.emulated-flex-gap {
+  --gap: 15px;
+  margin: calc(-1 * var(--gap)) 0 0 calc(-1 * var(--gap));
+  width: calc(100% + var(--gap));
+}
+
+.emulated-flex-gap > * {
+  margin: var(--gap) 0 0 var(--gap);
+}
