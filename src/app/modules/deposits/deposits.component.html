@@ -2,7 +2,7 @@
 
 	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
 
-		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap.gt-md="15px grid">
+		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap.gt-sm="15px grid">
 
 			<!-- New Deposit -->
 			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'">

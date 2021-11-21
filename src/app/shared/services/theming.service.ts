@@ -65,7 +65,7 @@ export class ThemingService {
 					this.exportDialogWidth = '95vw';
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 1;
-					this.walletGridColumns = 2;
+					this.walletGridColumns = 1;
 					console.log('Small');
 				} else if (state.breakpoints[Breakpoints.Medium]) {
 					this.isSmallScreen = false;
