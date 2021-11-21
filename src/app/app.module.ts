@@ -25,8 +25,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 // 3rd Party
 import { JwtModule } from "@auth0/angular-jwt";
 
-// Router
+// Modules
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
 
 // Components
 import { AppComponent } from './app.component';
@@ -54,6 +55,7 @@ export function tokenGetter() {
     BrowserModule,
 		PlatformModule,
     AppRoutingModule,
+		SharedModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

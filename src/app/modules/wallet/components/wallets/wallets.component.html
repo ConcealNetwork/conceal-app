@@ -1,4 +1,4 @@
-<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap.gt-sm="15px grid" [@listAnimation]="this.wallets" @transition>
+<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid" [@listAnimation]="this.wallets" @transition>
 
 	<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'" fxFlex="100%">
 		<mat-card id="cards" class="mat-elevation-z6">
