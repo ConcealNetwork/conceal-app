@@ -12,6 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from '@angular/material/select';
 
 import { DepositsRoutingModule } from './deposits-routing.module';
 import { DepositsComponent } from './deposits.component';
@@ -36,7 +38,9 @@ import { DepositsComponent } from './deposits.component';
 		MatMenuModule,
 		MatTableModule,
 		CdkTableModule,
-		MatSliderModule
+		MatSliderModule,
+		MatFormFieldModule,
+		MatSelectModule
   ]
 })
 export class DepositsModule { }
