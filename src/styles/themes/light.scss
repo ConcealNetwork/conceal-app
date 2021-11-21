@@ -50,3 +50,17 @@
 .amount {
 	color: #777;
 }
+
+.mat-toolbar {
+	background: rgba($color: #fff, $alpha: 1);
+}
+
+.card-content {
+	background: rgba(#000, 0.8);
+	mat-card-title {
+		color: #fff;
+	}
+	mat-card-subtitle {
+		color: #ccc;
+	}
+}
