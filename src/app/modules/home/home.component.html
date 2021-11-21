@@ -1,8 +1,10 @@
-<div class="container" fxLayout="column" fxLayoutGap="25px">
+<app-loader *ngIf="this.isLoading"></app-loader>
+
+<div class="container" fxLayout="column" fxLayoutGap="25px" *ngIf="!this.isLoading">
 
 	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
 
-			<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap.gt-sm="15px grid" [@listAnimation]="posts.length">
+			<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid" [@listAnimation]="posts.length">
 				<div [fxFlex]="(100/getThemingService().articleGridColumns) + '%'" fxFlex="100%" *ngFor="let item of posts">
 
 					<mat-card id="cards" class="article mat-elevation-z6">

@@ -25,6 +25,8 @@ import { ThemingService } from './../../shared/services/theming.service';
 })
 export class HomeComponent implements OnInit {
 
+	// Variables
+	isLoading: boolean = true;
 	posts: any = [];
 
   constructor(
@@ -43,6 +45,7 @@ export class HomeComponent implements OnInit {
 	getArticles() {
 		this.apiService.getMediumArticles().subscribe((data:any) => {
 			this.posts.push(...data.items);
+			this.isLoading = false;
 		})
 	}
 

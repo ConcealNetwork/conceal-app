@@ -27,8 +27,10 @@ export interface Wallets {
 			transition(':enter', [
 				query('#cards', [
 					style({ opacity: 0}),
-					animate('0.2s ease-in', style({ opacity: 1}))
-				])
+					stagger(100, [
+						animate('0.2s', style({ opacity: 1 }))
+					])
+				], {optional: true})
 			])
 		]),
 		trigger('listAnimation', [

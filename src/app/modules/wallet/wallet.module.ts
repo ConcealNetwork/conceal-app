@@ -30,6 +30,7 @@ import { ReceiveDialog } from "./dialogs/receive/receive.component";
 import { ExportDialog } from './dialogs/export/export.component';
 import { QrcodeDialog } from './dialogs/qrcode/qrcode.component';
 
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { QrcodeDialog } from './dialogs/qrcode/qrcode.component';
     WalletRoutingModule,
 		MatDialogModule,
 		MatSelectModule,
-		MatSlideToggleModule
+		MatSlideToggleModule,
+		SharedModule
   ]
 })
 export class WalletModule { }

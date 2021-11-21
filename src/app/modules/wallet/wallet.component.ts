@@ -12,6 +12,8 @@ import { DataService } from './../../shared/services/data.service';
 
 export class WalletComponent implements OnInit {
 
+	isDataLoading: boolean = true;
+
   constructor(
 		private cloudService: CloudService,
 		private dataService: DataService,
@@ -20,6 +22,7 @@ export class WalletComponent implements OnInit {
   ngOnInit(): void {
 		this.cloudService.getWalletsData().subscribe((data:any) => {
 			this.dataService.setWallets(data.message.wallets);
+			this.isDataLoading = false;
 		})
 	}
 
