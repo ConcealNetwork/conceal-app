@@ -32,9 +32,11 @@ import { HelperService } from 'src/app/shared/services/helper.service';
 export class DepositsComponent implements OnInit {
 
 	// Variables
-	interestRates = environment.interestRates;
-	wallets: any;
+	isLoading: boolean = true;
+	interestRates: any = environment.interestRates;
+	wallets: any = [];
 	selectedWallet: any;
+	balance: number = 0;
 
 	deposit: FormGroup = new FormGroup({
 		wallet: new FormControl('', [
@@ -71,10 +73,6 @@ export class DepositsComponent implements OnInit {
 		return this.helperService;
 	}
 
-	formatLabel(value: number) {
-    return value + 'M';
-  }
-
 	selectWallet(wallet:any) {
 		this.selectedWallet = wallet;
 	}
@@ -86,6 +84,8 @@ export class DepositsComponent implements OnInit {
   ngOnInit(): void {
 		this.cloudService.getWalletsData().subscribe((data:any) => {
 			this.wallets = data.message.wallets;
+			console.log(this.wallets);
+			this.isLoading = false;
 		})
 	}
 

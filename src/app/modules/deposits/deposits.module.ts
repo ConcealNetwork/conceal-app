@@ -15,6 +15,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from '@angular/material/select';
 
+import { SharedModule } from 'src/app/shared/shared.module';
+
 import { DepositsRoutingModule } from './deposits-routing.module';
 import { DepositsComponent } from './deposits.component';
 
@@ -27,6 +29,7 @@ import { DepositsComponent } from './deposits.component';
     CommonModule,
     DepositsRoutingModule,
 		CommonModule,
+		SharedModule,
 		FlexLayoutModule,
 		FormsModule,
     ReactiveFormsModule,
