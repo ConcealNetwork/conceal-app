@@ -17,47 +17,61 @@
 
 						<mat-card-content fxLayout="column" fxLayoutGap="15px">
 
-							<mat-form-field hintLabel="wallet" color="accent" appearance="fill" fxFlex>
-								<mat-label>Wallet?</mat-label>
-								<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">
-									<mat-option [value]="item.key" *ngFor="let item of this.wallets | keyvalue" >
-										{{ this.getHelperService().formatAddress(item.key) + ' (' + this.getHelperService().formatAmount($any(item).value.balance, 1, 6) + ')' }}
-									</mat-option>
-								</mat-select>
-								<mat-error *ngIf="deposit.controls.wallet.hasError('required')">
-									Wallet is <strong>required</strong>
-								</mat-error>
-								<mat-error *ngIf="deposit.controls.wallet.hasError('minlength')">
-									Address must be <strong>98 characters</strong>
-								</mat-error>
-							</mat-form-field>
+							<fieldset fxFlex fxLayout="column">
+								<legend>Wallet for deposit</legend>
+								<mat-form-field hintLabel="Select a wallet for this deposit" color="accent" appearance="fill" fxFlex>
+									<mat-label>Wallet</mat-label>
+									<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">
+										<mat-option [value]="item.key" *ngFor="let item of this.wallets | keyvalue" >
+											{{ this.getHelperService().formatAddress(item.key) + ' (' + this.getHelperService().formatAmount($any(item).value.balance, 1, 6) + ')' }}
+										</mat-option>
+									</mat-select>
+									<mat-error *ngIf="deposit.controls.wallet.hasError('required')">
+										Wallet is <strong>required</strong>
+									</mat-error>
+									<mat-error *ngIf="deposit.controls.wallet.hasError('minlength')">
+										Address must be <strong>98 characters</strong>
+									</mat-error>
+								</mat-form-field>
+							</fieldset>
 
-							<mat-form-field hintLabel="amount" color="accent" appearance="outline" fxFlex>
-								<mat-label>Amount?</mat-label>
-								<input #amount matInput numeric steps="0" min="0" type="number" name="amount" placeholder="100" formControlName="amount">
-								<span matSuffix>CCX</span>
-								<mat-error *ngIf="deposit.controls.amount.hasError('required')">
-									Amount is <strong>required</strong>
-								</mat-error>
-								<mat-error *ngIf="deposit.controls.amount.hasError('pattern')">
-									Amount is <strong>not a valid</strong> number
-								</mat-error>
-							</mat-form-field>
 
-							<div fxFlex fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-								<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(25, wallet.value)" [disabled]="!this.selectedWallet">25%</button>
-								<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(50, wallet.value)" [disabled]="!this.selectedWallet">50%</button>
-								<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 75% of balance" matTooltip="Add 75% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(75, wallet.value)" [disabled]="!this.selectedWallet">75%</button>
-								<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(100, wallet.value)" [disabled]="!this.selectedWallet">Max</button>
-							</div>
+							<fieldset fxFlex fxLayout="column">
+								<legend>Amount to deposit</legend>
 
-							<mat-form-field hintLabel="term" color="accent" appearance="outline" fxFlex>
-								<mat-label>Term?</mat-label>
-								<input #term matInput numeric steps="1" min="1" max="12" type="number" name="term" placeholder="1" formControlName="term">
-								<span matSuffix>Months</span>
-							</mat-form-field>
+								<div fxLayout="column" fxFlex fxLayoutGap="25px">
+									<mat-form-field hintLabel="Enter the amount you wish to deposit" color="accent" appearance="fill" fxFlex>
+										<mat-label>Amount</mat-label>
+										<input #amount matInput numeric steps="0" min="0" type="number" name="amount" placeholder="100" formControlName="amount">
+										<span matSuffix>CCX</span>
+										<mat-error *ngIf="deposit.controls.amount.hasError('required')">
+											Amount is <strong>required</strong>
+										</mat-error>
+										<mat-error *ngIf="deposit.controls.amount.hasError('pattern')">
+											Amount is <strong>not a valid</strong> number
+										</mat-error>
+									</mat-form-field>
+									<div fxFlex fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+										<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(25, wallet.value)" [disabled]="!this.selectedWallet">25%</button>
+										<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(50, wallet.value)" [disabled]="!this.selectedWallet">50%</button>
+										<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 75% of balance" matTooltip="Add 75% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(75, wallet.value)" [disabled]="!this.selectedWallet">75%</button>
+										<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(100, wallet.value)" [disabled]="!this.selectedWallet">Max</button>
+									</div>
+								</div>
 
-							<mat-slider class="slider" color="accent" thumbLabel tickInterval="1" step="1" min="1" max="12" aria-label="units"></mat-slider>
+							</fieldset>
+
+							<fieldset fxFlex fxLayout="column">
+								<legend>Length of deposit</legend>
+								<div fxLayout="column" fxFlex fxLayoutGap="25px">
+									<mat-form-field hintLabel="Select the term of the deposit in months" color="accent" appearance="fill" fxFlex>
+										<mat-label>Term</mat-label>
+										<input #term matInput numeric steps="1" min="1" max="12" type="number" name="term" placeholder="1" formControlName="term" (input)="termChanges(term.value)">
+										<span matSuffix>Months</span>
+									</mat-form-field>
+								<mat-slider [value]="termLength" class="slider" color="accent" thumbLabel tickInterval="1" step="1" min="0" max="12" aria-label="units" (input)="termChanges($event.value)"></mat-slider>
+								</div>
+							</fieldset>
 
 						</mat-card-content>
 

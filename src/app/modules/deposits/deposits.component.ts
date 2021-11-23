@@ -36,6 +36,7 @@ export class DepositsComponent implements OnInit {
 	interestRates: any = environment.interestRates;
 	wallets: any = [];
 	selectedWallet: any;
+	termLength: number = 0;
 
 	deposit: FormGroup = new FormGroup({
 		wallet: new FormControl('', [
@@ -76,6 +77,11 @@ export class DepositsComponent implements OnInit {
 		this.selectedWallet = wallet;
 	}
 
+	termChanges(length:any) {
+		this.termLength = length;
+		this.deposit.controls.term.patchValue(length, { emitEvent: true });
+	}
+
 	setAmount(percent:number, wallet:any) {
 		this.deposit.controls.amount.patchValue(((percent / 100) * this.wallets[wallet].balance).toFixed(6) || 0, { emitEvent: true });
 	}
@@ -83,7 +89,6 @@ export class DepositsComponent implements OnInit {
   ngOnInit(): void {
 		this.cloudService.getWalletsData().subscribe((data:any) => {
 			this.wallets = data.message.wallets;
-			console.log(this.wallets);
 			this.isLoading = false;
 		})
 	}
