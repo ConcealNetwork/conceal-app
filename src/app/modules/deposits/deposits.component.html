@@ -21,7 +21,7 @@
 								<mat-label>Wallet?</mat-label>
 								<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">
 									<mat-option [value]="item.key" *ngFor="let item of this.wallets | keyvalue" >
-										{{ this.getHelperService().formatAddress(item.key) }}
+										{{ this.getHelperService().formatAddress(item.key) + ' (' + this.getHelperService().formatAmount($any(item).value.balance, 1, 6) + ')' }}
 									</mat-option>
 								</mat-select>
 								<mat-error *ngIf="deposit.controls.wallet.hasError('required')">
@@ -57,7 +57,7 @@
 								<span matSuffix>Months</span>
 							</mat-form-field>
 
-							<mat-slider color="accent" thumbLabel tickInterval="1" step="1" min="1" max="12" aria-label="units"></mat-slider>
+							<mat-slider class="slider" color="accent" thumbLabel tickInterval="1" step="1" min="1" max="12" aria-label="units"></mat-slider>
 
 						</mat-card-content>
 

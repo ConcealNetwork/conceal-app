@@ -36,7 +36,6 @@ export class DepositsComponent implements OnInit {
 	interestRates: any = environment.interestRates;
 	wallets: any = [];
 	selectedWallet: any;
-	balance: number = 0;
 
 	deposit: FormGroup = new FormGroup({
 		wallet: new FormControl('', [
@@ -78,7 +77,7 @@ export class DepositsComponent implements OnInit {
 	}
 
 	setAmount(percent:number, wallet:any) {
-		this.deposit.controls.amount.patchValue((percent / 100) * this.wallets[wallet].balance || 0, { emitEvent: true });
+		this.deposit.controls.amount.patchValue(((percent / 100) * this.wallets[wallet].balance).toFixed(6) || 0, { emitEvent: true });
 	}
 
   ngOnInit(): void {
