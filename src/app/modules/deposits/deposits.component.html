@@ -1,4 +1,6 @@
-<div class="container" fxLayout="column" fxLayoutGap="15px">
+<app-loader *ngIf="this.isLoading"></app-loader>
+
+<div class="container" fxLayout="column" fxLayoutGap="15px" *ngIf="!this.isLoading">
 
 	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
 
@@ -32,7 +34,7 @@
 
 							<mat-form-field hintLabel="amount" color="accent" appearance="outline" fxFlex>
 								<mat-label>Amount?</mat-label>
-								<input matInput numeric steps="0" type="number" name="amount" #amount placeholder="100" formControlName="amount">
+								<input #amount matInput numeric steps="0" min="0" type="number" name="amount" placeholder="100" formControlName="amount">
 								<span matSuffix>CCX</span>
 								<mat-error *ngIf="deposit.controls.amount.hasError('required')">
 									Amount is <strong>required</strong>
@@ -51,10 +53,11 @@
 
 							<mat-form-field hintLabel="term" color="accent" appearance="outline" fxFlex>
 								<mat-label>Term?</mat-label>
-								<input #term type="number" formControlName="term" matInput>
+								<input #term matInput numeric steps="1" min="1" max="12" type="number" name="term" placeholder="1" formControlName="term">
+								<span matSuffix>Months</span>
 							</mat-form-field>
 
-							<mat-slider color="accent" thumbLabel [displayWith]="formatLabel" tickInterval="1" step="1" min="1" max="12" aria-label="units"></mat-slider>
+							<mat-slider color="accent" thumbLabel tickInterval="1" step="1" min="1" max="12" aria-label="units"></mat-slider>
 
 						</mat-card-content>
 
