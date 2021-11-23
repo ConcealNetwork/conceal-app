@@ -136,3 +136,22 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 .emulated-flex-gap > * {
   margin: var(--gap) 0 0 var(--gap);
 }
+
+// Custom SLider
+.mat-slider.mat-slider-horizontal .mat-slider-wrapper {
+  top: 20px;
+}
+.mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
+  height: 15px;
+  border-radius: 10px
+}
+.mat-slider.mat-slider-horizontal .mat-slider-track-background,
+.mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+  height: 100%;
+}
+.mat-accent .mat-slider-thumb {
+  height: 30px;
+  width: 30px;
+  bottom: -21px;
+  right: -20px;
+}
