@@ -7,7 +7,7 @@
 		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid" @transition>
 
 				<!-- New Deposit -->
-				<div id="cards" fxFlex="auto" fxFlex.gt-md="40">
+				<div id="cards" fxFlex="auto" fxFlex.gt-md="45">
 					<form [formGroup]="deposit">
 						<mat-card class="mat-elevation-z6">
 
@@ -18,45 +18,46 @@
 							<mat-card-content fxLayout="column" fxLayoutGap="15px">
 
 								<fieldset fxFlex fxLayout="column">
-									<legend>Wallet for deposit</legend>
-									<mat-form-field hintLabel="Select a wallet for this deposit" color="accent" appearance="fill" fxFlex>
-										<mat-label>Wallet</mat-label>
-										<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">
-											<mat-option [value]="item.key" *ngFor="let item of this.wallets | keyvalue" >
-												{{ this.getHelperService().formatAddress(item.key) + ' (' + this.getHelperService().formatAmount($any(item).value.balance, 1, 6) + ')' }}
-											</mat-option>
-										</mat-select>
-										<mat-error *ngIf="deposit.controls.wallet.hasError('required')">
-											Wallet is <strong>required</strong>
-										</mat-error>
-										<mat-error *ngIf="deposit.controls.wallet.hasError('minlength')">
-											Address must be <strong>98 characters</strong>
-										</mat-error>
-									</mat-form-field>
-								</fieldset>
-
-
-								<fieldset fxFlex fxLayout="column">
 									<legend>Amount to deposit</legend>
 
 									<div fxLayout="column" fxFlex fxLayoutGap="25px">
-										<mat-form-field hintLabel="Enter the amount you wish to deposit" color="accent" appearance="fill" fxFlex>
-											<mat-label>Amount</mat-label>
-											<input #amount matInput numeric steps="0" min="0" type="number" name="amount" placeholder="100" formControlName="amount">
-											<span matSuffix>CCX</span>
-											<mat-error *ngIf="deposit.controls.amount.hasError('required')">
-												Amount is <strong>required</strong>
-											</mat-error>
-											<mat-error *ngIf="deposit.controls.amount.hasError('pattern')">
-												Amount is <strong>not a valid</strong> number
-											</mat-error>
-										</mat-form-field>
-										<div fxFlex fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+
+										<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="25px" fxLayoutGap.gt-md="15px">
+											<mat-form-field hintLabel="Select a wallet for this deposit" color="accent" appearance="fill" fxFlex>
+												<mat-label>Wallet</mat-label>
+												<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">
+													<mat-option [value]="item.key" *ngFor="let item of this.wallets | keyvalue" >
+														{{ this.getHelperService().formatAddress(item.key) + ' (' + this.getHelperService().formatAmount($any(item).value.balance, 1, 6) + ')' }}
+													</mat-option>
+												</mat-select>
+												<mat-error *ngIf="deposit.controls.wallet.hasError('required')">
+													Wallet is <strong>required</strong>
+												</mat-error>
+												<mat-error *ngIf="deposit.controls.wallet.hasError('minlength')">
+													Address must be <strong>98 characters</strong>
+												</mat-error>
+											</mat-form-field>
+
+											<mat-form-field hintLabel="Enter the amount you wish to deposit" color="accent" appearance="fill" fxFlex>
+												<mat-label>Amount</mat-label>
+												<input #amount matInput numeric steps="0" min="0" type="number" name="amount" placeholder="100" formControlName="amount">
+												<span matSuffix>CCX</span>
+												<mat-error *ngIf="deposit.controls.amount.hasError('required')">
+													Amount is <strong>required</strong>
+												</mat-error>
+												<mat-error *ngIf="deposit.controls.amount.hasError('pattern')">
+													Amount is <strong>not a valid</strong> number
+												</mat-error>
+											</mat-form-field>
+										</div>
+
+										<div fxLayout="row wrap" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
 											<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(25, wallet.value)" [disabled]="!this.selectedWallet">25%</button>
 											<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(50, wallet.value)" [disabled]="!this.selectedWallet">50%</button>
 											<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 75% of balance" matTooltip="Add 75% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(75, wallet.value)" [disabled]="!this.selectedWallet">75%</button>
 											<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(100, wallet.value)" [disabled]="!this.selectedWallet">Max</button>
 										</div>
+
 									</div>
 
 								</fieldset>
@@ -73,12 +74,29 @@
 									</div>
 								</fieldset>
 
+								<fieldset fxFlex fxLayout="column">
+									<legend>Deposit interest</legend>
+									<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="25px">
+										<mat-form-field hintLabel="The interest rate on your deposit" color="accent" appearance="fill" fxFlex>
+											<mat-label>Your Rate</mat-label>
+											<input #rate matInput numeric type="number" name="rate" placeholder="1" formControlName="rate" readonly>
+											<span matSuffix>%</span>
+										</mat-form-field>
+										<mat-form-field hintLabel="The interest amount on your deposit" color="accent" appearance="fill" fxFlex>
+											<mat-label>Your Interest</mat-label>
+											<input #interest matInput numeric type="number" name="interest" placeholder="1" formControlName="interest" readonly>
+											<span matSuffix>CCX</span>
+										</mat-form-field>
+									</div>
+								</fieldset>
+
 							</mat-card-content>
 
-							<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
-								<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
-									<button color="accent" mat-flat-button>Create Deposit</button>
-									<button color="warn" mat-flat-button>Reset</button>
+							<mat-card-actions fxLayout="column">
+								<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+									<button color="warn" mat-stroked-button fxFlex (click)="reset()">Reset</button>
+									<button color="accent" mat-stroked-button fxFlex>Interest Matrix</button>
+									<button color="accent" mat-flat-button fxFlex>Create Deposit</button>
 								</div>
 							</mat-card-actions>
 
@@ -87,7 +105,7 @@
 				</div>
 
 				<!-- Deposits Table -->
-				<div id="cards" fxFlex="auto" fxFlex.gt-md="60">
+				<div id="cards" fxFlex="auto" fxFlex.gt-md="55">
 					<mat-card class="mat-elevation-z6" fxFlex="100%">
 						<mat-card-header fxLayout="column">
 							<h2 class="title">Interest Matrix</h2>
