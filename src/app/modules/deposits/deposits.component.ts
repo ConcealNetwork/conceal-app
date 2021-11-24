@@ -1,24 +1,25 @@
 // App Variables
-import { environment } from 'src/environments/environment';3
+import { environment } from 'src/environments/environment';
 
 // Angular Core
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
+import { debounceTime } from 'rxjs/operators';
 
 // Services
 import { ThemingService } from 'src/app/shared/services/theming.service';
 import { CloudService } from 'src/app/shared/services/cloud.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
 
-export interface InterestRates {
+export interface InterestMatrix {
   month: number;
   tier1: number;
   tier2: number;
   tier3: number;
 }
 
-const ELEMENT_DATA: InterestRates[] = [
+const ELEMENT_DATA: InterestMatrix[] = [
   {month: 1, tier1: 0.24, tier2: 0.33, tier3: 0.41},
   {month: 2, tier1: 0.50, tier2: 0.67, tier3: 0.83},
   {month: 3, tier1: 0.78, tier2: 1.03, tier3: 1.28},
@@ -53,6 +54,8 @@ const ELEMENT_DATA: InterestRates[] = [
 
 export class DepositsComponent implements OnInit {
 
+	@ViewChild('deposit') form: any;
+
 	displayedColumns: string[] = ['month', 'tier1', 'tier2', 'tier3'];
   dataSource = ELEMENT_DATA;
 
@@ -74,6 +77,12 @@ export class DepositsComponent implements OnInit {
 			Validators.required,
 		]),
 		term: new FormControl('', [
+			Validators.required,
+		]),
+		interest: new FormControl('', [
+			Validators.required,
+		]),
+		rate: new FormControl('', [
 			Validators.required,
 		]),
 		code: new FormControl('', [
@@ -111,10 +120,26 @@ export class DepositsComponent implements OnInit {
 		this.deposit.controls.amount.patchValue(((percent / 100) * this.wallets[wallet].balance).toFixed(6) || 0, { emitEvent: true });
 	}
 
+	reset() {
+		this.selectedWallet = null;
+		this.termLength = 0;
+		this.deposit.reset();
+	}
+
+	// return the correct interest rate percent from the 2D table
+	getDepositInterest(amount: number, duration: number) {
+		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)] * amount / 100).toFixed(6);
+	}
+
   ngOnInit(): void {
+		this.deposit.controls.rate.disable();
+		this.deposit.controls.interest.disable();
 		this.cloudService.getWalletsData().subscribe((data:any) => {
 			this.wallets = data.message.wallets;
 			this.isLoading = false;
+			this.deposit.valueChanges.pipe(debounceTime(500)).subscribe(() => {
+				if (this.deposit.controls.term.value && this.deposit.controls.amount.value) this.deposit.controls.interest.patchValue(this.getDepositInterest(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
+			})
 		})
 	}
 
