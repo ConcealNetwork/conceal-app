@@ -12,7 +12,7 @@
 
 	<mat-card-content fxLayout="column">
 		<mat-progress-bar color="accent" mode="indeterminate" *ngIf="isRefreshingResults"></mat-progress-bar>
-		<table mat-table [dataSource]="dataSource" matSort matSortDisableClear matSortActive="timestamp" matSortDirection="desc">
+		<table class="transactions" mat-table [dataSource]="dataSource" matSort matSortDisableClear matSortActive="timestamp" matSortDirection="desc">
 
 			<!-- timestamp column -->
 			<ng-container matColumnDef="timestamp">

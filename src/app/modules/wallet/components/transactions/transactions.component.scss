@@ -18,6 +18,13 @@
 	}
 }
 
+table {
+	width: 100%;
+	th {
+		width: 100px;
+	}
+}
+
 .loading {
 	.spin {
 		transform: scale(0.6);

@@ -1,9 +1,6 @@
 .mat-table {
 	width: 100%;
 	background: none;
-	.mat-row {
-		cursor: pointer;
-	}
 	th.mat-header-cell {
 		font-size: 1rem;
 	}
@@ -32,14 +29,6 @@
 
 /* Large devices (laptops/desktops, 960px and up) */
 @media only screen and (min-width: 960px) {
-	.mat-table {
-		td.mat-cell:first-of-type,
-		td.mat-cell:last-of-type,
-		th.mat-header-cell:first-of-type,
-		th.mat-header-cell:last-of-type {
-			padding-left: 24px;
-		}
-	}
 	.mat-paginator {
 		.mat-paginator-range-label {
 			margin: 0 32px 0 24px;
