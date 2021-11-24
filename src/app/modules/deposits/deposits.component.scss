@@ -18,12 +18,22 @@
 		padding-left: 15px;
 		padding-right: 15px;
 		padding-top: 20px;
-		padding-bottom: 20px;
 		font-size: 1rem;
 		fieldset {
 			border-radius: 5px;
 			border: 1px solid rgba($color: #999, $alpha: 0.5);
 			padding: 15px;
+		}
+		table {
+			width: 100%;
+			padding-bottom: 15px;
+			.subtitle {
+				font-size: 0.6rem;
+				color: orange;
+			}
+			th {
+				width: 100px;
+			}
 		}
 	}
 

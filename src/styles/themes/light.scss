@@ -20,8 +20,11 @@
   color: #eee;
 }
 
-.mat-row:hover {
-	background-color: #ddd;
+.transactions {
+	.mat-row:hover {
+		background-color: #ddd;
+		cursor: pointer;
+	}
 }
 
 .mat-form-field-label {

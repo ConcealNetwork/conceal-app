@@ -15,8 +15,11 @@
 	}
 }
 
-.mat-row:hover {
-	background-color: #5e5e5e;
+.transactions {
+	.mat-row:hover {
+		background-color: #5e5e5e;
+		cursor: pointer;
+	}
 }
 
 .mat-menu-panel {
