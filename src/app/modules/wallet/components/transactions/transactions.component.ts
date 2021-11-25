@@ -84,13 +84,15 @@ export class TransactionsComponent implements OnInit {
 	getWalletData() {
 		this.cloudService.getWalletsData().subscribe((data:any) => {
 			this.wallets = data.message.wallets;
-			let transactions: any = Object.values(this.wallets);
-			let arr = [];
-			for(let i = 0; i < transactions.length; i++) {
-				arr.push(transactions[i]['transactions']);
+			if(this.wallets) {
+				let transactions: any = Object.values(this.wallets);
+				let arr = [];
+				for(let i = 0; i < transactions.length; i++) {
+					arr.push(transactions[i]['transactions']);
+				}
+				let mergedTransactions = Array.prototype.concat(...arr);
+				this.transactions = mergedTransactions;
 			}
-			let mergedTransactions = Array.prototype.concat(...arr);
-			this.transactions = mergedTransactions;
 		});
 	}
 
