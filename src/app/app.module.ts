@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // 3rd Party
 import { JwtModule } from "@auth0/angular-jwt";
@@ -81,7 +82,8 @@ export function tokenGetter() {
 		MatMenuModule,
 		FlexLayoutModule,
 		MatSnackBarModule,
-		MatDialogModule
+		MatDialogModule,
+		MatTooltipModule
   ],
   providers: [ThemingService],
   bootstrap: [AppComponent]

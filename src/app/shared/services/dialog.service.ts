@@ -6,11 +6,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ThemingService } from './theming.service';
 
 // Dialog Components
-import { TwoFactorDialog } from '../dialogs/twofactor/twofactor.component';
-import { SendDialog } from '../../modules/wallet/dialogs/send/send.component';
-import { ReceiveDialog } from '../../modules/wallet/dialogs/receive/receive.component';
-import { ExportDialog } from '../../modules/wallet/dialogs/export/export.component';
-import { QrcodeDialog } from '../../modules/wallet/dialogs/qrcode/qrcode.component';
+import { TwoFactorDialog } from 'src/app/shared/dialogs/twofactor/twofactor.component';
+import { SendDialog } from 'src/app/modules/wallet/dialogs/send/send.component';
+import { ReceiveDialog } from 'src/app/modules/wallet/dialogs/receive/receive.component';
+import { ExportDialog } from 'src/app/modules/wallet/dialogs/export/export.component';
+import { QrcodeDialog } from 'src/app/modules/wallet/dialogs/qrcode/qrcode.component';
+import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix.dialog';
 
 @Injectable({
 	providedIn: 'root'
@@ -22,6 +23,17 @@ export class DialogService {
 		public dialog: MatDialog,
 		public themingService: ThemingService
 	) { }
+
+	openMatrixDialog(): void {
+		const dialogRef = this.dialog.open(MatrixDialog, {
+			width: this.themingService.dialogWidth,
+			maxWidth: this.themingService.dialogMaxWidth,
+			height: this.themingService.dialogHeight,
+			maxHeight: this.themingService.dialogHeight,
+			disableClose: false
+		})
+		dialogRef.afterClosed().subscribe(result => { })
+  }
 
 	openTwoFactorDialog(): void {
 		const dialogRef = this.dialog.open(TwoFactorDialog, {
