@@ -18,4 +18,14 @@
 	padding-right: 25px;
 	padding-top: 25px;
 	padding-bottom: 25px;
+	.mat-form-field {
+		font-size: 1rem;
+	}
+	button {
+		font-size: 1rem;
+		padding: .3rem;
+	}
+	.mat-stroked-button {
+		margin: 0px;
+	}
 }
