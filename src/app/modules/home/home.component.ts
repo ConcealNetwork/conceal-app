@@ -16,7 +16,7 @@ import { ThemingService } from './../../shared/services/theming.service';
 				query(':enter', [
 					style({ opacity: 0 }),
 					stagger(100, [
-						animate('0.2s', style({ opacity: 1 }))
+						animate('0.4s', style({ opacity: 1 }))
 					])
 				], {optional: true})
 			])
