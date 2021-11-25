@@ -73,6 +73,17 @@ export class CloudService {
 		return this.http.post(`${this.api}/wallet`, null);
 	};
 
+	createDeposit(amount: number, wallet: string, term: number, code?: string, password?: string) {
+		const body = {
+			amount, wallet, term, code, password
+		}
+		return this.http.post(`${this.api}/deposits`, JSON.stringify(body));
+	}
+
+	listDeposits() {
+		return this.http.get(`${this.api}/deposits/list`);
+	}
+
 	importWallet(privateSpendKey:string) {
 		privateSpendKey = JSON.stringify({ privateSpendKey });
 		return this.http.post(`${this.api}/wallet/import`, privateSpendKey);
