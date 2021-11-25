@@ -14,16 +14,20 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { DepositsRoutingModule } from './deposits-routing.module';
 import { DepositsComponent } from './deposits.component';
+import { MatrixDialog } from './dialogs/matrix.dialog';
 
 
 @NgModule({
   declarations: [
-    DepositsComponent
+    DepositsComponent,
+		MatrixDialog
   ],
   imports: [
     CommonModule,
@@ -43,7 +47,9 @@ import { DepositsComponent } from './deposits.component';
 		CdkTableModule,
 		MatSliderModule,
 		MatFormFieldModule,
-		MatSelectModule
+		MatSelectModule,
+		MatTooltipModule,
+		MatTabsModule
   ]
 })
 export class DepositsModule { }

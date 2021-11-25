@@ -90,6 +90,15 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 	margin: 0 !important;
 }
 
+.mat-tab-body.mat-tab-body-active {
+	overflow-x: hidden !important;
+	overflow-y: hidden !important;
+}
+
+.mat-tab-body-content {
+	padding: 15px;
+}
+
 .spinner:before {
   content: '';
   box-sizing: border-box;
