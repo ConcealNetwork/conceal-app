@@ -21,13 +21,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { DepositsRoutingModule } from './deposits-routing.module';
 import { DepositsComponent } from './deposits.component';
-import { MatrixDialog } from './dialogs/matrix.dialog';
+import { MatrixDialog } from './dialogs/matrix/matrix.dialog';
+import { ConfirmationDialog } from './dialogs/confirmation/confirmation.dialog';
 
 
 @NgModule({
   declarations: [
     DepositsComponent,
-		MatrixDialog
+		MatrixDialog,
+		ConfirmationDialog
   ],
   imports: [
     CommonModule,

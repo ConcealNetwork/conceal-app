@@ -4,8 +4,8 @@
 		<h4>Two-Factor Authentication is not enabled.</h4>
 		<p>For maximum security please enable it in settings.</p>
 	</div>
-	<div mat-dialog-actions>
-		<button mat-flat-button color="warn" (click)="close()">No Thanks</button>
-		<button mat-flat-button color="accent" [mat-dialog-close] routerLink="/settings" cdkFocusInitial>Open Settings</button>
+	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+		<button fxFlex mat-stroked-button color="warn" (click)="close()">No Thanks</button>
+		<button fxFlex mat-flat-button color="accent" [mat-dialog-close] routerLink="/settings" cdkFocusInitial>Open Settings</button>
 	</div>
 </div>

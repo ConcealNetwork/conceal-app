@@ -11,7 +11,7 @@ import { SendDialog } from 'src/app/modules/wallet/dialogs/send/send.component';
 import { ReceiveDialog } from 'src/app/modules/wallet/dialogs/receive/receive.component';
 import { ExportDialog } from 'src/app/modules/wallet/dialogs/export/export.component';
 import { QrcodeDialog } from 'src/app/modules/wallet/dialogs/qrcode/qrcode.component';
-import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix.dialog';
+import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix/matrix.dialog';
 
 @Injectable({
 	providedIn: 'root'
