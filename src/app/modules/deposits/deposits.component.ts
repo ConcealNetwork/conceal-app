@@ -12,6 +12,7 @@ import { ThemingService } from 'src/app/shared/services/theming.service';
 import { CloudService } from 'src/app/shared/services/cloud.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-deposits',
@@ -23,7 +24,7 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
 				query('#cards', [
 					style({ opacity: 0 }),
 					stagger(100, [
-						animate('0.2s', style({ opacity: 1 }))
+						animate('0.4s', style({ opacity: 1 }))
 					])
 				], {optional: true})
 			])
@@ -37,6 +38,7 @@ export class DepositsComponent implements OnInit {
 
 	// Variables
 	isLoading: boolean = true;
+	isFormLoading: boolean = false;
 	interestRates: any = environment.interestRates;
 	wallets: any = [];
 	selectedWallet: any;
@@ -54,26 +56,20 @@ export class DepositsComponent implements OnInit {
 		]),
 		term: new FormControl('', [
 			Validators.required,
-		]),
-		interest: new FormControl('', [
-			Validators.required,
-		]),
-		rate: new FormControl('', [
-			Validators.required,
-		]),
-		code: new FormControl('', [
-			Validators.minLength(6),
-			Validators.maxLength(6),
 			Validators.pattern('^[0-9]*$'),
-			Validators.required,
+			Validators.minLength(1),
+			Validators.maxLength(2),
 		]),
+		interest: new FormControl('', []),
+		rate: new FormControl('', [])
 	});
 
   constructor(
 		private themingService: ThemingService,
 		private cloudService: CloudService,
 		private helperService: HelperService,
-		private dialogService: DialogService
+		private dialogService: DialogService,
+		private snackbarService: SnackbarService
 	) {	}
 
 	getThemingService() {
@@ -101,19 +97,45 @@ export class DepositsComponent implements OnInit {
 		this.deposit.controls.amount.patchValue(((percent / 100) * this.wallets[wallet].balance).toFixed(6) || 0, { emitEvent: true });
 	}
 
+	// return the correct interest rate percent from the 2D table
+	getDepositInterest(amount: number, duration: number) {
+		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)] * amount / 100).toFixed(6);
+	}
+
+	// return the correct interest rate from the 2D table
+	getDepositRate(amount: number, duration: number) {
+		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)].toFixed(2));
+	}
+
 	reset() {
 		this.selectedWallet = null;
 		this.termLength = 0;
 		this.deposit.reset();
 	}
 
-	// return the correct interest rate percent from the 2D table
-	getDepositInterest(amount: number, duration: number) {
-		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)] * amount / 100).toFixed(6);
-	}
-
-	getDepositRate(amount: number, duration: number) {
-		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)].toFixed(2));
+	submit() {
+		let code = '';
+		let password = '';
+		if (this.deposit.valid) {
+			this.isFormLoading = true;
+			this.cloudService.createDeposit(
+				this.deposit.value.amount,
+				this.deposit.value.wallet,
+				this.deposit.value.term,
+				code,
+				password
+			).subscribe((data:any) => {
+				this.isFormLoading = false;
+				if (data.result === 'success') {
+					this.reset();
+					this.snackbarService.openSnackBar('Deposit created successfully!', 'Dismiss');
+				} else if (data.result === 'error') {
+					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+				} else {
+					this.snackbarService.openSnackBar('Whoops, something went wrong', 'Dismiss');
+				}
+			});
+		}
 	}
 
   ngOnInit(): void {
