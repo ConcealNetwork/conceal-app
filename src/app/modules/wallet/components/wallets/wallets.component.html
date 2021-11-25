@@ -22,9 +22,9 @@
 			</mat-card-content>
 
 			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
-				<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
-					<button color="accent" mat-flat-button routerLink="/deposits">Deposits</button>
-					<button color="accent" mat-flat-button (click)="this.createWallet()" [disabled]="isLoading" *ngIf="this.activeWallets < this.activeWalletsLimit">Create Wallet</button>
+				<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+					<button fxFlex color="accent" mat-stroked-button routerLink="/deposits" >My Deposits</button>
+					<button fxFlex color="accent" mat-flat-button (click)="this.createWallet()" [disabled]="isLoading" *ngIf="this.activeWallets < this.activeWalletsLimit">Create Wallet</button>
 				</div>
 			</mat-card-actions>
 
@@ -79,8 +79,9 @@
 			</mat-card-content>
 
 			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
-				<div class="actions" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
-					<button color="accent" mat-flat-button (click)="this.getDialogService().openSendDialog(item)">Send Funds</button>
+				<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+					<button fxFlex color="accent" mat-flat-button (click)="this.getDialogService().openSendDialog(item)">Withdraw</button>
+					<button fxFlex color="accent" mat-stroked-button routerLink="/deposits">Deposit</button>
 				</div>
 			</mat-card-actions>
 
