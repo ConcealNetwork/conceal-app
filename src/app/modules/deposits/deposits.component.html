@@ -18,12 +18,12 @@
 							<mat-card-content fxLayout="column" fxLayoutGap="15px">
 
 								<fieldset fxFlex fxLayout="column">
-									<legend>Amount to deposit</legend>
+									<legend>Deposit Amount</legend>
 
 									<div fxLayout="column" fxFlex fxLayoutGap="25px">
 
 										<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="25px" fxLayoutGap.gt-md="15px">
-											<mat-form-field hintLabel="Select a wallet for this deposit" color="accent" appearance="fill" fxFlex>
+											<mat-form-field hintLabel="The wallet for the deposit" color="accent" appearance="fill" fxFlex>
 												<mat-label>Wallet</mat-label>
 												<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">
 													<mat-option [value]="item.key" *ngFor="let item of this.wallets | keyvalue" >
@@ -38,7 +38,7 @@
 												</mat-error>
 											</mat-form-field>
 
-											<mat-form-field hintLabel="Enter the amount you wish to deposit" color="accent" appearance="fill" fxFlex>
+											<mat-form-field hintLabel="The amount for the deposit" color="accent" appearance="fill" fxFlex>
 												<mat-label>Amount</mat-label>
 												<input #amount matInput numeric steps="0" min="0" type="number" name="amount" placeholder="100" formControlName="amount">
 												<span matSuffix>CCX</span>
@@ -63,9 +63,9 @@
 								</fieldset>
 
 								<fieldset fxFlex fxLayout="column">
-									<legend>Length of deposit</legend>
+									<legend>Deposit Length</legend>
 									<div fxLayout="column" fxFlex fxLayoutGap="25px">
-										<mat-form-field hintLabel="Select the term of the deposit in months" color="accent" appearance="fill" fxFlex>
+										<mat-form-field hintLabel="The term of the deposit" color="accent" appearance="fill" fxFlex>
 											<mat-label>Term</mat-label>
 											<input #term matInput numeric steps="1" min="1" max="12" type="number" name="term" placeholder="1" formControlName="term" (input)="termChanges(term.value)">
 											<span matSuffix>Month<span *ngIf="(termLength > 1 || termLength === 0)">s</span></span>
@@ -75,14 +75,14 @@
 								</fieldset>
 
 								<fieldset fxFlex fxLayout="column">
-									<legend>Deposit interest</legend>
+									<legend>Interest Calculation</legend>
 									<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="25px">
-										<mat-form-field hintLabel="The interest rate on your deposit" color="accent" appearance="fill" fxFlex>
+										<mat-form-field hintLabel="The interest rate of the deposit" color="accent" appearance="fill" fxFlex>
 											<mat-label>Your Rate</mat-label>
 											<input #rate matInput numeric type="number" name="rate" placeholder="1" formControlName="rate" readonly>
 											<span matSuffix>%</span>
 										</mat-form-field>
-										<mat-form-field hintLabel="The interest amount on your deposit" color="accent" appearance="fill" fxFlex>
+										<mat-form-field hintLabel="The interest amount of the deposit" color="accent" appearance="fill" fxFlex>
 											<mat-label>Your Interest</mat-label>
 											<input #interest matInput numeric type="number" name="interest" placeholder="1" formControlName="interest" readonly>
 											<span matSuffix>CCX</span>
