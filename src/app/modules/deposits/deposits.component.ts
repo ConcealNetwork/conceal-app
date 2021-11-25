@@ -112,6 +112,10 @@ export class DepositsComponent implements OnInit {
 		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)] * amount / 100).toFixed(6);
 	}
 
+	getDepositRate(amount: number, duration: number) {
+		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)].toFixed(2));
+	}
+
   ngOnInit(): void {
 		this.deposit.controls.rate.disable();
 		this.deposit.controls.interest.disable();
@@ -119,7 +123,10 @@ export class DepositsComponent implements OnInit {
 			this.wallets = data.message.wallets;
 			this.isLoading = false;
 			this.deposit.valueChanges.pipe(debounceTime(500)).subscribe(() => {
-				if (this.deposit.controls.term.value && this.deposit.controls.amount.value) this.deposit.controls.interest.patchValue(this.getDepositInterest(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
+				if (this.deposit.controls.term.value && this.deposit.controls.amount.value) {
+					this.deposit.controls.interest.patchValue(this.getDepositInterest(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
+					this.deposit.controls.rate.patchValue(this.getDepositRate(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
+				}
 			})
 		})
 	}
