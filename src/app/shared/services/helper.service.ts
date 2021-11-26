@@ -35,6 +35,23 @@ export class HelperService {
 		return moment(datetime).fromNow(); // eg. 1 day ago, 2 hours ago etc
 	}
 
+	getUnlockTime(unlockHeight:number, blockchainHeight:number) {
+    let blocksToGo = (unlockHeight - blockchainHeight);
+    let minutesToGo = ((blocksToGo * 2) / 60);
+    let currentTS = moment();
+    let unlockTS = moment(currentTS).add(minutesToGo, 'hours');
+    return unlockTS.fromNow();
+  }
+
+	getUnlockPercent(lockHeight:number, unlockHeight:number, blockchainHeight:number) {
+    if (lockHeight >= unlockHeight) {
+      return 100;
+    } else {
+      let blocksToGo = (unlockHeight - blockchainHeight);
+      return (100 - Math.round(blocksToGo / (unlockHeight - lockHeight) * 100));
+    }
+  }
+
 	copyToClipboard(value: any, message: string): void {
 		if (navigator.clipboard) {
 			navigator.clipboard.writeText(value);

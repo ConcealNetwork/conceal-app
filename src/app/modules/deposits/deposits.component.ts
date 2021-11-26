@@ -43,6 +43,7 @@ export class DepositsComponent implements OnInit {
 	deposits: any = [];
 	selectedWallet: any;
 	termLength: number = 0;
+	blockchainHeight: number = 0;
 
 	deposit: FormGroup = new FormGroup({
 		wallet: new FormControl('', [
@@ -132,6 +133,7 @@ export class DepositsComponent implements OnInit {
 		// subscribe to wallets
 		let wallets = this.cloudService.getWalletsData().subscribe((data:any) => {
 			this.wallets = data.message.wallets;
+			this.blockchainHeight = data.message.height;
 			this.walletsLoading = false;
 			this.deposit.valueChanges.pipe(debounceTime(500)).subscribe(() => {
 				if (this.deposit.controls.term.value && this.deposit.controls.amount.value) {
