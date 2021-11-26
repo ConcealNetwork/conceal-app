@@ -33,7 +33,7 @@
 												<mat-error *ngIf="deposit.controls.wallet.hasError('required')">
 													Wallet is <strong>required</strong>
 												</mat-error>
-												<mat-error *ngIf="deposit.controls.wallet.hasError('minlength')">
+												<mat-error *ngIf="deposit.controls.wallet.hasError('minlength') || deposit.controls.wallet.hasError('maxlength')">
 													Address must be <strong>98 characters</strong>
 												</mat-error>
 											</mat-form-field>
@@ -69,6 +69,12 @@
 											<mat-label>Term</mat-label>
 											<input #term matInput numeric steps="1" min="1" max="12" type="number" name="term" placeholder="1" formControlName="term" (input)="termChanges(term.value)">
 											<span matSuffix>Month<span *ngIf="(termLength > 1 || termLength === 0)">s</span></span>
+											<mat-error *ngIf="deposit.controls.term.hasError('required')">
+												Term is <strong>required</strong>
+											</mat-error>
+											<mat-error *ngIf="deposit.controls.term.hasError('pattern') || deposit.controls.term.hasError('minlength') || deposit.controls.term.hasError('maxlength')">
+												Term must be between <strong>1 and 12</strong>
+											</mat-error>
 										</mat-form-field>
 									<mat-slider [value]="termLength" class="slider" color="accent" thumbLabel tickInterval="1" step="1" min="0" max="12" aria-label="units" (input)="termChanges($event.value)"></mat-slider>
 									</div>
@@ -96,7 +102,7 @@
 								<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
 									<button type="submit" color="warn" mat-stroked-button fxFlex (click)="reset()">Reset</button>
 									<button type="button" color="accent" mat-stroked-button fxFlex (click)="getDialogService().openMatrixDialog()">Interest Matrix</button>
-									<button type="submit" color="accent" mat-flat-button fxFlex (click)="submit()" [disabled]="!deposit.valid || this.isFormLoading">Create Deposit</button>
+									<button type="submit" color="accent" mat-flat-button fxFlex (click)="submit()" [disabled]="!deposit.valid">Create Deposit</button>
 								</div>
 							</mat-card-actions>
 

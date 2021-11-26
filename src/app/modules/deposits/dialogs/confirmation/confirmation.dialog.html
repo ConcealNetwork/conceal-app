@@ -1,1 +1,59 @@
-<p>confirmation works!</p>
+<div fxLayout="row" *ngIf="this.isFormLoading">
+	<div fxFill><mat-progress-bar color="accent" mode="query"></mat-progress-bar></div>
+</div>
+
+<form [formGroup]="confirmation" *ngIf="!this.isFormLoading">
+
+	<h1 mat-dialog-title class="title">Authorisation</h1>
+	<p class="subtitle" *ngIf="this.hasTwoFa">Please provide your 2FA code</p>
+	<p class="subtitle" *ngIf="!this.hasTwoFa">Please provide your password</p>
+
+	<div mat-dialog-content fxLayout="column" fxLayoutGap="25px">
+
+		<div fxLayout="row" fxLayoutGap="15px">
+
+			<div fxFlex fxLayout="column" *ngIf="this.hasTwoFa">
+				<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
+					<mat-label>2FA Code</mat-label>
+					<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="code">
+					<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste('twofa')">
+						<mat-icon>content_paste</mat-icon>
+					</button>
+					<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+					<mat-error *ngIf="confirmation.controls.code.hasError('minlength') || confirmation.controls.code.hasError('maxlength')">
+						2FA code should be <strong>6 numbers</strong>
+					</mat-error>
+					<mat-error *ngIf="confirmation.controls.code.hasError('pattern')">
+						2FA code should be <strong>numbers only</strong>
+					</mat-error>
+					<mat-error *ngIf="confirmation.controls.code.hasError('required')">
+						2FA Code is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+			</div>
+
+			<div fxFlex fxLayout="column" *ngIf="!this.hasTwoFa">
+				<mat-form-field fxFill appearance="fill" hintLabel="Your password">
+					<mat-label>Password</mat-label>
+					<input type='text' hidden name='email' autoComplete='username email' />
+					<input type="password" autocomplete="current-password" matInput placeholder="password" formControlName="password">
+					<mat-error *ngIf="confirmation.controls.password.hasError('required')">
+						Password is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+			</div>
+
+		</div>
+
+		<div fxLayout="row" *ngIf="this.isLoading">
+			<div fxFill><mat-progress-bar color="accent" mode="query"></mat-progress-bar></div>
+		</div>
+
+	</div>
+
+	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+		<button mat-stroked-button color="warn" type="button" fxFlex (click)="close()">Cancel</button>
+		<button mat-flat-button color="accent" type="submit" fxFlex (click)="authorise()" [disabled]="!confirmation.valid || this.isLoading">Submit</button>
+	</div>
+
+</form>
