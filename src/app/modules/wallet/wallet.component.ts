@@ -1,5 +1,6 @@
 // Angular Core
 import { Component, OnInit } from '@angular/core';
+import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
 import { CloudService } from './../../shared/services/cloud.service';
 import { DataService } from './../../shared/services/data.service';
@@ -8,6 +9,18 @@ import { DataService } from './../../shared/services/data.service';
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
   styleUrls: ['./wallet.component.scss'],
+	animations: [
+		trigger('transition', [
+			transition(':enter', [
+				query('#cards', [
+					style({ opacity: 0}),
+					stagger(100, [
+						animate('0.4s', style({ opacity: 1 }))
+					])
+				], {optional: true})
+			])
+		])
+	]
 })
 
 export class WalletComponent implements OnInit {

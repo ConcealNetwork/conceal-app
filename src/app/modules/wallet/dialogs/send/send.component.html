@@ -39,13 +39,7 @@
 
 					<mat-form-field color="accent" hintLabel="Address to send funds" appearance="fill">
 						<mat-label>Address</mat-label>
-						<input matInput #toAddress type="text" name="toAddress" maxlength="98" placeholder="CCX Address" formControlName="toAddress" [matAutocomplete]="auto">
-						<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-							<mat-option>
-								<mat-icon aria-hidden="true" color="accent">account_balance_wallet</mat-icon>
-								<span>example address book wallet</span>
-							</mat-option>
-						</mat-autocomplete>
+						<input matInput #toAddress type="text" name="toAddress" maxlength="98" placeholder="CCX Address" formControlName="toAddress">
 						<button *ngIf="this.clipboard" type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste('toAddress')">
 							<mat-icon>content_paste</mat-icon>
 						</button>

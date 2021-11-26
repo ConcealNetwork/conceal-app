@@ -6,6 +6,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
 // Services
 import { HelperService } from './../../../../shared/services/helper.service';
@@ -24,7 +25,19 @@ export interface Transactions {
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.scss']
+  styleUrls: ['./transactions.component.scss'],
+	animations: [
+		trigger('transition', [
+			transition(':enter', [
+				query('#cards', [
+					style({ opacity: 0}),
+					stagger(100, [
+						animate('0.4s', style({ opacity: 1 }))
+					])
+				], {optional: true})
+			])
+		])
+	]
 })
 
 export class TransactionsComponent implements OnInit {
