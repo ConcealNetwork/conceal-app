@@ -101,6 +101,7 @@ export class SendDialog {
 
 	setAmount(percent:number) {
 		this.formTransaction.controls.amount.patchValue((percent / 100) * this.wallet.value.balance, { emitEvent: true });
+		this.formTransaction.controls.amount.markAsTouched();
 	}
 
 	close() {
