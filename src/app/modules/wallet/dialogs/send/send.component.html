@@ -6,19 +6,19 @@
 		<div mat-dialog-content fxLayout="column" fxLayoutGap="25px">
 
 			<fieldset fxFlex fxLayout="column">
-				<legend>Amount</legend>
+				<legend>Funds</legend>
 
 				<div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap.gt-sm="15px">
 
 					<mat-form-field hintLabel="Amount to send" color="accent" appearance="outline" fxFlex>
 						<mat-label>Amount</mat-label>
-						<input matInput numeric steps="0" min="0" type="number" name="amount" #amount placeholder="100" formControlName="amount">
+						<input matInput numeric steps="0" min="0.000001" type="number" name="amount" #amount placeholder="100" formControlName="amount">
 						<span matSuffix>CCX</span>
 						<mat-error *ngIf="formTransaction.controls.amount.hasError('required')">
 							Amount is <strong>required</strong>
 						</mat-error>
-						<mat-error *ngIf="formTransaction.controls.amount.hasError('pattern')">
-							Amount is <strong>not a valid</strong> number
+						<mat-error *ngIf="formTransaction.controls.amount.hasError('pattern') || !formTransaction.controls.amount.valid">
+							Amount is <strong>not a valid value</strong>
 						</mat-error>
 					</mat-form-field>
 
