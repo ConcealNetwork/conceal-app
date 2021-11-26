@@ -36,9 +36,12 @@ export class HelperService {
 	}
 
 	copyToClipboard(value: any, message: string): void {
-		if (!navigator.clipboard) return;
-		navigator.clipboard.writeText(value);
-		this.snackbarService.openSnackBar(message, 'Dismiss');
+		if (navigator.clipboard) {
+			navigator.clipboard.writeText(value);
+			this.snackbarService.openSnackBar(message, 'Dismiss');
+		} else {
+			this.snackbarService.openSnackBar('Could not access the clipboard', 'Dismiss');
+		}
 	}
 
 	formatTypeText(type:string) {

@@ -94,8 +94,8 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {
 		this.route.queryParams.subscribe(x => {this.returnURL = x.return || ''});
+		// Check if clipboard is supported
 		if (navigator.clipboard) {
-			//this.snackbarService.openSnackBar('Clipboard API available', 'Dismiss');
 			this.clipboard = true;
 		}
 	}

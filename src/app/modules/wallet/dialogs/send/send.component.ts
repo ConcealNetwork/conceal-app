@@ -38,6 +38,7 @@ export class SendDialog {
 	hasTwoFa: boolean = false;
 	wallet: any;
 	isLoading: boolean = false;
+	clipboard: boolean = false;
 
 	constructor (
 		public dialogRef: MatDialogRef<SendDialog>,
@@ -48,6 +49,10 @@ export class SendDialog {
 		private dataService: DataService
 	) {
 		this.wallet = this.data.wallet;
+		// Check if clipboard is supported
+		if (navigator.clipboard) {
+			this.clipboard = true;
+		}
 		// Check if 2fa is enabled
 		this.authService.check2fa().subscribe((result: any) => {
 			if(result.message.enabled) {

@@ -29,6 +29,7 @@ import { ThemingService } from 'src/app/shared/services/theming.service';
 export class ExportDialog {
 
 	isLoading: boolean = false;
+	clipboard: boolean = false;
 	hasTwoFa: boolean = false;
 	haveKeys: boolean = false;
 	keys!: any;
@@ -50,6 +51,9 @@ export class ExportDialog {
 		private themingService: ThemingService,
 		public dialogRef: MatDialogRef<ExportDialog>, @Inject(MAT_DIALOG_DATA) public data: any
 	) {
+		if (navigator.clipboard) {
+			this.clipboard = true;
+		}
 		// Check if 2fa is enabled
 		this.authService.check2fa().subscribe((result: any) => {
 			if(!result.message.enabled) return;
