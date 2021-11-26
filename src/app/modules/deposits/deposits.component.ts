@@ -12,7 +12,6 @@ import { ThemingService } from 'src/app/shared/services/theming.service';
 import { CloudService } from 'src/app/shared/services/cloud.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-deposits',
@@ -38,7 +37,6 @@ export class DepositsComponent implements OnInit {
 
 	// Variables
 	isLoading: boolean = true;
-	isFormLoading: boolean = false;
 	interestRates: any = environment.interestRates;
 	wallets: any = [];
 	selectedWallet: any;
@@ -56,7 +54,7 @@ export class DepositsComponent implements OnInit {
 		]),
 		term: new FormControl('', [
 			Validators.required,
-			Validators.pattern('^[0-9]*$'),
+			Validators.pattern('([1-9]|1[0-2])'),
 			Validators.minLength(1),
 			Validators.maxLength(2),
 		]),
@@ -68,8 +66,7 @@ export class DepositsComponent implements OnInit {
 		private themingService: ThemingService,
 		private cloudService: CloudService,
 		private helperService: HelperService,
-		private dialogService: DialogService,
-		private snackbarService: SnackbarService
+		private dialogService: DialogService
 	) {	}
 
 	getThemingService() {
@@ -114,27 +111,8 @@ export class DepositsComponent implements OnInit {
 	}
 
 	submit() {
-		let code = '';
-		let password = '';
 		if (this.deposit.valid) {
-			this.isFormLoading = true;
-			this.cloudService.createDeposit(
-				this.deposit.value.amount,
-				this.deposit.value.wallet,
-				this.deposit.value.term,
-				code,
-				password
-			).subscribe((data:any) => {
-				this.isFormLoading = false;
-				if (data.result === 'success') {
-					this.reset();
-					this.snackbarService.openSnackBar('Deposit created successfully!', 'Dismiss');
-				} else if (data.result === 'error') {
-					this.snackbarService.openSnackBar(data.message, 'Dismiss');
-				} else {
-					this.snackbarService.openSnackBar('Whoops, something went wrong', 'Dismiss');
-				}
-			});
+			this.dialogService.openConfirmationDialog(this.deposit.value);
 		}
 	}
 

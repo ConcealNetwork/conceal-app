@@ -12,6 +12,7 @@ import { ReceiveDialog } from 'src/app/modules/wallet/dialogs/receive/receive.co
 import { ExportDialog } from 'src/app/modules/wallet/dialogs/export/export.component';
 import { QrcodeDialog } from 'src/app/modules/wallet/dialogs/qrcode/qrcode.component';
 import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix/matrix.dialog';
+import { ConfirmationDialog } from 'src/app/modules/deposits/dialogs/confirmation/confirmation.dialog';
 
 @Injectable({
 	providedIn: 'root'
@@ -23,6 +24,18 @@ export class DialogService {
 		public dialog: MatDialog,
 		public themingService: ThemingService
 	) { }
+
+	openConfirmationDialog(deposit:any): void {
+		const dialogRef = this.dialog.open(ConfirmationDialog, {
+			width: this.themingService.exportDialogWidth,
+			maxWidth: this.themingService.exportDialogWidth,
+			height: this.themingService.dialogHeight,
+			maxHeight: this.themingService.dialogHeight,
+			disableClose: true,
+			data: {deposit: deposit}
+		})
+		dialogRef.afterClosed().subscribe(result => { })
+  }
 
 	openMatrixDialog(): void {
 		const dialogRef = this.dialog.open(MatrixDialog, {

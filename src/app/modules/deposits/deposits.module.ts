@@ -16,6 +16,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -51,7 +53,9 @@ import { ConfirmationDialog } from './dialogs/confirmation/confirmation.dialog';
 		MatFormFieldModule,
 		MatSelectModule,
 		MatTooltipModule,
-		MatTabsModule
+		MatTabsModule,
+		MatProgressBarModule,
+		MatDialogModule
   ]
 })
 export class DepositsModule { }
