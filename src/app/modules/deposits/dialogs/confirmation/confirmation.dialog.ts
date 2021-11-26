@@ -20,6 +20,7 @@ export class ConfirmationDialog {
 	hasTwoFa!: boolean;
 	isFormLoading: boolean = true;
 	isLoading: boolean = false;
+	clipboard: boolean = false;
 
 	constructor (
 		public dialogRef: MatDialogRef<ConfirmationDialog>,
@@ -28,7 +29,10 @@ export class ConfirmationDialog {
 		private authService: AuthService,
 		private cloudService: CloudService
 	) {
-		console.log(this.data);
+		// Check if clipboard is supported
+		if (navigator.clipboard) {
+			this.clipboard = true;
+		}
 		// Check if 2fa is enabled
 		this.authService.check2fa().subscribe((result: any) => {
 			if(result.message.enabled) {
