@@ -88,10 +88,12 @@ export class DepositsComponent implements OnInit {
 	termChanges(length:any) {
 		this.termLength = length;
 		this.deposit.controls.term.patchValue(length, { emitEvent: true });
+		this.deposit.controls.term.markAsTouched();
 	}
 
 	setAmount(percent:number, wallet:any) {
 		this.deposit.controls.amount.patchValue(((percent / 100) * this.wallets[wallet].balance).toFixed(6) || 0, { emitEvent: true });
+		this.deposit.controls.amount.markAsTouched();
 	}
 
 	// return the correct interest rate percent from the 2D table
