@@ -23,16 +23,6 @@ export interface Wallets {
   templateUrl: './wallets.component.html',
   styleUrls: ['./wallets.component.scss'],
 	animations: [
-		trigger('transition', [
-			transition(':enter', [
-				query('#cards', [
-					style({ opacity: 0}),
-					stagger(100, [
-						animate('0.4s', style({ opacity: 1 }))
-					])
-				], {optional: true})
-			])
-		]),
 		trigger('listAnimation', [
 			transition('* => *', [ // each time the binding value changes
 				query(':enter', [
