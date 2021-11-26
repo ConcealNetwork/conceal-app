@@ -36,9 +36,11 @@ export class DepositsComponent implements OnInit {
 	@ViewChild('deposit') form: any;
 
 	// Variables
-	isLoading: boolean = true;
+	walletsLoading: boolean = true;
+	depositsLoading: boolean = true;
 	interestRates: any = environment.interestRates;
 	wallets: any = [];
+	deposits: any = [];
 	selectedWallet: any;
 	termLength: number = 0;
 
@@ -81,16 +83,19 @@ export class DepositsComponent implements OnInit {
 		return this.dialogService;
 	}
 
+	// show wallets in selection dropdown
 	selectWallet(wallet:any) {
 		this.selectedWallet = wallet;
 	}
 
+	// trigger term changes
 	termChanges(length:any) {
 		this.termLength = length;
 		this.deposit.controls.term.patchValue(length, { emitEvent: true });
 		this.deposit.controls.term.markAsTouched();
 	}
 
+	// set the amount of the deposit based on the select percentage
 	setAmount(percent:number, wallet:any) {
 		this.deposit.controls.amount.patchValue(((percent / 100) * this.wallets[wallet].balance).toFixed(6) || 0, { emitEvent: true });
 		this.deposit.controls.amount.markAsTouched();
@@ -106,12 +111,14 @@ export class DepositsComponent implements OnInit {
 		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)].toFixed(2));
 	}
 
+	// reset deposit form
 	reset() {
 		this.selectedWallet = null;
 		this.termLength = 0;
 		this.deposit.reset();
 	}
 
+	// submit deposit form
 	submit() {
 		if (this.deposit.valid) {
 			this.dialogService.openConfirmationDialog(this.deposit.value);
@@ -119,11 +126,13 @@ export class DepositsComponent implements OnInit {
 	}
 
   ngOnInit(): void {
+		// disable form controls
 		this.deposit.controls.rate.disable();
 		this.deposit.controls.interest.disable();
-		this.cloudService.getWalletsData().subscribe((data:any) => {
+		// subscribe to wallets
+		let wallets = this.cloudService.getWalletsData().subscribe((data:any) => {
 			this.wallets = data.message.wallets;
-			this.isLoading = false;
+			this.walletsLoading = false;
 			this.deposit.valueChanges.pipe(debounceTime(500)).subscribe(() => {
 				if (this.deposit.controls.term.value && this.deposit.controls.amount.value) {
 					this.deposit.controls.interest.patchValue(this.getDepositInterest(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
@@ -131,6 +140,13 @@ export class DepositsComponent implements OnInit {
 				}
 			})
 		})
+		// subscribe to deposits
+		let deposits = this.cloudService.listDeposits().subscribe((data:any) => {
+			this.deposits = data.message.deposits;
+			this.depositsLoading = false;
+		})
+		// call wallets and deposits
+		Promise.all([wallets, deposits]);
 	}
 
 }
