@@ -17,6 +17,7 @@ export class ThemingService {
 	dialogHeight: string = 'auto';
 	walletGridColumns: number = 0;
 	articleGridColumns: number = 0;
+	depositGridColumns: number = 0;
 
   constructor (
 		private ref: ApplicationRef,
@@ -55,6 +56,7 @@ export class ThemingService {
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 1;
 					this.walletGridColumns = 1;
+					this.depositGridColumns = 1;
 					console.log('XSmall');
 				} else if (state.breakpoints[Breakpoints.Small]) {
 					this.isSmallScreen = true;
@@ -66,6 +68,7 @@ export class ThemingService {
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 1;
 					this.walletGridColumns = 1;
+					this.depositGridColumns = 1;
 					console.log('Small');
 				} else if (state.breakpoints[Breakpoints.Medium]) {
 					this.isSmallScreen = false;
@@ -76,6 +79,7 @@ export class ThemingService {
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 2;
 					this.walletGridColumns = 3;
+					this.depositGridColumns = 2;
 					console.log('Medium');
 				} else if (state.breakpoints[Breakpoints.Large]) {
 					this.isSmallScreen = false;
@@ -86,6 +90,7 @@ export class ThemingService {
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 3;
 					this.walletGridColumns = 3;
+					this.depositGridColumns = 2;
 					console.log('Large');
 				} else if (state.breakpoints[Breakpoints.XLarge]) {
 					this.isSmallScreen = false;
@@ -96,6 +101,7 @@ export class ThemingService {
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 4;
 					this.walletGridColumns = 3;
+					this.depositGridColumns = 3;
 					console.log('XLarge');
 				}
 			}

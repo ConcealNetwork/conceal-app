@@ -19,10 +19,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-import { WalletRoutingModule } from './wallet-routing.module';
-import { WalletComponent } from './wallet.component';
-import { TransactionsComponent } from './components/transactions/transactions.component';
-import { WalletsComponent } from './components/wallets/wallets.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { WalletsRoutingModule } from './wallets-routing.module';
+import { WalletsComponent } from './wallets.component';
 
 // Dialogs
 import { SendDialog } from "./dialogs/send/send.component";
@@ -30,12 +29,9 @@ import { ReceiveDialog } from "./dialogs/receive/receive.component";
 import { ExportDialog } from './dialogs/export/export.component';
 import { QrcodeDialog } from './dialogs/qrcode/qrcode.component';
 
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
-    WalletComponent,
-    TransactionsComponent,
     WalletsComponent,
 		SendDialog,
 		ReceiveDialog,
@@ -59,7 +55,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 		CdkTableModule,
 		MatProgressBarModule,
 		MatProgressSpinnerModule,
-    WalletRoutingModule,
+    WalletsRoutingModule,
 		MatDialogModule,
 		MatSelectModule,
 		MatSlideToggleModule,

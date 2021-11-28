@@ -1,4 +1,8 @@
-<div *ngIf="!hasTwoFa && !haveKeys" @transition>
+<div fxLayout="row" *ngIf="this.isFormLoading">
+	<div fxFill><mat-progress-bar color="accent" mode="query"></mat-progress-bar></div>
+</div>
+
+<div *ngIf="!hasTwoFa && !haveKeys && !this.isFormLoading" @transition>
 
 	<h1 mat-dialog-title class="title">2FA Required</h1>
 	<p class="subtitle">You must enable two factor authentication.</p>
@@ -14,7 +18,7 @@
 
 </div>
 
-<form [formGroup]="export" *ngIf="hasTwoFa && !haveKeys" @transition>
+<form [formGroup]="export" *ngIf="hasTwoFa && !haveKeys && !this.isFormLoading" @transition>
 
 	<h1 mat-dialog-title class="title">Export Private Keys</h1>
 	<p class="subtitle">Please enter your two factor authentication code to continue</p>
@@ -48,7 +52,7 @@
 
 </form>
 
-<div *ngIf="hasTwoFa && haveKeys" @transition>
+<div *ngIf="hasTwoFa && haveKeys && !this.isFormLoading" @transition>
 
 	<h1 mat-dialog-title class="title">Your Private Keys</h1>
 	<p class="subtitle">Please save your keys to a secure location</p>

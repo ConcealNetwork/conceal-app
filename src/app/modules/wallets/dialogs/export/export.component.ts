@@ -28,6 +28,7 @@ import { ThemingService } from 'src/app/shared/services/theming.service';
 
 export class ExportDialog {
 
+	isFormLoading: boolean = true;
 	isLoading: boolean = false;
 	clipboard: boolean = false;
 	hasTwoFa: boolean = false;
@@ -56,9 +57,14 @@ export class ExportDialog {
 		}
 		// Check if 2fa is enabled
 		this.authService.check2fa().subscribe((result: any) => {
-			if(!result.message.enabled) return;
-			this.hasTwoFa = true;
-		});
+			if(result.message.enabled) {
+				this.hasTwoFa = true;
+				this.isFormLoading = false;
+			} else {
+				this.hasTwoFa = false;
+				this.isFormLoading = false;
+			}
+		})
 	}
 
 	getHelperService() {

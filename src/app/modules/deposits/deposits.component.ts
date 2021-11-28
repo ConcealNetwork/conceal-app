@@ -40,7 +40,8 @@ export class DepositsComponent implements OnInit {
 	depositsLoading: boolean = true;
 	interestRates: any = environment.interestRates;
 	wallets: any = [];
-	deposits: any = [];
+	depositsUnlocked: any = [];
+	depositsLocked: any = [];
 	selectedWallet: any;
 	termLength: number = 0;
 	blockchainHeight: number = 0;
@@ -144,7 +145,15 @@ export class DepositsComponent implements OnInit {
 		})
 		// subscribe to deposits
 		let deposits = this.cloudService.listDeposits().subscribe((data:any) => {
-			this.deposits = data.message.deposits;
+			// loop through results and check if address exists in deposit
+			for (let i = 0; i < data.message.deposits.length; i++) {
+				if (data.message.deposits[i].address && data.message.deposits[i].locked) {
+					this.depositsLocked.push(data.message.deposits[i]);
+				}
+				if (data.message.deposits[i].address && !data.message.deposits[i].locked) {
+					this.depositsUnlocked.push(data.message.deposits[i]);
+				}
+			}
 			this.depositsLoading = false;
 		})
 		// call wallets and deposits
