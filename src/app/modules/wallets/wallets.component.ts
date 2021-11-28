@@ -115,42 +115,56 @@ export class WalletsComponent implements OnInit {
 			}
 		})
 		let wallets = this.cloudService.getWalletsData().subscribe((data:any) => {
-			// convert object to array with key as address
-			let wallet = Object.keys(data.message.wallets).map(key => {
-				return {
-					address: key,
-					balance: data.message.wallets[key].balance,
-					locked: data.message.wallets[key].locked,
-					total: data.message.wallets[key].total,
-					corrupted: data.message.wallets[key].corrupted,
-					ipn: data.message.wallets[key].ipn,
-					transactions: data.message.wallets[key].transactions
+			if (data && data.result === 'success') {
+				// convert object to array with key as address
+				let wallet = Object.keys(data.message.wallets).map(key => {
+					return {
+						address: key,
+						balance: data.message.wallets[key].balance,
+						locked: data.message.wallets[key].locked,
+						total: data.message.wallets[key].total,
+						corrupted: data.message.wallets[key].corrupted,
+						ipn: data.message.wallets[key].ipn,
+						transactions: data.message.wallets[key].transactions
+					}
+				})
+				this.wallets = wallet;
+				this.activeWallets = wallet.length;
+				for (let i = 0; i < this.wallets.length; i++) {
+					this.portfolioCCX = this.wallets[i].balance;
+					this.transactions = this.wallets[i].transactions;
 				}
-			})
-			this.wallets = wallet;
-			this.activeWallets = wallet.length;
-			for (let i = 0; i < this.wallets.length; i++) {
-				this.portfolioCCX = this.wallets[i].balance;
-				this.transactions = this.wallets[i].transactions;
-			}
-			this.apiService.getPrice('btc').subscribe((price:any) => {
-				this.portfolioBTC = (price.conceal.btc * this.portfolioCCX);
-				this.isLoadingBTC = false;
-			})
-			this.apiService.getPrice('usd').subscribe((price:any) => {
-				this.portfolioUSD = (price.conceal.usd * this.portfolioCCX);
-				this.isLoadingUSD = false;
-			})
-			if (this.isLoadingBTC && this.isLoadingUSD) {
-				this.dataSource = new MatTableDataSource(this.transactions);
+				this.apiService.getPrice('usd').subscribe((price:any) => {
+					if (price.conceal) {
+						this.portfolioUSD = (price.conceal.usd * this.portfolioCCX);
+						this.portfolioBTC = (price.conceal.btc * this.portfolioCCX);
+						this.isLoadingUSD = false;
+						this.isLoadingBTC = false;
+					} else {
+						this.isLoadingUSD = false;
+						this.isLoadingBTC = false;
+						this.snackbarService.openSnackBar('Could not get the latest market price', 'Dismiss');
+					}
+				})
+				if (this.isLoadingBTC && this.isLoadingUSD) {
+					this.dataSource = new MatTableDataSource(this.transactions);
+					this.isDataLoading = false;
+					// Assign the data to the data source for the table to render
+					setTimeout(() => {
+						this.dataSource.paginator = this.paginator;
+						this.dataSource.sort = this.sort;
+						this.changeDetectorRefs.detectChanges();
+						this.isLoadingResults = false;
+					}, 500);
+				}
+			} else {
 				this.isDataLoading = false;
-				// Assign the data to the data source for the table to render
-				setTimeout(() => {
-					this.dataSource.paginator = this.paginator;
-					this.dataSource.sort = this.sort;
-					this.changeDetectorRefs.detectChanges();
-					this.isLoadingResults = false;
-				}, 500);
+				this.isLoadingResults = false;
+				if (data) {
+					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+				} else {
+					this.snackbarService.openSnackBar('Could not retrieve wallet data', 'Dismiss');
+				}
 			}
 		})
 		Promise.all([wallets, breakpoints]);
