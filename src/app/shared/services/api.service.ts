@@ -18,7 +18,7 @@ export class ApiService {
 	}
 
 	getPrice(currency:any) {
-		return this.http.get(`https://api.coingecko.com/api/v3/simple/price?ids=conceal&vs_currencies=${currency}&include_last_updated_at=false`);
+		return this.http.get(`https://api.coingecko.com/api/v3/simple/price?ids=conceal&vs_currencies=btc,${currency}&include_last_updated_at=false`);
   };
 
 }
