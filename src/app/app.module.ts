@@ -9,7 +9,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
 import { PlatformModule } from '@angular/cdk/platform';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Angular Material
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -27,6 +27,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { JwtModule } from "@auth0/angular-jwt";
 
 // Modules
+import { HttpInterceptorService } from "./shared/services/exception.interceptor";
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -85,7 +86,14 @@ export function tokenGetter() {
 		MatDialogModule,
 		MatTooltipModule
   ],
-  providers: [ThemingService],
+	providers: [
+		ThemingService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
