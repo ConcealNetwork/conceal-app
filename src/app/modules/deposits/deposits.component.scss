@@ -15,9 +15,7 @@
 	}
 
 	.mat-card-content {
-		padding-left: 15px;
-		padding-right: 15px;
-		padding-top: 20px;
+		padding: 15px;
 		font-size: 1rem;
 		fieldset {
 			border-radius: 5px;
@@ -52,8 +50,27 @@
 	text-transform: uppercase;
 }
 
-.deposit {
-	background: rgba($color: #999, $alpha: 0.5);
+.deposits {
+	.mat-icon {
+		margin-right: 5px;
+	}
+	legend {
+		margin-bottom: 0px !important;
+	}
+	.title {
+		margin-right: 10px;
+	}
+}
+
+.progress {
+	font-size: 1.1rem;
+}
+
+.orange {
+	color: orange;
+}
+
+.mat-progress-bar {
+	height: 10px;
 	border-radius: 5px;
-	padding: 15px;
 }

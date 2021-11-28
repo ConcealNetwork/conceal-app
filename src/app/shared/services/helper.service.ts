@@ -17,14 +17,14 @@ export class HelperService {
 		private snackbarService: SnackbarService
 	) { }
 
-	formattedStringAmount(amount:string, currency:string, symbol:string): any {
+	formattedStringAmount(amount:number, currency:string, symbol:string): any {
 		const formatOptions = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
-		return `${symbol ? symbol : ''} ${parseFloat(amount).toLocaleString('en', formatOptions)} ${currency ? currency : ''} `;
+		return `${symbol ? symbol : ''} ${amount.toLocaleString('en', formatOptions)} ${currency ? currency : ''} `;
 	};
 
-	formatAmount(amount:string, minDec:number, maxDec:number): any {
+	formatAmount(amount:number, minDec:number, maxDec:number): any {
 		const formatOptions = { minimumFractionDigits: minDec, maximumFractionDigits: maxDec };
-		return `${parseFloat(amount).toLocaleString('en', formatOptions)}`;
+		return `${amount.toLocaleString('en', formatOptions)}`;
 	};
 
 	formatAddress(address:any) {
@@ -40,7 +40,7 @@ export class HelperService {
     let minutesToGo = ((blocksToGo * 2) / 60);
     let currentTS = moment();
     let unlockTS = moment(currentTS).add(minutesToGo, 'hours');
-    return unlockTS.fromNow();
+    return unlockTS.fromNow(true);
   }
 
 	getUnlockPercent(lockHeight:number, unlockHeight:number, blockchainHeight:number) {

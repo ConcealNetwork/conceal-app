@@ -20,7 +20,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { SharedModule } from 'src/app/shared/shared.module';
-
 import { DepositsRoutingModule } from './deposits-routing.module';
 import { DepositsComponent } from './deposits.component';
 import { MatrixDialog } from './dialogs/matrix/matrix.dialog';

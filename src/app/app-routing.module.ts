@@ -6,7 +6,7 @@ import { AuthGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
 	{ path: '', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule), data: { title: "Conceal Hub" } },
-	{ path: 'wallet', loadChildren: () => import('./modules/wallet/wallet.module').then(m => m.WalletModule), data: { title: "Conceal Wallet" }, canActivate: [AuthGuard] },
+	{ path: 'wallets', loadChildren: () => import('./modules/wallets/wallets.module').then(m => m.WalletModule), data: { title: "Conceal Wallet" }, canActivate: [AuthGuard] },
 	{ path: 'deposits', loadChildren: () => import('./modules/deposits/deposits.module').then(m => m.DepositsModule), data: { title: "Conceal Deposits" }, canActivate: [AuthGuard] },
 	{ path: 'pay', loadChildren: () => import('./modules/pay/pay.module').then(m => m.PayModule), data: { title: "Conceal Pay" }, canActivate: [AuthGuard] },
 	{ path: 'id', loadChildren: () => import('./modules/id/id.module').then(m => m.IdModule), data: { title: "Conceal ID" }, canActivate: [AuthGuard] },

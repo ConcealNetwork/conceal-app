@@ -8,9 +8,8 @@
 			<fieldset fxFlex fxLayout="column">
 				<legend>Funds</legend>
 
-				<div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap.gt-sm="15px">
-
-					<mat-form-field hintLabel="Amount to send" color="accent" appearance="outline" fxFlex>
+				<div fxLayout="column" fxFlex fxLayoutGap="25px">
+					<mat-form-field hintLabel="Amount to send" color="accent" appearance="fill" fxFlex>
 						<mat-label>Amount</mat-label>
 						<input matInput numeric steps="0" min="0.000001" type="number" name="amount" #amount placeholder="100" formControlName="amount">
 						<span matSuffix>CCX</span>
@@ -22,12 +21,11 @@
 						</mat-error>
 					</mat-form-field>
 
-					<div fxFlex fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-						<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(25)">25%</button>
-						<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(50)">50%</button>
-						<button fxFlex color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(100)">Max</button>
+					<div fxLayout="row wrap" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<button fxFlex color="accent" mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(25)">25%</button>
+						<button fxFlex color="accent" mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(50)">50%</button>
+						<button fxFlex color="accent" mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(100)">Max</button>
 					</div>
-
 				</div>
 
 			</fieldset>

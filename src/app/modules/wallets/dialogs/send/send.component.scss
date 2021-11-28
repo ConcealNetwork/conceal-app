@@ -26,9 +26,17 @@
 .mat-dialog-actions {
 	margin-top: 10px;
 	padding: 15px 0;
+	.actions {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		padding-bottom: 10px;
+	}
 	button {
 		font-size: 1rem;
-		padding: .4rem;
+		padding: .3rem;
+	}
+	.mat-stroked-button {
+		margin: 0px;
 	}
 }
 
