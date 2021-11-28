@@ -12,6 +12,7 @@ import { ThemingService } from 'src/app/shared/services/theming.service';
 import { CloudService } from 'src/app/shared/services/cloud.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-deposits',
@@ -70,7 +71,8 @@ export class DepositsComponent implements OnInit {
 		private themingService: ThemingService,
 		private cloudService: CloudService,
 		private helperService: HelperService,
-		private dialogService: DialogService
+		private dialogService: DialogService,
+		private snackbarService: SnackbarService,
 	) {	}
 
 	getThemingService() {
@@ -133,28 +135,46 @@ export class DepositsComponent implements OnInit {
 		this.deposit.controls.interest.disable();
 		// subscribe to wallets
 		let wallets = this.cloudService.getWalletsData().subscribe((data:any) => {
-			this.wallets = data.message.wallets;
-			this.blockchainHeight = data.message.height;
-			this.walletsLoading = false;
-			this.deposit.valueChanges.pipe(debounceTime(500)).subscribe(() => {
-				if (this.deposit.controls.term.value && this.deposit.controls.amount.value) {
-					this.deposit.controls.interest.patchValue(this.getDepositInterest(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
-					this.deposit.controls.rate.patchValue(this.getDepositRate(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
+			if (data && data.result === 'success') {
+				this.wallets = data.message.wallets;
+				this.blockchainHeight = data.message.height;
+				this.walletsLoading = false;
+				this.deposit.valueChanges.pipe(debounceTime(500)).subscribe(() => {
+					if (this.deposit.controls.term.value && this.deposit.controls.amount.value) {
+						this.deposit.controls.interest.patchValue(this.getDepositInterest(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
+						this.deposit.controls.rate.patchValue(this.getDepositRate(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
+					}
+				})
+			} else {
+				this.walletsLoading = false;
+				if (data) {
+					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+				} else {
+					this.snackbarService.openSnackBar('Could not retrieve wallet data', 'Dismiss');
 				}
-			})
+			}
 		})
 		// subscribe to deposits
 		let deposits = this.cloudService.listDeposits().subscribe((data:any) => {
-			// loop through results and check if address exists in deposit
-			for (let i = 0; i < data.message.deposits.length; i++) {
-				if (data.message.deposits[i].address && data.message.deposits[i].locked) {
-					this.depositsLocked.push(data.message.deposits[i]);
+			if (data && data.result === 'success') {
+				// loop through results and check if address exists in deposit
+				for (let i = 0; i < data.message.deposits.length; i++) {
+					if (data.message.deposits[i].address && data.message.deposits[i].locked) {
+						this.depositsLocked.push(data.message.deposits[i]);
+					}
+					if (data.message.deposits[i].address && !data.message.deposits[i].locked) {
+						this.depositsUnlocked.push(data.message.deposits[i]);
+					}
 				}
-				if (data.message.deposits[i].address && !data.message.deposits[i].locked) {
-					this.depositsUnlocked.push(data.message.deposits[i]);
+				this.depositsLoading = false;
+			} else {
+				this.depositsLoading = false;
+				if (data) {
+					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+				} else {
+					this.snackbarService.openSnackBar('Could not retrieve deposits data', 'Dismiss');
 				}
 			}
-			this.depositsLoading = false;
 		})
 		// call wallets and deposits
 		Promise.all([wallets, deposits]);
