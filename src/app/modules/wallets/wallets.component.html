@@ -4,7 +4,7 @@
 
 	<!-- Wallets -->
 	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
-		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
+		<div [ngClass]="{'emulated-flex-gap' : this.isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 
 			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'" fxFlex="100%">
 				<mat-card id="cards" class="mat-elevation-z6">
@@ -29,7 +29,7 @@
 
 					<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 						<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-							<button fxFlex color="accent" mat-stroked-button routerLink="/deposits" >Term Deposits</button>
+							<button fxFlex color="accent" mat-stroked-button routerLink="/deposits" >My Deposits</button>
 							<button fxFlex color="accent" mat-flat-button (click)="this.createWallet()" [disabled]="isLoading" *ngIf="this.activeWallets < this.walletLimit">Create Wallet</button>
 						</div>
 					</mat-card-actions>
@@ -47,7 +47,7 @@
 								<mat-icon>more_vert</mat-icon>
 							</button>
 							<mat-menu #menu="matMenu">
-								<button mat-menu-item (click)="this.getHelperService().copyToClipboard(item.address, 'Address copied to clipboard')">
+								<button *ngIf="this.clipboard" mat-menu-item (click)="this.getHelperService().copyToClipboard(item.address, 'Address copied to clipboard')">
 									<mat-icon color="accent">content_copy</mat-icon>
 									<span>Copy Address</span>
 								</button>
@@ -86,7 +86,7 @@
 
 					<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 						<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-							<button fxFlex color="accent" mat-flat-button (click)="this.getDialogService().openSendDialog(item.address)">Transfer</button>
+							<button fxFlex color="accent" mat-flat-button (click)="this.getDialogService().openSendDialog(item)">Transfer</button>
 							<button fxFlex color="accent" mat-stroked-button routerLink="/deposits">Term Deposit</button>
 						</div>
 					</mat-card-actions>

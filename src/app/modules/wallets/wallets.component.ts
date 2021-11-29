@@ -62,6 +62,7 @@ export class WalletsComponent implements OnInit {
 	isSmallScreen: boolean = false;
 
 	// variables
+	clipboard: boolean = false;
 	transactions: any = [];
 	wallets: any = [];
 	walletLimit: number = environment.walletLimit;
@@ -87,7 +88,12 @@ export class WalletsComponent implements OnInit {
 		private themingService: ThemingService,
 		public breakpointObserver: BreakpointObserver,
 		private changeDetectorRefs: ChangeDetectorRef,
-	) { }
+	) {
+		// Check if clipboard is supported
+		if (navigator.clipboard) {
+			this.clipboard = true;
+		}
+	}
 
 	getHelperService() {
 		return this.helperService;
