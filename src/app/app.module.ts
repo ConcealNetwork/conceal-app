@@ -25,6 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 // 3rd Party
 import { JwtModule } from "@auth0/angular-jwt";
+import { NgPipesModule } from 'ngx-pipes';
 
 // Modules
 import { HttpInterceptorService } from "./shared/services/exception.interceptor";
@@ -84,7 +85,8 @@ export function tokenGetter() {
 		FlexLayoutModule,
 		MatSnackBarModule,
 		MatDialogModule,
-		MatTooltipModule
+		MatTooltipModule,
+		NgPipesModule
   ],
 	providers: [
 		ThemingService,

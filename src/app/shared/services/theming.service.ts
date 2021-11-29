@@ -99,7 +99,7 @@ export class ThemingService {
 					this.exportDialogWidth = '450px';
 					this.dialogMaxWidth = '600px';
 					this.dialogHeight = 'auto';
-					this.articleGridColumns = 4;
+					this.articleGridColumns = 5;
 					this.walletGridColumns = 3;
 					this.depositGridColumns = 3;
 					console.log('XLarge');

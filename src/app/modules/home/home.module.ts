@@ -6,16 +6,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-import { TrendModule } from 'ngx-trend';
 import { MomentModule } from 'ngx-moment';
+import { NgPipesModule } from 'ngx-pipes';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+import { ArticleDialog } from './dialogs/article/article.dialog';
+
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+		ArticleDialog
   ],
   imports: [
     CommonModule,
@@ -25,8 +28,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 		MatCardModule,
 		MatIconModule,
 		MatButtonModule,
-		TrendModule,
-		MomentModule
+		MomentModule,
+		NgPipesModule
   ]
 })
 export class HomeModule { }

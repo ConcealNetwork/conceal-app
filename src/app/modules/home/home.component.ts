@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
 // Services
-import { ApiService } from '../../shared/services/api.service';
-import { ThemingService } from './../../shared/services/theming.service';
+import { ApiService } from 'src/app/shared/services/api.service';
+import { ThemingService } from 'src/app/shared/services/theming.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +34,8 @@ export class HomeComponent implements OnInit {
   constructor(
 		private apiService: ApiService,
 		private themingService: ThemingService,
+		private snackbarService: SnackbarService,
+		private dialogService: DialogService,
 	) { }
 
 	getThemingService() {
@@ -40,13 +44,34 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 		this.getArticles();
+		console.log(this.posts);
+	}
+
+	openArticle(item: string) {
+		this.dialogService.openArticleDialog(item);
 	}
 
 	getArticles() {
-		this.apiService.getMediumArticles().subscribe((data:any) => {
-			this.posts.push(...data.items);
-			this.isLoading = false;
+		let medium = this.apiService.getMediumArticles().subscribe((data:any) => {
+			if (data) {
+				this.posts.push(...data.items);
+				this.isLoading = false;
+			} else {
+				this.isLoading = false;
+				this.snackbarService.openSnackBar('Could not retrieve articles', 'Dismiss');
+			}
 		})
+		let twitter = this.apiService.getTwitterArticles().subscribe((data:any) => {
+			if (data) {
+				this.posts.push(...data.items);
+				this.isLoading = false;
+			} else {
+				this.isLoading = false;
+				this.snackbarService.openSnackBar('Could not retrieve articles', 'Dismiss');
+			}
+		})
+		// call wallets and deposits
+		Promise.all([medium, twitter]);
 	}
 
 }
