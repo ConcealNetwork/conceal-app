@@ -105,7 +105,7 @@ export class SendDialog {
 	formAuthorise: FormGroup = new FormGroup({});
 
 	setAmount(percent:number) {
-		this.formTransaction.controls.amount.patchValue((percent / 100) * this.wallet.value.balance, { emitEvent: true });
+		this.formTransaction.controls.amount.patchValue((percent / 100) * this.wallet.balance, { emitEvent: true });
 		this.formTransaction.controls.amount.markAsTouched();
 	}
 
@@ -118,7 +118,7 @@ export class SendDialog {
 			this.formConfirm.controls.amount.patchValue(this.formTransaction.value.amount, { emitEvent: true });
 			this.formConfirm.controls.fee.patchValue(this.fee, { emitEvent: true });
 			this.formConfirm.controls.toAddress.patchValue(this.formTransaction.value.toAddress, { emitEvent: true });
-			this.formConfirm.controls.fromAddress.patchValue(this.wallet.key, { emitEvent: true });
+			this.formConfirm.controls.fromAddress.patchValue(this.wallet.address, { emitEvent: true });
 			this.formConfirm.controls.paymentID.patchValue(this.formTransaction.value.paymentID, { emitEvent: true });
 			this.formConfirm.controls.message.patchValue(this.formTransaction.value.message, { emitEvent: true });
 			this.formConfirm.disable({emitEvent: false});
