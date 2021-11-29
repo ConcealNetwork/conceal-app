@@ -1,1 +1,34 @@
-<p>settings works!</p>
+<div class="container" fxLayout="column" fxLayoutGap="15px">
+
+	<mat-card id="cards" class="mat-elevation-z6">
+
+		<mat-card-header fxLayout="column">
+			<h2 class="title">Settings</h2>
+		</mat-card-header>
+
+		<mat-card-content fxLayout="column" fxLayoutGap="25px">
+			<form [formGroup]="settings">
+				<mat-form-field hintLabel="Select your preferred currency" color="accent" appearance="fill" fxFlex>
+					<mat-label>Currency</mat-label>
+					<mat-select #currency name="currency" formControlName="currency">
+						<mat-option [value]="item" *ngFor="let item of this.currencies">
+							{{ item | uppercase }}
+						</mat-option>
+					</mat-select>
+					<mat-error *ngIf="settings.controls.currency.hasError('required')">
+						Currency is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+			</form>
+		</mat-card-content>
+
+		<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+			<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+				<button fxFlex color="warn" mat-stroked-button type="button" (click)="reset()">Reset Settings</button>
+				<button fxFlex color="accent" mat-flat-button type="button" (click)="setCurrency(currency.value)" [disabled]="!settings.valid">Set Currency</button>
+			</div>
+		</mat-card-actions>
+
+	</mat-card>
+
+</div>

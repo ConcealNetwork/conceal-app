@@ -9,6 +9,10 @@ export class ApiService {
 
 	constructor(private http: HttpClient) { }
 
+	getCurrencies() {
+		return this.http.get(`https://api.coingecko.com/api/v3/simple/supported_vs_currencies`);
+	}
+
 	getMarketPrice() {
 		return this.http.get(`https://api.coingecko.com/api/v3/simple/price?ids=conceal,wrapped-conceal&vs_currencies=usd`);
   };

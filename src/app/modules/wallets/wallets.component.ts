@@ -57,7 +57,7 @@ export class WalletsComponent implements OnInit {
 	isLoading: boolean = false;
 	isDataLoading: boolean = true;
 	isLoadingBTC: boolean = true;
-	isLoadingUSD: boolean = true;
+	isLoadingFiat: boolean = true;
 	isLoadingResults: boolean = true;
 	isSmallScreen: boolean = false;
 
@@ -66,10 +66,11 @@ export class WalletsComponent implements OnInit {
 	transactions: any = [];
 	wallets: any = [];
 	walletLimit: number = environment.walletLimit;
+	currency: string = localStorage.getItem('currency') || environment.currency;
 	activeWallets: number = 0;
 	portfolioCCX: number = 0;
 	portfolioBTC: number = 0;
-	portfolioUSD: number = 0;
+	portfolioFiat: number = 0;
 
 	// tables
 	pageEvent!: PageEvent;
@@ -140,19 +141,19 @@ export class WalletsComponent implements OnInit {
 					this.portfolioCCX = this.wallets[i].balance;
 					this.transactions = this.wallets[i].transactions;
 				}
-				this.apiService.getPrice('usd').subscribe((price:any) => {
+				this.apiService.getPrice(this.currency).subscribe((price:any) => {
 					if (price.conceal) {
-						this.portfolioUSD = (price.conceal.usd * this.portfolioCCX);
+						this.portfolioFiat = (price.conceal[(this.currency)] * this.portfolioCCX);
 						this.portfolioBTC = (price.conceal.btc * this.portfolioCCX);
-						this.isLoadingUSD = false;
+						this.isLoadingFiat = false;
 						this.isLoadingBTC = false;
 					} else {
-						this.isLoadingUSD = false;
+						this.isLoadingFiat = false;
 						this.isLoadingBTC = false;
 						this.snackbarService.openSnackBar('Could not get the latest market price', 'Dismiss');
 					}
 				})
-				if (this.isLoadingBTC && this.isLoadingUSD) {
+				if (this.isLoadingBTC && this.isLoadingFiat) {
 					this.dataSource = new MatTableDataSource(this.transactions);
 					this.isDataLoading = false;
 					// Assign the data to the data source for the table to render
