@@ -66,7 +66,7 @@ export class WalletsComponent implements OnInit {
 	transactions: any = [];
 	wallets: any = [];
 	walletLimit: number = environment.walletLimit;
-	currency: string = localStorage.getItem('currency') || environment.currency;
+	currency: any = environment.currency;
 	activeWallets: number = 0;
 	portfolioCCX: number = 0;
 	portfolioBTC: number = 0;
@@ -109,6 +109,11 @@ export class WalletsComponent implements OnInit {
 	}
 
   ngOnInit(): void {
+		// set currency if local storage is not empty
+		if (localStorage.getItem('currency') !== null) {
+			this.currency = localStorage.getItem('currency');
+		}
+		// breakpoints
 		let breakpoints = this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe((state: BreakpointState) => {
 			if (state.matches) {
 				// Matches small viewport or handset in portrait mode
@@ -121,6 +126,7 @@ export class WalletsComponent implements OnInit {
 				this.displayedColumns = ['timestamp', 'type', 'amount', 'address', 'fee', 'status'];
 			}
 		})
+		// wallets
 		let wallets = this.cloudService.getWalletsData().subscribe((data:any) => {
 			if (data && data.result === 'success') {
 				// convert object to array with key as address
