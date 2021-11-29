@@ -39,7 +39,7 @@ export class SettingsComponent implements OnInit {
 
 	setCurrency(currency: string) {
 		localStorage.setItem('currency', currency);
-		this.snackbarService.openSnackBar('Currency has changed to: ' + currency, 'Dismiss');
+		this.snackbarService.openSnackBar('Currency has changed to: ' + currency.toLocaleUpperCase(), 'Dismiss');
 	}
 
 }
