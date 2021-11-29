@@ -10,7 +10,7 @@ export class ApiService {
 	constructor(private http: HttpClient) { }
 
 	getCurrencies() {
-		return this.http.get(`https://api.coingecko.com/api/v3/simple/supported_vs_currencies`);
+		return this.http.get(`https://api.coinstats.app/public/v1/fiats`);
 	}
 
 	getMarketPrice() {
