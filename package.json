@@ -27,7 +27,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "moment": "^2.29.1",
     "ngx-moment": "^5.0.0",
-    "ngx-trend": "^7.0.0",
+    "ngx-pipes": "^2.7.6",
     "qr-code-styling": "^1.6.0-rc.1",
     "rxjs": "^7.4.0",
     "tslib": "^2.3.1",

@@ -1,0 +1,9 @@
+<h1 mat-dialog-title class="title">{{data.article.title}}</h1>
+
+<div mat-dialog-content class="mat-typography">
+	<p [innerText]="data.article.description | stripTags | shorten: 2000: '...'"></p>
+</div>
+
+<div mat-dialog-actions>
+	<button mat-stroked-button color="warn" type="button" (click)="close()">Close Article</button>
+</div>

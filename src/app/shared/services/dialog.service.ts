@@ -13,6 +13,7 @@ import { ExportDialog } from 'src/app/modules/wallets/dialogs/export/export.comp
 import { QrcodeDialog } from 'src/app/modules/wallets/dialogs/qrcode/qrcode.component';
 import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix/matrix.dialog';
 import { ConfirmationDialog } from 'src/app/modules/deposits/dialogs/confirmation/confirmation.dialog';
+import { ArticleDialog } from 'src/app/modules/home/dialogs/article/article.dialog';
 
 @Injectable({
 	providedIn: 'root'
@@ -102,6 +103,18 @@ export class DialogService {
 			height: this.themingService.dialogHeight,
 			maxHeight: this.themingService.dialogHeight,
 			disableClose: true
+		})
+		dialogRef.afterClosed().subscribe(result => { })
+  }
+
+	openArticleDialog(article:any): void {
+		const dialogRef = this.dialog.open(ArticleDialog, {
+			width: this.themingService.dialogWidth,
+			maxWidth: this.themingService.dialogMaxWidth,
+			height: this.themingService.dialogHeight,
+			maxHeight: this.themingService.dialogHeight,
+			disableClose: false,
+			data: {article: article}
 		})
 		dialogRef.afterClosed().subscribe(result => { })
   }
