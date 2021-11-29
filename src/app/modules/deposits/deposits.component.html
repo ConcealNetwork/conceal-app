@@ -7,7 +7,7 @@
 		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid" @transition>
 
 			<!-- New Deposit -->
-			<div id="cards" fxFlex="auto">
+			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="40" fxFlex.xl="30">
 				<form [formGroup]="deposit">
 					<mat-card class="mat-elevation-z6">
 
@@ -22,7 +22,7 @@
 
 								<div fxLayout="column" fxFlex fxLayoutGap="25px">
 
-									<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="25px" fxLayoutGap.gt-md="15px">
+									<div fxLayout="row" fxLayout.lt-lg="column" fxFlex fxLayoutGap="25px" fxLayoutGap.gt-md="15px">
 										<mat-form-field hintLabel="The wallet for the deposit" color="accent" appearance="fill" fxFlex>
 											<mat-label>Wallet</mat-label>
 											<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">
@@ -82,7 +82,7 @@
 
 							<fieldset fxFlex fxLayout="column">
 								<legend>Interest Calculation</legend>
-								<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="15px">
+								<div fxLayout="row" fxLayout.lt-lg="column" fxFlex fxLayoutGap="15px">
 									<mat-form-field hintLabel="The interest rate of the deposit" color="accent" appearance="fill" fxFlex>
 										<mat-label>Your Rate</mat-label>
 										<input #rate matInput numeric type="number" name="rate" placeholder="1" formControlName="rate" readonly>
@@ -111,13 +111,13 @@
 			</div>
 
 			<!-- Locked Deposits -->
-			<div id="cards" fxFlex="auto">
+			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="60" fxFlex.xl="auto">
 				<mat-card class="mat-elevation-z6" fxFlex="100%">
 					<mat-card-header fxLayout="column">
 						<h2 class="title">Locked Deposits</h2>
 					</mat-card-header>
 					<mat-card-content>
-						<div *ngIf="!this.depositsUnlocked">
+						<div *ngIf="this.depositsLocked == 0">
 							<h4>No Deposits</h4>
 						</div>
 						<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
@@ -158,13 +158,13 @@
 			</div>
 
 			<!-- Unlocked Deposits -->
-			<div id="cards" fxFlex="auto">
+			<div id="cards" fxFlex="100" fxFlex.xl="auto">
 				<mat-card class="mat-elevation-z6" fxFlex="100%">
 					<mat-card-header fxLayout="column">
 						<h2 class="title">Unlocked Deposits</h2>
 					</mat-card-header>
 					<mat-card-content>
-						<div *ngIf="!this.depositsLocked">
+						<div *ngIf="this.depositsUnlocked == 0">
 							<h4>No Deposits</h4>
 						</div>
 						<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
