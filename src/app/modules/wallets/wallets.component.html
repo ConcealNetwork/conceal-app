@@ -16,10 +16,10 @@
 					<mat-card-content fxLayout="column">
 						<div class="portfolio"  fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
 							<div fxLayout="row" fxFlex="25">
-								<span>$ {{getHelperService().formatAmount(this.portfolioUSD, 2, 2) || 0}}</span>
+								<span>{{getHelperService().formatAmount(this.portfolioFiat, 2, 2) || 0}} {{this.currency | uppercase}}</span>
 							</div>
 							<div fxLayout="row" fxFlex="25">
-								<span>₿ {{getHelperService().formatAmount(this.portfolioBTC, 8, 8) || 0}} </span>
+								<span>{{getHelperService().formatAmount(this.portfolioBTC, 8, 8) || 0}} BTC</span>
 							</div>
 							<div fxLayout="row" fxFlex="25">
 								<span>{{getHelperService().formatAmount(this.portfolioCCX, 1, 6) || 0}} CCX</span>
