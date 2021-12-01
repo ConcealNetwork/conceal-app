@@ -22,7 +22,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError(error => {
         console.error(error);
-				this.snackbarService.openSnackBar(error.message, 'Dismiss');
+				this.snackbarService.openSnackBar('There was an issue while fetching some data.', 'Dismiss');
 				return throwError(() => error.message);
       })
     );
