@@ -25,6 +25,8 @@
     "@angular/router": "~13.0.2",
     "@angular/service-worker": "~13.0.2",
     "@auth0/angular-jwt": "^5.0.2",
+    "@awesome-cordova-plugins/clipboard": "^5.37.1",
+    "@awesome-cordova-plugins/core": "^5.37.1",
     "moment": "^2.29.1",
     "ngx-moment": "^5.0.0",
     "ngx-pipes": "^2.7.6",
