@@ -66,21 +66,17 @@ export class HomeComponent implements OnInit {
 				this.snackbarService.openSnackBar('Could not retrieve articles', 'Dismiss');
 			}
 		})
-		let twitter = this.apiService.getTwitterArticles().subscribe((data:any) => {
-			if (data) {
-				this.posts.push(...data.items);
-				this.isLoading = false;
-			} else {
-				this.isLoading = false;
-				this.snackbarService.openSnackBar('Could not retrieve articles', 'Dismiss');
-			}
-		})
+		// let twitter = this.apiService.getTwitterArticles().subscribe((data:any) => {
+		// 	if (data) {
+		// 		this.posts.push(...data.items);
+		// 		this.isLoading = false;
+		// 	} else {
+		// 		this.isLoading = false;
+		// 		this.snackbarService.openSnackBar('Could not retrieve articles', 'Dismiss');
+		// 	}
+		// })
 		// call wallets and deposits
-		Promise.all([medium, twitter]).catch(err => {
-			if(err) {
-				this.isLoading = false;
-			}
-		});
+		Promise.all([medium]);
 	}
 
 }
