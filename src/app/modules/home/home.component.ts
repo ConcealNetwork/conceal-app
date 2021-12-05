@@ -2,6 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
+import * as moment from 'moment';
+
 // Services
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ThemingService } from 'src/app/shared/services/theming.service';
@@ -50,6 +52,10 @@ export class HomeComponent implements OnInit {
 		this.dialogService.openArticleDialog(item);
 	}
 
+	toDate(time: number) {
+		return moment(time);
+	}
+
 	getArticles() {
 		let medium = this.apiService.getMediumArticles().subscribe((data:any) => {
 			if (data) {
@@ -70,7 +76,11 @@ export class HomeComponent implements OnInit {
 			}
 		})
 		// call wallets and deposits
-		Promise.all([medium, twitter]);
+		Promise.all([medium, twitter]).catch(err => {
+			if(err) {
+				this.isLoading = false;
+			}
+		});
 	}
 
 }

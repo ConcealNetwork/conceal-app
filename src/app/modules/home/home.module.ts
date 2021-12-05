@@ -6,7 +6,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-import { MomentModule } from 'ngx-moment';
 import { NgPipesModule } from 'ngx-pipes';
 
 import { HomeRoutingModule } from './home-routing.module';
@@ -28,7 +27,6 @@ import { ArticleDialog } from './dialogs/article/article.dialog';
 		MatCardModule,
 		MatIconModule,
 		MatButtonModule,
-		MomentModule,
 		NgPipesModule
   ]
 })
