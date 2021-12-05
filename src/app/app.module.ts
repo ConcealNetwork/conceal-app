@@ -41,6 +41,7 @@ import { TwoFactorDialog } from "./shared/dialogs/twofactor/twofactor.component"
 
 // Services
 import { ThemingService } from './shared/services/theming.service';
+import { CordovaService } from './shared/services/cordova.service';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -90,6 +91,7 @@ export function tokenGetter() {
   ],
 	providers: [
 		ThemingService,
+		CordovaService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,

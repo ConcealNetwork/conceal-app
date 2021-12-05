@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
 import { DataService } from '../../../services/data.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { SnackbarService } from '../../../../shared/services/snackbar.service';
 import { DialogService } from '../../../../shared/services/dialog.service';
+import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 @Component({
   selector: 'app-auth-signin',
@@ -16,7 +18,7 @@ import { DialogService } from '../../../../shared/services/dialog.service';
 export class SigninComponent implements OnInit {
 
 	isLoading: boolean = false;
-	clipboard: boolean = false;
+	clipboards: boolean = false;
 	returnURL: string = '';
 	date: Date = new Date();
 	timeOfDay: number = this.date.getHours();
@@ -26,6 +28,8 @@ export class SigninComponent implements OnInit {
 		private dataService: DataService,
 		private snackbarService: SnackbarService,
 		private dialogService: DialogService,
+		private cordovaService: CordovaService,
+		private clipboard: Clipboard,
 		private route: ActivatedRoute,
 		private router: Router
 	) { }
@@ -80,15 +84,27 @@ export class SigninComponent implements OnInit {
 	}
 
 	paste2fa() {
-		if (navigator.clipboard) {
-			navigator.clipboard.readText()
-			.then(text => {
-				this.form.controls.twofaFormControl.setValue(text);
-				this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss')
-			})
-			.catch(err => {
-				this.snackbarService.openSnackBar(err, 'Dismiss');
-			});
+		if (this.cordovaService.onCordova) {
+			this.clipboard.paste().then(
+				(resolve: string) => {
+						this.form.controls.twofaFormControl.setValue(resolve);
+						this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+					},
+					(reject: string) => {
+						this.snackbarService.openSnackBar(reject, 'Dismiss');
+					}
+			)
+		} else if (navigator.clipboard) {
+			if (navigator.clipboard) {
+				navigator.clipboard.readText()
+				.then(text => {
+					this.form.controls.twofaFormControl.setValue(text);
+					this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+				})
+				.catch(err => {
+					this.snackbarService.openSnackBar(err, 'Dismiss');
+				});
+			}
 		}
 	}
 
@@ -96,7 +112,7 @@ export class SigninComponent implements OnInit {
 		this.route.queryParams.subscribe(x => {this.returnURL = x.return || ''});
 		// Check if clipboard is supported
 		if (navigator.clipboard) {
-			this.clipboard = true;
+			this.clipboards = true;
 		}
 	}
 

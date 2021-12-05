@@ -1,6 +1,7 @@
 // Angular Core
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 
 // Components
 import { LoaderComponent } from './components/loader/loader.component';
@@ -13,7 +14,10 @@ import { LoaderComponent } from './components/loader/loader.component';
     CommonModule,
   ],
   exports: [
-    LoaderComponent
+    LoaderComponent,
+	],
+	providers: [
+		HTTP
 	]
 })
 
