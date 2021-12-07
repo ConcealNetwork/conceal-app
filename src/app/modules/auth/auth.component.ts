@@ -5,7 +5,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Services
-import { DataService } from '../../services/data.service';
+import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-auth',
