@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { CdkTableModule } from '@angular/cdk/table';
 
 import { MatInputModule } from '@angular/material/input';
@@ -19,7 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from 'src/app/shared.module';
 import { DepositsRoutingModule } from './deposits-routing.module';
 import { DepositsComponent } from './deposits.component';
 import { MatrixDialog } from './dialogs/matrix/matrix.dialog';
@@ -33,11 +32,8 @@ import { ConfirmationDialog } from './dialogs/confirmation/confirmation.dialog';
 		ConfirmationDialog
   ],
   imports: [
-    CommonModule,
     DepositsRoutingModule,
-		CommonModule,
 		SharedModule,
-		FlexLayoutModule,
 		FormsModule,
     ReactiveFormsModule,
 		MatAutocompleteModule,
