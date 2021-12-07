@@ -4,6 +4,7 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 }
+
 .active {
 	color: #faa933 !important;
 }
@@ -43,10 +44,10 @@
 
 .card-content {
 	background: rgba(#fff, 0.8);
-	mat-card-title {
+	.mat-card-title {
 		color: #111;
 	}
-	mat-card-subtitle {
+	.mat-card-subtitle {
 		color: #333;
 	}
 }

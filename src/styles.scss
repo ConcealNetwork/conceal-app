@@ -163,6 +163,13 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 	}
 }
 
+/* Large devices (laptops/desktops, 960px and up) */
+@media only screen and (max-width: 960px) {
+	.container {
+		padding: 5px;
+	}
+}
+
 .mat-menu-content:not(:empty) {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
