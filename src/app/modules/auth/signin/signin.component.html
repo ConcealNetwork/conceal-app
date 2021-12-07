@@ -2,7 +2,6 @@
 
 	<mat-card-header fxLayout="column" fxLayoutGap="5px">
 		<h2 class="title">Log On</h2>
-		<p>Please login to continue.</p>
 	</mat-card-header>
 
 	<mat-card-content fxLayout="column" fxLayoutGap="25px">
@@ -30,7 +29,7 @@
 			<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill" color="accent">
 				<mat-label>2FA (Optional)</mat-label>
 				<input #twofa matInput type="text" inputmode="numeric" minlength="6" maxlength="6" placeholder="00000" pattern="[0-9]*" formControlName="twofaFormControl" autocomplete="one-time-code">
-				<button type="button" *ngIf="this.clipboards" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste2fa()">
+				<button type="button"  matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste2fa()">
 					<mat-icon>content_paste</mat-icon>
 				</button>
 				<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
@@ -42,7 +41,7 @@
 				</mat-error>
 			</mat-form-field>
 
-			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
+			<div fxLayout="column" fxLayoutAlign="start space-between" fxLayoutGap="15px">
 				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Login' : 'Loading' }}</button>
 				<a mat-stroked-button (click)="changeAuthType('signUp')">Create New Account</a>
 				<a mat-stroked-button (click)="changeAuthType('reset')">Password Recovery</a>
