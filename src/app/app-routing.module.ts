@@ -13,7 +13,7 @@ const routes: Routes = [
 	{ path: 'live', loadChildren: () => import('./modules/live/live.module').then(m => m.LiveModule), data: { title: "Conceal Live" } },
 	{ path: 'explorer', loadChildren: () => import('./modules/explorer/explorer.module').then(m => m.ExplorerModule), data: { title: "Conceal Explorer" } },
 	{ path: 'bridge', loadChildren: () => import('./modules/bridge/bridge.module').then(m => m.BridgeModule), data: { title: "Conceal Bridge" } },
-	{ path: 'auth', loadChildren: () => import('./shared/modules/auth/auth.module').then(m => m.AuthModule), data: { title: "Authentication" } },
+	{ path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule), data: { title: "Authentication" } },
 	{ path: 'settings', loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsModule), data: { title: "Hub Settings" } },
 	{ path: '**', redirectTo: '', pathMatch: 'full' }
 ];

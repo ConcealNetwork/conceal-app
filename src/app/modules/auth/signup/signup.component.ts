@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // Services
-import { DataService } from '../../../services/data.service';
-import { AuthService } from '../../../../shared/services/auth.service';
-import { SnackbarService } from '../../../../shared/services/snackbar.service';
+import { DataService } from 'src/app/shared/services/data.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-auth-signup',

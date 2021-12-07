@@ -4,10 +4,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
-import { DataService } from '../../../services/data.service';
-import { AuthService } from '../../../../shared/services/auth.service';
-import { SnackbarService } from '../../../../shared/services/snackbar.service';
-import { DialogService } from '../../../../shared/services/dialog.service';
+import { DataService } from 'src/app/shared/services/data.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 @Component({
