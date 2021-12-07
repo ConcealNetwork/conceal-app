@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { SharedModule } from 'src/app/shared.module';
 import { ExplorerRoutingModule } from './explorer-routing.module';
 import { ExplorerComponent } from './explorer.component';
 
@@ -10,7 +10,7 @@ import { ExplorerComponent } from './explorer.component';
     ExplorerComponent
   ],
   imports: [
-    CommonModule,
+		SharedModule,
     ExplorerRoutingModule
   ]
 })

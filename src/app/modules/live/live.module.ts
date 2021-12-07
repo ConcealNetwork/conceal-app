@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 
+import { SharedModule } from 'src/app/shared.module';
 import { LiveRoutingModule } from './live-routing.module';
 import { LiveComponent } from './live.component';
 
@@ -17,9 +16,8 @@ import { LiveComponent } from './live.component';
     LiveComponent
   ],
   imports: [
-    CommonModule,
+		SharedModule,
     LiveRoutingModule,
-		FlexLayoutModule,
 		MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,

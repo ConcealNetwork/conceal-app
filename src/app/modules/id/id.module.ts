@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { SharedModule } from 'src/app/shared.module';
 import { IdRoutingModule } from './id-routing.module';
 import { IdComponent } from './id.component';
 
@@ -10,7 +10,7 @@ import { IdComponent } from './id.component';
     IdComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     IdRoutingModule
   ]
 })

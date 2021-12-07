@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared.module';
 
 import { BridgeRoutingModule } from './bridge-routing.module';
 import { BridgeComponent } from './bridge.component';
@@ -10,7 +10,7 @@ import { BridgeComponent } from './bridge.component';
     BridgeComponent
   ],
   imports: [
-    CommonModule,
+		SharedModule,
     BridgeRoutingModule
   ]
 })
