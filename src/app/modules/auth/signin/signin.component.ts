@@ -18,7 +18,6 @@ import { CordovaService } from 'src/app/shared/services/cordova.service';
 export class SigninComponent implements OnInit {
 
 	isLoading: boolean = false;
-	clipboards: boolean = false;
 	returnURL: string = '';
 	date: Date = new Date();
 	timeOfDay: number = this.date.getHours();
@@ -84,7 +83,7 @@ export class SigninComponent implements OnInit {
 	}
 
 	paste2fa() {
-		if (this.cordovaService.onCordova) {
+		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
 			this.clipboard.paste().then(
 				(resolve: string) => {
 						this.form.controls.twofaFormControl.setValue(resolve);
@@ -110,10 +109,6 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {
 		this.route.queryParams.subscribe(x => {this.returnURL = x.return || ''});
-		// Check if clipboard is supported
-		if (navigator.clipboard) {
-			this.clipboards = true;
-		}
 	}
 
 }
