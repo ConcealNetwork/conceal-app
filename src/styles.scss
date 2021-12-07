@@ -106,6 +106,10 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 }
 
 /* You can add global styles to this file, and also import other style files */
+.orange {
+	color: orange;
+}
+
 .capitalize {
 	text-transform: capitalize;
 }

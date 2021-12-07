@@ -8,23 +8,22 @@
 	justify-content: center;
 	overflow: hidden;
 
-	.logo {
-		width: 135px;
-		height: 125px;
-	}
-
 	.message {
-		position: relative;
-		margin-top: 250px;
+		position: absolute;
+		margin-top: 300px;
 		font-size: 1rem;
 	}
 
+	.logo {
+		position: absolute;
+	}
+
 	.spinner {
-		height: 220px;
+		position: relative;
+		height: 250px;
 		width: 250px;
 		animation: rotate 2s linear infinite;
 		transform-origin: center center;
-		position: absolute;
 		bottom: 0;
 		left: 0;
 		right: 0;
