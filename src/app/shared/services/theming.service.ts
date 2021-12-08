@@ -79,7 +79,7 @@ export class ThemingService {
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 2;
 					this.walletGridColumns = 3;
-					this.depositGridColumns = 2;
+					this.depositGridColumns = 1;
 					console.log('Medium');
 				} else if (state.breakpoints[Breakpoints.Large]) {
 					this.isSmallScreen = false;

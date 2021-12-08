@@ -120,7 +120,7 @@
 					</mat-card-header>
 					<mat-card-content>
 						<div *ngIf="this.depositsLocked == 0">
-							<h4>No Deposits</h4>
+							<h3>No deposits...</h3>
 						</div>
 						<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsLocked">
@@ -161,17 +161,17 @@
 
 			<!-- Unlocked Deposits -->
 			<div id="cards" fxFlex="100" fxFlex.xl="auto">
-				<mat-card class="mat-elevation-z6" fxFlex="100%">
+				<mat-card class="deposit mat-elevation-z6" fxFlex="100%">
 					<mat-card-header fxLayout="column">
 						<h2 class="title">Unlocked Deposits</h2>
 					</mat-card-header>
 					<mat-card-content>
 						<div *ngIf="this.depositsUnlocked == 0">
-							<h4>No Deposits</h4>
+							<h3>No deposits...</h3>
 						</div>
-						<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
+						<div fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsUnlocked">
-								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="5px">
+								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="15px">
 									<legend class="uppercase orange" fxLayout="row" fxLayoutAlign="space-between center">
 										<mat-icon aria-hidden="false">lock_open</mat-icon>
 										{{this.getHelperService().formatAddress(item.address || '')}}
