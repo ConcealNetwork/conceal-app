@@ -120,7 +120,7 @@
 					</mat-card-header>
 					<mat-card-content>
 						<div *ngIf="this.depositsLocked == 0">
-							<h3>No deposits...</h3>
+							<span class="nothing">No deposits...</span>
 						</div>
 						<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsLocked">
@@ -167,7 +167,7 @@
 					</mat-card-header>
 					<mat-card-content>
 						<div *ngIf="this.depositsUnlocked == 0">
-							<h3>No deposits...</h3>
+							<span class="nothing">No deposits...</span>
 						</div>
 						<div fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsUnlocked">
