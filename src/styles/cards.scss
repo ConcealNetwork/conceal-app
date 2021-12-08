@@ -34,8 +34,8 @@
 		padding: 15px;
 		font-size: 1rem;
 		.description {
-			font-size: 1rem;
-			line-height: 1.5;
+			overflow: hidden;
+			word-wrap: break-word;
 		}
 	}
 
