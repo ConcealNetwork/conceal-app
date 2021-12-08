@@ -2,7 +2,9 @@
 
 <div class="container" fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-md="25px" *ngIf="!this.isLoading">
 
-	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
+	<div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
+
+		<div fxLayout="column" fxFlex="50" fxFlex.lt-lg="100" fxLayoutAlign="start">
 
 			<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxFlex="noshrink" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid" [@listAnimation]="posts.length">
 
@@ -11,26 +13,53 @@
 					<mat-card class="mat-elevation-z6">
 
 						<mat-card-header fxLayout="column">
-							<h2 class="title">{{item.title | shorten: 25: '...'}}</h2>
+							<h2 class="title">{{item.title | shorten: 70: '...'}}</h2>
+							<p class="orange">Posted {{ this.toDate(item.pubDate) | timeAgo }}</p>
 						</mat-card-header>
 
-						<mat-card-content fxLayout="column" fxLayoutGap="0px">
-							<p class="date orange">Article posted {{ this.toDate(item.pubDate) | timeAgo }}</p>
-							<p class="description" [innerHTML]="item.description | stripTags | shorten: 170: '...'"></p>
+						<mat-card-content fxLayout="column">
+							<p class="description" [innerHTML]="item.description | stripTags: 'p' | shorten: 1000: '...'"></p>
 						</mat-card-content>
 
 						<mat-card-actions fxLayout="column">
 							<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-								<a fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="openArticle(item)" target="_blank">Read More</a>
-								<a fxFlex fxFlex="noshrink" color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Full Article</a>
+								<a fxFlex fxFlex="noshrink" color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Open Post</a>
 							</div>
 						</mat-card-actions>
 
 					</mat-card>
 
 				</div>
+
 			</div>
 
+		</div>
+
+		<div fxHide.lt-lg fxLayout="column" fxFlex="50" fxLayoutAlign="start">
+
+			<mat-card class="mat-elevation-z6">
+
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Recent Posts</h2>
+				</mat-card-header>
+
+				<mat-card-content fxLayout="column" fxLayoutGap="15px">
+					<div class="posts" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center" *ngFor="let item of posts">
+						<div fxFlex="20" class="post-time">
+							Posted {{ this.toDate(item.pubDate) | timeAgo }}
+						</div>
+						<div fxFlex="auto" class="post-title">
+							{{item.title | shorten: 60: '...'}}
+						</div>
+						<div fxFlex="20">
+							<a fxFlex="noshrink" color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Open Post</a>
+						</div>
+					</div>
+				</mat-card-content>
+
+			</mat-card>
+
+		</div>
 
 	</div>
 

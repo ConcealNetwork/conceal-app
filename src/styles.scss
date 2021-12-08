@@ -164,6 +164,10 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
   animation: spinner .8s linear infinite;
 }
 
+.container {
+	padding: 45px;
+}
+
 /* Large devices (laptops/desktops, 960px and up) */
 @media (min-width: 1280px) and (max-width: 1919.98px) {
 	.container {

@@ -77,7 +77,7 @@ export class ThemingService {
 					this.dialogMaxWidth = '600px';
 					this.exportDialogWidth = '450px';
 					this.dialogHeight = 'auto';
-					this.articleGridColumns = 2;
+					this.articleGridColumns = 1;
 					this.walletGridColumns = 3;
 					this.depositGridColumns = 1;
 					console.log('Medium');
@@ -88,7 +88,7 @@ export class ThemingService {
 					this.exportDialogWidth = '450px';
 					this.dialogMaxWidth = '600px';
 					this.dialogHeight = 'auto';
-					this.articleGridColumns = 3;
+					this.articleGridColumns = 1;
 					this.walletGridColumns = 3;
 					this.depositGridColumns = 2;
 					console.log('Large');
@@ -99,7 +99,7 @@ export class ThemingService {
 					this.exportDialogWidth = '450px';
 					this.dialogMaxWidth = '600px';
 					this.dialogHeight = 'auto';
-					this.articleGridColumns = 5;
+					this.articleGridColumns = 1;
 					this.walletGridColumns = 3;
 					this.depositGridColumns = 3;
 					console.log('XLarge');
