@@ -10,6 +10,7 @@ import { trigger, transition, query, style, stagger, animate } from '@angular/an
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
 import { ThemingService } from 'src/app/shared/services/theming.service';
@@ -19,6 +20,7 @@ import { DataService } from 'src/app/shared/services/data.service';
 import { CloudService } from 'src/app/shared/services/cloud.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 export interface Transactions {
 	type: string;
@@ -62,7 +64,6 @@ export class WalletsComponent implements OnInit {
 	isSmallScreen: boolean = false;
 
 	// variables
-	clipboard: boolean = false;
 	transactions: any = [];
 	wallets: any = [];
 	walletLimit: number = environment.walletLimit;
@@ -87,14 +88,11 @@ export class WalletsComponent implements OnInit {
 		private dataService: DataService,
 		private cloudService: CloudService,
 		private themingService: ThemingService,
+		private cordovaService: CordovaService,
+		private clipboard: Clipboard,
 		public breakpointObserver: BreakpointObserver,
 		private changeDetectorRefs: ChangeDetectorRef,
-	) {
-		// Check if clipboard is supported
-		if (navigator.clipboard) {
-			this.clipboard = true;
-		}
-	}
+	) {	}
 
 	getHelperService() {
 		return this.helperService;
@@ -227,6 +225,18 @@ export class WalletsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+	copy(value: any, message: string): void {
+		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
+			this.clipboard.copy(value);
+			this.snackbarService.openSnackBar(message, 'Dismiss');
+		} else if (navigator.clipboard) {
+			navigator.clipboard.writeText(value);
+			this.snackbarService.openSnackBar(message, 'Dismiss');
+		} else {
+			this.snackbarService.openSnackBar('Could not access the clipboard', 'Dismiss');
+		}
+	}
 
 	openExplorer(hash:string) {
 		window.open("https://explorer.conceal.network/index.html?hash=" + hash + "#blockchain_transaction", '_blank');

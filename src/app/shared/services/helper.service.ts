@@ -1,10 +1,8 @@
 // Angular Core
 import { Injectable } from '@angular/core';
-import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 // 3rd Party
 import * as moment from 'moment';
@@ -16,9 +14,7 @@ import * as moment from 'moment';
 export class HelperService {
 
 	constructor (
-		private snackbarService: SnackbarService,
-		private cordovaService: CordovaService,
-		private clipboard: Clipboard,
+		private snackbarService: SnackbarService
 	) { }
 
 	formattedStringAmount(amount:number, currency:string, symbol:string): any {
@@ -55,18 +51,6 @@ export class HelperService {
       return (100 - Math.round(blocksToGo / (unlockHeight - lockHeight) * 100));
     }
   }
-
-	copyToClipboard(value: any, message: string): void {
-		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
-			this.clipboard.copy(value);
-			this.snackbarService.openSnackBar(message, 'Dismiss');
-		} else if (navigator.clipboard) {
-			navigator.clipboard.writeText(value);
-			this.snackbarService.openSnackBar(message, 'Dismiss');
-		} else {
-			this.snackbarService.openSnackBar('Could not access the clipboard', 'Dismiss');
-		}
-	}
 
 	formatTypeText(type:string) {
 		if (type === 'in') return 'Received';
