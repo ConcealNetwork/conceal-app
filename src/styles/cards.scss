@@ -33,9 +33,9 @@
 	.mat-card-content {
 		padding: 15px;
 		font-size: 1rem;
+		margin-bottom: 0px;
 		.description {
-			overflow: hidden;
-			word-wrap: break-word;
+			word-break: break-all;
 		}
 	}
 

@@ -4,38 +4,7 @@
 
 	<div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
 
-		<div fxLayout="column" fxFlex="50" fxFlex.lt-lg="100" fxLayoutAlign="start">
-
-			<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxFlex="noshrink" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid" [@listAnimation]="posts.length">
-
-				<div [fxFlex]="(100/this.getThemingService().articleGridColumns) + '%'" fxFlex="100%" *ngFor="let item of posts | orderByImpure: '-pubDate'">
-
-					<mat-card class="mat-elevation-z6">
-
-						<mat-card-header fxLayout="column">
-							<h2 class="title">{{item.title | shorten: 70: '...'}}</h2>
-							<p class="orange">Posted {{ this.toDate(item.pubDate) | timeAgo }}</p>
-						</mat-card-header>
-
-						<mat-card-content fxLayout="column">
-							<p class="description" [innerHTML]="item.description | stripTags: 'p' | shorten: 1000: '...'"></p>
-						</mat-card-content>
-
-						<mat-card-actions fxLayout="column">
-							<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-								<a fxFlex fxFlex="noshrink" color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Open Post</a>
-							</div>
-						</mat-card-actions>
-
-					</mat-card>
-
-				</div>
-
-			</div>
-
-		</div>
-
-		<div fxHide.lt-lg fxLayout="column" fxFlex="50" fxLayoutAlign="start">
+		<div fxHide.lt-lg fxLayout="column" fxFlex="40" fxLayoutAlign="start">
 
 			<mat-card class="mat-elevation-z6">
 
@@ -44,20 +13,46 @@
 				</mat-card-header>
 
 				<mat-card-content fxLayout="column" fxLayoutGap="15px">
-					<div class="posts" fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center" *ngFor="let item of posts">
-						<div fxFlex="20" class="post-time">
-							Posted {{ this.toDate(item.pubDate) | timeAgo }}
-						</div>
-						<div fxFlex="auto" class="post-title">
-							{{item.title | shorten: 60: '...'}}
+					<div class="posts" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center center" *ngFor="let item of posts">
+						<div fxFlex="auto" fxLayout="column" fxLayoutGap="5px">
+							<div class="orange">
+								Posted {{ this.toDate(item.pubDate) | timeAgo }}
+							</div>
+							<div class="title">
+								{{item.title | shorten: 70: '...'}}
+							</div>
 						</div>
 						<div fxFlex="20">
-							<a fxFlex="noshrink" color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Open Post</a>
+							<a fxFlex="noshrink" color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Read</a>
 						</div>
 					</div>
 				</mat-card-content>
 
 			</mat-card>
+
+		</div>
+
+		<div fxLayout="column" fxFlex="60" fxFlex.lt-lg="100" fxLayoutAlign="start">
+
+			<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxFlex="noshrink" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid" [@listAnimation]="posts.length">
+
+				<div [fxFlex]="(100/this.getThemingService().articleGridColumns) + '%'" fxFlex="100%" *ngFor="let item of posts | orderByImpure: '-pubDate'">
+
+					<mat-card class="mat-elevation-z6">
+
+						<mat-card-header fxLayout="column">
+							<h2 class="title">{{item.title | shorten: 60: '...'}}</h2>
+						</mat-card-header>
+
+						<mat-card-content fxLayout="column">
+							<p class="description" [innerHTML]="item.description | stripTags: 'p' | shorten: 2000: '...'"></p>
+						</mat-card-content>
+
+					</mat-card>
+
+				</div>
+
+			</div>
 
 		</div>
 
