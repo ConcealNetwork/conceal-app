@@ -30,10 +30,10 @@
 			</form>
 		</mat-card-content>
 
-		<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
-			<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-				<button fxFlex color="warn" mat-stroked-button type="button" (click)="reset()">Reset Settings</button>
-				<button fxFlex color="accent" mat-flat-button type="button" (click)="setCurrency(currency.value)" [disabled]="!settings.valid">Apply Settings</button>
+		<mat-card-actions>
+			<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+				<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="reset()">Reset Settings</button>
+				<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="setCurrency(currency.value)" [disabled]="!settings.valid">Apply Settings</button>
 			</div>
 		</mat-card-actions>
 
