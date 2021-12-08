@@ -166,7 +166,7 @@ export class DepositsComponent implements OnInit {
 						this.depositsUnlocked.push(data.message.deposits[i]);
 					}
 				}
-				this.depositsLoading = true;
+				this.depositsLoading = false;
 			} else {
 				this.depositsLoading = false;
 				if (data) {

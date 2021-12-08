@@ -1,11 +1,16 @@
-<div class="content" fxLayout="column" fxLayoutAlign="center stretch">
-	<h1 mat-dialog-title class="title">Two-Factor Authentication</h1>
+<div @transition>
+
+	<h1 mat-dialog-title class="title">Security Notification</h1>
+	<p class="subtitle">Two-Factor Authentication is not enabled</p>
+
 	<div mat-dialog-content>
-		<h4>Two-Factor Authentication is not enabled.</h4>
-		<p>For maximum security please enable it in settings.</p>
+		<p class="message">Two-factor authentication (or two-step authentication) is an important security measure that adds a second layer of protection in addition to your password. Adding this additional security layer makes it much harder for hackers to break into your accounts.</p>
+		<p>For maximum security you should enable it in settings.</p>
 	</div>
+
 	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
 		<button fxFlex mat-stroked-button color="warn" (click)="close()">No Thanks</button>
 		<button fxFlex mat-flat-button color="accent" [mat-dialog-close] routerLink="/settings" cdkFocusInitial>Open Settings</button>
 	</div>
+
 </div>

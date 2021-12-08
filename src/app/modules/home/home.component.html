@@ -14,8 +14,8 @@
 							<h2 class="title">{{item.title | shorten: 25: '...'}}</h2>
 						</mat-card-header>
 
-						<mat-card-content fxLayout="column" fxLayoutGap="15px">
-							<h4 class="date orange">Article posted {{ this.toDate(item.pubDate) | timeAgo }}</h4>
+						<mat-card-content fxLayout="column" fxLayoutGap="0px">
+							<p class="date orange">Article posted {{ this.toDate(item.pubDate) | timeAgo }}</p>
 							<p class="description" [innerHTML]="item.description | stripTags | shorten: 170: '...'"></p>
 						</mat-card-content>
 

@@ -1,5 +1,6 @@
 // Angular
 import { Component, Inject } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 // Dialogs
@@ -7,6 +8,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   selector: 'twofa',
   templateUrl: 'twofactor.component.html',
 	styleUrls: ['./twofactor.component.scss'],
+	animations: [
+		trigger('transition', [
+			transition(':enter', [
+				style({ opacity: 0}),
+				animate('0.3s ease-in', style({ opacity: 1}))
+			])
+		])
+	]
 })
 
 export class TwoFactorDialog {
