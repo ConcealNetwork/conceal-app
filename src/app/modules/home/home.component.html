@@ -13,7 +13,7 @@
 				</mat-card-header>
 
 				<mat-card-content fxLayout="column" fxLayoutGap="15px">
-					<div class="posts" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center center" *ngFor="let item of posts">
+					<div class="posts" fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center center" *ngFor="let item of posts | orderByImpure: '-pubDate'">
 						<div fxFlex="auto" fxLayout="column" fxLayoutGap="5px">
 							<div class="orange">
 								Posted {{ this.toDate(item.pubDate) | timeAgo }}
@@ -47,6 +47,12 @@
 						<mat-card-content fxLayout="column">
 							<p class="description" [innerHTML]="item.description | stripTags: 'p' | shorten: 2000: '...'"></p>
 						</mat-card-content>
+
+						<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+							<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+								<a fxFlex="noshrink" color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Open in browser</a>
+							</div>
+						</mat-card-actions>
 
 					</mat-card>
 

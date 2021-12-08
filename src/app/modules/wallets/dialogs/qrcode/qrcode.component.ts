@@ -40,11 +40,11 @@ export class QrcodeDialog implements OnInit {
 				type: "dots"
 			},
 			cornersSquareOptions: {
-				color:' #444',
-				type: 'dot'
+				color:' #333',
+				type: 'extra-rounded'
 			},
 			cornersDotOptions: {
-				color:' #666',
+				color:' #FFA500',
 				type: 'dot'
 			},
 			backgroundOptions: {
@@ -52,7 +52,7 @@ export class QrcodeDialog implements OnInit {
 			},
 			imageOptions: {
 				margin: 0,
-				imageSize: 0.3,
+				imageSize: 0.4,
 				hideBackgroundDots: false
 			}
 		});
