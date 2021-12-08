@@ -10,33 +10,39 @@
 
 	.message {
 		position: absolute;
-		margin-top: 300px;
-		font-size: 1rem;
+		margin-top: 280px;
+		font-size: 1.2rem;
 	}
 
 	.logo {
+		width: 150px;
+		height: 150px;
 		position: absolute;
-	}
-
-	.spinner {
-		position: relative;
-		height: 250px;
-		width: 250px;
-		animation: rotate 2s linear infinite;
-		transform-origin: center center;
+		top: 0;
 		bottom: 0;
 		left: 0;
 		right: 0;
 		margin: auto;
+	}
 
-		.path {
-			stroke-dasharray: 1, 200;
-			stroke-dashoffset: 0;
-			animation: dash 1.5s ease-in-out infinite;
-			stroke-linecap: round;
-			stroke: orange;
-		}
-
+	.app-loading .spinner {
+		height: 250px;
+		width: 250px;
+		animation: rotate 2s linear infinite;
+		transform-origin: center center;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+	.app-loading .spinner .path {
+		stroke-dasharray: 1, 200;
+		stroke-dashoffset: 0;
+		animation: dash 1.5s ease-in-out infinite;
+		stroke-linecap: round;
+		stroke: orange;
 	}
 
 }
