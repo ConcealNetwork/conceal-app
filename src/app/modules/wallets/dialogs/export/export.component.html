@@ -62,7 +62,7 @@
 			<mat-form-field appearance="fill" color="accent" fxFlex>
 				<mat-label>{{ item.key }}</mat-label>
 				<input matInput type="text" [value]="item.value" [readonly]="true">
-				<button type="button" matSuffix mat-icon-button color="accent" aria-label="copy" (click)="this.getHelperService().copyToClipboard(item.value, 'Key copied to clipboard')">
+				<button type="button" matSuffix mat-icon-button color="accent" aria-label="copy" (click)="copy(item.value, 'Key copied to clipboard')">
 					<mat-icon>content_copy</mat-icon>
 				</button>
 			</mat-form-field>

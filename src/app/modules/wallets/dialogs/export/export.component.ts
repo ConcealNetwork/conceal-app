@@ -111,6 +111,18 @@ export class ExportDialog {
 		this.dialogRef.close(true);
 	}
 
+	copy(value: any, message: string): void {
+		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
+			this.clipboard.copy(value);
+			this.snackbarService.openSnackBar(message, 'Dismiss');
+		} else if (navigator.clipboard) {
+			navigator.clipboard.writeText(value);
+			this.snackbarService.openSnackBar(message, 'Dismiss');
+		} else {
+			this.snackbarService.openSnackBar('Could not access the clipboard', 'Dismiss');
+		}
+	}
+
 	paste() {
 		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
 			this.clipboard.paste().then(
