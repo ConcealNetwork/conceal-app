@@ -1,10 +1,10 @@
 <app-loader *ngIf="this.isLoading"></app-loader>
 
-<div class="container" fxLayout="column" fxLayoutGap="25px" *ngIf="!this.isLoading">
+<div class="container" fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-md="25px" *ngIf="!this.isLoading">
 
 	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
 
-			<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid" [@listAnimation]="posts.length">
+			<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxFlex="noshrink" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid" [@listAnimation]="posts.length">
 
 				<div [fxFlex]="(100/this.getThemingService().articleGridColumns) + '%'" fxFlex="100%" *ngFor="let item of posts | orderByImpure: '-pubDate'">
 
@@ -20,9 +20,9 @@
 						</mat-card-content>
 
 						<mat-card-actions fxLayout="column">
-							<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-								<a (click)="openArticle(item)" target="_blank" color="accent" mat-stroked-button fxFlex>Read More</a>
-								<a [href]="item.link" target="_blank" color="warn" mat-stroked-button fxFlex>Full Article</a>
+							<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+								<a fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="openArticle(item)" target="_blank">Read More</a>
+								<a fxFlex fxFlex="noshrink" color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Full Article</a>
 							</div>
 						</mat-card-actions>
 
