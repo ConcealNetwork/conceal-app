@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { NgPipesModule } from 'ngx-pipes';
+import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Components
 import { LoaderComponent } from './shared/components/loader/loader.component';
@@ -19,7 +20,8 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 		FlexLayoutModule
 	],
 	providers: [
-		HTTP
+		HTTP,
+		Clipboard
 	]
 })
 
