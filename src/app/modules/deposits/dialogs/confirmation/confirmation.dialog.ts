@@ -2,11 +2,13 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CloudService } from 'src/app/shared/services/cloud.service';
+import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -20,19 +22,16 @@ export class ConfirmationDialog {
 	hasTwoFa!: boolean;
 	isFormLoading: boolean = true;
 	isLoading: boolean = false;
-	clipboard: boolean = false;
 
 	constructor (
 		public dialogRef: MatDialogRef<ConfirmationDialog>,
 		@Inject(MAT_DIALOG_DATA) public data: any,
 		private snackbarService: SnackbarService,
 		private authService: AuthService,
-		private cloudService: CloudService
+		private cloudService: CloudService,
+		private cordovaService: CordovaService,
+		private clipboard: Clipboard,
 	) {
-		// Check if clipboard is supported
-		if (navigator.clipboard) {
-			this.clipboard = true;
-		}
 		// Check if 2fa is enabled
 		this.authService.check2fa().subscribe((result: any) => {
 			if(result.message.enabled) {
@@ -60,16 +59,28 @@ export class ConfirmationDialog {
 		this.dialogRef.close(true);
 	}
 
-	paste(item:string) {
-		if (navigator.clipboard) {
-			navigator.clipboard.readText()
-			.then(text => {
-				if (item == 'twofa') {this.confirmation.controls.twofaFormControl.setValue(text)}
-				this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
-			})
-			.catch(err => {
-				this.snackbarService.openSnackBar(err, 'Dismiss');
-			});
+	paste() {
+		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
+			this.clipboard.paste().then(
+				(resolve: string) => {
+						this.confirmation.controls.twofaFormControl.setValue(resolve);
+						this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+					},
+					(reject: string) => {
+						this.snackbarService.openSnackBar(reject, 'Dismiss');
+					}
+			)
+		} else if (navigator.clipboard) {
+			if (navigator.clipboard) {
+				navigator.clipboard.readText()
+				.then(text => {
+					this.confirmation.controls.twofaFormControl.setValue(text);
+					this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+				})
+				.catch(err => {
+					this.snackbarService.openSnackBar(err, 'Dismiss');
+				});
+			}
 		}
 	}
 

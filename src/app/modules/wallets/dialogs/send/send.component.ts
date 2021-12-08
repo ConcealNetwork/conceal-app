@@ -6,12 +6,14 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CloudService } from 'src/app/shared/services/cloud.service';
 import { DataService } from 'src/app/shared/services/data.service';
+import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 // Dialogs
 @Component({
@@ -38,7 +40,6 @@ export class SendDialog {
 	hasTwoFa: boolean = false;
 	wallet: any;
 	isLoading: boolean = false;
-	clipboard: boolean = false;
 
 	constructor (
 		public dialogRef: MatDialogRef<SendDialog>,
@@ -46,13 +47,11 @@ export class SendDialog {
 		private snackbarService: SnackbarService,
 		private authService: AuthService,
 		private cloudService: CloudService,
-		private dataService: DataService
+		private dataService: DataService,
+		private cordovaService: CordovaService,
+		private clipboard: Clipboard,
 	) {
 		this.wallet = this.data.wallet;
-		// Check if clipboard is supported
-		if (navigator.clipboard) {
-			this.clipboard = true;
-		}
 		// Check if 2fa is enabled
 		this.authService.check2fa().subscribe((result: any) => {
 			if(result.message.enabled) {
@@ -160,18 +159,32 @@ export class SendDialog {
 		}
 	}
 
-	paste(item:string) {
-		if (navigator.clipboard) {
-			navigator.clipboard.readText()
-			.then(text => {
-				if (item == 'toAddress') {this.formTransaction.controls.toAddress.setValue(text)}
-				if (item == 'paymentID') {this.formTransaction.controls.paymentID.setValue(text)}
-				if (item == 'twofa') {this.formAuthorise.controls.twofaFormControl.setValue(text)}
-				this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
-			})
-			.catch(err => {
-				this.snackbarService.openSnackBar(err, 'Dismiss');
-			});
+	paste(item: string) {
+		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
+			this.clipboard.paste().then(
+				(resolve: string) => {
+					if (item == 'toAddress') {this.formTransaction.controls.toAddress.setValue(resolve)}
+					if (item == 'paymentID') {this.formTransaction.controls.paymentID.setValue(resolve)}
+					if (item == 'twofa') {this.formAuthorise.controls.twofaFormControl.setValue(resolve)}
+						this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+					},
+					(reject: string) => {
+						this.snackbarService.openSnackBar(reject, 'Dismiss');
+					}
+			)
+		} else if (navigator.clipboard) {
+			if (navigator.clipboard) {
+				navigator.clipboard.readText()
+				.then(text => {
+					if (item == 'toAddress') {this.formTransaction.controls.toAddress.setValue(text)}
+					if (item == 'paymentID') {this.formTransaction.controls.paymentID.setValue(text)}
+					if (item == 'twofa') {this.formAuthorise.controls.twofaFormControl.setValue(text)}
+					this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+				})
+				.catch(err => {
+					this.snackbarService.openSnackBar(err, 'Dismiss');
+				});
+			}
 		}
 	}
 
