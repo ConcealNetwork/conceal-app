@@ -3,6 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
 import { CloudService } from 'src/app/shared/services/cloud.service';
@@ -10,6 +11,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { ThemingService } from 'src/app/shared/services/theming.service';
+import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 // Dialogs
 @Component({
@@ -30,7 +32,6 @@ export class ExportDialog {
 
 	isFormLoading: boolean = true;
 	isLoading: boolean = false;
-	clipboard: boolean = false;
 	hasTwoFa: boolean = false;
 	haveKeys: boolean = false;
 	keys!: any;
@@ -50,11 +51,10 @@ export class ExportDialog {
 		private snackbarService: SnackbarService,
 		private helperService: HelperService,
 		private themingService: ThemingService,
+		private cordovaService: CordovaService,
+		private clipboard: Clipboard,
 		public dialogRef: MatDialogRef<ExportDialog>, @Inject(MAT_DIALOG_DATA) public data: any
 	) {
-		if (navigator.clipboard) {
-			this.clipboard = true;
-		}
 		// Check if 2fa is enabled
 		this.authService.check2fa().subscribe((result: any) => {
 			if(result.message.enabled) {
@@ -111,16 +111,28 @@ export class ExportDialog {
 		this.dialogRef.close(true);
 	}
 
-	paste(item:string) {
-		if (navigator.clipboard) {
-			navigator.clipboard.readText()
-			.then(text => {
-				if (item == 'twofa') {this.export.controls.code.setValue(text)}
-				this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
-			})
-			.catch(err => {
-				this.snackbarService.openSnackBar(err, 'Dismiss');
-			});
+	paste() {
+		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
+			this.clipboard.paste().then(
+				(resolve: string) => {
+						this.export.controls.code.setValue(resolve);
+						this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+					},
+					(reject: string) => {
+						this.snackbarService.openSnackBar(reject, 'Dismiss');
+					}
+			)
+		} else if (navigator.clipboard) {
+			if (navigator.clipboard) {
+				navigator.clipboard.readText()
+				.then(text => {
+					this.export.controls.code.setValue(text);
+					this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+				})
+				.catch(err => {
+					this.snackbarService.openSnackBar(err, 'Dismiss');
+				});
+			}
 		}
 	}
 

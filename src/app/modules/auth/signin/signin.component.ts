@@ -82,7 +82,7 @@ export class SigninComponent implements OnInit {
 		}
 	}
 
-	paste2fa() {
+	paste() {
 		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
 			this.clipboard.paste().then(
 				(resolve: string) => {
