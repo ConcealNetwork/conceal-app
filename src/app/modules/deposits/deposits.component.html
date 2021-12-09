@@ -76,7 +76,7 @@
 											Term must be between <strong>1 and 12</strong>
 										</mat-error>
 									</mat-form-field>
-									<div fxLayout="column" fxFlex="noshrink">
+									<div *ngIf="this.showSlider" fxLayout="column" fxFlex="noshrink">
 										<mat-slider [value]="termLength" class="slider" color="accent" thumbLabel tickInterval="1" step="1" min="0" max="12" aria-label="units" (input)="termChanges($event.value)"></mat-slider>
 									</div>
 								</div>

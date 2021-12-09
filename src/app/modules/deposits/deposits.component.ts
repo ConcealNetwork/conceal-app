@@ -13,6 +13,7 @@ import { CloudService } from 'src/app/shared/services/cloud.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 @Component({
   selector: 'app-deposits',
@@ -37,6 +38,7 @@ export class DepositsComponent implements OnInit {
 	@ViewChild('deposit') form: any;
 
 	// Variables
+	showSlider: boolean = true;
 	walletsLoading: boolean = true;
 	depositsLoading: boolean = true;
 	interestRates: any = environment.interestRates;
@@ -73,6 +75,7 @@ export class DepositsComponent implements OnInit {
 		private helperService: HelperService,
 		private dialogService: DialogService,
 		private snackbarService: SnackbarService,
+		private cordovaService: CordovaService,
 	) {	}
 
 	getThemingService() {
@@ -130,6 +133,9 @@ export class DepositsComponent implements OnInit {
 	}
 
   ngOnInit(): void {
+		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'Android')) {
+			this.showSlider = false;
+		}
 		// disable form controls
 		this.deposit.controls.rate.disable();
 		this.deposit.controls.interest.disable();
