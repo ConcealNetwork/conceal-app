@@ -1,28 +1,29 @@
 <app-loader *ngIf="this.depositsLoading || this.walletsLoading"></app-loader>
 
-<div class="container" fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-md="25px" *ngIf="!this.depositsLoading && !this.walletsLoading">
+<div class="container" fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-sm="25px" *ngIf="!this.depositsLoading && !this.walletsLoading">
 
 	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
 
+		<!-- Deposits -->
 		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid" @transition>
 
 			<!-- New Deposit -->
-			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="30">
+			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="auto" fxFlex.xl="auto">
 				<form [formGroup]="deposit">
 					<mat-card class="mat-elevation-z6">
 
 						<mat-card-header fxLayout="column">
-							<h2 class="title">New Deposit</h2>
+							<h2 class="title">Create a deposit</h2>
 						</mat-card-header>
 
 						<mat-card-content fxLayout="column" fxLayoutGap="15px">
 
 							<fieldset fxLayout="column" fxFlex="noshrink">
-								<legend>Deposit Value</legend>
+								<legend>Value</legend>
 
 								<div fxLayout="column" fxFlex="noshrink" fxLayoutGap="25px">
 
-									<div fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+									<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
 										<mat-form-field hintLabel="The wallet for the deposit" color="accent" appearance="fill" fxFlex="noshrink">
 											<mat-label>Wallet</mat-label>
 											<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">
@@ -63,9 +64,9 @@
 							</fieldset>
 
 							<fieldset fxLayout="column" fxFlex="noshrink">
-								<legend>Deposit Length</legend>
-								<div fxLayout="column" fxFlex fxLayoutGap="15px">
-									<mat-form-field hintLabel="The term of the deposit" color="accent" appearance="fill" fxFlex>
+								<legend>Length</legend>
+								<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
+									<mat-form-field hintLabel="The term of the deposit" color="accent" appearance="fill" fxFlex="noshrink">
 										<mat-label>Fixed Term</mat-label>
 										<input #term matInput numeric steps="1" min="1" max="12" type="number" name="term" placeholder="1" formControlName="term" (input)="termChanges(term.value)">
 										<span matSuffix>Month<span *ngIf="(termLength > 1 || termLength === 0)">s</span></span>
@@ -76,35 +77,33 @@
 											Term must be between <strong>1 and 12</strong>
 										</mat-error>
 									</mat-form-field>
-									<div *ngIf="this.showSlider" fxLayout="column" fxFlex="noshrink">
+									<div *ngIf="this.showSlider" fxLayout="column">
 										<mat-slider [value]="termLength" class="slider" color="accent" thumbLabel tickInterval="1" step="1" min="0" max="12" aria-label="units" (input)="termChanges($event.value)"></mat-slider>
 									</div>
 								</div>
 							</fieldset>
 
 							<fieldset fxLayout="column" fxFlex="noshrink">
-								<legend>Interest Calculation</legend>
-								<div fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-									<mat-form-field fxFlex hintLabel="The interest rate of the deposit" color="accent" appearance="fill">
-										<mat-label>Your Rate</mat-label>
-										<input #rate matInput numeric type="number" name="rate" placeholder="1" formControlName="rate" readonly>
-										<span matSuffix>%</span>
-									</mat-form-field>
-									<mat-form-field fxFlex hintLabel="The interest amount of the deposit" color="accent" appearance="fill">
-										<mat-label>Interest Paid</mat-label>
-										<input #interest matInput numeric type="number" name="interest" placeholder="1" formControlName="interest" readonly>
-										<span matSuffix>CCX</span>
-									</mat-form-field>
+								<legend>Calculation</legend>
+								<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
+									<div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between stretch">
+										<span class="orange">Your Rate</span>
+										<span class="amount">{{this.rate}} %</span>
+									</div>
+									<div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between stretch">
+										<span class="orange">Your Interest</span>
+										<span class="amount">{{this.interest}} CCX</span>
+									</div>
+									<button type="button" mat-stroked-button fxFlex (click)="getDialogService().openMatrixDialog()">View interest rates</button>
 								</div>
 							</fieldset>
 
 						</mat-card-content>
 
 						<mat-card-actions fxLayout="column">
-							<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-								<button type="submit" color="warn" mat-stroked-button fxFlex="noshrink" (click)="reset()">Reset</button>
-								<button type="button" color="accent" mat-stroked-button fxFlex="noshrink" (click)="getDialogService().openMatrixDialog()">Interest Table</button>
-								<button type="submit" color="accent" mat-flat-button fxFlex="noshrink" (click)="submit()" [disabled]="!deposit.valid">Create Deposit</button>
+							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+								<button type="submit" color="warn" mat-stroked-button fxFlex="50" (click)="reset()">Reset</button>
+								<button type="submit" color="accent" mat-flat-button fxFlex="50" (click)="submit()" [disabled]="!deposit.valid">Create Deposit</button>
 							</div>
 						</mat-card-actions>
 
@@ -113,10 +112,10 @@
 			</div>
 
 			<!-- Locked Deposits -->
-			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="auto">
-				<mat-card class="mat-elevation-z6" fxFlex="100%">
+			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="auto" fxFlex.xl="auto">
+				<mat-card class="deposit mat-elevation-z6" fxFlex="100%">
 					<mat-card-header fxLayout="column">
-						<h2 class="title">Locked Deposits</h2>
+						<h2 class="title">Pending Deposits</h2>
 					</mat-card-header>
 					<mat-card-content>
 						<div *ngIf="this.depositsLocked == 0">
@@ -125,8 +124,8 @@
 						<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsLocked">
 								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="5px">
-									<legend class="uppercase orange" fxLayout="row" fxLayoutAlign="space-between center">
-										<mat-icon aria-hidden="false">lock</mat-icon>
+									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
+										<mat-icon class="orange" aria-hidden="false">lock</mat-icon>
 										{{this.getHelperService().formatAddress(item.address || '')}}
 									</legend>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
@@ -160,7 +159,7 @@
 			</div>
 
 			<!-- Unlocked Deposits -->
-			<div id="cards" fxFlex="100" fxFlex.xl="auto">
+			<div id="cards" fxFlex="100" fxFlex.md="auto" fxFlex.lg="auto" fxFlex.xl="auto">
 				<mat-card class="deposit mat-elevation-z6" fxFlex="100%">
 					<mat-card-header fxLayout="column">
 						<h2 class="title">Unlocked Deposits</h2>
@@ -204,6 +203,21 @@
 
 		</div>
 
+	</div>
+
+	<!-- Deposit History -->
+	<div class="search" fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
+		<mat-card id="cards" class="mat-elevation-z6">
+			<mat-card-header fxLayout="column">
+				<div fxLayout="row" class="controls" fxLayoutAlign="center center">
+					<mat-form-field color="accent" fxFlex="auto" class="filter" appearance="standard">
+						<mat-label class="searchbox">Search Deposits</mat-label>
+						<input matInput>
+						<mat-icon color="accent" matSuffix>search</mat-icon>
+					</mat-form-field>
+				</div>
+			</mat-card-header>
+		</mat-card>
 	</div>
 
 </div>

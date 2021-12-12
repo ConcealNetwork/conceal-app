@@ -49,6 +49,9 @@ export class DepositsComponent implements OnInit {
 	termLength: number = 0;
 	blockchainHeight: number = 0;
 
+	interest: any = 0;
+	rate: any = 0;
+
 	deposit: FormGroup = new FormGroup({
 		wallet: new FormControl('', [
 			Validators.required,
@@ -64,9 +67,7 @@ export class DepositsComponent implements OnInit {
 			Validators.pattern('([1-9]|1[0-2])'),
 			Validators.minLength(1),
 			Validators.maxLength(2),
-		]),
-		interest: new FormControl('', []),
-		rate: new FormControl('', [])
+		])
 	});
 
   constructor(
@@ -136,9 +137,6 @@ export class DepositsComponent implements OnInit {
 		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'Android')) {
 			this.showSlider = false;
 		}
-		// disable form controls
-		this.deposit.controls.rate.disable();
-		this.deposit.controls.interest.disable();
 		// subscribe to wallets
 		let wallets = this.cloudService.getWalletsData().subscribe((data:any) => {
 			if (data && data.result === 'success') {
@@ -147,8 +145,8 @@ export class DepositsComponent implements OnInit {
 				this.walletsLoading = false;
 				this.deposit.valueChanges.pipe(debounceTime(500)).subscribe(() => {
 					if (this.deposit.controls.term.value && this.deposit.controls.amount.value) {
-						this.deposit.controls.interest.patchValue(this.getDepositInterest(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
-						this.deposit.controls.rate.patchValue(this.getDepositRate(this.deposit.controls.amount.value, this.termLength), { emitEvent: true });
+						this.interest = this.getDepositInterest(this.deposit.controls.amount.value, this.termLength);
+						this.rate = this.getDepositRate(this.deposit.controls.amount.value, this.termLength);
 					}
 				})
 			} else {

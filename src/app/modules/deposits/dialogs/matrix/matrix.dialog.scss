@@ -1,6 +1,7 @@
 .title {
 	font-size: 1.4rem;
 	margin-block-end: 0.3em;
+	margin-bottom: 15px;
 }
 
 .subtitle {
@@ -9,10 +10,12 @@
 	filter: brightness(80%);
 }
 
+
+
 table {
 	width: 100%;
 	th {
-		color: orange;
+		color: #faa933;
 	}
 	tr {
 		height: 35px;
@@ -20,5 +23,5 @@ table {
 }
 
 .orange {
-	color: orange;
+	color: #faa933;
 }

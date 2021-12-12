@@ -21,7 +21,7 @@
 
 			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
 				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Recover Password' : 'Loading' }}</button>
-				<a mat-stroked-button (click)="changeAuthType('signIn')">Return</a>
+				<a mat-stroked-button (click)="changeAuthType('signIn')">Cancel</a>
 			</div>
 
 		</form>
