@@ -1,7 +1,7 @@
 .mat-toolbar {
 	-webkit-app-region: drag;
-	height: 70px;
 	padding: 0 1.5rem 0 1.5rem;
+	height: 90px;
 
 	h1 {
 		float: left;
@@ -21,6 +21,13 @@
 	.options {
 		-webkit-app-region: no-drag;
 		-webkit-user-select: none;
+	}
+
+	.active {
+		color: #faa933 !important;
+		border-bottom: 2px solid #faa933;
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
 	}
 
 	.navlink {

@@ -115,7 +115,7 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 
 /* You can add global styles to this file, and also import other style files */
 .orange {
-	color: orange;
+	color: #faa933;
 }
 
 .capitalize {
@@ -165,13 +165,13 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 }
 
 .container {
-	padding: 45px;
+	padding: 25px;
 }
 
 /* Large devices (laptops/desktops, 960px and up) */
 @media (min-width: 1280px) and (max-width: 1919.98px) {
 	.container {
-		padding: 25px;
+		padding: 15px;
 	}
 }
 
@@ -198,7 +198,7 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 :-webkit-autofill,
 :-webkit-autofill:hover,
 :-webkit-autofill:focus {
-  -webkit-text-fill-color: orange;
+  -webkit-text-fill-color: #faa933;
   -webkit-box-shadow: 0 0 0px 1000px rgba(0,0,0,0) inset;
   transition: background-color 5000s ease-in-out 0s;
 }

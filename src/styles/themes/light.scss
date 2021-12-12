@@ -56,7 +56,8 @@
 }
 
 .mat-toolbar {
-	background: rgba($color: #fff, $alpha: 1);
+	background: rgba($color: #fff, $alpha: 0.8);
+	border-bottom: 1px solid #ccc;
 }
 
 .card-content {
