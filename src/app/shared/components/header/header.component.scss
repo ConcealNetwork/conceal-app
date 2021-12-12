@@ -1,4 +1,5 @@
 .mat-toolbar {
+	-webkit-app-region: drag;
 	height: 70px;
 	padding: 0 1.5rem 0 1.5rem;
 
@@ -12,10 +13,19 @@
 	}
 
 	.links {
+		-webkit-app-region: no-drag;
+		-webkit-user-select: none;
 		margin-left: 35px;
 	}
 
+	.options {
+		-webkit-app-region: no-drag;
+		-webkit-user-select: none;
+	}
+
 	.navlink {
+		-webkit-app-region: no-drag;
+		-webkit-user-select: none;
 		padding-top: 5px;
 		padding-bottom: 5px;
 		font-weight: 400;
