@@ -121,16 +121,20 @@
 						<div *ngIf="this.depositsLocked == 0">
 							<span class="nothing">No deposits...</span>
 						</div>
-						<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
+						<div *ngIf="this.depositsLocked > 0" [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsLocked">
 								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="5px">
 									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
 										<mat-icon class="orange" aria-hidden="false">lock</mat-icon>
-										{{this.getHelperService().formatAddress(item.address || '')}}
+										Unlocks in {{this.getHelperService().getUnlockTime(item.unlockHeight, this.blockchainHeight)}}
 									</legend>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Created</span>
 										<span class="amount">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
+									</div>
+									<div fxLayout="row" fxLayoutAlign="space-between stretch">
+										<span class="title">Wallet</span>
+										<span class="amount">{{this.getHelperService().formatAddress(item.address || '')}}</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Amount</span>
@@ -140,11 +144,7 @@
 										<span class="title">Interest</span>
 										<span class="amount">{{(item.interest / 1000000).toFixed(6)}} CCX</span>
 									</div>
-									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Unlocks</span>
-										<span class="amount">In {{this.getHelperService().getUnlockTime(item.unlockHeight, this.blockchainHeight)}}</span>
-									</div>
-									<div class="progress" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="15px">
+									<div class="progress" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
 										<div fxLayout="row">
 											<span class="title">Progress:</span>
 											<span class="amount">{{this.getHelperService().getUnlockPercent(item.height, item.unlockHeight, this.blockchainHeight)}}%</span>
@@ -168,7 +168,7 @@
 						<div *ngIf="this.depositsUnlocked == 0">
 							<span class="nothing">No deposits...</span>
 						</div>
-						<div fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
+						<div *ngIf="this.depositsUnlocked > 0" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsUnlocked">
 								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="15px">
 									<legend class="uppercase orange" fxLayout="row" fxLayoutAlign="space-between center">
