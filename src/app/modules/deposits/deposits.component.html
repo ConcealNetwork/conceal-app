@@ -121,12 +121,12 @@
 						<div *ngIf="this.depositsLocked == 0">
 							<span class="nothing">No deposits...</span>
 						</div>
-						<div *ngIf="this.depositsLocked > 0" [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
+						<div *ngIf="this.depositsLocked !== 0" [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsLocked">
 								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="5px">
 									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
 										<mat-icon class="orange" aria-hidden="false">lock</mat-icon>
-										Unlocks in {{this.getHelperService().getUnlockTime(item.unlockHeight, this.blockchainHeight)}}
+										Unlocks {{this.getHelperService().getUnlockTime(item.unlockHeight, this.blockchainHeight)}}
 									</legend>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Created</span>
@@ -168,7 +168,7 @@
 						<div *ngIf="this.depositsUnlocked == 0">
 							<span class="nothing">No deposits...</span>
 						</div>
-						<div *ngIf="this.depositsUnlocked > 0" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
+						<div *ngIf="this.depositsUnlocked !== 0" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsUnlocked">
 								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="15px">
 									<legend class="uppercase orange" fxLayout="row" fxLayoutAlign="space-between center">

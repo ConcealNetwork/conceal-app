@@ -40,7 +40,7 @@ export class HelperService {
     let minutesToGo = ((blocksToGo * 2) / 60);
     let currentTS = moment();
     let unlockTS = moment(currentTS).add(minutesToGo, 'hours');
-    return unlockTS.fromNow(true);
+    return unlockTS.fromNow();
   }
 
 	getUnlockPercent(lockHeight:number, unlockHeight:number, blockchainHeight:number) {
