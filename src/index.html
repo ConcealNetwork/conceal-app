@@ -7,16 +7,25 @@
   <base href="/">
 	<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 	<meta name="msapplication-tap-highlight" content="no"/>
-	<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff">
-	<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#222">
-  <link href="manifest.webmanifest" rel="manifest">
-  <!-- add to homescreen for ios -->
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+	<meta name="color-scheme" content="dark light">
+	<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+	<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212">
+	<!-- add to homescreen for ios -->
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<!-- web-version-config-on -->
+	<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+	<link href="https://fonts.googleapis.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
+	<!-- end-web-version-config-on -->
+	<link href="manifest.webmanifest" rel="manifest">
+	<link href="assets/images/bg-dark.webp" rel="prefetch">
+	<link href="assets/images/bg-light.webp" rel="prefetch">
+  <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
 	<style type="text/css">
 		body {
 			font-family: 'Poppins';
+			font-display: optional;
 			background-color: #121212;
 		}
 		.app-loading {
