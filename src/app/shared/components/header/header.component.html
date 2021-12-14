@@ -21,16 +21,16 @@
 
 	<div class="options" fxLayoutGap="15px">
 		<button *ngIf="isLoggedIn" mat-icon-button aria-label="logout" (click)="logout()">
-			<mat-icon>logout</mat-icon>
+			<mat-icon aria-hidden="false">logout</mat-icon>
 		</button>
 		<button *ngIf="activeTheme == 'light-theme'" mat-icon-button mdTooltip="Change theme" (click)="changeTheme('dark-theme')">
-			<mat-icon>dark_mode</mat-icon>
+			<mat-icon aria-hidden="false">dark_mode</mat-icon>
 		</button>
 		<button *ngIf="activeTheme == 'dark-theme'" mat-icon-button mdTooltip="Change theme" (click)="changeTheme('light-theme')">
-			<mat-icon>light_mode</mat-icon>
+			<mat-icon aria-hidden="false">light_mode</mat-icon>
 		</button>
 		<button mat-icon-button aria-label="login" routerLink="/settings" routerLinkActive="active">
-			<mat-icon>settings</mat-icon>
+			<mat-icon aria-hidden="false">settings</mat-icon>
 		</button>
 	</div>
 
