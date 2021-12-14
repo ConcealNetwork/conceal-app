@@ -56,3 +56,8 @@
 .posts {
 	border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.break {
+	border-bottom: 1px dashed rgba($color: #ffffff, $alpha: 0.5);
+	margin-bottom : 15px;
+}

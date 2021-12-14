@@ -8,7 +8,7 @@
 		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid" @transition>
 
 			<!-- New Deposit -->
-			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="auto" fxFlex.xl="auto">
+			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="30" fxFlex.xl="30">
 				<form [formGroup]="deposit">
 					<mat-card class="mat-elevation-z6">
 
@@ -111,37 +111,37 @@
 				</form>
 			</div>
 
-			<!-- Locked Deposits -->
-			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="auto" fxFlex.xl="auto">
+			<!-- Deposits -->
+			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="70" fxFlex.xl="70">
 				<mat-card class="deposit mat-elevation-z6" fxFlex="100%">
 					<mat-card-header fxLayout="column">
 						<h2 class="title">Pending Deposits</h2>
 					</mat-card-header>
 					<mat-card-content>
-						<div *ngIf="this.depositsLocked.length == 0">
+						<div *ngIf="this.deposits.length == 0">
 							<span class="nothing">No deposits...</span>
 						</div>
-						<div *ngIf="this.depositsLocked.length !== 0" [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
-							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsLocked">
-								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="5px">
+						<div fxLayout="row" fxLayoutGap="15px" *ngIf="this.deposits.length !== 0">
+							<div fxLayout="column" fxLayoutGap="15px" fxFlex *ngFor="let item of this.deposits">
+								<fieldset class="deposits" fxLayout="column" fxLayoutGap="10px" fxFill.lt-md *ngIf="item.locked">
 									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
 										<mat-icon class="orange" aria-hidden="false">lock</mat-icon>
 										Unlocks {{this.getHelperService().getUnlockTime(item.unlockHeight, this.blockchainHeight)}}
 									</legend>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Created</span>
-										<span class="amount">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
-									</div>
-									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Wallet</span>
-										<span class="amount">{{this.getHelperService().formatAddress(item.address || '')}}</span>
+										<span class="amount uppercase">{{this.getHelperService().formatAddress(item.address || '')}}</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Amount</span>
+										<span class="title">Created</span>
+										<span class="amount uppercase">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
+									</div>
+									<div fxLayout="row" fxLayoutAlign="space-between stretch">
+										<span class="title">Deposited</span>
 										<span class="amount">{{(item.amount / 1000000).toFixed(6)}} CCX</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Interest</span>
+										<span class="title">Earnings</span>
 										<span class="amount">{{(item.interest / 1000000).toFixed(6)}} CCX</span>
 									</div>
 									<div class="progress" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -152,48 +152,24 @@
 										<mat-progress-bar color="accent" mode="buffer" [value]="this.getHelperService().getUnlockPercent(item.height, item.unlockHeight, this.blockchainHeight)"></mat-progress-bar>
 									</div>
 								</fieldset>
-							</div>
-						</div>
-					</mat-card-content>
-				</mat-card>
-			</div>
-
-			<!-- Unlocked Deposits -->
-			<div id="cards" fxFlex="100" fxFlex.md="auto" fxFlex.lg="auto" fxFlex.xl="auto">
-				<mat-card class="deposit mat-elevation-z6" fxFlex="100%">
-					<mat-card-header fxLayout="column">
-						<h2 class="title">Unlocked Deposits</h2>
-					</mat-card-header>
-					<mat-card-content>
-						<div *ngIf="this.depositsUnlocked.length == 0">
-							<span class="nothing">No deposits...</span>
-						</div>
-						<div *ngIf="this.depositsUnlocked.length !== 0" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
-							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsUnlocked">
-								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="15px">
-									<legend class="uppercase orange" fxLayout="row" fxLayoutAlign="space-between center">
-										<mat-icon aria-hidden="false">lock_open</mat-icon>
-										{{this.getHelperService().formatAddress(item.address || '')}}
+								<fieldset class="deposits" fxLayout="column" fxLayoutGap="10px" fxFill.lt-md *ngIf="item.locked">
+									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
+										<mat-icon class="unlocked" aria-hidden="false">lock_open</mat-icon>
+										Unlocked
 									</legend>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Created</span>
-										<span class="amount">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
+										<span class="title">Wallet</span>
+										<span class="amount uppercase">{{this.getHelperService().formatAddress(item.address || '')}}</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Amount</span>
+										<span class="title">Deposited</span>
 										<span class="amount">{{(item.amount / 1000000).toFixed(6)}} CCX</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Interest</span>
+										<span class="title">Earnings</span>
 										<span class="amount">{{(item.interest / 1000000).toFixed(6)}} CCX</span>
 									</div>
-									<div class="progress" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="15px">
-										<div fxLayout="row">
-											<span class="title">Progress:</span>
-											<span class="amount">{{this.getHelperService().getUnlockPercent(item.height, item.unlockHeight, this.blockchainHeight)}}%</span>
-										</div>
-										<mat-progress-bar color="accent" [value]="this.getHelperService().getUnlockPercent(item.height, item.unlockHeight, this.blockchainHeight)"></mat-progress-bar>
-									</div>
+									<button type="button" class="ready" mat-flat-button fxFlex (click)="unlock(item.depositId)">Redeem Deposit</button>
 								</fieldset>
 							</div>
 						</div>
@@ -208,15 +184,109 @@
 	<!-- Deposit History -->
 	<div class="search" fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
 		<mat-card id="cards" class="mat-elevation-z6">
+
 			<mat-card-header fxLayout="column">
 				<div fxLayout="row" class="controls" fxLayoutAlign="center center">
 					<mat-form-field color="accent" fxFlex="auto" class="filter" appearance="standard">
 						<mat-label class="searchbox">Search Deposits</mat-label>
-						<input matInput>
+						<input matInput (keyup)="applyFilter($event)">
 						<mat-icon color="accent" matSuffix>search</mat-icon>
 					</mat-form-field>
 				</div>
 			</mat-card-header>
+
+			<mat-card-content fxLayout="column">
+				<mat-progress-bar color="accent" mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+				<table [hidden]="isLoadingResults" class="transactions" mat-table [dataSource]="dataSource" matSort matSortDisableClear matSortActive="timestamp" matSortDirection="desc">
+
+					<!-- timestamp column -->
+					<ng-container matColumnDef="timestamp">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Locked Time</th>
+						<td mat-cell *matCellDef="let row">
+							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
+								<mat-icon class="icon" *ngIf="!isSmallScreen" aria-hidden="true">event</mat-icon>
+								{{getHelperService().formatDatetime(row.timestamp)}}
+							</div>
+						</td>
+					</ng-container>
+
+					<!-- term column -->
+					<ng-container matColumnDef="term">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header >Unlock Time</th>
+						<td mat-cell *matCellDef="let row" class="capitalize">
+							{{this.getHelperService().getUnlockTime(row.unlockHeight, this.blockchainHeight)}}
+						</td>
+					</ng-container>
+
+					<!-- locked column -->
+					<ng-container matColumnDef="locked">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Deposit Locked</th>
+						<td mat-cell *matCellDef="let row">
+							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
+								<mat-icon class="icon" *ngIf="row.locked" color="accent" aria-hidden="true">lock</mat-icon>
+								<mat-icon class="icon" *ngIf="!row.locked" color="warn" aria-hidden="true">lock_open</mat-icon>
+								{{row.locked}}
+							</div>
+						</td>
+					</ng-container>
+
+					<!-- unlockHeight column -->
+					<ng-container matColumnDef="unlockHeight">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Unlock Height</th>
+						<td mat-cell *matCellDef="let row">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								{{row.unlockHeight}}
+							</div>
+						</td>
+					</ng-container>
+
+					<!-- height column -->
+					<ng-container matColumnDef="height">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Lock Height</th>
+						<td mat-cell *matCellDef="let row">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								{{row.height}}
+							</div>
+						</td>
+					</ng-container>
+
+					<!-- interest column -->
+					<ng-container matColumnDef="interest">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Interest Amount</th>
+						<td mat-cell *matCellDef="let row">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								{{(row.interest / 1000000).toFixed(6)}} CCX
+							</div>
+						</td>
+					</ng-container>
+
+					<!-- address column -->
+					<ng-container matColumnDef="address">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Deposit Wallet</th>
+						<td mat-cell *matCellDef="let row" class="uppercase">
+							{{this.getHelperService().formatAddress(row.address || '')}}
+						</td>
+					</ng-container>
+
+					<!-- amount column -->
+					<ng-container matColumnDef="amount">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Deposit Amount</th>
+						<td mat-cell *matCellDef="let row">
+							{{(row.amount / 1000000).toFixed(6)}} CCX
+						</td>
+					</ng-container>
+
+					<tr mat-header-row class="header" *matHeaderRowDef="displayedColumns;"></tr>
+					<tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></tr>
+
+				</table>
+
+			</mat-card-content>
+
+			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+				<mat-paginator color="accent" class="mat-paginator" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+			</mat-card-actions>
+
 		</mat-card>
 	</div>
 

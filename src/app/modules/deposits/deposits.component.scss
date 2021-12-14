@@ -2,6 +2,9 @@ fieldset {
 	border-radius: 5px;
 	border: 1px solid rgba($color: #999, $alpha: 0.5);
 	padding: 20px;
+	@media only screen and (max-width: 960px) {
+		padding: 15px;
+	}
 }
 
 .mat-option, .mat-select {
@@ -62,5 +65,25 @@ table {
 .controls {
 	.filter {
 		font-size: 1.2rem;
+	}
+}
+
+.unlocked {
+	color: #4caf50;
+}
+
+.ready {
+	background-color: #4caf50;
+}
+
+@media only screen and (max-width: 960px) {
+	.mat-header-cell {
+		font-size: 0.8rem !important;
+	}
+	.mat-cell {
+		font-size: 0.8rem !important;
+	}
+	.icon {
+		font-size: 1.2rem !important;
 	}
 }
