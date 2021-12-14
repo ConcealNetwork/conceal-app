@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Meta } from "@angular/platform-browser";
 import { Router } from '@angular/router';
 import { Subscription } from "rxjs";
 
@@ -22,6 +23,7 @@ export class SidenavComponent implements OnInit {
 
   constructor(
 		private router: Router,
+		private meta: Meta,
 		private authService: AuthService,
 		private snackbarService: SnackbarService,
 		private theming: ThemingService
@@ -45,6 +47,7 @@ export class SidenavComponent implements OnInit {
 		this.close();
     this.theming.theme.next(theme);
 		this.activeTheme = this.theming.theme.value;
+		this.meta.updateTag({ content: `${this.activeTheme === 'light-theme' ? 'light' : 'dark'}` }, 'name=color-scheme');
 		this.snackbarService.openSnackBar(`${this.activeTheme === 'light-theme' ? ' ☀️ Light Mode' : '🌙 Dark Mode'} Activated`, 'Dismiss');
   }
 

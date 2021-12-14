@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Meta } from "@angular/platform-browser";
 import { Router } from '@angular/router';
 
 import { Subscription } from "rxjs";
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
 		private router: Router,
+		private meta: Meta,
 		private authService: AuthService,
 		private theming: ThemingService,
 		private snackbarService: SnackbarService
@@ -31,6 +33,7 @@ export class HeaderComponent implements OnInit {
     this.theming.theme.next(theme);
 		this.activeTheme = this.theming.theme.value;
 		this.snackbarService.openSnackBar(`${this.activeTheme === 'light-theme' ? ' ☀️ Light Mode' : '🌙 Dark Mode'} Activated`, 'Dismiss');
+		this.meta.updateTag({ content: `${this.activeTheme === 'light-theme' ? 'light' : 'dark'}` }, 'name=color-scheme');
   }
 
 	logout() {
