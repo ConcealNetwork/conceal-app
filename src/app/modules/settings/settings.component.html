@@ -1,42 +1,64 @@
 <div class="container" fxLayout="column" fxLayoutGap="15px">
 
-	<mat-card id="cards" class="mat-elevation-z6">
+	<div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="15px" fxLayoutGap.gt-md="25px" @transition>
 
-		<mat-card-header fxLayout="column">
-			<h2 class="title">Settings</h2>
-		</mat-card-header>
+		<mat-card id="cards" class="mat-elevation-z6" fxLayout="column" fxFlex>
 
-		<mat-card-content fxLayout="column" fxLayoutGap="25px">
-			<form [formGroup]="settings">
-				<div fxLayout="row wrap" fxLayoutGap="15px grid">
-					<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-						<mat-form-field hintLabel="Select your preferred currency" color="accent" appearance="fill" fxFlex>
-							<mat-label>Currency</mat-label>
-							<mat-select #currency name="currency" formControlName="currency">
-								<mat-option [value]="item.name | lowercase" *ngFor="let item of this.currencies">
-									{{ item.name | uppercase }}
-								</mat-option>
-							</mat-select>
-							<mat-error *ngIf="settings.controls.currency.hasError('required')">
-								Currency is <strong>required</strong>
-							</mat-error>
-						</mat-form-field>
+			<mat-card-header fxLayout="column">
+				<h2 class="title">Hub Settings</h2>
+			</mat-card-header>
+
+			<mat-card-content fxLayout="column" fxLayoutGap="25px">
+				<form [formGroup]="settings">
+					<div fxLayout="row wrap" fxLayoutGap="15px grid">
+						<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+							<mat-form-field hintLabel="Select your preferred currency" color="accent" appearance="fill" fxFlex>
+								<mat-label>Display Currency</mat-label>
+								<mat-select #currency name="currency" formControlName="currency">
+									<mat-option [value]="item.name | lowercase" *ngFor="let item of this.currencies">
+										{{ item.name | uppercase }}
+									</mat-option>
+								</mat-select>
+								<mat-error *ngIf="settings.controls.currency.hasError('required')">
+									Currency is <strong>required</strong>
+								</mat-error>
+							</mat-form-field>
+						</div>
+
+						<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+							<!-- more fields here -->
+						</div>
 					</div>
+				</form>
+			</mat-card-content>
 
-					<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-						<!-- more fields here -->
-					</div>
+			<mat-card-actions>
+				<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+					<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="reset()">Reset Settings</button>
+					<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="setCurrency(currency.value)" [disabled]="!settings.valid">Apply Settings</button>
 				</div>
-			</form>
-		</mat-card-content>
+			</mat-card-actions>
 
-		<mat-card-actions>
-			<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-				<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="reset()">Reset Settings</button>
-				<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="setCurrency(currency.value)" [disabled]="!settings.valid">Apply Settings</button>
-			</div>
-		</mat-card-actions>
+		</mat-card>
 
-	</mat-card>
+		<mat-card id="cards" class="mat-elevation-z6" fxLayout="column" fxFlex>
+
+			<mat-card-header fxLayout="column">
+				<h2 class="title">Cloud Settings</h2>
+			</mat-card-header>
+
+			<mat-card-content fxLayout="column" fxLayoutGap="25px">
+			</mat-card-content>
+
+			<mat-card-actions>
+				<!-- <div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+					<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="reset()">Reset Settings</button>
+					<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="setCurrency(currency.value)" [disabled]="!settings.valid">Apply Settings</button>
+				</div> -->
+			</mat-card-actions>
+
+		</mat-card>
+
+	</div>
 
 </div>

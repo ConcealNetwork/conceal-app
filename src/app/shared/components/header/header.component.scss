@@ -17,6 +17,12 @@
 		-webkit-app-region: no-drag;
 		-webkit-user-select: none;
 		margin-left: 35px;
+		.active {
+			color: #faa933 !important;
+			border-bottom: 2px solid #faa933;
+			border-bottom-left-radius: 0px;
+			border-bottom-right-radius: 0px;
+		}
 	}
 
 	.options {
@@ -24,12 +30,6 @@
 		-webkit-user-select: none;
 	}
 
-	.active {
-		color: #faa933 !important;
-		border-bottom: 2px solid #faa933;
-		border-bottom-left-radius: 0px;
-		border-bottom-right-radius: 0px;
-	}
 
 	.navlink {
 		-webkit-app-region: no-drag;
