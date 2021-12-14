@@ -32,3 +32,35 @@ fieldset {
 .nothing {
 	font-size: 1rem;
 }
+
+.search {
+	.mat-card {
+		.mat-card-header {
+			padding-top: 5px;
+			padding-bottom: 10px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		.mat-card-content {
+			padding: 0;
+			margin: 0;
+		}
+		.mat-card-actions {
+			padding: 0;
+			margin: 0;
+		}
+	}
+}
+
+table {
+	width: 100%;
+	th {
+		width: 100px;
+	}
+}
+
+.controls {
+	.filter {
+		font-size: 1.2rem;
+	}
+}
