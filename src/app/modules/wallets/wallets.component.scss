@@ -33,3 +33,15 @@ table {
 		font-size: 1.2rem;
 	}
 }
+
+@media only screen and (max-width: 960px) {
+	.mat-header-cell {
+		font-size: 0.8rem !important;
+	}
+	.mat-cell {
+		font-size: 0.8rem !important;
+	}
+	.icon {
+		font-size: 1.2rem !important;
+	}
+}

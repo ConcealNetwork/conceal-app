@@ -2,9 +2,17 @@
 import { environment } from 'src/environments/environment';
 
 // Angular Core
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
+
+// Angular Material
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+
+// RxJs
 import { debounceTime } from 'rxjs/operators';
 
 // Services
@@ -14,6 +22,20 @@ import { HelperService } from 'src/app/shared/services/helper.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { CordovaService } from 'src/app/shared/services/cordova.service';
+
+export interface Deposits {
+	address: string;
+	amount: number;
+	creatingTransactionHash: string;
+	depositId: number;
+	height: number;
+	interest: number;
+	locked: boolean;
+	spendingTransactionHash: string;
+	term: number;
+	timestamp: string;
+	unlockHeight: number;
+}
 
 @Component({
   selector: 'app-deposits',
@@ -36,21 +58,31 @@ import { CordovaService } from 'src/app/shared/services/cordova.service';
 export class DepositsComponent implements OnInit {
 
 	@ViewChild('deposit') form: any;
+	@ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
 	// Variables
+	isLoadingResults: boolean = true;
+	isSmallScreen: boolean = false;
+	isDataLoading: boolean = true;
 	showSlider: boolean = true;
 	walletsLoading: boolean = true;
 	depositsLoading: boolean = true;
 	interestRates: any = environment.interestRates;
 	wallets: any = [];
-	depositsUnlocked: any = [];
-	depositsLocked: any = [];
+	deposits: any = [];
 	selectedWallet: any;
 	termLength: number = 0;
 	blockchainHeight: number = 0;
-
 	interest: any = 0;
 	rate: any = 0;
+
+	// Tables
+	pageEvent!: PageEvent;
+	pageSize: number = 10;
+	pageSizeOptions: number[] = [5, 10, 25, 100];
+	displayedColumns: string[] = ['timestamp', 'type', 'amount'];
+	dataSource!: MatTableDataSource<Deposits>;
 
 	deposit: FormGroup = new FormGroup({
 		wallet: new FormControl('', [
@@ -71,6 +103,8 @@ export class DepositsComponent implements OnInit {
 	});
 
   constructor(
+		private changeDetectorRefs: ChangeDetectorRef,
+		public breakpointObserver: BreakpointObserver,
 		private themingService: ThemingService,
 		private cloudService: CloudService,
 		private helperService: HelperService,
@@ -91,52 +125,34 @@ export class DepositsComponent implements OnInit {
 		return this.dialogService;
 	}
 
-	// show wallets in selection dropdown
-	selectWallet(wallet:any) {
-		this.selectedWallet = wallet;
-	}
-
-	// trigger term changes
-	termChanges(length:any) {
-		this.termLength = length;
-		this.deposit.controls.term.patchValue(length, { emitEvent: true });
-		this.deposit.controls.term.markAsTouched();
-	}
-
-	// set the amount of the deposit based on the select percentage
-	setAmount(percent:number, wallet:any) {
-		this.deposit.controls.amount.patchValue(((percent / 100) * this.wallets[wallet].balance).toFixed(6) || 0, { emitEvent: true });
-		this.deposit.controls.amount.markAsTouched();
-	}
-
-	// return the correct interest rate percent from the 2D table
-	getDepositInterest(amount: number, duration: number) {
-		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)] * amount / 100).toFixed(6);
-	}
-
-	// return the correct interest rate from the 2D table
-	getDepositRate(amount: number, duration: number) {
-		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)].toFixed(2));
-	}
-
-	// reset deposit form
-	reset() {
-		this.selectedWallet = null;
-		this.termLength = 0;
-		this.deposit.reset();
-	}
-
-	// submit deposit form
-	submit() {
-		if (this.deposit.valid) {
-			this.dialogService.openConfirmationDialog(this.deposit.value);
-		}
-	}
-
   ngOnInit(): void {
 		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'Android')) {
 			this.showSlider = false;
 		}
+		// breakpoints
+		let breakpoints = this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe((state: BreakpointState) => {
+			if (state.matches) {
+				// Matches small viewport or handset in portrait mode
+				this.isSmallScreen = true;
+				this.pageSize = 5;
+				this.displayedColumns = [
+					'timestamp',
+					'term',
+					'locked',
+				];
+			} else {
+				this.isSmallScreen = false;
+				this.pageSize = 10;
+				this.displayedColumns = [
+					'timestamp',
+					'term',
+					'locked',
+					'address',
+					'amount',
+					'interest',
+				];
+			}
+		})
 		// subscribe to wallets
 		let wallets = this.cloudService.getWalletsData().subscribe((data:any) => {
 			if (data && data.result === 'success') {
@@ -163,16 +179,24 @@ export class DepositsComponent implements OnInit {
 			if (data && data.result === 'success') {
 				// loop through results and check if address exists in deposit
 				for (let i = 0; i < data.message.deposits.length; i++) {
-					if (data.message.deposits[i].address && data.message.deposits[i].locked) {
-						this.depositsLocked.push(data.message.deposits[i]);
-					}
-					if (data.message.deposits[i].address && !data.message.deposits[i].locked) {
-						this.depositsUnlocked.push(data.message.deposits[i]);
+					if (data.message.deposits[i].address) {
+						this.deposits.push(data.message.deposits[i]);
 					}
 				}
+				this.dataSource = new MatTableDataSource(this.deposits);
 				this.depositsLoading = false;
+				this.isDataLoading = false;
+				// Assign the data to the data source for the table to render
+				setTimeout(() => {
+					this.dataSource.paginator = this.paginator;
+					this.dataSource.sort = this.sort;
+					this.changeDetectorRefs.detectChanges();
+					this.isLoadingResults = false;
+				}, 500);
 			} else {
 				this.depositsLoading = false;
+				this.isDataLoading = false;
+				this.isLoadingResults = false;
 				if (data) {
 					this.snackbarService.openSnackBar(data.message, 'Dismiss');
 				} else {
@@ -181,7 +205,61 @@ export class DepositsComponent implements OnInit {
 			}
 		})
 		// call wallets and deposits
-		Promise.all([wallets, deposits]);
+		Promise.all([wallets, deposits, breakpoints]);
 	}
+
+	// show wallets in selection dropdown
+	selectWallet(wallet:any) {
+		this.selectedWallet = wallet;
+	}
+
+	// trigger term changes
+	termChanges(length:any) {
+		this.termLength = length;
+		this.deposit.controls.term.patchValue(length, { emitEvent: true });
+		this.deposit.controls.term.markAsTouched();
+	}
+
+	// set the amount of the deposit based on the select percentage
+	setAmount(percent:number, wallet:any) {
+		this.deposit.controls.amount.patchValue(((percent / 100) * this.wallets[wallet].balance).toFixed(6) || 0, { emitEvent: true });
+		this.deposit.controls.amount.markAsTouched();
+	}
+
+	// reset deposit form
+	reset() {
+		this.selectedWallet = null;
+		this.termLength = 0;
+		this.deposit.reset();
+	}
+
+	// submit deposit form
+	submit() {
+		if (this.deposit.valid) {
+			this.dialogService.openConfirmationDialog(this.deposit.value);
+		}
+	}
+
+	unlock(id:number) {
+		console.log(id);
+	}
+
+	// return the correct interest rate percent from the 2D table
+	getDepositInterest(amount: number, duration: number) {
+		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)] * amount / 100).toFixed(6);
+	}
+
+	// return the correct interest rate from the 2D table
+	getDepositRate(amount: number, duration: number) {
+		return (this.interestRates[duration - 1][Math.min(Math.floor(amount / 10000), 2)].toFixed(2));
+	}
+
+	applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
 }

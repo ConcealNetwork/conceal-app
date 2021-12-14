@@ -17,6 +17,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 import { SharedModule } from 'src/app/shared.module';
 import { DepositsRoutingModule } from './deposits-routing.module';
@@ -50,7 +51,8 @@ import { ConfirmationDialog } from './dialogs/confirmation/confirmation.dialog';
 		MatTooltipModule,
 		MatTabsModule,
 		MatProgressBarModule,
-		MatDialogModule
+		MatDialogModule,
+		MatPaginatorModule
   ]
 })
 export class DepositsModule { }
