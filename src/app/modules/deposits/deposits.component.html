@@ -118,10 +118,10 @@
 						<h2 class="title">Pending Deposits</h2>
 					</mat-card-header>
 					<mat-card-content>
-						<div *ngIf="this.depositsLocked == 0">
+						<div *ngIf="this.depositsLocked.length == 0">
 							<span class="nothing">No deposits...</span>
 						</div>
-						<div *ngIf="this.depositsLocked !== 0" [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
+						<div *ngIf="this.depositsLocked.length !== 0" [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsLocked">
 								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="5px">
 									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
@@ -165,10 +165,10 @@
 						<h2 class="title">Unlocked Deposits</h2>
 					</mat-card-header>
 					<mat-card-content>
-						<div *ngIf="this.depositsUnlocked == 0">
+						<div *ngIf="this.depositsUnlocked.length == 0">
 							<span class="nothing">No deposits...</span>
 						</div>
-						<div *ngIf="this.depositsUnlocked !== 0" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
+						<div *ngIf="this.depositsUnlocked.length !== 0" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="15px grid">
 							<div [fxFlex]="(100/getThemingService().depositGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.depositsUnlocked">
 								<fieldset class="deposits" fxFlex fxLayout="column" fxLayoutGap="15px">
 									<legend class="uppercase orange" fxLayout="row" fxLayoutAlign="space-between center">
