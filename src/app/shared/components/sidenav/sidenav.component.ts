@@ -1,3 +1,6 @@
+// App Variables
+import { environment } from 'src/environments/environment';
+
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Meta } from "@angular/platform-browser";
 import { Router } from '@angular/router';
@@ -16,6 +19,7 @@ export class SidenavComponent implements OnInit {
 
 	@Output() sideNavClosed = new EventEmitter();
 
+	version: any = environment.version;
 	themes: string[] = [];
 	activeTheme: string = '';
 	watcherSubscription!: Subscription;
