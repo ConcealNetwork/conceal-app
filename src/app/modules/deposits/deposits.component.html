@@ -1,14 +1,14 @@
 <app-loader *ngIf="this.depositsLoading || this.walletsLoading"></app-loader>
 
-<div class="container" fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-sm="25px" *ngIf="!this.depositsLoading && !this.walletsLoading">
+<div class="container" fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-sm="25px" *ngIf="!this.depositsLoading && !this.walletsLoading" @transition>
 
 	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
 
 		<!-- Deposits -->
-		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid" @transition>
+		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid">
 
 			<!-- New Deposit -->
-			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="30" fxFlex.xl="30">
+			<div id="cards" fxLayout="column" fxFlex="100" fxFlex.gt-md="35">
 				<form [formGroup]="deposit">
 					<mat-card class="mat-elevation-z6">
 
@@ -111,8 +111,8 @@
 				</form>
 			</div>
 
-			<!-- Deposits -->
-			<div id="cards" fxFlex="100" fxFlex.md="50" fxFlex.lg="70" fxFlex.xl="70">
+			<!-- Pending Deposits -->
+			<div id="cards" fxLayout="column" fxFlex="100"  fxFlex.gt-md="65">
 				<mat-card class="deposit mat-elevation-z6" fxFlex="100%">
 					<mat-card-header fxLayout="column">
 						<h2 class="title">Pending Deposits</h2>
@@ -121,9 +121,9 @@
 						<div *ngIf="this.deposits.length == 0">
 							<span class="nothing">No deposits...</span>
 						</div>
-						<div fxLayout="row" fxLayoutGap="15px" *ngIf="this.deposits.length !== 0">
-							<div fxLayout="column" fxLayoutGap="15px" fxFlex *ngFor="let item of this.deposits">
-								<fieldset class="deposits" fxLayout="column" fxLayoutGap="10px" fxFill.lt-md *ngIf="item.locked">
+						<div fxLayout="row" fxLayout.lt-md="column" fxFlexFill fxLayoutGap="10px" *ngIf="this.deposits.length !== 0">
+							<div fxLayout="column" fxFlex fxLayoutGap="10px" *ngFor="let item of this.deposits | orderByImpure: 'height'">
+								<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" *ngIf="item.locked && item.spendingTransactionHash !== null">
 									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
 										<mat-icon class="orange" aria-hidden="false">lock</mat-icon>
 										Unlocks {{this.getHelperService().getUnlockTime(item.unlockHeight, this.blockchainHeight)}}
@@ -152,7 +152,7 @@
 										<mat-progress-bar color="accent" mode="buffer" [value]="this.getHelperService().getUnlockPercent(item.height, item.unlockHeight, this.blockchainHeight)"></mat-progress-bar>
 									</div>
 								</fieldset>
-								<fieldset class="deposits" fxLayout="column" fxLayoutGap="10px" fxFill.lt-md *ngIf="item.locked">
+								<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" *ngIf="!item.locked && item.spendingTransactionHash !== null">
 									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
 										<mat-icon class="unlocked" aria-hidden="false">lock_open</mat-icon>
 										Unlocked
@@ -162,6 +162,10 @@
 										<span class="amount uppercase">{{this.getHelperService().formatAddress(item.address || '')}}</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
+										<span class="title">Created</span>
+										<span class="amount uppercase">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
+									</div>
+									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Deposited</span>
 										<span class="amount">{{(item.amount / 1000000).toFixed(6)}} CCX</span>
 									</div>
@@ -169,7 +173,7 @@
 										<span class="title">Earnings</span>
 										<span class="amount">{{(item.interest / 1000000).toFixed(6)}} CCX</span>
 									</div>
-									<button type="button" class="ready" mat-flat-button fxFlex (click)="unlock(item.depositId)">Redeem Deposit</button>
+									<button type="button" class="ready" mat-flat-button fxFlex (click)="unlock(item.depositId)" [disabled]="this.isUnlocking">Redeem Deposit</button>
 								</fieldset>
 							</div>
 						</div>

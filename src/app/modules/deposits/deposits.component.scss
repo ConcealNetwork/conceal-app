@@ -12,6 +12,7 @@ fieldset {
 }
 
 .deposits {
+	font-size: 0.9rem;
 	.mat-icon {
 		margin-right: 5px;
 	}
@@ -24,7 +25,7 @@ fieldset {
 }
 
 .progress {
-	font-size: 1.1rem;
+	font-size: 1rem;
 }
 
 .mat-progress-bar {
@@ -73,6 +74,7 @@ table {
 }
 
 .ready {
+	margin-top: 10px;
 	background-color: #4caf50;
 }
 

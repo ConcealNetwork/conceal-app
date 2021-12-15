@@ -65,6 +65,7 @@ export class DepositsComponent implements OnInit {
 	isLoadingResults: boolean = true;
 	isSmallScreen: boolean = false;
 	isDataLoading: boolean = true;
+	isUnlocking: boolean = false;
 	showSlider: boolean = true;
 	walletsLoading: boolean = true;
 	depositsLoading: boolean = true;
@@ -241,7 +242,18 @@ export class DepositsComponent implements OnInit {
 	}
 
 	unlock(id:number) {
-		console.log(id);
+		if(id) {
+			this.isUnlocking = true;
+			this.cloudService.unlockDeposit(id).subscribe((data:any) => {
+				if (data && data.result === 'success') {
+					this.snackbarService.openSnackBar('Deposit unlocked', 'Dismiss');
+					this.isUnlocking = false;
+				} else {
+					this.snackbarService.openSnackBar('Could not unlock deposit', 'Dismiss');
+					this.isUnlocking = false;
+				}
+			})
+		}
 	}
 
 	// return the correct interest rate percent from the 2D table
