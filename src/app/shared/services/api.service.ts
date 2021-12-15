@@ -44,9 +44,9 @@ export class ApiService {
 
 	getTwitterArticles() {
 		if (!this.cordovaService.onCordova) {
-			return this.httpclient.get(`https://api.rss2json.com/v1/api.json?rss_url=https://nitter.fly.dev/ConcealNetwork/rss`);
+			return this.httpclient.get(`https://api.rss2json.com/v1/api.json?rss_url=https://nttr.stream/ConcealNetwork/rss`);
 		} else {
-			return from(this.http.get(`https://api.rss2json.com/v1/api.json?rss_url=https://nitter.fly.dev/ConcealNetwork/rss`, {}, {})).pipe(map((data: any) => JSON.parse(data?.data)));
+			return from(this.http.get(`https://api.rss2json.com/v1/api.json?rss_url=https://nttr.stream/ConcealNetwork/rss`, {}, {})).pipe(map((data: any) => JSON.parse(data?.data)));
 		}
 	}
 
