@@ -5,7 +5,7 @@
 	<div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
 
 		<!-- recent posts -->
-		<div fxLayout="column" fxFlex="30" fxFlex.md="50" fxFlex.lt-md="100" fxLayoutAlign="start">
+		<div fxLayout="column" fxFlex="30" fxFlex.md="50" fxFlex.lt-md="100" fxLayoutAlign="start" [@listAnimation1]="posts.length">
 
 			<mat-card class="mat-elevation-z6">
 
@@ -38,7 +38,7 @@
 		<!-- articles -->
 		<div fxLayout="column" fxFlex="70" fxFlex.md="50" fxLayoutAlign="start" fxHide.lt-md>
 
-			<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxFlex="noshrink" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid" [@listAnimation]="posts.length">
+			<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxFlex="noshrink" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid" [@listAnimation2]="posts.length">
 
 				<div [fxFlex]="(100/this.getThemingService().articleGridColumns) + '%'" fxFlex="100%">
 

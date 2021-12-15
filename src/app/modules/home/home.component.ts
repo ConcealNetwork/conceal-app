@@ -15,7 +15,17 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 	animations: [
-		trigger('listAnimation', [
+		trigger('listAnimation1', [
+			transition('* => *', [ // each time the binding value changes
+				query(':enter', [
+					style({ opacity: 0 }),
+					stagger(100, [
+						animate('0.4s', style({ opacity: 1 }))
+					])
+				], {optional: true})
+			])
+		]),
+		trigger('listAnimation2', [
 			transition('* => *', [ // each time the binding value changes
 				query(':enter', [
 					style({ opacity: 0 }),
