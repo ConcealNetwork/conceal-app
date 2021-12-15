@@ -7,7 +7,7 @@
     "build": "ng build --configuration production",
     "deploy": "ng build --configuration production --base-href . --output-path ../cordova/www/",
     "watch": "ng build --watch --configuration development",
-    "firebase": "ng build --configuration development && firebase deploy",
+    "firebase": "ng build --configuration production && firebase deploy",
     "test": "ng test"
   },
   "private": true,
