@@ -1,0 +1,20 @@
+.mat-toolbar {
+	height: 50px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	font-size: 0.8rem;
+
+	.copyright {
+		text-align: center;
+	}
+
+	.mat-icon-button {
+		height: 30px;
+		width: 30px;
+	}
+
+	.fab, .far {
+    margin-top: -10px;
+	}
+
+}
