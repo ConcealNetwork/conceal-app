@@ -137,7 +137,6 @@ export class HomeComponent implements OnInit {
 						description: data.items[i].description,
 						pubDate: data.items[i].pubDate,
 						link: data.items[i].link,
-						thumbnail: data.items[i].thumbnail,
 						source: 'Reddit'
 					});
 				}

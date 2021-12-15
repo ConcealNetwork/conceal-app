@@ -109,10 +109,6 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 	background: rgb(0 0 0 / 80%);
 }
 
-@keyframes spinner {
-  to {transform: rotate(360deg);}
-}
-
 .mat-paginator-container {
 	padding: 0 !important;
 	margin: 0 !important;
@@ -127,6 +123,9 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 	padding: 15px;
 }
 
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
 .spinner:before {
   content: '';
   box-sizing: border-box;
