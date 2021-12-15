@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
 import { ApiService } from 'src/app/shared/services/api.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
@@ -7,8 +8,21 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  styleUrls: ['./settings.component.scss'],
+	animations: [
+		trigger('transition', [
+			transition(':enter', [
+				query('#cards', [
+					style({ opacity: 0 }),
+					stagger(100, [
+						animate('0.4s', style({ opacity: 1 }))
+					])
+				], {optional: true})
+			])
+		])
+	]
 })
+
 export class SettingsComponent implements OnInit {
 
 	currencies: any;
