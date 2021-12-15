@@ -13,10 +13,24 @@
 
 .title {
 	word-break: break-all;
+	margin-bottom: 15px;
 }
 
-p {
-	filter: brightness(80%);
-	margin-block-start: 0;
-	margin-block-end: 0
+fieldset {
+	border-radius: 5px;
+	border: 1px solid rgba($color: #999, $alpha: 0.5);
+	padding: 20px;
+	mat-icon {
+		margin-right: 10px;
+	}
+	@media only screen and (max-width: 960px) {
+		padding: 15px;
+	}
+}
+
+.image {
+	width: 100%; /* or any custom size */
+	height: 100%;
+	object-fit: contain;
+	margin-bottom: 15px;
 }

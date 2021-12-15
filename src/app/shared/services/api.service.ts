@@ -50,6 +50,22 @@ export class ApiService {
 		}
 	}
 
+	getRedditPosts() {
+		if (!this.cordovaService.onCordova) {
+			return this.httpclient.get(`https://api.rss2json.com/v1/api.json?rss_url=https://www.reddit.com/r/ConcealNetwork/.rss`);
+		} else {
+			return from(this.http.get(`https://api.rss2json.com/v1/api.json?rss_url=https://www.reddit.com/r/ConcealNetwork/.rss`, {}, {})).pipe(map((data: any) => JSON.parse(data?.data)));
+		}
+	}
+
+	getYouTubePosts() {
+		if (!this.cordovaService.onCordova) {
+			return this.httpclient.get(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=UC_YtRUcy0FR0yIc3H6DDxuw`);
+		} else {
+			return from(this.http.get(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=UC_YtRUcy0FR0yIc3H6DDxuw`, {}, {})).pipe(map((data: any) => JSON.parse(data?.data)));
+		}
+	}
+
 	getPrice(currency:any) {
 		if (!this.cordovaService.onCordova) {
 			return this.httpclient.get(`https://api.coingecko.com/api/v3/simple/price?ids=conceal&vs_currencies=btc,${currency}&include_last_updated_at=false`);
