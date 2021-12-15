@@ -4,8 +4,8 @@
 		<h2 class="title">Log On</h2>
 	</mat-card-header>
 
-	<mat-card-content fxLayout="column" fxLayoutGap="25px">
-		<form [formGroup]="form" fxLayout="column" fxLayoutGap="25px">
+	<mat-card-content fxLayout="column" fxLayoutGap="15px">
+		<form [formGroup]="form" fxLayout="column" fxLayoutGap="15px">
 
 			<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
 				<mat-label>Email Address</mat-label>
@@ -41,7 +41,7 @@
 				</mat-error>
 			</mat-form-field>
 
-			<div fxLayout="column" fxLayoutAlign="start space-between" fxLayoutGap="15px">
+			<div fxLayout="column" fxLayoutAlign="start space-between" fxLayoutGap="10px">
 				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Login' : 'Loading' }}</button>
 				<a mat-stroked-button (click)="changeAuthType('signUp')">Create New Account</a>
 				<a mat-stroked-button (click)="changeAuthType('reset')">Password Recovery</a>
