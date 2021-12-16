@@ -107,6 +107,9 @@ export class SettingsComponent implements OnInit {
 		let currencies = this.apiService.getCurrencies().subscribe((currencies:any) => {
 			if(currencies) {
 				this.currencies = currencies;
+				if (!localStorage.getItem('currency')) {
+					this.hub.controls.currency.patchValue('usd');
+				}
 			} else {
 				this.snackbarService.openSnackBar('Could not get list of currencies', 'Dismiss');
 			}
