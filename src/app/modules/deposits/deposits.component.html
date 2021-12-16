@@ -47,7 +47,10 @@
 												Amount is <strong>required</strong>
 											</mat-error>
 											<mat-error *ngIf="deposit.controls.amount.hasError('pattern') || !deposit.controls.amount.valid">
-												Amount is <strong>not a valid value</strong>
+												<strong>Not a valid value</strong>
+											</mat-error>
+											<mat-error *ngIf="deposit.controls.amount.hasError('min')">
+												Must be <strong>at least 1 CCX</strong>
 											</mat-error>
 										</mat-form-field>
 									</div>

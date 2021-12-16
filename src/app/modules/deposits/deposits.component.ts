@@ -92,8 +92,9 @@ export class DepositsComponent implements OnInit {
 			Validators.maxLength(98),
 		]),
 		amount: new FormControl('', [
-			Validators.pattern('^[0-9]+\.?[0-9]*$'),
 			Validators.required,
+			Validators.pattern('^[0-9]+\.?[0-9]*$'),
+			Validators.min(1),
 		]),
 		term: new FormControl('', [
 			Validators.required,
