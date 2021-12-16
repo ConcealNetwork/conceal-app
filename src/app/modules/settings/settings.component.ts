@@ -4,6 +4,7 @@ import { trigger, transition, query, style, stagger, animate } from '@angular/an
 
 import { ApiService } from 'src/app/shared/services/api.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { ThemingService } from 'src/app/shared/services/theming.service';
 
 @Component({
   selector: 'app-settings',
@@ -26,22 +27,46 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 export class SettingsComponent implements OnInit {
 
 	currencies: any;
+	modes: any = [
+		{
+			name: 'Follow System',
+			value: 'follow-system'
+		},
+		{
+			name: 'Light Theme',
+			value: 'light-theme'
+		},
+		{
+			name: 'Dark Theme',
+			value: 'dark-theme'
+		}
+	];
 
   constructor(
 		private apiService: ApiService,
-		private snackbarService: SnackbarService
+		private snackbarService: SnackbarService,
+		private theming: ThemingService
 	) { }
 
 	settings: FormGroup = new FormGroup({
 		currency: new FormControl('', [
 			Validators.required
+		]),
+		mode: new FormControl('', [
+			Validators.required
 		])
 	});
 
   ngOnInit(): void {
+		this.getCurrency();
 		let currency = localStorage.getItem('currency');
 		this.settings.controls.currency.patchValue(currency);
-		this.getCurrency();
+		let mode = localStorage.getItem('mode');
+		if (mode) {
+			this.settings.controls.mode.patchValue(mode);
+		} else {
+			this.settings.controls.mode.patchValue('follow-system');
+		}
   }
 
 	// reset settings form
@@ -57,16 +82,19 @@ export class SettingsComponent implements OnInit {
 				this.snackbarService.openSnackBar('Could not get list of currencies', 'Dismiss');
 			}
 		})
-		// Promise.all([request]).catch(err => {
-		// 	if(err) {
-		// 		this.snackbarService.openSnackBar(err, 'Dismiss');
-		// 	}
-		// });
 	}
 
-	setCurrency(currency: string) {
+	saveHubSettings() {
+		let currency = this.settings.controls.currency.value;
+		let mode = this.settings.controls.mode.value;
 		localStorage.setItem('currency', currency);
-		this.snackbarService.openSnackBar('Currency has changed to: ' + currency.toLocaleUpperCase(), 'Dismiss');
+		if (mode === 'follow-system') {
+			localStorage.removeItem('mode');
+		} else {
+			this.theming.theme.next(mode);
+			localStorage.setItem('mode', mode);
+		}
+		this.snackbarService.openSnackBar("Settings have been updated", 'Dismiss');
 	}
 
 }

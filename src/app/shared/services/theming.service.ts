@@ -23,19 +23,28 @@ export class ThemingService {
 		private ref: ApplicationRef,
 		public breakpointObserver: BreakpointObserver
 	) {
+
     // initially trigger dark mode if preference is set to dark mode on system
+		const mode = localStorage.getItem('mode');
     const darkModeOn = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const lightModeOn = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
 
-    if(darkModeOn){
-      this.theme.next("dark-theme");
-    }
-
-    // watch for changes of the preference
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-      const turnOn = e.matches;
-      this.theme.next(turnOn ? "dark-theme" : "light-theme");
-      this.ref.tick(); // trigger refresh of UI
-    });
+		if (mode) {
+			this.theme.next(mode);
+		} else {
+			if (darkModeOn) {
+				this.theme.next("dark-theme");
+			}
+			if (lightModeOn) {
+				this.theme.next("light-theme");
+			}
+			// watch for changes of the preference
+			window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+				const turnOn = e.matches;
+				this.theme.next(turnOn ? "dark-theme" : "light-theme");
+				this.ref.tick(); // trigger refresh of UI
+			});
+		}
 
 		// watch for changes of the screen size
 		this.breakpointObserver.observe([
