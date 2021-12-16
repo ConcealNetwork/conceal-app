@@ -13,7 +13,7 @@
 					<div fxLayout="row wrap" fxLayoutGap="15px grid">
 						<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
 							<mat-form-field hintLabel="Select your preferred currency" color="accent" appearance="fill" fxFlex>
-								<mat-label>Display Currency</mat-label>
+								<mat-label>Currency</mat-label>
 								<mat-select #currency name="currency" formControlName="currency">
 									<mat-option [value]="item.name | lowercase" *ngFor="let item of this.currencies">
 										{{ item.name | uppercase }}
@@ -26,7 +26,17 @@
 						</div>
 
 						<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-							<!-- more fields here -->
+							<mat-form-field hintLabel="Select your dark mode setting" color="accent" appearance="fill" fxFlex>
+								<mat-label>Color Theme</mat-label>
+								<mat-select #mode name="mode" formControlName="mode">
+									<mat-option [value]="item.value | lowercase" *ngFor="let item of this.modes">
+										{{ item.name }}
+									</mat-option>
+								</mat-select>
+								<mat-error *ngIf="settings.controls.mode.hasError('required')">
+									This setting is <strong>required</strong>
+								</mat-error>
+							</mat-form-field>
 						</div>
 					</div>
 				</form>
@@ -35,7 +45,7 @@
 			<mat-card-actions>
 				<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
 					<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="reset()">Reset Settings</button>
-					<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="setCurrency(currency.value)" [disabled]="!settings.valid">Apply Settings</button>
+					<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="saveHubSettings()" [disabled]="!settings.valid">Apply Settings</button>
 				</div>
 			</mat-card-actions>
 
