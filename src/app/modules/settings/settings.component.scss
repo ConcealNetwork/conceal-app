@@ -1,0 +1,19 @@
+.container {
+	min-height: calc(100vh - 80px - 80px);
+}
+
+.settings {
+	max-width: 600px;
+}
+
+fieldset {
+	border-radius: 5px;
+	border: 1px solid rgba($color: #999, $alpha: 0.5);
+	padding: 20px;
+	mat-icon {
+		margin-right: 10px;
+	}
+	@media only screen and (max-width: 960px) {
+		padding: 15px;
+	}
+}
