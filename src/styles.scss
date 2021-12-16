@@ -176,7 +176,7 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 :-webkit-autofill,
 :-webkit-autofill:hover,
 :-webkit-autofill:focus {
-  -webkit-text-fill-color: #faa933;
+  // -webkit-text-fill-color: #faa933;
   -webkit-box-shadow: 0 0 0px 1000px rgba(0,0,0,0) inset;
   transition: background-color 5000s ease-in-out 0s;
 }
