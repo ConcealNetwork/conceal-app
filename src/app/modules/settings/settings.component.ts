@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
+import { Subscription } from "rxjs";
+
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { CloudService } from 'src/app/shared/services/cloud.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { ThemingService } from 'src/app/shared/services/theming.service';
 
@@ -26,6 +30,9 @@ import { ThemingService } from 'src/app/shared/services/theming.service';
 
 export class SettingsComponent implements OnInit {
 
+	isLoggedIn: boolean = false;
+	hasTwoFa: boolean = false;
+	username: string = '';
 	currencies: any;
 	modes: any = [
 		{
@@ -43,12 +50,14 @@ export class SettingsComponent implements OnInit {
 	];
 
   constructor(
+		private authService: AuthService,
 		private apiService: ApiService,
+		private cloudService: CloudService,
 		private snackbarService: SnackbarService,
 		private theming: ThemingService
 	) { }
 
-	settings: FormGroup = new FormGroup({
+	hub: FormGroup = new FormGroup({
 		currency: new FormControl('', [
 			Validators.required
 		]),
@@ -57,44 +66,83 @@ export class SettingsComponent implements OnInit {
 		])
 	});
 
+	cloud: FormGroup = new FormGroup({
+		email: new FormControl('', [
+			Validators.required,
+			Validators.email
+		]),
+	});
+
   ngOnInit(): void {
-		this.getCurrency();
-		let currency = localStorage.getItem('currency');
-		this.settings.controls.currency.patchValue(currency);
-		let mode = localStorage.getItem('mode');
-		if (mode) {
-			this.settings.controls.mode.patchValue(mode);
-		} else {
-			this.settings.controls.mode.patchValue('follow-system');
-		}
-  }
-
-	// reset settings form
-	reset() {
-		this.settings.reset();
-	}
-
-	getCurrency() {
-		this.apiService.getCurrencies().subscribe((currencies:any) => {
+		let loggedin = this.authService.isLoginSubject.subscribe((isLoggedIn: boolean) => {
+			this.isLoggedIn = isLoggedIn;
+		});
+		let user = this.cloudService.getUser().subscribe((user:any) => {
+			if(user) {
+				this.username = user.message.name;
+				this.cloud.controls.email.setValue(user.message.email);
+			}
+		});
+		let twofa =	this.authService.check2fa().subscribe((result: any) => {
+			if(result.message.enabled) {
+				this.hasTwoFa = true;
+			}
+		});
+		let currencies = this.apiService.getCurrencies().subscribe((currencies:any) => {
 			if(currencies) {
 				this.currencies = currencies;
 			} else {
 				this.snackbarService.openSnackBar('Could not get list of currencies', 'Dismiss');
 			}
 		})
+		Promise.all([loggedin, user, twofa, currencies]).catch(err => {
+			if(err) {
+				this.snackbarService.openSnackBar('Could not query all data', 'Dismiss');
+			}
+		});
+		let currency = localStorage.getItem('currency');
+		this.hub.controls.currency.patchValue(currency);
+		let mode = localStorage.getItem('mode');
+		if (mode) {
+			this.hub.controls.mode.patchValue(mode);
+		} else {
+			this.hub.controls.mode.patchValue('follow-system');
+		}
+  }
+
+	// reset settings form
+	clear(type:string) {
+		if (type === 'hub') {
+			this.hub.reset();
+		}
+		if (type === 'cloud') {
+			this.cloud.reset();
+		}
 	}
 
-	saveHubSettings() {
-		let currency = this.settings.controls.currency.value;
-		let mode = this.settings.controls.mode.value;
+	saveHub() {
+		let currency = this.hub.controls.currency.value;
+		let mode = this.hub.controls.mode.value;
 		localStorage.setItem('currency', currency);
 		if (mode === 'follow-system') {
 			localStorage.removeItem('mode');
+			const darkModeOn = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+			const lightModeOn = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+			if (darkModeOn) {
+				this.theming.theme.next("dark-theme");
+			}
+			if (lightModeOn) {
+				this.theming.theme.next("light-theme");
+			}
 		} else {
 			this.theming.theme.next(mode);
 			localStorage.setItem('mode', mode);
 		}
 		this.snackbarService.openSnackBar("Settings have been updated", 'Dismiss');
+	}
+
+	saveCloud() {
+
 	}
 
 }
