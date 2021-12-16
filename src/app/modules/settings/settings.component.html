@@ -1,4 +1,6 @@
-<div class="container" fxLayout="column" fxLayoutAlign="center stretch">
+<app-loader *ngIf="this.isLoading"></app-loader>
+
+<div class="container" fxLayout="column" fxLayoutAlign="center stretch" *ngIf="!this.isLoading">
 	<div fxLayout="row" fxLayoutAlign="center center">
 
 		<div class="settings" fxLayout="column" fxFlex fxLayoutGap="15px" fxLayoutGap.gt-md="25px" @transition>
@@ -94,7 +96,7 @@
 
 							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
 								<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('cloud')">Clear</button>
-								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="saveCloud()" [disabled]="!cloud.valid">Change</button>
+								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="saveCloud()" [disabled]="!cloud.valid">Change Email</button>
 							</div>
 
 						</form>

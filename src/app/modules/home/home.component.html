@@ -17,14 +17,14 @@
 					<fieldset class="posts" fxLayout="column" fxFlex *ngFor="let item of posts | orderByImpure: '-pubDate'">
 						<legend fxLayout="row" fxLayoutAlign="space-between center">
 							<mat-icon class="orange" aria-hidden="false">article</mat-icon>
-							{{ this.toDate(item.pubDate) | timeAgo | wrap: 'Posted ': ' on' }} {{item.source}}
+							{{ this.toDate(item.pubDate) | timeAgo | wrap: 'Posted ': ' on' }} <span class="platform orange">{{item.source}}</span>
 						</legend>
 						<div class="title">
 							{{item.title | shorten: 125: '...'}}
 						</div>
 						<img class="image" *ngIf="item.thumbnail" src="{{item.thumbnail}}" />
 						<div fxLayout="row" fxFill>
-							<a fxFlex color="accent" mat-flat-button type="button" [href]="item.link" target="_blank">Open {{item.source}}</a>
+							<a fxFlex color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Open {{item.source}}</a>
 						</div>
 					</fieldset>
 				</mat-card-content>
@@ -39,7 +39,7 @@
 			<div fxLayout="row" [@listAnimation2]="posts.length">
 				<mat-card class="mat-elevation-z6">
 					<mat-card-header fxLayout="column">
-						<h2 class="title">Social Media Feed</h2>
+						<h2 class="title">Social Feed</h2>
 					</mat-card-header>
 					<mat-card-content>
 						<div *ngFor="let item of posts | orderByImpure: '-pubDate'">

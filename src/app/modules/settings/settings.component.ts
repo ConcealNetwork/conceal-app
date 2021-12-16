@@ -31,6 +31,7 @@ import { ThemingService } from 'src/app/shared/services/theming.service';
 export class SettingsComponent implements OnInit {
 
 	isLoggedIn: boolean = false;
+	isLoading: boolean = true;
 	hasTwoFa: boolean = false;
 	username: string = '';
 	currencies: any;
@@ -97,8 +98,14 @@ export class SettingsComponent implements OnInit {
 		})
 		Promise.all([loggedin, user, twofa, currencies]).catch(err => {
 			if(err) {
+				this.isLoading = false;
 				this.snackbarService.openSnackBar('Could not query all data', 'Dismiss');
 			}
+		}).then(() => {
+			// hacky way to wait for promises to resolve
+			setTimeout(() => {
+				this.isLoading = false;
+			}, 1000);
 		});
 		let currency = localStorage.getItem('currency');
 		this.hub.controls.currency.patchValue(currency);
