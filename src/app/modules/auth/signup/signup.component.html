@@ -6,7 +6,7 @@
 
 	<mat-card-content fxLayout="column" fxLayoutGap="25px">
 
-		<form [formGroup]="form" fxLayout="column" fxLayoutGap="15px">
+		<form [formGroup]="form" fxLayout="column" fxLayoutGap="25px">
 
 			<mat-form-field fxFill hintLabel="New username" appearance="fill" color="accent">
 				<mat-label>Username</mat-label>
@@ -38,7 +38,7 @@
 				</mat-error>
 			</mat-form-field>
 
-			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
+			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
 				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Create Account' : 'Loading' }}</button>
 				<a mat-stroked-button (click)="changeAuthType('signIn')">Cancel</a>
 			</div>

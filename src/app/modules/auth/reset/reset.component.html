@@ -6,7 +6,7 @@
 
 	<mat-card-content fxLayout="column" fxLayoutGap="25px">
 
-		<form [formGroup]="form" fxLayout="column" fxLayoutGap="15px">
+		<form [formGroup]="form" fxLayout="column" fxLayoutGap="25px">
 
 			<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
 				<mat-label>Email Address</mat-label>
@@ -19,7 +19,7 @@
 				</mat-error>
 			</mat-form-field>
 
-			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
+			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
 				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Recover Password' : 'Loading' }}</button>
 				<a mat-stroked-button (click)="changeAuthType('signIn')">Cancel</a>
 			</div>

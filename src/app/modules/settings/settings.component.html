@@ -1,74 +1,111 @@
-<div class="container" fxLayout="column" fxLayoutGap="15px">
+<div class="container" fxLayout="column" fxLayoutAlign="center stretch">
+	<div fxLayout="row" fxLayoutAlign="center center">
 
-	<div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="15px" fxLayoutGap.gt-md="25px" @transition>
+		<div class="settings" fxLayout="column" fxFlex fxLayoutGap="15px" fxLayoutGap.gt-md="25px" @transition>
 
-		<mat-card id="cards" class="mat-elevation-z6" fxLayout="column" fxFlex>
+			<!-- cloud settings -->
+			<mat-card id="cards" class="mat-elevation-z6">
 
-			<mat-card-header fxLayout="column">
-				<h2 class="title">Hub Settings</h2>
-			</mat-card-header>
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Settings</h2>
+				</mat-card-header>
 
-			<mat-card-content fxLayout="column" fxLayoutGap="25px">
-				<form [formGroup]="settings">
-					<div fxLayout="row wrap" fxLayoutGap="15px grid">
-						<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-							<mat-form-field hintLabel="Select your preferred currency" color="accent" appearance="fill" fxFlex>
+				<mat-card-content fxLayout="column" fxLayoutGap="15px">
+
+					<!-- General -->
+					<fieldset fxLayout="column" fxFlex="noshrink">
+
+						<legend fxLayout="row" fxLayoutAlign="space-between center">
+							<mat-icon class="orange" aria-hidden="false">settings_suggest</mat-icon>
+							General
+						</legend>
+
+						<form fxLayout="column" fxLayoutGap="25px" [formGroup]="hub">
+
+							<mat-form-field hintLabel="Select preferred currency" color="accent" appearance="fill" fxFlex>
 								<mat-label>Currency</mat-label>
 								<mat-select #currency name="currency" formControlName="currency">
 									<mat-option [value]="item.name | lowercase" *ngFor="let item of this.currencies">
 										{{ item.name | uppercase }}
 									</mat-option>
 								</mat-select>
-								<mat-error *ngIf="settings.controls.currency.hasError('required')">
+								<mat-error *ngIf="hub.controls.currency.hasError('required')">
 									Currency is <strong>required</strong>
 								</mat-error>
 							</mat-form-field>
-						</div>
 
-						<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-							<mat-form-field hintLabel="Select your dark mode setting" color="accent" appearance="fill" fxFlex>
-								<mat-label>Color Theme</mat-label>
+							<mat-form-field hintLabel="Select preferred theme" color="accent" appearance="fill" fxFlex>
+								<mat-label>Theme</mat-label>
 								<mat-select #mode name="mode" formControlName="mode">
 									<mat-option [value]="item.value | lowercase" *ngFor="let item of this.modes">
 										{{ item.name }}
 									</mat-option>
 								</mat-select>
-								<mat-error *ngIf="settings.controls.mode.hasError('required')">
+								<mat-error *ngIf="hub.controls.mode.hasError('required')">
 									This setting is <strong>required</strong>
 								</mat-error>
 							</mat-form-field>
+
+							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
+								<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('hub')">Clear</button>
+								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="saveHub()" [disabled]="!hub.valid">Apply</button>
+							</div>
+
+						</form>
+
+					</fieldset>
+
+					<!-- Security -->
+					<fieldset fxLayout="column" fxFlex="noshrink" *ngIf="isLoggedIn">
+						<legend fxLayout="row" fxLayoutAlign="space-between center">
+							<mat-icon class="orange" aria-hidden="false">admin_panel_settings</mat-icon>
+							Authentication
+						</legend>
+						<div fxLayout="row wrap" fxLayoutGap="15px grid">
+							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button">Change Password</button>
+							</div>
+							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+								<button fxFlex fxFlex="noshrink" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
+							</div>
 						</div>
-					</div>
-				</form>
-			</mat-card-content>
+					</fieldset>
 
-			<mat-card-actions>
-				<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-					<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="reset()">Reset Settings</button>
-					<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="saveHubSettings()" [disabled]="!settings.valid">Apply Settings</button>
-				</div>
-			</mat-card-actions>
+					<!-- Account -->
+					<fieldset fxLayout="column" fxFlex="noshrink" *ngIf="isLoggedIn">
 
-		</mat-card>
+						<legend fxLayout="row" fxLayoutAlign="space-between center">
+							<mat-icon class="orange" aria-hidden="false">manage_accounts</mat-icon>
+							Account: <span class="username orange">{{this.username}}</span>
+						</legend>
 
-		<mat-card id="cards" class="mat-elevation-z6" fxLayout="column" fxFlex>
+						<form fxLayout="column" fxLayoutGap="25px" [formGroup]="cloud">
 
-			<mat-card-header fxLayout="column">
-				<h2 class="title">Cloud Settings</h2>
-			</mat-card-header>
+							<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
+								<mat-label>Email Address</mat-label>
+								<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="email" autocomplete="email">
+								<mat-error *ngIf="cloud.controls.email.hasError('email') && !cloud.controls.email.hasError('required')">
+									Please enter a valid email address
+								</mat-error>
+								<mat-error *ngIf="cloud.controls.email.hasError('required')">
+									Email address is <strong>required</strong>
+								</mat-error>
+							</mat-form-field>
 
-			<mat-card-content fxLayout="column" fxLayoutGap="25px">
-			</mat-card-content>
+							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
+								<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('cloud')">Clear</button>
+								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="saveCloud()" [disabled]="!cloud.valid">Change</button>
+							</div>
 
-			<mat-card-actions>
-				<!-- <div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-					<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="reset()">Reset Settings</button>
-					<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="setCurrency(currency.value)" [disabled]="!settings.valid">Apply Settings</button>
-				</div> -->
-			</mat-card-actions>
+						</form>
 
-		</mat-card>
+					</fieldset>
+
+				</mat-card-content>
+
+			</mat-card>
+
+		</div>
 
 	</div>
-
 </div>
