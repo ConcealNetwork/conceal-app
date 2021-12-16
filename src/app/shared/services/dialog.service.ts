@@ -12,6 +12,7 @@ import { ReceiveDialog } from 'src/app/modules/wallets/dialogs/receive/receive.c
 import { ExportDialog } from 'src/app/modules/wallets/dialogs/export/export.component';
 import { QrcodeDialog } from 'src/app/modules/wallets/dialogs/qrcode/qrcode.component';
 import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix/matrix.dialog';
+import { UnlockDialog } from 'src/app/modules/deposits/dialogs/unlock/unlock.dialog';
 import { ConfirmationDialog } from 'src/app/modules/deposits/dialogs/confirmation/confirmation.dialog';
 import { ArticleDialog } from 'src/app/modules/home/dialogs/article/article.dialog';
 
@@ -42,6 +43,17 @@ export class DialogService {
 		const dialogRef = this.dialog.open(MatrixDialog, {
 			width: this.themingService.dialogWidth,
 			maxWidth: this.themingService.dialogMaxWidth,
+			height: this.themingService.dialogHeight,
+			maxHeight: this.themingService.dialogHeight,
+			disableClose: false
+		})
+		dialogRef.afterClosed().subscribe(result => { })
+  }
+
+	openUnlockDialog(): void {
+		const dialogRef = this.dialog.open(UnlockDialog, {
+			width: this.themingService.exportDialogWidth,
+			maxWidth: this.themingService.exportDialogWidth,
 			height: this.themingService.dialogHeight,
 			maxHeight: this.themingService.dialogHeight,
 			disableClose: false

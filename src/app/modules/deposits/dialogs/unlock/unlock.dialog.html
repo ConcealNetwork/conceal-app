@@ -1,0 +1,14 @@
+<h1 mat-dialog-title class="title">Confirmation</h1>
+
+<div mat-dialog-content fxLayout="column" fxLayoutGap="25px">
+
+	<div fxLayout="column" fxLayoutGap="15px">
+		<p>Your deposit has been successfully unlocked however it still needs to be confirmed by the blockchain.</p>
+		<p>This can take some time so check back later to confirm.</p>
+	</div>
+
+</div>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+	<button mat-flat-button color="accent" type="button" fxFlex (click)="close()">Acknowledged</button>
+</div>
