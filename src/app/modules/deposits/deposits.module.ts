@@ -24,7 +24,7 @@ import { DepositsRoutingModule } from './deposits-routing.module';
 import { DepositsComponent } from './deposits.component';
 import { MatrixDialog } from './dialogs/matrix/matrix.dialog';
 import { ConfirmationDialog } from './dialogs/confirmation/confirmation.dialog';
-import { UnlockDialog } from './dialogs/unlock/unlock.dialog';
+import { PendingDialog } from './dialogs/pending/pending.dialog';
 
 
 @NgModule({
@@ -32,7 +32,7 @@ import { UnlockDialog } from './dialogs/unlock/unlock.dialog';
     DepositsComponent,
 		MatrixDialog,
 		ConfirmationDialog,
-		UnlockDialog,
+		PendingDialog,
   ],
   imports: [
     DepositsRoutingModule,

@@ -41,7 +41,7 @@
 
 										<mat-form-field hintLabel="The amount for the deposit" color="accent" appearance="fill" fxFlex="noshrink">
 											<mat-label>Amount</mat-label>
-											<input #amount matInput numeric steps="0" min="0.000001" type="number" name="amount" placeholder="100" formControlName="amount">
+											<input #amount matInput numeric steps="0" min="1" type="number" name="amount" placeholder="100" formControlName="amount">
 											<span matSuffix>CCX</span>
 											<mat-error *ngIf="deposit.controls.amount.hasError('required')">
 												Amount is <strong>required</strong>
