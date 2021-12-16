@@ -24,13 +24,15 @@ import { DepositsRoutingModule } from './deposits-routing.module';
 import { DepositsComponent } from './deposits.component';
 import { MatrixDialog } from './dialogs/matrix/matrix.dialog';
 import { ConfirmationDialog } from './dialogs/confirmation/confirmation.dialog';
+import { UnlockDialog } from './dialogs/unlock/unlock.dialog';
 
 
 @NgModule({
   declarations: [
     DepositsComponent,
 		MatrixDialog,
-		ConfirmationDialog
+		ConfirmationDialog,
+		UnlockDialog,
   ],
   imports: [
     DepositsRoutingModule,

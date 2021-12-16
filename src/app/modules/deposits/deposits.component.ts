@@ -248,9 +248,10 @@ export class DepositsComponent implements OnInit {
 			this.cloudService.unlockDeposit(id).subscribe((data:any) => {
 				if (data && data.result === 'success') {
 					this.snackbarService.openSnackBar('Deposit unlocked', 'Dismiss');
+					this.dialogService.openUnlockDialog();
 					this.isUnlocking = false;
 				} else {
-					this.snackbarService.openSnackBar('Could not unlock deposit', 'Dismiss');
+					this.snackbarService.openSnackBar('Could not unlock this deposit', 'Dismiss');
 					this.isUnlocking = false;
 				}
 			})

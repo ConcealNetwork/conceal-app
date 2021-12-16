@@ -106,7 +106,7 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 }
 
 .cdk-overlay-dark-backdrop {
-	background: rgb(0 0 0 / 80%);
+	background: rgba(0, 0, 0, 0.6) !important
 }
 
 .mat-paginator-container {
