@@ -75,20 +75,35 @@ export class SettingsComponent implements OnInit {
 	});
 
   ngOnInit(): void {
-		let loggedin = this.authService.isLoginSubject.subscribe((isLoggedIn: boolean) => {
+
+		this.authService.isLoginSubject.subscribe((isLoggedIn: boolean) => {
 			this.isLoggedIn = isLoggedIn;
-		});
-		let user = this.cloudService.getUser().subscribe((user:any) => {
-			if(user) {
-				this.username = user.message.name;
-				this.cloud.controls.email.setValue(user.message.email);
+			if(this.isLoggedIn) {
+				let user = this.cloudService.getUser().subscribe((user:any) => {
+					if(user) {
+						this.username = user.message.name;
+						this.cloud.controls.email.setValue(user.message.email);
+					}
+				})
+				let twofa =	this.authService.check2fa().subscribe((result: any) => {
+					if(result.message.enabled) {
+						this.hasTwoFa = true;
+					}
+				})
+				Promise.all([user, twofa]).catch(err => {
+					if(err) {
+						this.isLoading = false;
+						this.snackbarService.openSnackBar('Could not query all data', 'Dismiss');
+					}
+				}).then(() => {
+					// hacky way to wait for promises to resolve
+					setTimeout(() => {
+						this.isLoading = false;
+					}, 1000);
+				});
 			}
 		});
-		let twofa =	this.authService.check2fa().subscribe((result: any) => {
-			if(result.message.enabled) {
-				this.hasTwoFa = true;
-			}
-		});
+
 		let currencies = this.apiService.getCurrencies().subscribe((currencies:any) => {
 			if(currencies) {
 				this.currencies = currencies;
@@ -96,7 +111,7 @@ export class SettingsComponent implements OnInit {
 				this.snackbarService.openSnackBar('Could not get list of currencies', 'Dismiss');
 			}
 		})
-		Promise.all([loggedin, user, twofa, currencies]).catch(err => {
+		Promise.all([currencies]).catch(err => {
 			if(err) {
 				this.isLoading = false;
 				this.snackbarService.openSnackBar('Could not query all data', 'Dismiss');
@@ -107,6 +122,7 @@ export class SettingsComponent implements OnInit {
 				this.isLoading = false;
 			}, 1000);
 		});
+
 		let currency = localStorage.getItem('currency');
 		this.hub.controls.currency.patchValue(currency);
 		let mode = localStorage.getItem('mode');
@@ -115,6 +131,7 @@ export class SettingsComponent implements OnInit {
 		} else {
 			this.hub.controls.mode.patchValue('follow-system');
 		}
+
   }
 
 	// reset settings form
