@@ -3,15 +3,15 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-unlock',
-  templateUrl: './unlock.dialog.html',
-  styleUrls: ['./unlock.dialog.scss']
+  selector: 'app-pending',
+  templateUrl: './pending.dialog.html',
+  styleUrls: ['./pending.dialog.scss']
 })
 
-export class UnlockDialog {
+export class PendingDialog {
 
 	constructor (
-		public dialogRef: MatDialogRef<UnlockDialog>,
+		public dialogRef: MatDialogRef<PendingDialog>,
 		@Inject(MAT_DIALOG_DATA) public data: any,
 	) {	}
 

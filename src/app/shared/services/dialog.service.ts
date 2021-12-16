@@ -12,7 +12,7 @@ import { ReceiveDialog } from 'src/app/modules/wallets/dialogs/receive/receive.c
 import { ExportDialog } from 'src/app/modules/wallets/dialogs/export/export.component';
 import { QrcodeDialog } from 'src/app/modules/wallets/dialogs/qrcode/qrcode.component';
 import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix/matrix.dialog';
-import { UnlockDialog } from 'src/app/modules/deposits/dialogs/unlock/unlock.dialog';
+import { PendingDialog } from 'src/app/modules/deposits/dialogs/pending/pending.dialog';
 import { ConfirmationDialog } from 'src/app/modules/deposits/dialogs/confirmation/confirmation.dialog';
 import { ArticleDialog } from 'src/app/modules/home/dialogs/article/article.dialog';
 
@@ -50,8 +50,8 @@ export class DialogService {
 		dialogRef.afterClosed().subscribe(result => { })
   }
 
-	openUnlockDialog(): void {
-		const dialogRef = this.dialog.open(UnlockDialog, {
+	openPendingDialog(): void {
+		const dialogRef = this.dialog.open(PendingDialog, {
 			width: this.themingService.exportDialogWidth,
 			maxWidth: this.themingService.exportDialogWidth,
 			height: this.themingService.dialogHeight,

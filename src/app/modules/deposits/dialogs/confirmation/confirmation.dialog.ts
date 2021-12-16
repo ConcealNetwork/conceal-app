@@ -9,6 +9,7 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CloudService } from 'src/app/shared/services/cloud.service';
 import { CordovaService } from 'src/app/shared/services/cordova.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -30,6 +31,7 @@ export class ConfirmationDialog {
 		private authService: AuthService,
 		private cloudService: CloudService,
 		private cordovaService: CordovaService,
+		private dialogService: DialogService,
 		private clipboard: Clipboard,
 	) {
 		// Check if 2fa is enabled
@@ -96,8 +98,9 @@ export class ConfirmationDialog {
 			).subscribe((data:any) => {
 				this.isLoading = false;
 				if (data.result === 'success') {
-					this.snackbarService.openSnackBar('Deposit created successfully!', 'Dismiss');
 					this.close();
+					this.snackbarService.openSnackBar('Deposit created successfully!', 'Dismiss');
+					this.dialogService.openPendingDialog();
 				} else if (data.result === 'error') {
 					this.snackbarService.openSnackBar(data.message, 'Dismiss');
 				} else {
