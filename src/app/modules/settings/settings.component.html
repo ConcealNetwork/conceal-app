@@ -5,7 +5,7 @@
 
 		<div class="settings" fxLayout="column" fxFlex fxLayoutGap="15px" fxLayoutGap.gt-md="25px" @transition>
 
-			<!-- cloud settings -->
+			<!-- settings -->
 			<mat-card id="cards" class="mat-elevation-z6">
 
 				<mat-card-header fxLayout="column">
@@ -29,7 +29,7 @@
 								<mat-select #currency name="currency" formControlName="currency">
 									<mat-option [value]="item.name | lowercase" *ngFor="let item of this.currencies">
 										<img class="icon" width="16" [src]="item.imageUrl" />
-										{{ item.symbol }} {{ item.name | uppercase }} ({{ item.rate.toFixed(2) }} USD)
+										{{ item.symbol }} {{ item.name | uppercase }} <small>(1 USD = {{ item.rate.toFixed(2) }} {{ item.name | uppercase }})</small>
 									</mat-option>
 								</mat-select>
 								<mat-error *ngIf="hub.controls.currency.hasError('required')">
@@ -96,14 +96,34 @@
 						</legend>
 						<div fxLayout="row wrap" fxLayoutGap="15px grid">
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex color="accent" mat-flat-button type="button">Reset Password</button>
+								<button fxFlex color="warn" mat-flat-button type="button" (click)="resetPassword()">Reset Password</button>
 							</div>
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
 								<button fxFlex color="primary" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button" (click)="this.show2fa = !this.show2fa">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
 							</div>
 						</div>
-						<form class="twofa" fxLayout="column" fxLayoutGap="15px" [formGroup]="twofa" *ngIf="this.show2fa">
-							<h4 class="title">Enter the code from your authenticator app to {{this.hasTwoFa ? 'disable' : 'enable'}} two-factor authentication.</h4>
+					</fieldset>
+
+					<!-- twofa -->
+					<fieldset fxLayout="column" fxFlex="noshrink" *ngIf="isLoggedIn && this.show2fa">
+						<legend fxLayout="row" fxLayoutAlign="space-between center">
+							<mat-icon class="orange" aria-hidden="false">qr_code_scanner</mat-icon>
+							Two-Factor
+						</legend>
+						<form fxLayout="column" fxLayoutGap="15px" [formGroup]="twofa">
+							<p fxFlex class="title" *ngIf="!this.hasTwoFa">Scan or enter your secret code with your authentication app to set up your account.</p>
+							<fieldset fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="10px" *ngIf="!this.hasTwoFa">
+								<legend fxLayout="row" fxLayoutAlign="space-between center">
+									<mat-icon class="orange" aria-hidden="false">key</mat-icon>
+									Your Secret
+								</legend>
+								<img fxFlex fxFlexAlign="center" class="qrcode" [src]="this.secretQR">
+								<span fxFlexAlign="center" class="secret">{{this.secret}}</span>
+								<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
+									<button fxFlex color="accent" mat-flat-button type="button" (click)="copy(this.secret, 'Copied secret to clipboard')">Copy Secret Key</button>
+								</div>
+							</fieldset>
+							<p class="title">Enter the code from your authenticator app to {{this.hasTwoFa ? 'disable' : 'enable'}} two-factor authentication.</p>
 							<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
 								<mat-label>Two-factor Code</mat-label>
 								<input matInput minlength="6" maxlength="6" placeholder="00000" formControlName="code">

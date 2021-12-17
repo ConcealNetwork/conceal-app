@@ -34,6 +34,8 @@ export class SettingsComponent implements OnInit {
 	isLoading: boolean = true;
 	hasTwoFa: boolean = false;
 	show2fa: boolean = false;
+	secretQR: string = '';
+	secret: string = '';
 	username: string = '';
 	email: string = '';
 	currencies: any;
@@ -43,11 +45,11 @@ export class SettingsComponent implements OnInit {
 			value: 'follow-system'
 		},
 		{
-			name: '☀️ Light Theme',
+			name: '☀️ Light Mode',
 			value: 'light-theme'
 		},
 		{
-			name: '🌙 Dark Theme',
+			name: '🌙 Dark Mode',
 			value: 'dark-theme'
 		}
 	];
@@ -98,12 +100,18 @@ export class SettingsComponent implements OnInit {
 						this.cloud.controls.email.setValue(user.message.email);
 					}
 				})
+				let qr = this.authService.getQRCode().subscribe((result: any) => {
+					if (result.message.enabled === false) {
+						this.secretQR = result.message.qrCodeUrl;
+						this.secret = result.message.qrCodeUrl.split(' ')[0].split('secret%3')[1];
+					}
+				})
 				let twofa =	this.authService.check2fa().subscribe((result: any) => {
 					if(result.message.enabled) {
 						this.hasTwoFa = true;
 					}
 				})
-				Promise.all([user, twofa]).catch(err => {
+				Promise.all([qr, user, twofa]).catch(err => {
 					if(err) {
 						this.isLoading = false;
 						this.snackbarService.openSnackBar('Could not query all data', 'Dismiss');
@@ -187,18 +195,18 @@ export class SettingsComponent implements OnInit {
 	changeEmail() {
 		let email = this.cloud.controls.email.value;
 		this.authService.changeEmail(email).subscribe((result: any) => {
-			if(result.message.success) {
-				this.snackbarService.openSnackBar("Email has been changed", 'Dismiss');
+			if(result.result === 'success') {
+				this.snackbarService.openSnackBar(`Success! Check ${email} to confirm`, 'Dismiss');
 			} else {
-				this.snackbarService.openSnackBar("Could not change email", 'Dismiss');
+				this.snackbarService.openSnackBar(`${result.message}`, 'Dismiss');
 			}
 		})
 	}
 
 	resetPassword() {
 		this.authService.resetPassword(this.email).subscribe((result: any) => {
-			if(result.message.success) {
-				this.snackbarService.openSnackBar(`Check ${this.email} to reset your password`, 'Dismiss');
+			if(result.result === 'success') {
+				this.snackbarService.openSnackBar(`Success! Check ${this.email} to reset your password`, 'Dismiss');
 			} else {
 				this.snackbarService.openSnackBar("Could not reset password", 'Dismiss');
 			}
@@ -208,19 +216,19 @@ export class SettingsComponent implements OnInit {
 	change2fa(enabled: boolean) {
 		let code = this.twofa.controls.code.value;
 		if(enabled) {
-			this.authService.enable2FA(code, true).subscribe((result: any) => {
-				if(result.message.success) {
-					this.snackbarService.openSnackBar("Two factor authentication has been enabled", 'Dismiss');
-				} else {
-					this.snackbarService.openSnackBar("Could not enabled 2fa", 'Dismiss');
-				}
-			})
-		} else {
 			this.authService.disable2FA(code).subscribe((result: any) => {
-				if(result.message.success) {
+				if(result.result === 'success') {
 					this.snackbarService.openSnackBar("Two factor authentication has been disabled", 'Dismiss');
 				} else {
 					this.snackbarService.openSnackBar("Could not disable 2fa", 'Dismiss');
+				}
+			})
+		} else {
+			this.authService.enable2FA(code, true).subscribe((result: any) => {
+				if(result.result === 'success') {
+					this.snackbarService.openSnackBar("Two factor authentication has been enabled", 'Dismiss');
+				} else {
+					this.snackbarService.openSnackBar("Could not enable 2fa", 'Dismiss');
 				}
 			})
 		}
@@ -248,6 +256,18 @@ export class SettingsComponent implements OnInit {
 					this.snackbarService.openSnackBar(err, 'Dismiss');
 				});
 			}
+		}
+	}
+
+	copy(value: any, message: string): void {
+		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
+			this.clipboard.copy(value);
+			this.snackbarService.openSnackBar(message, 'Dismiss');
+		} else if (navigator.clipboard) {
+			navigator.clipboard.writeText(value);
+			this.snackbarService.openSnackBar(message, 'Dismiss');
+		} else {
+			this.snackbarService.openSnackBar('Could not access the clipboard', 'Dismiss');
 		}
 	}
 

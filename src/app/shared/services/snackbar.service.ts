@@ -15,7 +15,7 @@ export class SnackbarService {
 
 	openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 5000,
 			panelClass: 'snack-notify',
 			horizontalPosition: this.snackbarHorizontalPosition,
 			verticalPosition: this.snackbarVerticalPosition,

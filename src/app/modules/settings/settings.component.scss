@@ -3,7 +3,7 @@
 }
 
 .settings {
-	max-width: 600px;
+	max-width: 550px;
 }
 
 fieldset {
@@ -30,6 +30,28 @@ fieldset {
 	margin-left: 8px;
 }
 
+small {
+	color: rgba($color: #999, $alpha: 0.8);
+}
+
 .icon {
 	margin-right: 5px;
+	margin-bottom: -3px;
+}
+
+.qrcode {
+	border-radius: 5px;
+	margin-top: -10px;
+}
+
+.secret {
+	padding: 10px;
+	font-size: 1rem;
+	border: 1px dashed rgba($color: #999, $alpha: 0.5);
+	border-radius: 5px;
+}
+
+.title {
+	margin-block-start: 0;
+	margin-block-end: 0;
 }
