@@ -19,6 +19,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator'
 
+// Custom Pipes
+import { FilterPipe } from './pipes/filter.pipe';
+
 import { SharedModule } from 'src/app/shared.module';
 import { DepositsRoutingModule } from './deposits-routing.module';
 import { DepositsComponent } from './deposits.component';
@@ -33,6 +36,7 @@ import { PendingDialog } from './dialogs/pending/pending.dialog';
 		MatrixDialog,
 		ConfirmationDialog,
 		PendingDialog,
+		FilterPipe
   ],
   imports: [
     DepositsRoutingModule,
