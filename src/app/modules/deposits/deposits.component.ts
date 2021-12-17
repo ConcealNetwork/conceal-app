@@ -138,9 +138,9 @@ export class DepositsComponent implements OnInit {
 				this.isSmallScreen = true;
 				this.pageSize = 5;
 				this.displayedColumns = [
-					'timestamp',
 					'term',
 					'locked',
+					'spendingTransactionHash'
 				];
 			} else {
 				this.isSmallScreen = false;
@@ -149,6 +149,7 @@ export class DepositsComponent implements OnInit {
 					'timestamp',
 					'term',
 					'locked',
+					'spendingTransactionHash',
 					'address',
 					'amount',
 					'interest',

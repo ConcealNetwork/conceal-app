@@ -57,22 +57,6 @@
 
 					</fieldset>
 
-					<!-- Security -->
-					<fieldset fxLayout="column" fxFlex="noshrink" *ngIf="isLoggedIn">
-						<legend fxLayout="row" fxLayoutAlign="space-between center">
-							<mat-icon class="orange" aria-hidden="false">admin_panel_settings</mat-icon>
-							Authentication
-						</legend>
-						<div fxLayout="row wrap" fxLayoutGap="15px grid">
-							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button">Change Password</button>
-							</div>
-							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex fxFlex="noshrink" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
-							</div>
-						</div>
-					</fieldset>
-
 					<!-- Account -->
 					<fieldset fxLayout="column" fxFlex="noshrink" *ngIf="isLoggedIn">
 
@@ -101,6 +85,22 @@
 
 						</form>
 
+					</fieldset>
+
+					<!-- Security -->
+					<fieldset fxLayout="column" fxFlex="noshrink" *ngIf="isLoggedIn">
+						<legend fxLayout="row" fxLayoutAlign="space-between center">
+							<mat-icon class="orange" aria-hidden="false">admin_panel_settings</mat-icon>
+							Authentication
+						</legend>
+						<div fxLayout="row wrap" fxLayoutGap="15px grid">
+							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button">Change Password</button>
+							</div>
+							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+								<button fxFlex fxFlex="noshrink" color="primary" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
+							</div>
+						</div>
 					</fieldset>
 
 				</mat-card-content>

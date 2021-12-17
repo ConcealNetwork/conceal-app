@@ -136,24 +136,24 @@
 						<div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="15px grid" *ngIf="this.deposits.length !== 0">
 							<div fxLayout="column" fxLayoutGap="15px" fxFlex="33.33" *ngFor="let item of (this.deposits | filter:'spendingTransactionHash') | orderByImpure: 'height'">
 								<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" fxFlex *ngIf="item.locked">
-									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
+									<legend class="" fxLayout="row" fxLayoutAlign="space-between center">
 										<mat-icon class="orange" aria-hidden="false">lock</mat-icon>
 										Unlocks {{this.getHelperService().getUnlockTime(item.unlockHeight, this.blockchainHeight)}}
 									</legend>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Wallet</span>
-										<span class="amount uppercase">{{this.getHelperService().formatAddress(item.address || '')}}</span>
+										<span class="amount">{{this.getHelperService().formatAddress(item.address || '')}}</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Created</span>
-										<span class="amount uppercase">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
+										<span class="amount">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Deposited</span>
 										<span class="amount">{{(item.amount / 1000000).toFixed(6)}} CCX</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Earnings</span>
+										<span class="title">Earning</span>
 										<span class="amount">{{(item.interest / 1000000).toFixed(6)}} CCX</span>
 									</div>
 									<div class="progress" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -165,24 +165,24 @@
 									</div>
 								</fieldset>
 								<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" fxFlex *ngIf="!item.locked">
-									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
+									<legend class="" fxLayout="row" fxLayoutAlign="space-between center">
 										<mat-icon class="unlocked" aria-hidden="false">lock_open</mat-icon>
 										Unlocked
 									</legend>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Wallet</span>
-										<span class="amount uppercase">{{this.getHelperService().formatAddress(item.address || '')}}</span>
+										<span class="amount">{{this.getHelperService().formatAddress(item.address || '')}}</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Created</span>
-										<span class="amount uppercase">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
+										<span class="amount">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
 										<span class="title">Deposited</span>
 										<span class="amount">{{(item.amount / 1000000).toFixed(6)}} CCX</span>
 									</div>
 									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Earnings</span>
+										<span class="title">Earning</span>
 										<span class="amount">{{(item.interest / 1000000).toFixed(6)}} CCX</span>
 									</div>
 									<button type="button" class="ready" mat-flat-button fxFlex (click)="unlock(item.depositId)" [disabled]="this.isUnlocking">Redeem Deposit</button>
@@ -236,12 +236,24 @@
 
 					<!-- locked column -->
 					<ng-container matColumnDef="locked">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header>Deposit Locked</th>
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Locked</th>
 						<td mat-cell *matCellDef="let row">
 							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
 								<mat-icon class="icon" *ngIf="row.locked" color="accent" aria-hidden="true">lock</mat-icon>
 								<mat-icon class="icon unlocked" *ngIf="!row.locked" aria-hidden="true">lock_open</mat-icon>
 								{{row.locked}}
+							</div>
+						</td>
+					</ng-container>
+
+					<!-- spent column -->
+					<ng-container matColumnDef="spendingTransactionHash">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Redeemed</th>
+						<td mat-cell *matCellDef="let row">
+							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
+								<mat-icon class="icon unlocked" *ngIf="row.spendingTransactionHash !== ''" aria-hidden="true">redeem</mat-icon>
+								<mat-icon class="icon" *ngIf="row.spendingTransactionHash === ''" color="accent" aria-hidden="true">pending</mat-icon>
+								{{row.spendingTransactionHash === '' ? false : true}}
 							</div>
 						</td>
 					</ng-container>
