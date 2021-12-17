@@ -134,8 +134,8 @@
 							<span class="nothing">No deposits...</span>
 						</div>
 						<div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="15px grid" *ngIf="this.deposits.length !== 0">
-							<div fxLayout="column" fxLayoutGap="15px" fxFlex="33.33" *ngFor="let item of this.deposits | orderByImpure: 'height'">
-								<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" fxFlex *ngIf="item.locked && item.spendingTransactionHash !== null">
+							<div fxLayout="column" fxLayoutGap="15px" fxFlex="33.33" *ngFor="let item of (this.deposits | filter:'spendingTransactionHash') | orderByImpure: 'height'">
+								<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" fxFlex *ngIf="item.locked">
 									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
 										<mat-icon class="orange" aria-hidden="false">lock</mat-icon>
 										Unlocks {{this.getHelperService().getUnlockTime(item.unlockHeight, this.blockchainHeight)}}
@@ -164,7 +164,7 @@
 										<mat-progress-bar color="accent" mode="buffer" [value]="this.getHelperService().getUnlockPercent(item.height, item.unlockHeight, this.blockchainHeight)"></mat-progress-bar>
 									</div>
 								</fieldset>
-								<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" fxFlex *ngIf="!item.locked && item.spendingTransactionHash !== null">
+								<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" fxFlex *ngIf="!item.locked">
 									<legend class="uppercase" fxLayout="row" fxLayoutAlign="space-between center">
 										<mat-icon class="unlocked" aria-hidden="false">lock_open</mat-icon>
 										Unlocked
@@ -240,7 +240,7 @@
 						<td mat-cell *matCellDef="let row">
 							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
 								<mat-icon class="icon" *ngIf="row.locked" color="accent" aria-hidden="true">lock</mat-icon>
-								<mat-icon class="icon" *ngIf="!row.locked" color="warn" aria-hidden="true">lock_open</mat-icon>
+								<mat-icon class="icon unlocked" *ngIf="!row.locked" aria-hidden="true">lock_open</mat-icon>
 								{{row.locked}}
 							</div>
 						</td>
