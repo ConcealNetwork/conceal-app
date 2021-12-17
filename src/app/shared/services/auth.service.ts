@@ -88,7 +88,7 @@ export class AuthService {
 		return this.http.put(`${this.api}/auth`, JSON.stringify(body));
 	};
 
-	changePassword(email: string) {
+	changeEmail(email: string) {
 		const body = { email };
 		return this.http.patch(`${this.api}/user`, JSON.stringify(body));
   };

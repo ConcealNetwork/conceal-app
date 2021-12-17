@@ -62,4 +62,8 @@ export class SidenavComponent implements OnInit {
 		this.snackbarService.openSnackBar('👋 See you soon. (Logged out)', 'Dismiss');
 	}
 
+	login() {
+		this.router.navigate(['/auth']);
+	}
+
 }

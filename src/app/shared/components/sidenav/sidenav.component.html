@@ -24,6 +24,9 @@
 			<a mat-icon-button (click)="logout()" *ngIf="isLoggedIn">
 				<mat-icon>logout</mat-icon>
 			</a>
+			<a mat-icon-button (click)="login()" *ngIf="!isLoggedIn">
+				<mat-icon>login</mat-icon>
+			</a>
 		</div>
 
 		<div fxLayout="row" fxLayoutAlign="space-around">

@@ -36,6 +36,10 @@ export class HeaderComponent implements OnInit {
 		this.meta.updateTag({ content: `${this.activeTheme === 'light-theme' ? 'light' : 'dark'}` }, 'name=color-scheme');
   }
 
+	login() {
+		this.router.navigate(['/auth']);
+	}
+
 	logout() {
 		this.authService.logout();
 		this.router.navigate(['/auth']);
