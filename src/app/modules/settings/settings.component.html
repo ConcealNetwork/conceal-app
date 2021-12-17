@@ -28,7 +28,8 @@
 								<mat-label>Currency</mat-label>
 								<mat-select #currency name="currency" formControlName="currency">
 									<mat-option [value]="item.name | lowercase" *ngFor="let item of this.currencies">
-										{{ item.name | uppercase }}
+										<img class="icon" width="16" [src]="item.imageUrl" />
+										{{ item.symbol }} {{ item.name | uppercase }} ({{ item.rate.toFixed(2) }} USD)
 									</mat-option>
 								</mat-select>
 								<mat-error *ngIf="hub.controls.currency.hasError('required')">
@@ -49,8 +50,8 @@
 							</mat-form-field>
 
 							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
-								<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('hub')">Clear</button>
-								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="saveHub()" [disabled]="!hub.valid">Apply</button>
+								<button fxFlex color="warn" mat-stroked-button type="button" (click)="clear('hub')">Clear</button>
+								<button fxFlex color="accent" mat-flat-button type="submit" (click)="changeSettings()" [disabled]="!hub.valid">Apply</button>
 							</div>
 
 						</form>
@@ -79,8 +80,8 @@
 							</mat-form-field>
 
 							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
-								<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('cloud')">Clear</button>
-								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="saveCloud()" [disabled]="!cloud.valid">Change Email</button>
+								<button fxFlex color="warn" mat-stroked-button type="button" (click)="clear('cloud')">Clear</button>
+								<button fxFlex color="accent" mat-flat-button type="submit" (click)="changeEmail()" [disabled]="!cloud.valid">Change Email</button>
 							</div>
 
 						</form>
@@ -95,12 +96,36 @@
 						</legend>
 						<div fxLayout="row wrap" fxLayoutGap="15px grid">
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button">Change Password</button>
+								<button fxFlex color="accent" mat-flat-button type="button">Reset Password</button>
 							</div>
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex fxFlex="noshrink" color="primary" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
+								<button fxFlex color="primary" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button" (click)="this.show2fa = !this.show2fa">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
 							</div>
 						</div>
+						<form class="twofa" fxLayout="column" fxLayoutGap="15px" [formGroup]="twofa" *ngIf="this.show2fa">
+							<h4 class="title">Enter the code from your authenticator app to {{this.hasTwoFa ? 'disable' : 'enable'}} two-factor authentication.</h4>
+							<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
+								<mat-label>Two-factor Code</mat-label>
+								<input matInput minlength="6" maxlength="6" placeholder="00000" formControlName="code">
+								<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste()">
+									<mat-icon>content_paste</mat-icon>
+								</button>
+								<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+								<mat-error *ngIf="twofa.controls.code.hasError('minlength') || twofa.controls.code.hasError('maxlength')">
+									2FA code should be <strong>6 numbers</strong>
+								</mat-error>
+								<mat-error *ngIf="twofa.controls.code.hasError('pattern')">
+									2FA code should be <strong>numbers only</strong>
+								</mat-error>
+								<mat-error *ngIf="twofa.controls.code.hasError('required')">
+									2FA Code is <strong>required</strong>
+								</mat-error>
+							</mat-form-field>
+							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
+								<button fxFlex color="warn" mat-stroked-button type="button" (click)="clear('twofa')">Clear</button>
+								<button fxFlex color="accent" mat-flat-button type="submit" (click)="change2fa(this.hasTwoFa)" [disabled]="!twofa.valid">{{this.hasTwoFa ? 'Disable' : 'Enable'}}</button>
+							</div>
+						</form>
 					</fieldset>
 
 				</mat-card-content>
