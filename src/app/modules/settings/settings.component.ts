@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
-
-import { Subscription } from "rxjs";
+import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { CloudService } from 'src/app/shared/services/cloud.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { ThemingService } from 'src/app/shared/services/theming.service';
+import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 @Component({
   selector: 'app-settings',
@@ -33,19 +33,21 @@ export class SettingsComponent implements OnInit {
 	isLoggedIn: boolean = false;
 	isLoading: boolean = true;
 	hasTwoFa: boolean = false;
+	show2fa: boolean = false;
 	username: string = '';
+	email: string = '';
 	currencies: any;
 	modes: any = [
 		{
-			name: 'Follow System',
+			name: '💻 Follow System',
 			value: 'follow-system'
 		},
 		{
-			name: 'Light Theme',
+			name: '☀️ Light Theme',
 			value: 'light-theme'
 		},
 		{
-			name: 'Dark Theme',
+			name: '🌙 Dark Theme',
 			value: 'dark-theme'
 		}
 	];
@@ -54,8 +56,10 @@ export class SettingsComponent implements OnInit {
 		private authService: AuthService,
 		private apiService: ApiService,
 		private cloudService: CloudService,
+		private cordovaService: CordovaService,
 		private snackbarService: SnackbarService,
-		private theming: ThemingService
+		private theming: ThemingService,
+		private clipboard: Clipboard,
 	) { }
 
 	hub: FormGroup = new FormGroup({
@@ -71,17 +75,26 @@ export class SettingsComponent implements OnInit {
 		email: new FormControl('', [
 			Validators.required,
 			Validators.email
-		]),
+		])
+	});
+
+	twofa: FormGroup = new FormGroup({
+		code: new FormControl('', [
+			Validators.minLength(6),
+			Validators.maxLength(6),
+			Validators.pattern('^[0-9]*$'),
+			Validators.required
+		])
 	});
 
   ngOnInit(): void {
-
 		this.authService.isLoginSubject.subscribe((isLoggedIn: boolean) => {
 			this.isLoggedIn = isLoggedIn;
 			if(this.isLoggedIn) {
 				let user = this.cloudService.getUser().subscribe((user:any) => {
 					if(user) {
 						this.username = user.message.name;
+						this.email = user.message.email;
 						this.cloud.controls.email.setValue(user.message.email);
 					}
 				})
@@ -138,16 +151,19 @@ export class SettingsComponent implements OnInit {
   }
 
 	// reset settings form
-	clear(type:string) {
-		if (type === 'hub') {
+	clear(form:string) {
+		if (form === 'hub') {
 			this.hub.reset();
 		}
-		if (type === 'cloud') {
+		if (form === 'cloud') {
 			this.cloud.reset();
+		}
+		if (form === 'twofa') {
+			this.twofa.reset();
 		}
 	}
 
-	saveHub() {
+	changeSettings() {
 		let currency = this.hub.controls.currency.value;
 		let mode = this.hub.controls.mode.value;
 		localStorage.setItem('currency', currency);
@@ -168,8 +184,71 @@ export class SettingsComponent implements OnInit {
 		this.snackbarService.openSnackBar("Settings have been updated", 'Dismiss');
 	}
 
-	saveCloud() {
+	changeEmail() {
+		let email = this.cloud.controls.email.value;
+		this.authService.changeEmail(email).subscribe((result: any) => {
+			if(result.message.success) {
+				this.snackbarService.openSnackBar("Email has been changed", 'Dismiss');
+			} else {
+				this.snackbarService.openSnackBar("Could not change email", 'Dismiss');
+			}
+		})
+	}
 
+	resetPassword() {
+		this.authService.resetPassword(this.email).subscribe((result: any) => {
+			if(result.message.success) {
+				this.snackbarService.openSnackBar(`Check ${this.email} to reset your password`, 'Dismiss');
+			} else {
+				this.snackbarService.openSnackBar("Could not reset password", 'Dismiss');
+			}
+		})
+	}
+
+	change2fa(enabled: boolean) {
+		let code = this.twofa.controls.code.value;
+		if(enabled) {
+			this.authService.enable2FA(code, true).subscribe((result: any) => {
+				if(result.message.success) {
+					this.snackbarService.openSnackBar("Two factor authentication has been enabled", 'Dismiss');
+				} else {
+					this.snackbarService.openSnackBar("Could not enabled 2fa", 'Dismiss');
+				}
+			})
+		} else {
+			this.authService.disable2FA(code).subscribe((result: any) => {
+				if(result.message.success) {
+					this.snackbarService.openSnackBar("Two factor authentication has been disabled", 'Dismiss');
+				} else {
+					this.snackbarService.openSnackBar("Could not disable 2fa", 'Dismiss');
+				}
+			})
+		}
+	}
+
+	paste() {
+		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
+			this.clipboard.paste().then(
+				(resolve: string) => {
+						this.twofa.controls.code.setValue(resolve);
+						this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+					},
+					(reject: string) => {
+						this.snackbarService.openSnackBar(reject, 'Dismiss');
+					}
+			)
+		} else if (navigator.clipboard) {
+			if (navigator.clipboard) {
+				navigator.clipboard.readText()
+				.then(text => {
+					this.twofa.controls.code.setValue(text);
+					this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+				})
+				.catch(err => {
+					this.snackbarService.openSnackBar(err, 'Dismiss');
+				});
+			}
+		}
 	}
 
 }
