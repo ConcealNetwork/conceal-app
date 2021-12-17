@@ -119,6 +119,10 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 	overflow-y: hidden !important;
 }
 
+.mat-snack-bar-container {
+	margin: 15px 15px 65px 15px !important;
+}
+
 .mat-tab-body-content {
 	padding: 15px;
 }
