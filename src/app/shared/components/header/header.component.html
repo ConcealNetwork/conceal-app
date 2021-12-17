@@ -23,6 +23,9 @@
 		<button *ngIf="isLoggedIn" mat-icon-button aria-label="logout" (click)="logout()">
 			<mat-icon aria-hidden="false">logout</mat-icon>
 		</button>
+		<button *ngIf="!isLoggedIn" mat-icon-button aria-label="login" (click)="login()">
+			<mat-icon aria-hidden="false">login</mat-icon>
+		</button>
 		<button *ngIf="activeTheme == 'light-theme'" mat-icon-button mdTooltip="Change theme" (click)="changeTheme('dark-theme')">
 			<mat-icon aria-hidden="false">dark_mode</mat-icon>
 		</button>
