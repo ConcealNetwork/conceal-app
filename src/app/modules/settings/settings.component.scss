@@ -19,11 +19,11 @@ fieldset {
 }
 
 .enable {
-	background-color: #4caf50;
+	background-color: #4caf50 !important;
 }
 
 .disable {
-	background-color: #cb5d5d;
+	background-color: #e57373;
 }
 
 .username {
@@ -52,6 +52,8 @@ small {
 }
 
 .title {
+	font-size: 0.9rem;
+	filter: brightness(80%);
 	margin-block-start: 0;
 	margin-block-end: 0;
 }

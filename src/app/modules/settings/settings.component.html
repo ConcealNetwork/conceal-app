@@ -22,8 +22,8 @@
 							General
 						</legend>
 
-						<form fxLayout="column" fxLayoutGap="25px" [formGroup]="hub">
-
+						<form fxLayout="column" fxLayoutGap="15px" [formGroup]="hub">
+							<p class="title">Configure application settings</p>
 							<mat-form-field hintLabel="Select preferred currency" color="accent" appearance="fill" fxFlex>
 								<mat-label>Currency</mat-label>
 								<mat-select #currency name="currency" formControlName="currency">
@@ -66,8 +66,8 @@
 							Account: <span class="username orange">{{this.username}}</span>
 						</legend>
 
-						<form fxLayout="column" fxLayoutGap="25px" [formGroup]="cloud">
-
+						<form fxLayout="column" fxLayoutGap="15px" [formGroup]="cloud">
+							<p class="title">Change your email address</p>
 							<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
 								<mat-label>Email Address</mat-label>
 								<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="email" autocomplete="email">
@@ -95,11 +95,12 @@
 							Authentication
 						</legend>
 						<div fxLayout="row wrap" fxLayoutGap="15px grid">
+							<p class="title">Change your authentication settings</p>
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
 								<button fxFlex color="warn" mat-flat-button type="button" (click)="resetPassword()">Reset Password</button>
 							</div>
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex color="primary" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button" (click)="this.show2fa = !this.show2fa">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
+								<button fxFlex color="warn" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button" (click)="this.show2fa = !this.show2fa">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
 							</div>
 						</div>
 					</fieldset>

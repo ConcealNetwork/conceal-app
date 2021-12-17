@@ -101,7 +101,7 @@ export class SettingsComponent implements OnInit {
 					}
 				})
 				let qr = this.authService.getQRCode().subscribe((result: any) => {
-					if (result.message.enabled === false) {
+					if (result.message.qrCodeUrl) {
 						this.secretQR = result.message.qrCodeUrl;
 						this.secret = result.message.qrCodeUrl.split(' ')[0].split('secret%3')[1];
 					}
