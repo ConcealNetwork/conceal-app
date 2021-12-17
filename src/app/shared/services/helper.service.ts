@@ -1,9 +1,6 @@
 // Angular Core
 import { Injectable } from '@angular/core';
 
-// Services
-import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-
 // 3rd Party
 import * as moment from 'moment';
 
@@ -13,9 +10,7 @@ import * as moment from 'moment';
 
 export class HelperService {
 
-	constructor (
-		private snackbarService: SnackbarService
-	) { }
+	constructor (	) { }
 
 	formattedStringAmount(amount:number, currency:string, symbol:string): any {
 		const formatOptions = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
