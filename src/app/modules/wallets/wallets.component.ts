@@ -56,6 +56,7 @@ export class WalletsComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
 	// status
+	interval: number = 60000;
 	isLoading: boolean = false;
 	isDataLoading: boolean = true;
 	isLoadingBTC: boolean = true;
@@ -112,73 +113,105 @@ export class WalletsComponent implements OnInit {
 			this.currency = localStorage.getItem('currency');
 		}
 		// breakpoints
-		let breakpoints = this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe((state: BreakpointState) => {
-			if (state.matches) {
-				// Matches small viewport or handset in portrait mode
-				this.isSmallScreen = true;
-				this.pageSize = 5;
-				this.displayedColumns = ['timestamp', 'type', 'amount'];
-			} else {
-				this.isSmallScreen = false;
-				this.pageSize = 10;
-				this.displayedColumns = ['timestamp', 'type', 'amount', 'address', 'fee', 'status'];
-			}
-		})
-		// wallets
-		let wallets = this.cloudService.getWalletsData().subscribe((data:any) => {
-			if (data && data.result === 'success') {
-				// convert object to array with key as address
-				let wallet = Object.keys(data.message.wallets).map(key => {
-					return {
-						address: key,
-						balance: data.message.wallets[key].balance,
-						locked: data.message.wallets[key].locked,
-						total: data.message.wallets[key].total,
-						corrupted: data.message.wallets[key].corrupted,
-						ipn: data.message.wallets[key].ipn,
-						transactions: data.message.wallets[key].transactions
-					}
-				})
-				this.wallets = wallet;
-				this.activeWallets = wallet.length;
-				for (let i = 0; i < this.wallets.length; i++) {
-					this.portfolioCCX = this.wallets[i].balance;
-					this.transactions = this.wallets[i].transactions;
-				}
-				this.apiService.getPrice(this.currency).subscribe((price:any) => {
-					if (price.conceal) {
-						this.portfolioFiat = (price.conceal[(this.currency)] * this.portfolioCCX);
-						this.portfolioBTC = (price.conceal.btc * this.portfolioCCX);
-						this.isLoadingFiat = false;
-						this.isLoadingBTC = false;
-					} else {
-						this.isLoadingFiat = false;
-						this.isLoadingBTC = false;
-						this.snackbarService.openSnackBar('Could not get the latest market price', 'Dismiss');
-					}
-				})
-				if (this.isLoadingBTC && this.isLoadingFiat) {
-					this.dataSource = new MatTableDataSource(this.transactions);
-					this.isDataLoading = false;
-					// Assign the data to the data source for the table to render
-					setTimeout(() => {
-						this.dataSource.paginator = this.paginator;
-						this.dataSource.sort = this.sort;
-						this.changeDetectorRefs.detectChanges();
-						this.isLoadingResults = false;
-					}, 500);
-				}
-			} else {
-				this.isDataLoading = false;
-				this.isLoadingResults = false;
-				if (data) {
-					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+		let breakpoints = (resolve:any) => {
+			this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe((state: BreakpointState) => {
+				if (state.matches) {
+					// Matches small viewport or handset in portrait mode
+					this.isSmallScreen = true;
+					this.pageSize = 5;
+					this.displayedColumns = ['timestamp', 'type', 'amount'];
 				} else {
-					this.snackbarService.openSnackBar('Could not retrieve wallet data', 'Dismiss');
+					this.isSmallScreen = false;
+					this.pageSize = 10;
+					this.displayedColumns = ['timestamp', 'type', 'amount', 'address', 'fee', 'status'];
 				}
-			}
+			})
+			resolve();
+		};
+		// wallets
+		let wallets = (resolve:any) => {
+			this.cloudService.getWalletsData().subscribe((data:any) => {
+				if (data && data.result === 'success') {
+					// convert object to array with key as address
+					let wallet = Object.keys(data.message.wallets).map(key => {
+						return {
+							address: key,
+							balance: data.message.wallets[key].balance,
+							locked: data.message.wallets[key].locked,
+							total: data.message.wallets[key].total,
+							corrupted: data.message.wallets[key].corrupted,
+							ipn: data.message.wallets[key].ipn,
+							transactions: data.message.wallets[key].transactions
+						}
+					})
+					this.wallets = wallet;
+					this.activeWallets = wallet.length;
+					this.portfolioCCX = 0;
+					this.transactions = [];
+					for (let i = 0; i < this.wallets.length; i++) {
+						this.portfolioCCX += this.wallets[i].balance;
+						this.transactions = this.wallets[i].transactions.concat(this.transactions);
+					}
+					this.apiService.getPrice(this.currency).subscribe((price:any) => {
+						if (price.conceal) {
+							this.portfolioFiat = (price.conceal[(this.currency)] * this.portfolioCCX);
+							this.portfolioBTC = (price.conceal.btc * this.portfolioCCX);
+							this.isLoadingFiat = false;
+							this.isLoadingBTC = false;
+						} else {
+							this.isLoadingFiat = false;
+							this.isLoadingBTC = false;
+							this.snackbarService.openSnackBar('Could not get the latest market price', 'Dismiss');
+						}
+					})
+					if (this.isLoadingBTC && this.isLoadingFiat) {
+						this.dataSource = new MatTableDataSource(this.transactions);
+						this.isDataLoading = false;
+						// Assign the data to the data source for the table to render
+						setTimeout(() => {
+							console.log('Refresh:table');
+							this.dataSource.paginator = this.paginator;
+							this.dataSource.sort = this.sort;
+							this.changeDetectorRefs.detectChanges();
+							this.isLoadingResults = false;
+						}, 500);
+					}
+				} else {
+					this.isDataLoading = false;
+					this.isLoadingResults = false;
+					if (data) {
+						this.snackbarService.openSnackBar(data.message, 'Dismiss');
+					} else {
+						this.snackbarService.openSnackBar('Could not retrieve wallet data', 'Dismiss');
+					}
+				}
+			})
+			resolve();
+		};
+		// repeat promise at set intervals
+		Promise.all([new Promise(breakpoints), new Promise(wallets)]).then(() => {
+			let interval = this.interval;
+			let callback = function() {
+				Promise.all([new Promise(breakpoints), new Promise(wallets)]).then(function(){
+					console.log('Refresh:data');
+					setTimeout(callback, interval);
+				});
+			};
+			setTimeout(callback, interval);
+			// refresh table
+			setInterval(() => {
+				this.refresh()
+			}, interval+500);
 		})
-		Promise.all([wallets, breakpoints]);
+	}
+
+	refresh() {
+		console.log('Refresh:table');
+		this.dataSource = new MatTableDataSource(this.transactions);
+		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort;
+		this.changeDetectorRefs.detectChanges();
+		this.isLoading = false;
 	}
 
 	deleteWallet(wallet:string, balance:number) {
