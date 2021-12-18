@@ -62,6 +62,7 @@ export class DepositsComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
 	// Variables
+	interval: number = 60000;
 	isLoadingResults: boolean = true;
 	isSmallScreen: boolean = false;
 	isDataLoading: boolean = true;
@@ -132,83 +133,116 @@ export class DepositsComponent implements OnInit {
 			this.showSlider = false;
 		}
 		// breakpoints
-		let breakpoints = this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe((state: BreakpointState) => {
-			if (state.matches) {
-				// Matches small viewport or handset in portrait mode
-				this.isSmallScreen = true;
-				this.pageSize = 5;
-				this.displayedColumns = [
-					'term',
-					'locked',
-					'spendingTransactionHash'
-				];
-			} else {
-				this.isSmallScreen = false;
-				this.pageSize = 10;
-				this.displayedColumns = [
-					'timestamp',
-					'term',
-					'locked',
-					'spendingTransactionHash',
-					'address',
-					'amount',
-					'interest',
-				];
-			}
-		})
+		let breakpoints = (resolve:any) => {
+			this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe((state: BreakpointState) => {
+				if (state.matches) {
+					// Matches small viewport or handset in portrait mode
+					this.isSmallScreen = true;
+					this.pageSize = 5;
+					this.displayedColumns = [
+						'term',
+						'locked',
+						'spendingTransactionHash'
+					];
+				} else {
+					this.isSmallScreen = false;
+					this.pageSize = 10;
+					this.displayedColumns = [
+						'timestamp',
+						'term',
+						'locked',
+						'spendingTransactionHash',
+						'address',
+						'amount',
+						'interest',
+					];
+				}
+			})
+			resolve();
+		};
 		// subscribe to wallets
-		let wallets = this.cloudService.getWalletsData().subscribe((data:any) => {
-			if (data && data.result === 'success') {
-				this.wallets = data.message.wallets;
-				this.blockchainHeight = data.message.height;
-				this.walletsLoading = false;
-				this.deposit.valueChanges.pipe(debounceTime(500)).subscribe(() => {
-					if (this.deposit.controls.term.value && this.deposit.controls.amount.value) {
-						this.interest = this.getDepositInterest(this.deposit.controls.amount.value, this.termLength);
-						this.rate = this.getDepositRate(this.deposit.controls.amount.value, this.termLength);
-					}
-				})
-			} else {
-				this.walletsLoading = false;
-				if (data) {
-					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+		let wallets = (resolve:any) => {
+			this.cloudService.getWalletsData().subscribe((data:any) => {
+				if (data && data.result === 'success') {
+					this.wallets = data.message.wallets;
+					this.blockchainHeight = data.message.height;
+					this.walletsLoading = false;
+					this.deposit.valueChanges.pipe(debounceTime(500)).subscribe(() => {
+						if (this.deposit.controls.term.value && this.deposit.controls.amount.value) {
+							this.interest = this.getDepositInterest(this.deposit.controls.amount.value, this.termLength);
+							this.rate = this.getDepositRate(this.deposit.controls.amount.value, this.termLength);
+						}
+					})
 				} else {
-					this.snackbarService.openSnackBar('Could not retrieve wallet data', 'Dismiss');
+					this.walletsLoading = false;
+					if (data) {
+						this.snackbarService.openSnackBar(data.message, 'Dismiss');
+					} else {
+						this.snackbarService.openSnackBar('Could not retrieve wallet data', 'Dismiss');
+					}
 				}
-			}
-		})
+			})
+			resolve();
+		};
 		// subscribe to deposits
-		let deposits = this.cloudService.listDeposits().subscribe((data:any) => {
-			if (data && data.result === 'success') {
-				// loop through results and check if address exists in deposit
-				for (let i = 0; i < data.message.deposits.length; i++) {
-					if (data.message.deposits[i].address) {
-						this.deposits.push(data.message.deposits[i]);
+		let deposits = (resolve:any) => {
+			this.cloudService.listDeposits().subscribe((data:any) => {
+				if (data && data.result === 'success') {
+					// loop through results and check if address exists in deposit
+					this.deposits = [];
+					for (let i = 0; i < data.message.deposits.length; i++) {
+						if (data.message.deposits[i].address) {
+							this.deposits.push(data.message.deposits[i]);
+						}
+					}
+					this.dataSource = new MatTableDataSource(this.deposits);
+					this.depositsLoading = false;
+					this.isDataLoading = false;
+					// Assign the data to the data source for the table to render
+					setTimeout(() => {
+						console.log('Refresh:table');
+						this.dataSource.paginator = this.paginator;
+						this.dataSource.sort = this.sort;
+						this.changeDetectorRefs.detectChanges();
+						this.isLoadingResults = false;
+					}, 500);
+				} else {
+					this.depositsLoading = false;
+					this.isDataLoading = false;
+					this.isLoadingResults = false;
+					if (data) {
+						this.snackbarService.openSnackBar(data.message, 'Dismiss');
+					} else {
+						this.snackbarService.openSnackBar('Could not retrieve deposits data', 'Dismiss');
 					}
 				}
-				this.dataSource = new MatTableDataSource(this.deposits);
-				this.depositsLoading = false;
-				this.isDataLoading = false;
-				// Assign the data to the data source for the table to render
-				setTimeout(() => {
-					this.dataSource.paginator = this.paginator;
-					this.dataSource.sort = this.sort;
-					this.changeDetectorRefs.detectChanges();
-					this.isLoadingResults = false;
-				}, 500);
-			} else {
-				this.depositsLoading = false;
-				this.isDataLoading = false;
-				this.isLoadingResults = false;
-				if (data) {
-					this.snackbarService.openSnackBar(data.message, 'Dismiss');
-				} else {
-					this.snackbarService.openSnackBar('Could not retrieve deposits data', 'Dismiss');
-				}
-			}
-		})
-		// call wallets and deposits
-		Promise.all([wallets, deposits, breakpoints]);
+			})
+			resolve();
+		};
+		// repeat promise at set intervals
+		Promise.all([new Promise(breakpoints), new Promise(wallets), new Promise(deposits)]).then(() => {
+			let interval = this.interval;
+			let callback = function() {
+				Promise.all([new Promise(breakpoints), new Promise(wallets), new Promise(deposits)]).then(function(){
+					console.log('Refresh:data');
+					setTimeout(callback, interval);
+				});
+			};
+			setTimeout(callback, interval);
+			// refresh table
+			setInterval(() => {
+				this.refresh()
+			}, interval+500);
+		});
+	};
+
+	refresh() {
+		console.log('Refresh:table');
+		this.dataSource = new MatTableDataSource(this.deposits);
+		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort;
+		this.changeDetectorRefs.detectChanges();
+		this.isLoadingResults = false;
 	}
 
 	// show wallets in selection dropdown
