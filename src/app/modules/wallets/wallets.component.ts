@@ -2,7 +2,7 @@
 import { environment } from 'src/environments/environment';
 
 // Angular Core
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
@@ -50,13 +50,14 @@ export interface Transactions {
 	]
 })
 
-export class WalletsComponent implements OnInit {
+export class WalletsComponent implements OnInit, OnDestroy {
 
 	@ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
 	// status
-	interval: number = 60000;
+	interval: number = environment.interval;
+	polling: any;
 	isLoading: boolean = false;
 	isDataLoading: boolean = true;
 	isLoadingBTC: boolean = true;
@@ -164,18 +165,10 @@ export class WalletsComponent implements OnInit {
 							this.snackbarService.openSnackBar('Could not get the latest market price', 'Dismiss');
 						}
 					})
-					if (this.isLoadingBTC && this.isLoadingFiat) {
-						this.dataSource = new MatTableDataSource(this.transactions);
-						this.isDataLoading = false;
-						// Assign the data to the data source for the table to render
-						setTimeout(() => {
-							console.log('Refresh:table');
-							this.dataSource.paginator = this.paginator;
-							this.dataSource.sort = this.sort;
-							this.changeDetectorRefs.detectChanges();
-							this.isLoadingResults = false;
-						}, 500);
-					}
+					this.dataSource = new MatTableDataSource(this.transactions);
+					this.isDataLoading = false;
+					this.isLoadingResults = false
+					this.refresh();
 				} else {
 					this.isDataLoading = false;
 					this.isLoadingResults = false;
@@ -190,28 +183,34 @@ export class WalletsComponent implements OnInit {
 		};
 		// repeat promise at set intervals
 		Promise.all([new Promise(breakpoints), new Promise(wallets)]).then(() => {
-			let interval = this.interval;
 			let callback = function() {
-				Promise.all([new Promise(breakpoints), new Promise(wallets)]).then(function(){
+				Promise.all([new Promise(breakpoints), new Promise(wallets)]).then(() => {
 					console.log('Refresh:data');
-					setTimeout(callback, interval);
 				});
 			};
-			setTimeout(callback, interval);
-			// refresh table
-			setInterval(() => {
-				this.refresh()
-			}, interval+500);
+			// polling for new data
+			this.polling = setInterval(callback, this.interval);
 		})
 	}
 
+	ngOnDestroy() {
+		if(this.polling) {
+			clearInterval(this.polling);
+			console.log('Destroyed polling');
+		}
+	}
+
 	refresh() {
-		console.log('Refresh:table');
-		this.dataSource = new MatTableDataSource(this.transactions);
-		this.dataSource.paginator = this.paginator;
-		this.dataSource.sort = this.sort;
-		this.changeDetectorRefs.detectChanges();
-		this.isLoading = false;
+		this.isLoadingResults = true;
+		setTimeout(() => {
+			console.log('Refresh:table');
+			this.dataSource = new MatTableDataSource(this.transactions);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+			this.changeDetectorRefs.detectChanges();
+			this.isLoading = false;
+			this.isLoadingResults = false;
+		}, 500);
 	}
 
 	deleteWallet(wallet:string, balance:number) {

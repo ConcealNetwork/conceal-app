@@ -2,7 +2,7 @@
 import { environment } from 'src/environments/environment';
 
 // Angular Core
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
@@ -55,14 +55,15 @@ export interface Deposits {
 	]
 })
 
-export class DepositsComponent implements OnInit {
+export class DepositsComponent implements OnInit, OnDestroy {
 
 	@ViewChild('deposit') form: any;
 	@ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
 	// Variables
-	interval: number = 60000;
+	interval: number = environment.interval;
+	polling: any;
 	isLoadingResults: boolean = true;
 	isSmallScreen: boolean = false;
 	isDataLoading: boolean = true;
@@ -198,14 +199,7 @@ export class DepositsComponent implements OnInit {
 					this.dataSource = new MatTableDataSource(this.deposits);
 					this.depositsLoading = false;
 					this.isDataLoading = false;
-					// Assign the data to the data source for the table to render
-					setTimeout(() => {
-						console.log('Refresh:table');
-						this.dataSource.paginator = this.paginator;
-						this.dataSource.sort = this.sort;
-						this.changeDetectorRefs.detectChanges();
-						this.isLoadingResults = false;
-					}, 500);
+					this.refresh();
 				} else {
 					this.depositsLoading = false;
 					this.isDataLoading = false;
@@ -221,28 +215,33 @@ export class DepositsComponent implements OnInit {
 		};
 		// repeat promise at set intervals
 		Promise.all([new Promise(breakpoints), new Promise(wallets), new Promise(deposits)]).then(() => {
-			let interval = this.interval;
 			let callback = function() {
-				Promise.all([new Promise(breakpoints), new Promise(wallets), new Promise(deposits)]).then(function(){
+				Promise.all([new Promise(breakpoints), new Promise(wallets), new Promise(deposits)]).then(() => {
 					console.log('Refresh:data');
-					setTimeout(callback, interval);
-				});
-			};
-			setTimeout(callback, interval);
-			// refresh table
-			setInterval(() => {
-				this.refresh()
-			}, interval+500);
-		});
+				})
+			}
+			// polling for new data
+			this.polling = setInterval(callback, this.interval);
+		})
 	};
 
+	ngOnDestroy() {
+		if(this.polling) {
+			clearInterval(this.polling);
+			console.log('Destroyed polling');
+		}
+	}
+
 	refresh() {
-		console.log('Refresh:table');
-		this.dataSource = new MatTableDataSource(this.deposits);
-		this.dataSource.paginator = this.paginator;
-		this.dataSource.sort = this.sort;
-		this.changeDetectorRefs.detectChanges();
-		this.isLoadingResults = false;
+		this.isLoadingResults = true;
+		setTimeout(() => {
+			console.log('Refresh:table');
+			this.dataSource = new MatTableDataSource(this.deposits);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+			this.changeDetectorRefs.detectChanges();
+			this.isLoadingResults = false;
+		}, 500);
 	}
 
 	// show wallets in selection dropdown
