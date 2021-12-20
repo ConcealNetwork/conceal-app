@@ -20,7 +20,7 @@ export class AuthService {
 	) {}
 
 	api = environment.walletAPI;
-	isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
+	isLoginSubject = new BehaviorSubject<boolean>(this.hasToken() && !this.isTokenExpired());
 	token: any;
 
 	login(email: string, password: string, twofa: string) {
@@ -36,7 +36,7 @@ export class AuthService {
     return this.isLoginSubject.asObservable();
   }
 
-	loggedIn() {
+	isTokenExpired() {
 		return this.jwtHelper.isTokenExpired();
 	};
 
