@@ -3,6 +3,7 @@ export const environment = {
   environment: 'PROD',
 	version: '1.0.0 Beta',
   walletAPI: 'https://api.wallet.conceal.network/api',
+	interval: 60000,
 	defaultFee: 0.001000,
 	walletLimit: 2,
 	currency: 'usd',
