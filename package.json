@@ -1,11 +1,22 @@
 {
   "name": "conceal-hub",
+	"displayName": "Conceal Hub",
   "version": "1.0.0",
+	"description": "Access the entire Conceal Privacy Ecosystem in one simple and intuitive app.",
+	"homepage": "https://github.com/ConcealNetwork/conceal-hub",
+  "author": {
+    "name": "Conceal Network",
+    "email": "ccx@conceal.network"
+  },
+	"keywords": [
+    "ecosystem:angular"
+  ],
+  "license": "MIT License",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open --host 0.0.0.0 --disable-host-check",
     "build": "ng build --configuration production",
-    "deploy": "ng build --configuration production --base-href . --output-path ../cordova/www/",
+    "deploy": "ng build --configuration production --base-href . --output-path ../conceal-hub-cordova/www/",
     "watch": "ng build --watch --configuration development",
     "firebase": "ng build --configuration production && firebase deploy",
     "test": "ng test"
