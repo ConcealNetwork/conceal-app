@@ -22,7 +22,9 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $mat-primary-light-scheme: (
-  100: #212121,
+  100: rgb(255, 255, 255),
+	500: rgb(255, 255, 255),
+  700: rgb(255, 255, 255),
   contrast: (
     100: rgba(0,0,0,0.9),
     500: rgba(0,0,0,0.7),
@@ -32,6 +34,8 @@ $mat-primary-light-scheme: (
 
 $mat-primary-dark-scheme: (
   100: #212121,
+	500: #212121,
+  700: #212121,
   contrast: (
 		100: rgba(255,255,255,0.9),
     500: rgba(255,255,255,0.7),
