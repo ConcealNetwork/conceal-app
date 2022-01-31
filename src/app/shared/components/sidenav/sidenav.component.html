@@ -1,4 +1,4 @@
-<aside fxLayout="column" fxLayoutGap="25px">
+<aside fxLayout="column" fxLayoutGap="15px">
 
 		<!-- future updates
 		<div fxLayout="column" fxLayoutGap="15px">
@@ -10,6 +10,18 @@
 		-->
 
 		<div class="fill-space"></div>
+
+		<div fxLayout="row" fxLayoutAlign="space-around">
+			<div class="version">Version: <span class="orange">{{this.version}}</span></div>
+		</div>
+
+		<div fxLayout="row" fxLayoutAlign="space-around">
+			<div class="item copyright">Copyright © {{this.year}} All rights reserved <strong>Conceal Network.</strong></div>
+		</div>
+
+		<div fxLayout="row" fxLayoutAlign="space-around">
+			<div class="item copyright"><a href="https://conceal.network/tc/index.html" class="orange" target="_blank">Terms & Conditions</a><br /><a href="https://conceal.network/privacy/index.html" class="orange" target="_blank">Privacy Policy</a></div>
+		</div>
 
 		<div fxLayout="row" fxLayoutAlign="space-around">
 			<a mat-icon-button (click)="close()" routerLink="/settings" routerLinkActive="active">
@@ -27,10 +39,6 @@
 			<a mat-icon-button (click)="login()" *ngIf="!isLoggedIn">
 				<mat-icon>login</mat-icon>
 			</a>
-		</div>
-
-		<div fxLayout="row" fxLayoutAlign="space-around">
-			<div class="version">Version: <span class="orange">{{this.version}}</span></div>
 		</div>
 
 </aside>
