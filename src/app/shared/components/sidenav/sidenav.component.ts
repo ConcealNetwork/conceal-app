@@ -20,6 +20,7 @@ export class SidenavComponent implements OnInit {
 	@Output() sideNavClosed = new EventEmitter();
 
 	version: any = environment.version;
+	year: number = new Date().getFullYear();
 	themes: string[] = [];
 	activeTheme: string = '';
 	watcherSubscription!: Subscription;
