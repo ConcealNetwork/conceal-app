@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,6 +29,7 @@ import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 		AuthRoutingModule,
 		MatButtonModule,
 		MatInputModule,
+		MatRadioModule,
 		MatCardModule,
 		MatIconModule,
 		FormsModule,
