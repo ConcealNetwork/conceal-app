@@ -6,31 +6,41 @@
 
 	<mat-card-content fxLayout="column" fxLayoutGap="25px">
 
+		<form [formGroup]="login" class="login" fxLayout="column" fxLayoutGap="15px">
+			<span>Preferred login method?</span>
+			<mat-radio-group fxFill formControlName="loginTypeFromControl" aria-label="Select an option" fxLayoutGap="25px">
+				<mat-radio-button *ngFor="let type of loginTypes" [value]="type">
+					{{type}}
+				</mat-radio-button>
+				<p class="red info" *ngIf="!this.login.valid"><strong>Please Note:</strong> While username login will enable greater privacy, you will not be able to recover your password.</p>
+			</mat-radio-group>
+		</form>
+
 		<form [formGroup]="form" fxLayout="column" fxLayoutGap="25px">
 
-			<mat-form-field fxFill hintLabel="New username" appearance="fill" color="accent">
+			<mat-form-field fxFill hintLabel="Enter your email address" appearance="fill" color="accent" *ngIf="this.login.value.loginTypeFromControl === 'Email Address'">
+				<mat-label>Email Address</mat-label>
+				<input matInput type="email" name="email" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="email">
+				<mat-error *ngIf="form.controls.emailFormControl.hasError('email') && form.controls.emailFormControl.hasError('required')">
+					Please enter a valid email address
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field fxFill hintLabel="Enter your username" appearance="fill" color="accent" *ngIf="this.login.value.loginTypeFromControl === 'Username'">
 				<mat-label>Username</mat-label>
-				<input matInput type="text" minlength="3" maxlength="24" formControlName="usernameFormControl" autocomplete="nickname">
+				<input matInput type="text" name="username" minlength="4" maxlength="24" formControlName="usernameFormControl" autocomplete="username">
 				<mat-error *ngIf="form.controls.usernameFormControl.hasError('minlength') || form.controls.usernameFormControl.hasError('maxlength')">
-					Username should be at least <strong>3 characters</strong>
+					Username should be at least <strong>5 characters</strong>
+				</mat-error>
+				<mat-error *ngIf="form.controls.usernameFormControl.hasError('pattern')">
+					Please enter a valid username
 				</mat-error>
 				<mat-error *ngIf="form.controls.usernameFormControl.hasError('required')">
 					Username is <strong>required</strong>
 				</mat-error>
 			</mat-form-field>
 
-			<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
-				<mat-label>Email Address</mat-label>
-				<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="email">
-				<mat-error *ngIf="form.controls.emailFormControl.hasError('email') && !form.controls.emailFormControl.hasError('required')">
-					Please enter a valid email address
-				</mat-error>
-				<mat-error *ngIf="form.controls.emailFormControl.hasError('required')">
-					Email address is <strong>required</strong>
-				</mat-error>
-			</mat-form-field>
-
-			<mat-form-field fxFill hintLabel="New password" appearance="fill" color="accent">
+			<mat-form-field fxFill hintLabel="Enter your password" appearance="fill" color="accent">
 				<mat-label>Password</mat-label>
 				<input matInput type="password" name="password" placeholder="password" formControlName="passwordFormControl" autocomplete="new-password">
 				<mat-error *ngIf="form.controls.passwordFormControl.hasError('required')">
@@ -38,8 +48,16 @@
 				</mat-error>
 			</mat-form-field>
 
+			<mat-form-field fxFill hintLabel="What should we call you?" appearance="fill" color="accent">
+				<mat-label>Display Name</mat-label>
+				<input matInput type="text" minlength="4" maxlength="24" formControlName="displayNameFormControl" autocomplete="nickname">
+				<mat-error *ngIf="form.controls.displayNameFormControl.hasError('required')">
+					Display name is <strong>required</strong>
+				</mat-error>
+			</mat-form-field>
+
 			<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
-				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Create Account' : 'Loading' }}</button>
+				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading || !this.form.valid || !this.login.value.loginTypeFromControl">{{ !this.isLoading ? 'Create Account' : 'Loading' }}</button>
 				<a mat-stroked-button (click)="changeAuthType('signIn')">Cancel</a>
 			</div>
 

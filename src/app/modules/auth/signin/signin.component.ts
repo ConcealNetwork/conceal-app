@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
@@ -15,12 +15,13 @@ import { CordovaService } from 'src/app/shared/services/cordova.service';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements AfterViewInit, OnInit {
 
 	isLoading: boolean = false;
 	returnURL: string = '';
 	date: Date = new Date();
 	timeOfDay: number = this.date.getHours();
+	loginTypes: string[] = ['Email Address', 'Username'];
 
   constructor(
 		private authService: AuthService,
@@ -33,12 +34,14 @@ export class SigninComponent implements OnInit {
 		private router: Router
 	) { }
 
-	form: FormGroup = new FormGroup({
-    emailFormControl: new FormControl('', [
-      Validators.required,
-      Validators.email,
+	login: FormGroup = new FormGroup({
+		loginTypeFromControl: new FormControl('', [
+      Validators.required
     ]),
-    passwordFormControl: new FormControl('', [
+	});
+
+	form: FormGroup = new FormGroup({
+		passwordFormControl: new FormControl('', [
       Validators.required
     ]),
     twofaFormControl: new FormControl('', [
@@ -56,7 +59,7 @@ export class SigninComponent implements OnInit {
 		if(this.form.valid) {
 			this.isLoading = true;
 			this.authService.login(
-				this.form.value.emailFormControl,
+				this.form.value.emailFormControl || this.form.value.usernameFormControl,
 				this.form.value.passwordFormControl,
 				this.form.value.twofaFormControl
 			).subscribe((data: any) => {
@@ -105,6 +108,27 @@ export class SigninComponent implements OnInit {
 				});
 			}
 		}
+	}
+
+	ngAfterViewInit(): void {
+		this.login.valueChanges.subscribe(x => {
+			if (this.login.value.loginTypeFromControl === 'Email Address') {
+				this.form.removeControl('usernameFormControl');
+				this.form.addControl('emailFormControl', new FormControl('', [
+					Validators.email,
+					Validators.required
+				]));
+			}
+			if (this.login.value.loginTypeFromControl === 'Username') {
+				this.form.removeControl('emailFormControl');
+				this.form.addControl('usernameFormControl', new FormControl('', [
+					Validators.minLength(4),
+					Validators.maxLength(24),
+					Validators.pattern('^[A-Za-z_-][A-Za-z0-9_-]*$'),
+					Validators.required
+				]));
+			}
+		})
 	}
 
   ngOnInit(): void {

@@ -5,16 +5,37 @@
 	</mat-card-header>
 
 	<mat-card-content fxLayout="column" fxLayoutGap="25px">
+
+		<form [formGroup]="login" class="login" fxLayout="column" fxLayoutGap="15px">
+			<span>Login method?</span>
+			<mat-radio-group fxFill formControlName="loginTypeFromControl" aria-label="Select an option" fxLayoutGap="25px">
+				<mat-radio-button *ngFor="let type of loginTypes" [value]="type">
+					{{type}}
+				</mat-radio-button>
+			</mat-radio-group>
+		</form>
+
 		<form [formGroup]="form" fxLayout="column" fxLayoutGap="25px">
 
-			<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
+			<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent" *ngIf="this.login.value.loginTypeFromControl === 'Email Address'">
 				<mat-label>Email Address</mat-label>
-				<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="email">
-				<mat-error *ngIf="form.controls.emailFormControl.hasError('email') && !form.controls.emailFormControl.hasError('required')">
+				<input matInput type="email" name="email" placeholder="you@youremail.com" formControlName="emailFormControl" autocomplete="email">
+				<mat-error *ngIf="form.controls.emailFormControl.hasError('email') && form.controls.emailFormControl.hasError('required')">
 					Please enter a valid email address
 				</mat-error>
-				<mat-error *ngIf="form.controls.emailFormControl.hasError('required')">
-					Email address is <strong>required</strong>
+			</mat-form-field>
+
+			<mat-form-field fxFill hintLabel="Your username" appearance="fill" color="accent" *ngIf="this.login.value.loginTypeFromControl === 'Username'">
+				<mat-label>Username</mat-label>
+				<input matInput type="text" name="username" minlength="4" maxlength="24" formControlName="usernameFormControl" autocomplete="username">
+				<mat-error *ngIf="form.controls.usernameFormControl.hasError('minlength') || form.controls.usernameFormControl.hasError('maxlength')">
+					Username should be at least <strong>4 characters</strong>
+				</mat-error>
+				<mat-error *ngIf="form.controls.usernameFormControl.hasError('pattern')">
+					Please enter a valid username
+				</mat-error>
+				<mat-error *ngIf="form.controls.usernameFormControl.hasError('required')">
+					Username is <strong>required</strong>
 				</mat-error>
 			</mat-form-field>
 
@@ -27,9 +48,9 @@
 			</mat-form-field>
 
 			<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill" color="accent">
-				<mat-label>2FA (Optional)</mat-label>
+				<mat-label>2FA (If Enabled)</mat-label>
 				<input #twofa matInput type="text" inputmode="numeric" minlength="6" maxlength="6" placeholder="00000" pattern="[0-9]*" formControlName="twofaFormControl" autocomplete="one-time-code">
-				<button type="button"  matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste()">
+				<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste()">
 					<mat-icon>content_paste</mat-icon>
 				</button>
 				<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
@@ -42,7 +63,7 @@
 			</mat-form-field>
 
 			<div fxLayout="column" fxLayoutAlign="start space-between" fxLayoutGap="15px">
-				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading">{{ !this.isLoading ? 'Login' : 'Loading' }}</button>
+				<button mat-flat-button color="accent" (click)="submit()" [class.spinner]="this.isLoading" [disabled]="this.isLoading || !this.form.valid || !this.login.value.loginTypeFromControl">{{ !this.isLoading ? 'Login' : 'Loading' }}</button>
 				<a mat-stroked-button (click)="changeAuthType('signUp')">Create New Account</a>
 				<a mat-stroked-button (click)="changeAuthType('reset')">Password Recovery</a>
 			</div>
