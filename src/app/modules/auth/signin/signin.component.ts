@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
@@ -31,7 +32,8 @@ export class SigninComponent implements AfterViewInit, OnInit {
 		private cordovaService: CordovaService,
 		private clipboard: Clipboard,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private recaptchaV3Service: ReCaptchaV3Service
 	) { }
 
 	login: FormGroup = new FormGroup({
@@ -58,30 +60,39 @@ export class SigninComponent implements AfterViewInit, OnInit {
 	submit() {
 		if(this.form.valid) {
 			this.isLoading = true;
-			this.authService.login(
-				this.form.value.emailFormControl || this.form.value.usernameFormControl,
-				this.form.value.passwordFormControl,
-				this.form.value.twofaFormControl
-			).subscribe((data: any) => {
-				if (data.message.token && data.result === 'success') {
-					this.isLoading = false;
-					// set auth token
-					this.authService.setToken(data.message.token);
-					// Check if 2fa is enabled
-					this.authService.check2fa().subscribe((result: any) => {
-						if(!result.message.enabled) this.dialogService.openTwoFactorDialog();
-					});
-					// Login message
-					this.authService.getUser().subscribe((result: any) => {
-						if(result.message.name) this.snackbarService.openSnackBar(`👋 ${this.timeOfDay < 12 ? 'Good morning' : 'Good evening'}, ${result.message.name} (Logged in)`, 'Dismiss')
-					});
-					// navigate to previous route
-					this.router.navigate([this.returnURL]);
-				}	else {
-					this.isLoading = false;
-					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+			this.recaptchaV3Service.execute('login').subscribe(
+				token => {
+					this.authService.login(
+						this.form.value.emailFormControl || this.form.value.usernameFormControl,
+						this.form.value.passwordFormControl,
+						this.form.value.twofaFormControl,
+						token
+					).subscribe((data: any) => {
+						if (data.message.token && data.result === 'success') {
+							this.isLoading = false;
+							// set auth token
+							this.authService.setToken(data.message.token);
+							// Check if 2fa is enabled
+							this.authService.check2fa().subscribe((result: any) => {
+								if(!result.message.enabled) this.dialogService.openTwoFactorDialog();
+							});
+							// Login message
+							this.authService.getUser().subscribe((result: any) => {
+								if(result.message.name) this.snackbarService.openSnackBar(`👋 ${this.timeOfDay < 12 ? 'Good morning' : 'Good evening'}, ${result.message.name} (Logged in)`, 'Dismiss')
+							});
+							// navigate to previous route
+							this.router.navigate([this.returnURL]);
+						}	else {
+							this.isLoading = false;
+							this.snackbarService.openSnackBar(data.message, 'Dismiss');
+						}
+					})
+				},
+				error => {
+					console.log(`Recaptcha v3 error: see console`);
+					console.log(`Recaptcha v3 error:`, error);
 				}
-			});
+			);
 		}
 	}
 

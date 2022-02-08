@@ -20,5 +20,8 @@ export const environment = {
 		[3.17, 4.00, 4.83],
 		[3.58, 4.49, 5.41],
 		[4.00, 5.00, 6.00],
-	]
+	],
+	recaptcha: {
+		siteKey: '6LfhP0IeAAAAAAwyLJoH4SZLxFfvwM3RDS15WyIC',
+	},
 };

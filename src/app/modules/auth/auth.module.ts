@@ -1,3 +1,6 @@
+// App Variables
+import { environment } from 'src/environments/environment';
+
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -15,6 +18,7 @@ import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ResetComponent } from './reset/reset.component';
 
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaFormsModule } from 'ng-recaptcha';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 @NgModule({
@@ -33,10 +37,16 @@ import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 		MatCardModule,
 		MatIconModule,
 		FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+		RecaptchaV3Module,
+		RecaptchaFormsModule
   ],
 	providers: [
-		Clipboard
+		Clipboard,
+		{
+			provide: RECAPTCHA_V3_SITE_KEY,
+			useValue: environment.recaptcha.siteKey,
+		},
 	]
 })
 

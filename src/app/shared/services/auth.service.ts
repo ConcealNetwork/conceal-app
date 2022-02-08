@@ -23,8 +23,8 @@ export class AuthService {
 	isLoginSubject = new BehaviorSubject<boolean>(this.hasToken() && !this.isTokenExpired());
 	token: any;
 
-	login(email: string, password: string, twofa: string) {
-		const body = { email,	password,	rememberme: false, code: twofa }
+	login(email: string, password: string, twofa: string, capture: string) {
+		const body = { email,	password,	rememberme: false, code: twofa, capture: capture };
 		return this.http.post(this.api + '/auth', JSON.stringify(body));
 	};
 
