@@ -20,19 +20,22 @@
 	<span class="fill-space"></span>
 
 	<div class="options" fxLayoutGap="15px">
-		<button *ngIf="isLoggedIn" mat-icon-button aria-label="logout" (click)="logout()">
+		<button *ngIf="isLoggedIn" mat-icon-button aria-label="logout" matTooltip="Logout" (click)="logout()">
 			<mat-icon aria-hidden="false">logout</mat-icon>
 		</button>
-		<button *ngIf="!isLoggedIn" mat-icon-button aria-label="login" (click)="login()">
+		<button *ngIf="!isLoggedIn" mat-icon-button aria-label="login" matTooltip="Login" (click)="login()">
 			<mat-icon aria-hidden="false">login</mat-icon>
 		</button>
-		<button *ngIf="activeTheme == 'light-theme'" mat-icon-button mdTooltip="Change theme" (click)="changeTheme('dark-theme')">
+		<button *ngIf="activeTheme == 'light-theme'" mat-icon-button mdTooltip="Change theme" matTooltip="Dark Mode" (click)="changeTheme('dark-theme')">
 			<mat-icon aria-hidden="false">dark_mode</mat-icon>
 		</button>
-		<button *ngIf="activeTheme == 'dark-theme'" mat-icon-button mdTooltip="Change theme" (click)="changeTheme('light-theme')">
+		<button *ngIf="activeTheme == 'dark-theme'" mat-icon-button mdTooltip="Change theme" matTooltip="Light Mode" (click)="changeTheme('light-theme')">
 			<mat-icon aria-hidden="false">light_mode</mat-icon>
 		</button>
-		<button mat-icon-button aria-label="login" routerLink="/settings" routerLinkActive="active">
+		<a mat-icon-button aria-label="service status" matTooltip="Service Status" href="https://status.conceal.network" target="_blank" >
+			<mat-icon aria-hidden="false">monitor_heart</mat-icon>
+		</a>
+		<button mat-icon-button aria-label="settings" matTooltip="Settings" routerLink="/settings" routerLinkActive="active">
 			<mat-icon aria-hidden="false">settings</mat-icon>
 		</button>
 	</div>
