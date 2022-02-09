@@ -39,6 +39,7 @@ export class SettingsComponent implements OnInit {
 	username: string = '';
 	email: string = '';
 	currencies: any;
+	accountButtonLabel: string = '';
 	modes: any = [
 		{
 			name: '💻 Follow System',
@@ -98,6 +99,7 @@ export class SettingsComponent implements OnInit {
 						this.username = user.message.name;
 						this.email = user.message.email;
 						this.cloud.controls.email.setValue(user.message.email);
+						this.accountButtonLabel = 'Change Email';
 					}
 				})
 				let qr = this.authService.getQRCode().subscribe((result: any) => {

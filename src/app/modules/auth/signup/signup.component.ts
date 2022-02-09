@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgHcaptchaService } from 'ng-hcaptcha';
 
 // Services
 import { DataService } from 'src/app/shared/services/data.service';
@@ -22,7 +23,9 @@ export class SignupComponent implements AfterViewInit, OnInit {
 		private authService: AuthService,
 		private dataService: DataService,
 		private snackbarService: SnackbarService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private zone: NgZone,
+		private hcaptchaService: NgHcaptchaService
 	) { }
 
 	login: FormGroup = new FormGroup({
@@ -47,24 +50,43 @@ export class SignupComponent implements AfterViewInit, OnInit {
 	submit() {
 		if(this.form.valid) {
 			this.isLoading = true;
-			this.authService.signUpUser(
-				this.form.value.displayNameFormControl,
-				this.form.value.emailFormControl || this.form.value.usernameFormControl,
-				this.form.value.passwordFormControl,
-			).subscribe((data: any) => {
-				if (data.result === 'success') {
-					this.isLoading = false;
-					this.changeAuthType('signIn');
-					if (this.login.value.loginTypeFromControl === 'Email Address') {
-						this.snackbarService.openSnackBar('Account created... Please check your email to activate.', 'Dismiss');
-					} else {
-						this.snackbarService.openSnackBar('Account created...', 'Dismiss');
-					}
-				}	else {
-					this.isLoading = false;
-					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+			this.hcaptchaService.verify().subscribe(
+				(result) => {
+					this.authService.signUpUser(
+						this.form.value.displayNameFormControl,
+						this.form.value.emailFormControl || this.form.value.usernameFormControl,
+						this.form.value.passwordFormControl,
+						result
+					).subscribe((data: any) => {
+						if (data.result === 'success') {
+							this.isLoading = false;
+							this.changeAuthType('signIn');
+							if (this.login.value.loginTypeFromControl === 'Email Address') {
+								this.zone.run(() => {
+									this.snackbarService.openSnackBar('Account created... Please check your email to activate.', 'Dismiss');
+								});
+							} else {
+								this.zone.run(() => {
+									this.snackbarService.openSnackBar('Account created...', 'Dismiss');
+								});
+							}
+						}	else {
+							this.isLoading = false;
+							this.zone.run(() => {
+								this.snackbarService.openSnackBar(data.message, 'Dismiss');
+							});
+						}
+					})
+				},
+				(err) => {
+					this.zone.run(() => {
+						this.snackbarService.openSnackBar(err, 'Dismiss');
+					});
+				},
+				() => {
+					console.log('hCaptcha Completed');
 				}
-			})
+			)
 		}
 	}
 

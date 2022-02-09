@@ -67,8 +67,22 @@
 						</legend>
 
 						<form fxLayout="column" fxLayoutGap="15px" [formGroup]="cloud">
-							<p class="title">Change your email address</p>
-							<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent">
+
+							<mat-form-field fxFill hintLabel="Your username" appearance="fill" color="accent" *ngIf="this.cloud.controls.username">
+								<mat-label>Username</mat-label>
+								<input matInput type="text" name="username" minlength="4" maxlength="24" formControlName="username" autocomplete="username">
+								<mat-error *ngIf="cloud.controls.username.hasError('minlength') || cloud.controls.username.hasError('maxlength')">
+									Username should be at least <strong>4 characters</strong>
+								</mat-error>
+								<mat-error *ngIf="cloud.controls.username.hasError('pattern')">
+									Please enter a valid username
+								</mat-error>
+								<mat-error *ngIf="cloud.controls.username.hasError('required')">
+									Username is <strong>required</strong>
+								</mat-error>
+							</mat-form-field>
+
+							<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent" *ngIf="this.cloud.controls.email">
 								<mat-label>Email Address</mat-label>
 								<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="email" autocomplete="email">
 								<mat-error *ngIf="cloud.controls.email.hasError('email') && !cloud.controls.email.hasError('required')">
@@ -81,7 +95,7 @@
 
 							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
 								<button fxFlex color="warn" mat-stroked-button type="button" (click)="clear('cloud')">Clear</button>
-								<button fxFlex color="accent" mat-flat-button type="submit" (click)="changeEmail()" [disabled]="!cloud.valid">Change Email</button>
+								<button fxFlex color="accent" mat-flat-button type="submit" (click)="changeEmail()" [disabled]="!cloud.valid">{{this.accountButtonLabel}}</button>
 							</div>
 
 						</form>
