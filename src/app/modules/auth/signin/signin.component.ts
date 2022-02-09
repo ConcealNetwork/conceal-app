@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { NgHcaptchaService } from 'ng-hcaptcha';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
@@ -33,7 +33,7 @@ export class SigninComponent implements AfterViewInit, OnInit {
 		private clipboard: Clipboard,
 		private route: ActivatedRoute,
 		private router: Router,
-		private recaptchaV3Service: ReCaptchaV3Service
+		private hcaptchaService: NgHcaptchaService
 	) { }
 
 	login: FormGroup = new FormGroup({
@@ -60,13 +60,13 @@ export class SigninComponent implements AfterViewInit, OnInit {
 	submit() {
 		if(this.form.valid) {
 			this.isLoading = true;
-			this.recaptchaV3Service.execute('login').subscribe(
-				token => {
+			this.hcaptchaService.verify().subscribe(
+				(result) => {
 					this.authService.login(
 						this.form.value.emailFormControl || this.form.value.usernameFormControl,
 						this.form.value.passwordFormControl,
 						this.form.value.twofaFormControl,
-						token
+						result
 					).subscribe((data: any) => {
 						if (data.message.token && data.result === 'success') {
 							this.isLoading = false;
@@ -88,11 +88,13 @@ export class SigninComponent implements AfterViewInit, OnInit {
 						}
 					})
 				},
-				error => {
-					console.log(`Recaptcha v3 error: see console`);
-					console.log(`Recaptcha v3 error:`, error);
+				(err) => {
+					this.snackbarService.openSnackBar(err, 'Dismiss');
+				},
+				() => {
+					console.log('hCaptcha Completed');
 				}
-			);
+			)
 		}
 	}
 
