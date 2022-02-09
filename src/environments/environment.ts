@@ -26,7 +26,7 @@ export const environment = {
 		[4.00, 5.00, 6.00],
 	],
 	recaptcha: {
-		siteKey: '6LfhP0IeAAAAAAwyLJoH4SZLxFfvwM3RDS15WyIC',
+		siteKey: '4b23f7fc-ed7c-4284-ae98-b077d8745254',
 	},
 };
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgHcaptchaService } from 'ng-hcaptcha';
@@ -33,7 +33,8 @@ export class SigninComponent implements AfterViewInit, OnInit {
 		private clipboard: Clipboard,
 		private route: ActivatedRoute,
 		private router: Router,
-		private hcaptchaService: NgHcaptchaService
+		private zone: NgZone,
+		private hcaptchaService: NgHcaptchaService,
 	) { }
 
 	login: FormGroup = new FormGroup({
@@ -74,17 +75,25 @@ export class SigninComponent implements AfterViewInit, OnInit {
 							this.authService.setToken(data.message.token);
 							// Check if 2fa is enabled
 							this.authService.check2fa().subscribe((result: any) => {
-								if(!result.message.enabled) this.dialogService.openTwoFactorDialog();
+								if(!result.message.enabled) this.zone.run(() => {
+									this.dialogService.openTwoFactorDialog();
+								})
 							});
 							// Login message
 							this.authService.getUser().subscribe((result: any) => {
-								if(result.message.name) this.snackbarService.openSnackBar(`👋 ${this.timeOfDay < 12 ? 'Good morning' : 'Good evening'}, ${result.message.name} (Logged in)`, 'Dismiss')
+								if(result.message.name) this.zone.run(() => {
+								 	this.snackbarService.openSnackBar(`👋 ${this.timeOfDay < 12 ? 'Good morning' : 'Good evening'}, ${result.message.name} (Logged in)`, 'Dismiss')
+								})
 							});
 							// navigate to previous route
-							this.router.navigate([this.returnURL]);
+							this.zone.run(() => {
+								this.router.navigate([this.returnURL]);
+							});
 						}	else {
 							this.isLoading = false;
-							this.snackbarService.openSnackBar(data.message, 'Dismiss');
+							this.zone.run(() => {
+								this.snackbarService.openSnackBar(data.message, 'Dismiss');
+							});
 						}
 					})
 				},

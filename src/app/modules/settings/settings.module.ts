@@ -1,3 +1,6 @@
+// App Variables
+import { environment } from 'src/environments/environment';
+
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';

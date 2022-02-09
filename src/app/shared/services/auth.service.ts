@@ -24,9 +24,24 @@ export class AuthService {
 	token: any;
 
 	login(email: string, password: string, twofa: string, capture: string) {
-		const body = { email,	password,	rememberme: false, code: twofa, capture: capture };
+		const body = { email,	password,	rememberme: false, code: twofa, 'h-captcha-response': capture };
 		return this.http.post(this.api + '/auth', JSON.stringify(body));
 	};
+
+	signUpUser(username:string, email:string, password:string, capture: string) {
+		const body = { name: username, email, password, 'h-captcha-response': capture };
+		return this.http.post(`${this.api}/user`, JSON.stringify(body));
+	}
+
+	resetPassword(email: string) {
+		const body = { email };
+		return this.http.put(`${this.api}/auth`, JSON.stringify(body));
+	};
+
+	changeEmail(email: string) {
+		const body = { email };
+		return this.http.patch(`${this.api}/user`, JSON.stringify(body));
+  };
 
 	getUser() {
     return this.http.get(`${this.api}/user`);
@@ -82,20 +97,5 @@ export class AuthService {
 	disable2FA(code: string) {
 		return this.http.delete(`${this.api}/two-factor-authentication?code=${code}`);
 	};
-
-	resetPassword(email: string) {
-		const body = { email };
-		return this.http.put(`${this.api}/auth`, JSON.stringify(body));
-	};
-
-	changeEmail(email: string) {
-		const body = { email };
-		return this.http.patch(`${this.api}/user`, JSON.stringify(body));
-  };
-
-	signUpUser(username:string, email:string, password:string) {
-		const body = { name: username, email, password };
-		return this.http.post(`${this.api}/user`, JSON.stringify(body));
-	}
 
 }
