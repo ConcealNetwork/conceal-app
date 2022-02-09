@@ -18,7 +18,7 @@ import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ResetComponent } from './reset/reset.component';
 
-import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaFormsModule } from 'ng-recaptcha';
+import { NgHcaptchaModule } from 'ng-hcaptcha';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 @NgModule({
@@ -38,15 +38,12 @@ import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 		MatIconModule,
 		FormsModule,
     ReactiveFormsModule,
-		RecaptchaV3Module,
-		RecaptchaFormsModule
+		NgHcaptchaModule.forRoot({
+			siteKey: environment.recaptcha.siteKey
+		}),
   ],
 	providers: [
 		Clipboard,
-		{
-			provide: RECAPTCHA_V3_SITE_KEY,
-			useValue: environment.recaptcha.siteKey,
-		},
 	]
 })
 
