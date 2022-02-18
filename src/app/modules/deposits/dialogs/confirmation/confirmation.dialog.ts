@@ -1,3 +1,6 @@
+// App Variables
+import { environment } from 'src/environments/environment';
+
 // Angular Core
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -92,7 +95,7 @@ export class ConfirmationDialog {
 			this.cloudService.createDeposit(
 				this.data.deposit.amount,
 				this.data.deposit.wallet,
-				this.data.deposit.term,
+				(this.data.deposit.term * environment.depositBlocksPerMonth),
 				this.confirmation.value.code || '',
 				this.confirmation.value.password || '',
 			).subscribe((data:any) => {
