@@ -5,6 +5,7 @@ export const environment = {
   walletAPI: 'https://api.wallet.conceal.network/api',
 	interval: 60000,
 	defaultFee: 0.001000,
+	depositBlocksPerMonth: 21900,
 	walletLimit: 2,
 	currency: 'usd',
 	interestRates: [
