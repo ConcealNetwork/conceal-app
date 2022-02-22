@@ -39,7 +39,9 @@ export class SettingsComponent implements OnInit {
 	username: string = '';
 	email: string = '';
 	currencies: any;
+	passwordReset: boolean = false;
 	accountButtonLabel: string = '';
+	loginMethodLabel: string = '';
 	modes: any = [
 		{
 			name: '💻 Follow System',
@@ -74,12 +76,7 @@ export class SettingsComponent implements OnInit {
 		])
 	});
 
-	cloud: FormGroup = new FormGroup({
-		email: new FormControl('', [
-			Validators.required,
-			Validators.email
-		])
-	});
+	cloud: FormGroup = new FormGroup({});
 
 	twofa: FormGroup = new FormGroup({
 		code: new FormControl('', [
@@ -98,8 +95,29 @@ export class SettingsComponent implements OnInit {
 					if(user) {
 						this.username = user.message.name;
 						this.email = user.message.email;
-						this.cloud.controls.email.setValue(user.message.email);
-						this.accountButtonLabel = 'Change Email';
+						if(this.email.includes('@')) {
+							this.cloud.removeControl('username');
+							this.cloud.addControl('email', new FormControl('', [
+								Validators.email,
+								Validators.required
+							]))
+							this.accountButtonLabel = 'Update Email';
+							this.loginMethodLabel = 'Switch to Username';
+							this.cloud.controls.email.setValue(user.message.email);
+							this.passwordReset = false;
+						} else {
+							this.cloud.removeControl('email');
+							this.cloud.addControl('username', new FormControl('', [
+								Validators.minLength(4),
+								Validators.maxLength(24),
+								Validators.pattern('^[A-Za-z_-][A-Za-z0-9_-]*$'),
+								Validators.required
+							]))
+							this.accountButtonLabel = 'Update Username';
+							this.loginMethodLabel = 'Switch to Email';
+							this.cloud.controls.username.setValue(user.message.email);
+							this.passwordReset = true;
+						}
 					}
 				})
 				let qr = this.authService.getQRCode().subscribe((result: any) => {
@@ -173,6 +191,29 @@ export class SettingsComponent implements OnInit {
 		}
 	}
 
+	changeLoginMethod(value:string) {
+		if(value === 'Switch to Email') {
+			this.cloud.removeControl('username');
+			this.cloud.addControl('email', new FormControl('', [
+				Validators.email,
+				Validators.required
+			]))
+			this.accountButtonLabel = 'Save Email';
+			this.loginMethodLabel = 'Switch to Username';
+		}
+		if(value === 'Switch to Username') {
+			this.cloud.removeControl('email');
+			this.cloud.addControl('username', new FormControl('', [
+				Validators.minLength(4),
+				Validators.maxLength(24),
+				Validators.pattern('^[A-Za-z_-][A-Za-z0-9_-]*$'),
+				Validators.required
+			]))
+			this.accountButtonLabel = 'Save Username';
+			this.loginMethodLabel = 'Switch to Email';
+		}
+	}
+
 	changeSettings() {
 		let currency = this.hub.controls.currency.value;
 		let mode = this.hub.controls.mode.value;
@@ -194,15 +235,27 @@ export class SettingsComponent implements OnInit {
 		this.snackbarService.openSnackBar("Settings have been updated", 'Dismiss');
 	}
 
-	changeEmail() {
-		let email = this.cloud.controls.email.value;
-		this.authService.changeEmail(email).subscribe((result: any) => {
-			if(result.result === 'success') {
-				this.snackbarService.openSnackBar(`Success! Check ${email} to confirm`, 'Dismiss');
-			} else {
-				this.snackbarService.openSnackBar(`${result.message}`, 'Dismiss');
-			}
-		})
+	changeEmail(value:string) {
+		if(value === 'Update Email' || value === 'Save Email') {
+			let email = this.cloud.controls.email.value;
+			this.authService.changeEmail(email).subscribe((result: any) => {
+				if(result.result === 'success') {
+					this.snackbarService.openSnackBar(`Success! Check ${email} to confirm`, 'Dismiss');
+				} else {
+					this.snackbarService.openSnackBar(`${result.message}`, 'Dismiss');
+				}
+			})
+		}
+		if(value === 'Update Username' || value === 'Save Username') {
+			let email = this.cloud.controls.username.value;
+			this.authService.changeEmail(email).subscribe((result: any) => {
+				if(result.result === 'success') {
+					this.snackbarService.openSnackBar(`Success! your username has been updated.`, 'Dismiss');
+				} else {
+					this.snackbarService.openSnackBar(`${result.message}`, 'Dismiss');
+				}
+			})
+		}
 	}
 
 	resetPassword() {
