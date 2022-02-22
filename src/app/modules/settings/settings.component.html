@@ -63,7 +63,7 @@
 
 						<legend fxLayout="row" fxLayoutAlign="space-between center">
 							<mat-icon class="orange" aria-hidden="false">manage_accounts</mat-icon>
-							Account: <span class="username orange">{{this.username}}</span>
+							Account
 						</legend>
 
 						<form fxLayout="column" fxLayoutGap="15px" [formGroup]="cloud">
@@ -95,8 +95,11 @@
 
 							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
 								<button fxFlex color="warn" mat-stroked-button type="button" (click)="clear('cloud')">Clear</button>
-								<button fxFlex color="accent" mat-flat-button type="submit" (click)="changeEmail()" [disabled]="!cloud.valid">{{this.accountButtonLabel}}</button>
+								<button fxFlex color="accent" mat-flat-button type="submit" (click)="changeEmail(this.accountButtonLabel)" [disabled]="!cloud.valid">{{this.accountButtonLabel}}</button>
 							</div>
+
+							<p class="title">Users may choose between <strong>username</strong> and <strong>email</strong> based logins. While usernames may provide greater privacy, resetting your password will not be possible.</p>
+							<button fxFlex color="accent" mat-stroked-button type="button" (click)="changeLoginMethod(loginMethodLabel)">{{this.loginMethodLabel}}</button>
 
 						</form>
 
@@ -111,7 +114,7 @@
 						<div fxLayout="row wrap" fxLayoutGap="15px grid">
 							<p class="title">Change your authentication settings</p>
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex color="warn" mat-flat-button type="button" (click)="resetPassword()">Reset Password</button>
+								<button fxFlex color="warn" mat-flat-button type="button" [disabled]="this.passwordReset" (click)="resetPassword()">Reset Password</button>
 							</div>
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
 								<button fxFlex color="warn" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button" (click)="this.show2fa = !this.show2fa">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
