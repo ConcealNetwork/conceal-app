@@ -68,7 +68,7 @@
 
 						<form fxLayout="column" fxLayoutGap="15px" [formGroup]="cloud">
 
-							<mat-form-field fxFill hintLabel="Your username" appearance="fill" color="accent" *ngIf="this.cloud.controls.username">
+							<mat-form-field hintLabel="Your username" appearance="fill" color="accent" fxFlex *ngIf="this.cloud.controls.username">
 								<mat-label>Username</mat-label>
 								<input matInput type="text" name="username" minlength="4" maxlength="24" formControlName="username" autocomplete="username">
 								<mat-error *ngIf="cloud.controls.username.hasError('minlength') || cloud.controls.username.hasError('maxlength')">
@@ -82,7 +82,7 @@
 								</mat-error>
 							</mat-form-field>
 
-							<mat-form-field fxFill hintLabel="Your email address" appearance="fill" color="accent" *ngIf="this.cloud.controls.email">
+							<mat-form-field hintLabel="Your email address" appearance="fill" color="accent" fxFlex *ngIf="this.cloud.controls.email">
 								<mat-label>Email Address</mat-label>
 								<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="email" autocomplete="email">
 								<mat-error *ngIf="cloud.controls.email.hasError('email') && !cloud.controls.email.hasError('required')">
@@ -138,7 +138,7 @@
 								<button fxFlex color="accent" mat-flat-button type="button" (click)="copy(this.secret, 'Copied secret to clipboard')">Copy Secret Key</button>
 							</div>
 							<p class="title">Enter the code from your authenticator app to {{this.hasTwoFa ? 'disable' : 'enable'}} two-factor authentication.</p>
-							<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill">
+							<mat-form-field fxFlex hintLabel="6 Numbers" appearance="fill">
 								<mat-label>Two-factor Code</mat-label>
 								<input matInput minlength="6" maxlength="6" placeholder="00000" formControlName="code">
 								<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste()">
