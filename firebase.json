@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/conceal-hub",
+    "public": "dist/conceal-app",
     "ignore": [
       "firebase.json",
       "**/.*",
