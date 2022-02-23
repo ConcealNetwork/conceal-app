@@ -1,9 +1,9 @@
 {
-  "name": "conceal-hub",
-  "displayName": "Conceal Hub",
-  "version": "1.0.0",
+  "name": "conceal-app",
+  "displayName": "Conceal App",
+  "version": "1.2.0",
   "description": "Access the entire Conceal Privacy Ecosystem in one simple and intuitive app.",
-  "homepage": "https://github.com/ConcealNetwork/conceal-hub",
+  "homepage": "https://github.com/ConcealNetwork/conceal-app",
   "author": {
     "name": "Conceal Network",
     "email": "ccx@conceal.network"
@@ -16,7 +16,7 @@
     "ng": "ng",
     "start": "ng serve --open --host 0.0.0.0 --disable-host-check",
     "build": "ng build --configuration production",
-    "deploy": "ng build --configuration production --base-href . --output-path ../conceal-hub-cordova/www/",
+    "deploy": "ng build --configuration production --base-href . --output-path ../conceal-app-cordova/www/",
     "watch": "ng build --watch --configuration development",
     "firebase": "ng build --configuration production && firebase deploy",
     "test": "ng test"

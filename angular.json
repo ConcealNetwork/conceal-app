@@ -10,7 +10,7 @@
 	},
   "newProjectRoot": "projects",
   "projects": {
-    "conceal-hub": {
+    "conceal-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -27,7 +27,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/conceal-hub",
+            "outputPath": "dist/conceal-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -82,10 +82,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "conceal-hub:build:production"
+              "browserTarget": "conceal-app:build:production"
             },
             "development": {
-              "browserTarget": "conceal-hub:build:development"
+              "browserTarget": "conceal-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -93,7 +93,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "conceal-hub:build"
+            "browserTarget": "conceal-app:build"
           }
         },
         "test": {
@@ -118,5 +118,5 @@
       }
     }
   },
-  "defaultProject": "conceal-hub"
+  "defaultProject": "conceal-app"
 }
