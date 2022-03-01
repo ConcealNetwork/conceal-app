@@ -13,6 +13,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { NgHcaptchaModule } from 'ng-hcaptcha';
+
 import { SharedModule } from 'src/app/shared.module';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
@@ -34,7 +36,10 @@ import { SettingsComponent } from './settings.component';
 		MatIconModule,
 		MatFormFieldModule,
 		MatSelectModule,
-		MatTooltipModule
+		MatTooltipModule,
+		NgHcaptchaModule.forRoot({
+			siteKey: environment.recaptcha.siteKey
+		}),
   ]
 })
 export class SettingsModule { }

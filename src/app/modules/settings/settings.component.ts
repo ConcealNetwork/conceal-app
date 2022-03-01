@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
+import { NgHcaptchaService } from 'ng-hcaptcha';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ApiService } from 'src/app/shared/services/api.service';
@@ -65,6 +66,7 @@ export class SettingsComponent implements OnInit {
 		private snackbarService: SnackbarService,
 		private theming: ThemingService,
 		private clipboard: Clipboard,
+		private hcaptchaService: NgHcaptchaService,
 	) { }
 
 	hub: FormGroup = new FormGroup({
@@ -259,13 +261,17 @@ export class SettingsComponent implements OnInit {
 	}
 
 	resetPassword() {
-		this.authService.resetPassword(this.email).subscribe((result: any) => {
-			if(result.result === 'success') {
-				this.snackbarService.openSnackBar(`Success! Check ${this.email} to reset your password`, 'Dismiss');
-			} else {
-				this.snackbarService.openSnackBar("Could not reset password", 'Dismiss');
+		this.hcaptchaService.verify().subscribe(
+			(result) => {
+				this.authService.resetPassword(this.email, result).subscribe((result: any) => {
+					if(result.result === 'success') {
+						this.snackbarService.openSnackBar(`Success! Check ${this.email} to reset your password`, 'Dismiss');
+					} else {
+						this.snackbarService.openSnackBar("Could not reset password", 'Dismiss');
+					}
+				})
 			}
-		})
+		)
 	}
 
 	change2fa(enabled: boolean) {

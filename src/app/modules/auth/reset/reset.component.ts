@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgHcaptchaService } from 'ng-hcaptcha';
 
 // Services
 import { DataService } from 'src/app/shared/services/data.service';
@@ -22,7 +23,7 @@ export class ResetComponent implements OnInit {
 		private dataService: DataService,
 		private snackbarService: SnackbarService,
 		private route: ActivatedRoute,
-		private router: Router
+		private hcaptchaService: NgHcaptchaService,
 	) { }
 
 	form: FormGroup = new FormGroup({
@@ -39,18 +40,22 @@ export class ResetComponent implements OnInit {
 	submit() {
 		if(this.form.valid) {
 			this.isLoading = true;
-			this.authService.resetPassword(
-				this.form.value.emailFormControl
-			).subscribe((data: any) => {
-				if (data.result === 'success') {
-					this.isLoading = false;
-					this.changeAuthType('signIn');
-					this.snackbarService.openSnackBar('Password Reset! Check your email to change your password.', 'Dismiss');
-				}	else {
-					this.isLoading = false;
-					this.snackbarService.openSnackBar(data.message, 'Dismiss');
+			this.hcaptchaService.verify().subscribe(
+				(result) => {
+					this.authService.resetPassword(
+						this.form.value.emailFormControl, result
+					).subscribe((data: any) => {
+						if (data.result === 'success') {
+							this.isLoading = false;
+							this.changeAuthType('signIn');
+							this.snackbarService.openSnackBar('Password Reset! Check your email to change your password.', 'Dismiss');
+						}	else {
+							this.isLoading = false;
+							this.snackbarService.openSnackBar(data.message, 'Dismiss');
+						}
+					})
 				}
-			});
+			)
 		}
 	}
 
