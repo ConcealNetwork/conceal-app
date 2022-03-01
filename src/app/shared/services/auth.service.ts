@@ -33,8 +33,8 @@ export class AuthService {
 		return this.http.post(`${this.api}/user`, JSON.stringify(body));
 	}
 
-	resetPassword(email: string) {
-		const body = { email };
+	resetPassword(email: string, capture: string) {
+		const body = { email, capture };
 		return this.http.put(`${this.api}/auth`, JSON.stringify(body));
 	};
 
