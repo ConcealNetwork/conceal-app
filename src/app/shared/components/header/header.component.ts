@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import { Subscription } from "rxjs";
 
 // Services
-import { AuthService } from '../../../shared/services/auth.service';
-import { ThemingService } from '../../../shared/services/theming.service';
-import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { ThemingService } from 'src/app/shared/services/theming.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-header',
