@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, Observable } from "rxjs";
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 export interface Data {
   message: string;
