@@ -106,7 +106,9 @@
 										<span class="orange">Your Interest</span>
 										<span class="amount">{{this.interest}} CCX</span>
 									</div>
-									<button type="button" mat-stroked-button fxFlex (click)="getDialogService().openMatrixDialog()">View interest rates</button>
+									<div fxLayout="row wrap" fxLayoutAlign="space-between stretch" fxFlex="noshrink">
+										<button type="button" mat-stroked-button fxFlex (click)="getDialogService().openMatrixDialog()">View interest rates</button>
+									</div>
 								</div>
 							</fieldset>
 

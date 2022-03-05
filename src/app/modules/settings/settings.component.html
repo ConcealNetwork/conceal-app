@@ -49,9 +49,9 @@
 								</mat-error>
 							</mat-form-field>
 
-							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
-								<button fxFlex color="warn" mat-stroked-button type="button" (click)="clear('hub')">Clear</button>
-								<button fxFlex color="accent" mat-flat-button type="submit" (click)="changeSettings()" [disabled]="!hub.valid">Apply</button>
+							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px" fxFlex="noshrink">
+								<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('hub')">Clear</button>
+								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="changeSettings()" [disabled]="!hub.valid">Apply</button>
 							</div>
 
 						</form>
@@ -93,13 +93,13 @@
 								</mat-error>
 							</mat-form-field>
 
-							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
-								<button fxFlex color="warn" mat-stroked-button type="button" (click)="clear('cloud')">Clear</button>
-								<button fxFlex color="accent" mat-flat-button type="submit" (click)="changeEmail(this.accountButtonLabel)" [disabled]="!cloud.valid">{{this.accountButtonLabel}}</button>
+							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px" fxFlex="noshrink">
+								<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('cloud')">Clear</button>
+								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="changeEmail(this.accountButtonLabel)" [disabled]="!cloud.valid">{{this.accountButtonLabel}}</button>
 							</div>
 
 							<p class="title">Users may choose between <strong>username</strong> and <strong>email</strong> based logins. While usernames may provide greater privacy, resetting your password will not be possible.</p>
-							<button fxFlex color="accent" mat-stroked-button type="button" (click)="changeLoginMethod(loginMethodLabel)">{{this.loginMethodLabel}}</button>
+							<button fxFlex fxFlex="noshrink" color="accent" mat-stroked-button type="button" (click)="changeLoginMethod(loginMethodLabel)">{{this.loginMethodLabel}}</button>
 
 						</form>
 
@@ -111,13 +111,13 @@
 							<mat-icon class="orange" aria-hidden="false">admin_panel_settings</mat-icon>
 							Authentication
 						</legend>
-						<div fxLayout="row wrap" fxLayoutGap="15px grid">
+						<div fxLayout="row wrap" fxLayoutGap="15px grid" fxFlex="noshrink">
 							<p class="title">Change your authentication settings</p>
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex color="warn" mat-flat-button type="button" [disabled]="this.passwordReset" (click)="resetPassword()">Reset Password</button>
+								<button fxFlex fxFlex="noshrink" color="warn" mat-flat-button type="button" [disabled]="this.passwordReset" (click)="resetPassword()">Reset Password</button>
 							</div>
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex color="warn" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button" (click)="this.show2fa = !this.show2fa">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
+								<button fxFlex fxFlex="noshrink" color="warn" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button" (click)="this.show2fa = !this.show2fa">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
 							</div>
 						</div>
 					</fieldset>
@@ -130,12 +130,12 @@
 						</legend>
 						<form fxLayout="column" fxLayoutGap="15px" [formGroup]="twofa">
 							<p fxFlex class="title" *ngIf="!this.hasTwoFa">Scan or enter your secret code with your authentication app to set up your account.</p>
-							<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="center center" fxLayoutGap="15px" *ngIf="!this.hasTwoFa">
+							<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxFlex="noshrink" fxLayoutAlign="center center" fxLayoutGap="15px" *ngIf="!this.hasTwoFa">
 								<img class="qrcode" [src]="this.secretQR">
 								<div class="secret">{{this.secret}}</div>
 							</div>
-							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px" *ngIf="!this.hasTwoFa">
-								<button fxFlex color="accent" mat-flat-button type="button" (click)="copy(this.secret, 'Copied secret to clipboard')">Copy Secret Key</button>
+							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px" *ngIf="!this.hasTwoFa">
+								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="copy(this.secret, 'Copied secret to clipboard')">Copy Secret Key</button>
 							</div>
 							<p class="title">Enter the code from your authenticator app to {{this.hasTwoFa ? 'disable' : 'enable'}} two-factor authentication.</p>
 							<mat-form-field fxFlex hintLabel="6 Numbers" appearance="fill">
@@ -155,9 +155,9 @@
 									2FA Code is <strong>required</strong>
 								</mat-error>
 							</mat-form-field>
-							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px">
-								<button fxFlex color="warn" mat-stroked-button type="button" (click)="clear('twofa')">Clear</button>
-								<button fxFlex color="accent" mat-flat-button type="submit" (click)="change2fa(this.hasTwoFa)" [disabled]="!twofa.valid">{{this.hasTwoFa ? 'Disable' : 'Enable'}}</button>
+							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px" fxFlex="noshrink">
+								<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('twofa')">Clear</button>
+								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="change2fa(this.hasTwoFa)" [disabled]="!twofa.valid">{{this.hasTwoFa ? 'Disable' : 'Enable'}}</button>
 							</div>
 						</form>
 					</fieldset>
