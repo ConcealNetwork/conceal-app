@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   environment: 'PROD',
-	version: '1.2.0',
+	version: '1.3.0',
   walletAPI: 'https://api.wallet.conceal.network/api',
   coinStats: 'https://api.coinstats.app',
   gecko: 'https://api.coingecko.com',
