@@ -48,7 +48,7 @@ export function tokenGetter() {
 		MaterialModule,
 		SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: environment.worker,
       // Register the ServiceWorker as soon as the app is stable or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),

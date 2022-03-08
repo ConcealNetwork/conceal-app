@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-	worker: true,
+	worker: false,
   environment: 'PROD',
 	version: '1.3.0',
   walletAPI: 'https://api.wallet.conceal.network/api',
