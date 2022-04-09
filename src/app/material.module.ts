@@ -23,6 +23,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRadioModule } from '@angular/material/radio';
+import { CdkTableModule } from '@angular/cdk/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatSortModule } from '@angular/material/sort';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   exports: [
@@ -39,7 +52,20 @@ import { MatSelectModule } from '@angular/material/select';
 		MatCardModule,
 		MatInputModule,
 		MatFormFieldModule,
-		MatSelectModule
+		MatSelectModule,
+		MatStepperModule,
+		MatProgressSpinnerModule,
+		ClipboardModule,
+		MatDividerModule,
+		MatProgressBarModule,
+		MatRadioModule,
+		CdkTableModule,
+		MatTableModule,
+		MatSliderModule,
+		MatTabsModule,
+		MatPaginatorModule,
+		MatSortModule,
+		MatSlideToggleModule
   ]
 })
 

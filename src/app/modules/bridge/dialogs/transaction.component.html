@@ -1,0 +1,19 @@
+<div class="content" fxLayout="column" fxLayoutAlign="center center">
+
+	<h1 mat-dialog-title class="title">Gas Payment</h1>
+
+	<div mat-dialog-content fxLayout="column" fxLayoutAlign="center center">
+		<p class="text">To continue you must pay the gas fee for the transaction.</p>
+	</div>
+
+	<div fxLayout="column" fxLayoutAlign="center center">
+		<img src="./assets/images/gas.png">
+	</div>
+
+	<div fxLayout="column" fxLayoutAlign="center center">
+		<p class="text">Waiting for payment...</p>
+		<p class="warn">Do not attempt to speed up the transaction after it has been submitted, It will fail.</p>
+		<mat-progress-bar class="progress" mode="indeterminate" color="accent"></mat-progress-bar>
+	</div>
+
+</div>

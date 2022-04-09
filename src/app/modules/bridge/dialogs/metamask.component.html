@@ -1,0 +1,37 @@
+<div class="content" fxLayout="column" fxLayoutAlign.xs="start" fxLayoutAlign="center center" fxLayoutGap="35px" fxLayoutGap.sm="25px" fxLayoutGap.xs="25px">
+
+	<!-- Desktop -->
+	<h1 mat-dialog-title class="title" fxHide fxShow.md fxShow.gt-md>Install MetaMask for your browser</h1>
+	<p class="text" fxHide fxShow.md fxShow.gt-md>MetaMask is required to use this application</p>
+
+	<!-- Mobile -->
+	<div fxLayout="column" fxHide fxShow.lt-md fxLayoutGap.sm="25px" fxLayoutGap.xs="25px">
+		<h1 mat-dialog-title class="title">Please open this page in your wallet...</h1>
+		<div fxLayoutAlign="center center" fxFlex>
+			<a mat-flat-button fxFlex color="accent" type="button" href="https://metamask.app.link/dapp/bridge.conceal.network">Open in MetaMask</a>
+		</div>
+		<div fxLayoutAlign="center center" fxFlex>
+			<a mat-flat-button fxFlex color="accent" type="button" href="https://link.trustwallet.com/open_url?coin_id=60&url=https://bridge.conceal.network">Open in TrustWallet</a>
+		</div>
+	</div>
+
+	<div fxHide fxShow.md fxShow.gt-md fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center space-around" fxLayoutGap="35px" fxLayoutGap.sm="25px" fxLayoutGap.xs="15px">
+		<a mat-button mat-flat-button color="accent" href="https://metamask.io/download.html" target="_blank">Install Now</a>
+		<a mat-flat-button color="primary" routerLink="/home">Try Again?</a>
+	</div>
+
+	<div fxHide fxShow.md fxShow.gt-md fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="35px" fxLayoutGap.sm="25px" fxLayoutGap.xs="15px">
+		<img class="metamask" src="./assets/images/branding/metamask.png">
+		<h2 class="support">Supported Browsers & Devices</h2>
+	</div>
+
+	<div mat-dialog-content fxHide fxShow.md fxShow.gt-md fxLayout="row" fxLayoutAlign="center space-around" fxLayoutAlign.sm="center center" fxLayoutAlign.xs="center center" fxLayoutGap="35px">
+		<div fxLayout="column"><img class="browser" src="./assets/images/browsers/chrome.png"></div>
+		<div fxLayout="column"><img class="browser" src="./assets/images/browsers/firefox.png"></div>
+		<div fxLayout="column"><img class="browser" src="./assets/images/browsers/brave.png"></div>
+		<div fxLayout="column"><img class="browser" src="./assets/images/browsers/edge.png"></div>
+		<div fxLayout="column"><img class="browser" src="./assets/images/browsers/ios.png"></div>
+		<div fxLayout="column"><img class="browser" src="./assets/images/browsers/android.png"></div>
+	</div>
+
+</div>

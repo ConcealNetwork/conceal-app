@@ -5,11 +5,11 @@
 		<p class="description">SIMPLE, FAST, SECURE AND PRIVATE. NO REGISTRATION.</p>
 	</div>
 
-	<div class="swap" fxLayout="row" fxLayout.xs="column-reverse" fxLayout.sm="column-reverse" fxLayoutAlign="center" fxLayoutGap="25px">
+	<div class="swap" fxLayout="row" fxLayout.xs="column-reverse" fxLayout.sm="column-reverse" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
 
-		<div class="help" fxLayout="column" fxLayoutAlign="space-between center">
+		<mat-card id="cards" class="help mat-elevation-z6" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="start">
 
-			<div fxLayout="column" fxLayoutAlign="space-evenly" fxLayoutAlign.lt-sm="center center">
+			<div fxLayout="column" fxLayoutAlign="space-evenly">
 				<mat-nav-list>
 					<a href="https://concealnetwork.medium.com/the-anatomy-of-wrapped-ccx-97b2a8c008d9" rel="noreferrer" target="_blank" mat-list-item>Introduction</a>
 					<a href="https://concealnetwork.medium.com/conceal-bridge-user-guide-2ad03eee4963" rel="noreferrer" target="_blank" mat-list-item>User Guide</a>
@@ -19,15 +19,17 @@
 					<a href="https://metamask.io/download.html" rel="noreferrer" target="_blank" mat-list-item>Get MetaMask</a>
 				</mat-nav-list>
 			</div>
-		</div>
+		</mat-card>
 
-		<div class="network" fxLayout="column" fxLayoutGap="25px">
+		<mat-card id="cards" class="network mat-elevation-z6" fxFill fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
 
-			<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="25px">
+			<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
 
-				<div fxLayout="column">
-					<h3 class="direction">From</h3>
-					<mat-card fxLayout="column" fxLayoutAlign="center stretch">
+				<div fxLayout="column" fxFlex>
+					<mat-card class="mat-elevation-z8" fxLayout="column" fxLayoutAlign="center stretch">
+						<mat-card-header fxLayout="column">
+							<h2 class="title">From</h2>
+						</mat-card-header>
 						<mat-card-content>
 							<div fxLayout="row" fxLayoutAlign="center stretch">
 								<img src="./assets/images/branding/{{fromControl.value}}.png" width="128" height="128">
@@ -44,9 +46,11 @@
 					</mat-card>
 				</div>
 
-				<div fxLayout="column">
-					<h3 class="direction">To</h3>
-					<mat-card fxLayout="column" fxLayoutAlign="center stretch">
+				<div fxLayout="column" fxFlex>
+					<mat-card class="mat-elevation-z8" fxLayout="column" fxLayoutAlign="center stretch">
+						<mat-card-header fxLayout="column">
+							<h2 class="title">To</h2>
+						</mat-card-header>
 						<mat-card-content>
 							<div fxLayout="row" fxLayoutAlign="center stretch">
 								<img src="./assets/images/branding/{{toControl.value}}.png" width="128" height="128">
@@ -65,9 +69,9 @@
 
 			</div>
 
-			<button mat-flat-button color="accent" [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value, this.toControl.value)">Continue</button>
+			<button mat-flat-button class="mat-elevation-z8" color="accent" [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value, this.toControl.value)">Continue</button>
 
-		</div>
+		</mat-card>
 
 	</div>
 
