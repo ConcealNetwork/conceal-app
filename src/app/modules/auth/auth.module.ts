@@ -4,13 +4,8 @@ import { environment } from 'src/environments/environment';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-
 import { SharedModule } from 'src/app/shared.module';
+import { MaterialModule } from 'src/app/material.module';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
@@ -31,11 +26,7 @@ import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
   imports: [
 		SharedModule,
 		AuthRoutingModule,
-		MatButtonModule,
-		MatInputModule,
-		MatRadioModule,
-		MatCardModule,
-		MatIconModule,
+		MaterialModule,
 		FormsModule,
     ReactiveFormsModule,
 		NgHcaptchaModule.forRoot({

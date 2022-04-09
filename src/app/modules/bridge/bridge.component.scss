@@ -1,28 +1,19 @@
-// Small
-@media only screen and (max-width: 599px) {
-	.container {
-		height: auto !important;
-		margin: 1.5rem;
-	}
-	.network {
-		padding: 1.4rem !important;
-	}
-	.swap {
-		padding-bottom: 0rem !important;
-	}
-}
-
 .container {
 	min-height: calc(100vh - 115px - 50px);
 	overflow: hidden;
 	color: #fff;
 
-	.swap {
-		padding-bottom: 3rem;
+	.help {
+		min-width: fit-content;
+	}
+
+	.network {
+		padding: 1.6rem;
 	}
 
 	.mat-list-item {
 		font-size: 1rem !important;
+		border-radius: 5px;
 	}
 
 	.headline {
@@ -50,51 +41,8 @@
 	}
 
 	.mat-form-field {
+		margin-top: 1rem;
 		margin-bottom: -1rem;
 	}
-
-	.help {
-		border: solid 4px rgba(255, 255, 255, 0.05);
-		padding: 0.8rem;
-		border-radius: 1rem;
-    background: rgba(44, 50, 55, 0.8);
-	}
-
-	.network {
-		border: solid 4px rgba(255, 255, 255, 0.05);
-		padding: 1.6rem;
-		border-radius: 1rem;
-    background: rgba(44, 50, 55, 0.8);
-	}
-
-	.mat-card {
-		//padding: 1rem;
-		border-radius: 10px;
-    background: rgba(154, 156, 158, 0.1);
-    border: solid 3px rgba(204, 204, 204, 0.2);
-	}
-
-	.mat-flat-button {
-		font-size: 1rem;
-		padding-top: 0.4rem;
-		padding-bottom: 0.4rem;
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
-	}
-
-	.mat-form-field {
-		//min-width: 200px;
-		margin-top: 1rem;
-	}
-
-	.mat-list-item {
-		border-radius: 5px;
-	}
-
-	.version {
-		color: orange;
-		font-size: 0.9rem;
-	}
-
 
 }

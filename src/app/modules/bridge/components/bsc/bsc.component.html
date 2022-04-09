@@ -1,0 +1,201 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start">
+
+	<!-- <mat-horizontal-stepper linear #stepper selectedIndex="1"> -->
+	<mat-horizontal-stepper [linear]="true" #stepper [selectedIndex]="this.getDataService().step">
+
+		<mat-step [stepControl]="form1" [editable]="isEditable">
+
+			<form [formGroup]="form1">
+
+				<ng-template matStepLabel>Start</ng-template>
+
+				<div fxLayout="column" fLayoutAlign="center center" fxLayoutGap="25px">
+
+					<div fxLayout="column" fxLayoutAlign="center center">
+						<img class="token" src="./assets/images/branding/bsc.png" width="86" height="86">
+						<p class="description">
+							There are <strong class="orange">{{ this.getDataService().wccxSwapBalance | number: '1.0-0' }}</strong> $wCCX available.
+						</p>
+					</div>
+
+					<div class="forms" fxLayout="column" fxLayoutGap="25px">
+
+						<div fxFlex fxLayout="row" fxFlex="noshrink" fxLayoutAlign="start stretch">
+							<mat-form-field fxFill hintLabel="Amount of $CCX to exchange" color="accent" appearance="fill">
+								<mat-label>Amount</mat-label>
+								<input matInput numeric steps="0" #amount formControlName="amount" placeholder="100" required>
+								<mat-hint align="end">{{amount.value || 0}} / {{this.getDataService().maxSwapAmount}}</mat-hint>
+								<mat-error *ngIf="form1.controls.amount.hasError('required')">
+									Amount is required
+								</mat-error>
+								<mat-error *ngIf="form1.controls.amount.hasError('pattern')">
+									Amount is not a valid number
+								</mat-error>
+								<mat-error *ngIf="form1.controls.amount.hasError('max')">
+									The maximum allowed is {{this.getDataService().maxSwapAmount}}
+								</mat-error>
+								<mat-error *ngIf="form1.controls.amount.hasError('min')">
+									From address is required {{this.getDataService().minSwapAmount}}
+								</mat-error>
+							</mat-form-field>
+						</div>
+
+						<div fxFlex fxLayout="row" fxFlex="noshrink" fxLayoutAlign="start stretch">
+							<mat-form-field fxFill hintLabel="The address you're sending from" color="accent" appearance="fill">
+								<mat-label>From Address</mat-label>
+								<input matInput #fromAddress maxlength="98" formControlName="fromAddress" placeholder="ccx7RfyjfYKTYA51SSzEXXfuBB9HtDvuXXDsvC8ST1E2F2cw18KsJSuGxafmf13nyUdjWnsFMhL4AJJBRHB1RTnA84CzYGYqZt" autocomplete="off" required>
+								<mat-hint align="end">{{fromAddress.value.length}} / 98</mat-hint>
+								<mat-error *ngIf="form1.controls.fromAddress.hasError('required')">
+									From address is required
+								</mat-error>
+								<mat-error *ngIf="form1.controls.fromAddress.hasError('pattern')">
+									Please enter a valid address
+								</mat-error>
+								<mat-error *ngIf="form1.controls.fromAddress.hasError('minlength')">
+									Address must be 98 characters
+								</mat-error>
+							</mat-form-field>
+						</div>
+
+						<div fxFlex fxLayout="row" fxFlex="noshrink" fxLayoutAlign="start stretch">
+							<mat-form-field fxFill hintLabel="The address you're sending to" color="accent" appearance="fill">
+								<mat-label>To Address</mat-label>
+								<input matInput #toAddress maxlength="42" formControlName="toAddress" [(ngModel)]="this.getDataService().account" placeholder="0x885eB20a5439831fb90fC774a826d6680e4A2414" autocomplete="off" required>
+								<mat-hint align="end">{{toAddress.value.length}} / 42</mat-hint>
+								<mat-error *ngIf="form1.controls.toAddress.hasError('required')">
+									To address is required
+								</mat-error>
+								<mat-error *ngIf="form1.controls.toAddress.hasError('pattern')">
+									Please enter a valid address
+								</mat-error>
+								<mat-error *ngIf="form1.controls.toAddress.hasError('minlength')">
+									Address must be 42 characters
+								</mat-error>
+							</mat-form-field>
+						</div>
+
+						<div fxFlex fxLayout="row" fxFlex="noshrink" fxLayoutAlign="start stretch">
+							<mat-form-field fxFill hintLabel="Confirmation receipt" color="accent" appearance="fill">
+								<mat-label>Email</mat-label>
+								<input type="email" matInput placeholder="you@youremail.com" formControlName="email">
+								<mat-error *ngIf="form1.controls.email.hasError('email') && !form1.controls.email.hasError('required')">
+									Please enter a valid email address
+								</mat-error>
+								<mat-error *ngIf="form1.controls.email.hasError('required')">
+									Email address is required
+								</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+
+					<div class="actions" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+						<button mat-flat-button color="accent" type="submit" (click)="formSubmit()" [class.spinner]="this.getDataService().loading" [disabled]="!form1.valid || this.getDataService().loading">Continue</button>
+						<button mat-flat-button color="warn" routerLink="/bridge">Cancel</button>
+						<button mat-flat-button color="accent" (click)="addCustomChains()">Add Network</button>
+						<button mat-flat-button color="accent" (click)="addToken()">Add Token</button>
+					</div>
+
+				</div>
+
+			</form>
+		</mat-step>
+
+		<mat-step [completed]="this.getDataService().stepCompleted" [editable]="isEditable">
+			<mat-progress-bar class="progress" mode="indeterminate" color="accent"></mat-progress-bar>
+
+			<ng-template matStepLabel>Deposit</ng-template>
+
+			<div fxLayout="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="5px">
+
+				<div fxLayout="row" fxFlex="noshrink" fxLayoutAlign="center center">
+					<h2 class="title orange">Waiting for Deposit</h2>
+				</div>
+
+				<div fxLayout="row" fxFlex="noshrink" fxLayoutAlign="center center">
+					<p class="description">
+						Please deposit <strong class="strong orange">{{ amount.value || 0 }}</strong> $CCX from
+						<strong class="strong orange"> {{ (fromAddress.value.length>7)? (fromAddress.value | slice:0:7)+'...':(fromAddress.value) }}{{(fromAddress.value | slice:-7) || "your wallet" }}</strong>
+						to the below <strong class="strong orange"> Address + Payment ID </strong> in a single transaction.
+					</p>
+				</div>
+
+				<div fxLayout="row" fxFlex="noshrink" fxLayoutAlign="center center">
+					<span class="warn">Do not close the page, this can take some time...</span>
+				</div>
+
+				<div class="payments" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="space-around" fxLayoutGap="25px">
+
+					<div fxLayout="column" fxFlex fxLayoutGap="10px">
+						<mat-form-field class="payment" color="accent">
+							<mat-label>Address</mat-label>
+							<input matInput #ccxAddress type="text" [value]="this.getDataService().ccxAccountAddress">
+						</mat-form-field>
+						<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().ccxAccountAddress" (click)="getSnackbarService().openSnackBar('Address Copied!', 'Dismiss')">Copy Address</button>
+						<!-- <qrcode *ngIf="this.getDataService().ccxAccountAddress" class="code" [qrdata]="this.getDataService().ccxAccountAddress" [allowEmptyString]="true" [width]="280" [margin]="2" [errorCorrectionLevel]="'M'" [colorDark]="'#393939ff'" [colorLight]="'#fff'"></qrcode> -->
+						<div #qrcode1 class="code"></div>
+					</div>
+
+					<div fxLayout="column" fxFlex fxLayoutGap="10px">
+						<mat-form-field class="payment" color="accent">
+							<mat-label>Payment ID</mat-label>
+							<input matInput #ccxPaymentId type="text" [value]="this.getDataService().paymentId">
+						</mat-form-field>
+						<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().paymentId" (click)="getSnackbarService().openSnackBar('Payment ID Copied!', 'Dismiss')">Copy Payment ID</button>
+						<!-- <qrcode *ngIf="this.getDataService().paymentId" class="code" [qrdata]="this.getDataService().paymentId" [allowEmptyString]="true" [width]="280" [margin]="2" [errorCorrectionLevel]="'M'" [colorDark]="'#393939ff'" [colorLight]="'#fff'"></qrcode> -->
+						<div #qrcode2 class="code"></div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</mat-step>
+
+		<mat-step [editable]="isEditable">
+
+			<ng-template matStepLabel>Done</ng-template>
+
+			<div fxLayout="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="15px">
+
+				<div fxLayout="row" fxFlex="noshrink" fxLayoutAlign="center center">
+					<h2 class="title orange">Transfer Complete</h2>
+				</div>
+
+				<div fxLayout="row" fxFlex="noshrink" fxLayoutAlign="center center">
+					<p class="description">
+						You were sent <strong class="strong orange">{{ this.getDataService().txAmount || 0 }}</strong> $wCCX to <strong class="strong orange"> {{ (this.getDataService().txWallet.length>7)? (this.getDataService().txWallet | slice:0:7)+'...':(this.getDataService().txWallet) }}{{(this.getDataService().txWallet | slice:-7) || "your wallet" }}</strong>
+					</p>
+				</div>
+
+				<div class="receipts" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="25px">
+					<h3 class="receipt orange">Your Receipt</h3>
+					<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="5px">
+						<mat-form-field class="payment" color="accent">
+							<mat-label>Binance Smart Chain Transaction ID</mat-label>
+							<input matInput #ccxAddress type="text" [value]="this.getDataService().txHash1">
+						</mat-form-field>
+						<div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+							<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().txHash1" (click)="getSnackbarService().openSnackBar('Transaction Copied!', 'Dismiss')">Copy</button>
+							<a href="https://bscscan.com/tx/{{this.getDataService().txHash1}}" target="_blank" mat-flat-button color="accent">View on BscScan</a>
+						</div>
+					</div>
+
+					<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="5px">
+						<mat-form-field class="payment" color="accent">
+							<mat-label>Conceal Transaction ID</mat-label>
+							<input matInput #ccxPaymentId type="text" [value]="this.getDataService().txHash2">
+						</mat-form-field>
+						<div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+							<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().txHash2" (click)="getSnackbarService().openSnackBar('Transaction Copied!', 'Dismiss')">Copy</button>
+							<a href="https://explorer.conceal.network/index.html?hash={{this.getDataService().txHash2}}" target="_blank"  mat-flat-button color="accent">View on Explorer</a>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</mat-step>
+
+	</mat-horizontal-stepper>
+</div>

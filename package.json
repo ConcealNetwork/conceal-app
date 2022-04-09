@@ -47,7 +47,11 @@
     "@fontsource/poppins": "^4.5.2",
 >>>>>>> 5c9dd8b (update deps)
     "@types/cordova": "^0.0.34",
+<<<<<<< HEAD
 >>>>>>> 83bf6df (add conditional code for cordova)
+=======
+    "ethers": "^5.5.4",
+>>>>>>> 40d6ac9 (add bridge module)
     "moment": "^2.29.1",
     "ng-hcaptcha": "^1.3.0",
     "ngx-pipes": "^3.0.0",

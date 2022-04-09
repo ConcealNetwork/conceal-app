@@ -77,27 +77,27 @@ export class BridgeComponent implements OnInit {
 	submit(from:string, to:string) {
 		if (from === 'ccx' && to === 'eth') {
 			this.dataService.apiPath = 'eth';
-			this.router.navigate(['/eth'], { skipLocationChange: true });
+			this.router.navigate(['eth'], { relativeTo: this.route, skipLocationChange: true });
 		}
 		if (from === 'ccx' && to === 'bsc') {
 			this.dataService.apiPath = 'bsc';
-			this.router.navigate(['/bsc'], { skipLocationChange: true });
+			this.router.navigate(['bsc'], { relativeTo: this.route, skipLocationChange: true });
 		}
 		if (from === 'ccx' && to === 'plg') {
 			this.dataService.apiPath = 'plg';
-			this.router.navigate(['/plg'], { skipLocationChange: true });
+			this.router.navigate(['plg'], { relativeTo: this.route, skipLocationChange: true });
 		}
 		if (from === 'eth' && to === 'ccx') {
 			this.dataService.apiPath = 'eth';
-			this.router.navigate(['/ccx'], { skipLocationChange: true });
+			this.router.navigate(['ccx'], { relativeTo: this.route, skipLocationChange: true });
 		}
 		if (from === 'bsc' && to === 'ccx') {
 			this.dataService.apiPath = 'bsc';
-			this.router.navigate(['/ccx'], { skipLocationChange: true });
+			this.router.navigate(['ccx'], { relativeTo: this.route, skipLocationChange: true });
 		}
 		if (from === 'plg' && to === 'ccx') {
 			this.dataService.apiPath = 'plg';
-			this.router.navigate(['/ccx'], { skipLocationChange: true });
+			this.router.navigate(['ccx'], { relativeTo: this.route, skipLocationChange: true });
 		}
 	}
 
