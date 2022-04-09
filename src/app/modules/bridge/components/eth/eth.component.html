@@ -1,7 +1,7 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start">
 
 	<!-- <mat-horizontal-stepper linear #stepper selectedIndex="1"> -->
-	<mat-horizontal-stepper [linear]="true" #stepper [selectedIndex]="this.getDataService().step">
+	<mat-horizontal-stepper [linear]="true" #stepper [selectedIndex]="this.getDataService().step" class="mat-elevation-z8">
 
 		<mat-step [stepControl]="form1" [editable]="isEditable">
 
