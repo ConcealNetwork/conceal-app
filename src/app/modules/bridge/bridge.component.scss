@@ -1,7 +1,6 @@
 .container {
 	min-height: calc(100vh - 115px - 50px);
 	overflow: hidden;
-	color: #fff;
 
 	.help {
 		min-width: fit-content;
@@ -27,8 +26,6 @@
 		padding: 3rem 0;
     text-transform: uppercase;
 		letter-spacing: 0.1em;
-		text-shadow: -0.2em 0 0.4em #000, 0.2em 0 0.4em #000;
-		color: #999;
 		margin-block-start: 0em;
 		font-size: 1.3rem;
 	}
