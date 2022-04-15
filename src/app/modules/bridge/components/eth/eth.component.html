@@ -175,7 +175,10 @@
 						</mat-form-field>
 						<div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="15px">
 							<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().txHash1" (click)="getSnackbarService().openSnackBar('Transaction Copied!', 'Dismiss')">Copy</button>
-							<a href="https://bscscan.com/tx/{{this.getDataService().txHash1}}" target="_blank" mat-flat-button color="accent">View on BscScan</a>
+							<a *ngIf="this.getDataService().chainId === 137" href="https://polygonscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="accent">View on PolygonScan</a>
+							<a *ngIf="this.getDataService().chainId === 56" href="https://bscscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="accent">View on BscScan</a>
+							<a *ngIf="this.getDataService().chainId === 1" href="https://etherscan.io/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="accent">View on EtherScan</a>
+							<a *ngIf="this.getDataService().chainId === 42" href="https://{{this.getDataService().provider}}.etherscan.io/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="accent">View on EtherScan</a>
 						</div>
 					</div>
 
