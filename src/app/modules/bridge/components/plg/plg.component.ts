@@ -1,7 +1,9 @@
-// Imports
+// Angular
 import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+
+// 3rd Party
 import { Subscription } from "rxjs";
 import QRCodeStyling from 'qr-code-styling';
 

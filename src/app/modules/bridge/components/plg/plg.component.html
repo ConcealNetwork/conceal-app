@@ -131,7 +131,6 @@
 							<input matInput #ccxAddress type="text" [value]="this.getDataService().ccxAccountAddress">
 						</mat-form-field>
 						<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().ccxAccountAddress" (click)="getSnackbarService().openSnackBar('Address Copied!', 'Dismiss')">Copy Address</button>
-						<!-- <qrcode *ngIf="this.getDataService().ccxAccountAddress" class="code" [qrdata]="this.getDataService().ccxAccountAddress" [allowEmptyString]="true" [width]="280" [margin]="2" [errorCorrectionLevel]="'M'" [colorDark]="'#393939ff'" [colorLight]="'#fff'"></qrcode> -->
 						<div #qrcode1 class="code"></div>
 					</div>
 
@@ -141,7 +140,6 @@
 							<input matInput #ccxPaymentId type="text" [value]="this.getDataService().paymentId">
 						</mat-form-field>
 						<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().paymentId" (click)="getSnackbarService().openSnackBar('Payment ID Copied!', 'Dismiss')">Copy Payment ID</button>
-						<!-- <qrcode *ngIf="this.getDataService().paymentId" class="code" [qrdata]="this.getDataService().paymentId" [allowEmptyString]="true" [width]="280" [margin]="2" [errorCorrectionLevel]="'M'" [colorDark]="'#393939ff'" [colorLight]="'#fff'"></qrcode> -->
 						<div #qrcode2 class="code"></div>
 					</div>
 
