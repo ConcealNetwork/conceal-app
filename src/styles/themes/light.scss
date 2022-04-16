@@ -83,3 +83,31 @@
 	margin-top : 15px;
 	margin-bottom : 15px;
 }
+
+.mat-horizontal-stepper-header-container {
+	background: #424242;
+}
+
+.mat-stepper-horizontal-line {
+	border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.mat-step-header {
+	.mat-step-label {
+		color: #999;
+	}
+	.mat-step-label.mat-step-label-active {
+		color: #fff;
+	}
+	.mat-step-icon {
+		background-color: rgba(255, 255, 255, 0.54);
+	}
+}
+
+.mat-stepper-horizontal {
+	background: rgba(255,255,255,.9);
+}
+
+.network {
+	background: #fff;
+}

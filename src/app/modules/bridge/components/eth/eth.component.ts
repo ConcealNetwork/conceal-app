@@ -161,11 +161,11 @@ export class EthSwapComponent implements OnInit, OnDestroy {
 
 	createCodes(paymentId: string){
     const qr1 = new QRCodeStyling({
-			width: 285,
-			height: 285,
+			width: 275,
+			height: 275,
       margin: 0,
       data: this.dataService.ccxAccountAddress,
-      image: "../assets/images/branding/qr1.png",
+			image: "../assets/images/qrcode.png",
       dotsOptions: {
         color: "#33383B",
         type: "dots"
@@ -188,11 +188,11 @@ export class EthSwapComponent implements OnInit, OnDestroy {
       }
     });
 		const qr2 = new QRCodeStyling({
-			width: 285,
-			height: 285,
+			width: 275,
+			height: 275,
       margin: 0,
       data: paymentId,
-      image: "../assets/images/branding/qr2.png",
+			image: "../assets/images/qrcode.png",
       dotsOptions: {
         color: "#33383B",
         type: "dots"

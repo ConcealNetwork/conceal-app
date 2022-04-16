@@ -14,7 +14,7 @@
 					<div fxLayout="column" fxLayoutAlign="center center">
 						<img class="token" src="./assets/images/branding/ccx.png" width="86" height="86">
 						<p class="description">
-							There are <strong class="orange">{{ this.getDataService().ccxSwapBalance | number: '1.0-0' }}</strong> $CCX available.
+							There are currently <strong class="orange">{{ this.getDataService().ccxSwapBalance | number: '1.0-0' }}</strong> $CCX coins available to swap
 						</p>
 					</div>
 
@@ -104,7 +104,7 @@
 
 			<ng-template matStepLabel>Deposit</ng-template>
 
-			<div fxLayout="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="15px">
+			<div fxLayout="column" fxFlex="noshrink" fxLayoutAlign="center stretch">
 
 				<div fxLayout="row" fxFlex="noshrink" fxLayoutAlign="center center">
 					<h2 class="title orange">Deposit Complete</h2>
@@ -112,19 +112,13 @@
 
 				<div fxLayout="row" fxFlex="noshrink" fxLayoutAlign="center center">
 					<div fxLayout="column">
-						<h2>Waiting for Receipt</h2>
+						<h3>Waiting for Receipt</h3>
 					</div>
 				</div>
 
 				<div class="animation" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="space-around" fxLayoutGap="25px">
 					<div fxLayout="column">
-						<p class="description">One moment...</p>
-						<span class="loading">
-							<span></span>
-							<span></span>
-							<span></span>
-							<span></span>
-						</span>
+						<p class="description">One moment please...</p>
 					</div>
 				</div>
 
@@ -136,7 +130,7 @@
 
 			<ng-template matStepLabel>Done</ng-template>
 
-			<div fxLayout="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="15px">
+			<div fxLayout="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="25px">
 
 				<div fxLayout="row" fxFlex="noshrink" fxLayoutAlign="center center">
 					<h2 class="title orange">Transfer Complete</h2>
@@ -160,10 +154,10 @@
 						</mat-form-field>
 						<div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="15px">
 							<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().txHash2" (click)="getSnackbarService().openSnackBar('Transaction Copied!', 'Dismiss')">Copy</button>
-							<a *ngIf="this.getDataService().chainId === 137" href="https://polygonscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="accent">View on PolygonScan</a>
-							<a *ngIf="this.getDataService().chainId === 56" href="https://bscscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="accent">View on BscScan</a>
-							<a *ngIf="this.getDataService().chainId === 1" href="https://etherscan.io/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="accent">View on EtherScan</a>
-							<a *ngIf="this.getDataService().chainId === 42" href="https://{{this.getDataService().provider}}.etherscan.io/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="accent">View on EtherScan</a>
+							<a *ngIf="this.getDataService().chainId === 137" href="https://polygonscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on PolygonScan</a>
+							<a *ngIf="this.getDataService().chainId === 56" href="https://bscscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on BscScan</a>
+							<a *ngIf="this.getDataService().chainId === 1" href="https://etherscan.io/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on EtherScan</a>
+							<a *ngIf="this.getDataService().chainId === 42" href="https://{{this.getDataService().provider}}.etherscan.io/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on EtherScan</a>
 						</div>
 					</div>
 
@@ -174,10 +168,14 @@
 						</mat-form-field>
 						<div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="15px">
 							<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().txHash1" (click)="getSnackbarService().openSnackBar('Transaction Copied!', 'Dismiss')">Copy</button>
-							<a href="https://explorer.conceal.network/index.html?hash={{this.getDataService().txHash1}}" target="_blank"  mat-flat-button color="accent">View on Explorer</a>
+							<a href="https://explorer.conceal.network/index.html?hash={{this.getDataService().txHash1}}" target="_blank"  mat-flat-button color="primary">View on Explorer</a>
 						</div>
 					</div>
 
+				</div>
+
+				<div class="actions" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="center center" fxLayoutGap="15px">
+					<button mat-flat-button color="accent" routerLink="/bridge">Return to Bridge</button>
 				</div>
 
 			</div>
