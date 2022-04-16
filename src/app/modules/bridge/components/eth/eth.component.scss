@@ -1,0 +1,49 @@
+.container {
+	min-height: calc(100vh - 80px - 80px);
+}
+
+mat-horizontal-stepper {
+	max-width: 700px;
+}
+
+.token {
+	margin-top: 1.2rem;
+}
+
+.mat-flat-button {
+	font-size: 1rem;
+	padding-top: 0.3rem;
+	padding-bottom: 0.3rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+}
+
+.code {
+	align-self: center;
+	margin-top: 5px;
+	height: 275px;
+	width: 275px;
+	border: 8px solid #fff;
+	border-radius: 5px;
+}
+
+.progress {
+	width: 100vw;
+	margin-left: -24px;
+}
+
+.warn {
+	color: #e57373;
+}
+
+.payments, .receipts {
+	padding: 1.2rem;
+	border-radius: 15px;
+	background: rgba($color: #9a9c9e, $alpha: 0.1);
+	border: solid 3px rgba($color: #ccc, $alpha: 0.2);
+}
+
+.receipt {
+	margin-block-start: 0em;
+	margin-block-end: 0em;
+}

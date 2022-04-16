@@ -213,3 +213,21 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
   bottom: -21px;
   right: -20px;
 }
+
+mat-horizontal-stepper {
+	border-radius: 10px;
+}
+
+.mat-horizontal-stepper-header-container {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding: 0px;
+}
+
+.mat-step-icon-selected {
+	background-color: orange !important;
+}
+
+.mat-step-icon-state-done {
+	background-color: green !important;
+}

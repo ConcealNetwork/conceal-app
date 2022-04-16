@@ -19,6 +19,23 @@ import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRadioModule } from '@angular/material/radio';
+import { CdkTableModule } from '@angular/cdk/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatSortModule } from '@angular/material/sort';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   exports: [
@@ -31,7 +48,24 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSidenavModule,
     MatSnackBarModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+		MatCardModule,
+		MatInputModule,
+		MatFormFieldModule,
+		MatSelectModule,
+		MatStepperModule,
+		MatProgressSpinnerModule,
+		ClipboardModule,
+		MatDividerModule,
+		MatProgressBarModule,
+		MatRadioModule,
+		CdkTableModule,
+		MatTableModule,
+		MatSliderModule,
+		MatTabsModule,
+		MatPaginatorModule,
+		MatSortModule,
+		MatSlideToggleModule
   ]
 })
 

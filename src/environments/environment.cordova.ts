@@ -3,6 +3,7 @@ export const environment = {
 	worker: false,
   environment: 'PROD',
 	version: '1.3.1',
+	api: 'https://bridge.conceal.network/backend',
   walletAPI: 'https://api.wallet.conceal.network/api',
   coinStats: 'https://api.coinstats.app',
   gecko: 'https://api.coingecko.com',
