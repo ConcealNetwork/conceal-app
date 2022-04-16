@@ -185,7 +185,7 @@ export class BscSwapComponent implements OnInit, OnDestroy {
 			height: 285,
       margin: 0,
       data: this.dataService.ccxAccountAddress,
-      image: "../assets/images/branding/qr1.png",
+			image: "../assets/images/qrcode.png",
       dotsOptions: {
         color: "#33383B",
         type: "dots"
@@ -212,7 +212,7 @@ export class BscSwapComponent implements OnInit, OnDestroy {
 			height: 285,
       margin: 0,
       data: paymentId,
-      image: "../assets/images/branding/qr2.png",
+			image: "../assets/images/qrcode.png",
       dotsOptions: {
         color: "#33383B",
         type: "dots"

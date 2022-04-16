@@ -21,7 +21,7 @@
 			</div>
 		</mat-card>
 
-		<mat-card id="cards" class="network mat-elevation-z6" fxFill fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
+		<div id="cards" class="network" fxFill fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
 
 			<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
 
@@ -69,9 +69,9 @@
 
 			</div>
 
-			<button mat-flat-button class="mat-elevation-z8" color="accent" [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value, this.toControl.value)">Continue</button>
+			<button mat-flat-button class="mat-elevation-z8" color="accent" [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value, this.toControl.value)">Begin Swap Process</button>
 
-		</mat-card>
+		</div>
 
 	</div>
 
