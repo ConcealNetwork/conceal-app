@@ -39,4 +39,12 @@ export class IdComponent implements OnInit {
   ngOnInit(): void {
   }
 
+	submit() {
+		console.log(this.new.value);
+	}
+
+	reset() {
+		this.new.reset();
+	}
+
 }

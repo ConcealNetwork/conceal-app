@@ -6,13 +6,13 @@
 	</div>
 
 	<mat-card class="mat-elevation-z8" fxLayout="column" fxLayoutAlign="center stretch">
+		<form [formGroup]="new">
 
-		<mat-card-header fxLayout="column">
-			<h2 class="title">New Conceal ID</h2>
-		</mat-card-header>
+			<mat-card-header fxLayout="column">
+				<h2 class="title">New Conceal ID</h2>
+			</mat-card-header>
 
-		<mat-card-content>
-			<form [formGroup]="new">
+			<mat-card-content>
 				<div fxLayout="column" fxFlex fxLayoutGap="25px">
 
 					<fieldset fxLayout="column" fxFlex="noshrink" fxLayoutGap="15px">
@@ -23,8 +23,8 @@
 
 						<mat-form-field color="accent" hintLabel="Conceal ID" appearance="fill">
 							<mat-label>Name</mat-label>
-							<input matInput #name type="text" name="name" placeholder="you" formControlName="name">
-							<span matSuffix>.conceal.id</span>
+							<input matInput #name type="text" name="name" placeholder="My Name" formControlName="name">
+							<span matSuffix class="orange">.conceal.id</span>
 							<mat-error *ngIf="new.controls.name.hasError('required')">
 								Your ID name is <strong>required</strong>
 							</mat-error>
@@ -35,9 +35,17 @@
 							</mat-progress-spinner>
 						</mat-form-field>
 
-						<mat-form-field color="accent" hintLabel="ID Linked Address" appearance="fill">
+						<mat-form-field color="accent" hintLabel="Your ID Label" appearance="fill">
+							<mat-label>Label</mat-label>
+							<input matInput #label type="text" name="label" placeholder="My Label" formControlName="label" [value]="new.controls.name.value">
+							<mat-error *ngIf="new.controls.label.hasError('required')">
+								Your ID Label is <strong>required</strong>
+							</mat-error>
+						</mat-form-field>
+
+						<mat-form-field color="accent" hintLabel="Linked Wallet Address" appearance="fill">
 							<mat-label>Address</mat-label>
-							<input matInput #address type="text" name="address" maxlength="98" placeholder="Linked Address" formControlName="address">
+							<input matInput #address type="text" name="address" maxlength="98" placeholder="My Address" formControlName="address">
 							<mat-hint align="end">{{address.value.length}} / 98</mat-hint>
 							<mat-error *ngIf="new.controls.address.hasError('required')">
 								Your linked address is <strong>required</strong>
@@ -50,38 +58,39 @@
 					</fieldset>
 
 					<fieldset fxLayout="column" fxFlex="noshrink" fxLayoutGap="15px">
+
 						<legend fxLayout="row" fxLayoutAlign="space-between center">
 							<mat-icon class="orange" aria-hidden="false">money</mat-icon>
 							Payment
 						</legend>
 
-					<mat-form-field color="accent" hintLabel="Payment Address" appearance="fill">
-						<mat-label>Payment Address</mat-label>
-						<input matInput #payment type="text" name="payment" maxlength="98" placeholder="CCX Address" formControlName="payment">
-						<mat-hint align="end">{{payment.value.length}} / 98</mat-hint>
-						<mat-error *ngIf="new.controls.payment.hasError('required')">
-							Your payment address is <strong>required</strong>
-						</mat-error>
-						<mat-error *ngIf="new.controls.payment.hasError('minlength') || new.controls.payment.hasError('maxlength')">
-							Address must be <strong>98 characters</strong>
-						</mat-error>
-					</mat-form-field>
+						<span>Creating an ID has a fixed fee of <span class="orange">20.001 CCX.</span> After submitting, this fee will be deducted from your selected wallet's balance.</span>
 
-					<mat-form-field color="accent" hintLabel="Your ID Label" appearance="fill">
-						<mat-label>ID Label</mat-label>
-						<input matInput #label type="text" name="label" placeholder="My Label" formControlName="label">
-						<mat-error *ngIf="new.controls.label.hasError('required')">
-							Your ID Label is <strong>required</strong>
-						</mat-error>
-					</mat-form-field>
+						<mat-form-field color="accent" hintLabel="Payment Address" appearance="fill">
+							<mat-label>Payment Address</mat-label>
+							<input matInput #payment type="text" name="payment" maxlength="98" placeholder="CCX Address" formControlName="payment" [value]="new.controls.address.value">
+							<mat-hint align="end">{{payment.value.length}} / 98</mat-hint>
+							<mat-error *ngIf="new.controls.payment.hasError('required')">
+								Your payment address is <strong>required</strong>
+							</mat-error>
+							<mat-error *ngIf="new.controls.payment.hasError('minlength') || new.controls.payment.hasError('maxlength')">
+								Address must be <strong>98 characters</strong>
+							</mat-error>
+						</mat-form-field>
 
 					</fieldset>
 
 				</div>
-			</form>
+			</mat-card-content>
 
-		</mat-card-content>
+			<mat-card-actions>
+				<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+					<button type="submit" color="warn" mat-stroked-button fxFlex="50" (click)="reset()">Reset</button>
+					<button type="submit" color="accent" mat-flat-button fxFlex="50" (click)="submit()" [disabled]="!new.valid">Create New ID</button>
+				</div>
+			</mat-card-actions>
 
+		</form>
 	</mat-card>
 
 </div>
