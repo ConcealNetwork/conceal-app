@@ -2,9 +2,13 @@
 	min-height: calc(100vh - 115px - 50px);
 	overflow: hidden;
 
-	.mat-card {
-		max-width: 550px !important;
+	.form {
+		max-width: 550px;
 	}
+
+	// .ids {
+	// 	max-width: 300px;
+	// }
 
 	.headline {
 		font-size: 3.6rem;

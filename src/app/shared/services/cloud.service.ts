@@ -101,7 +101,7 @@ export class CloudService {
 		let ref = ''
 		if(!message) message = ''
 		if(!paymentID) paymentID = ''
-    let body = {
+    const body = {
       amount: amount,
 			wallet,  		// origin
 			address,  	// destination
@@ -114,5 +114,23 @@ export class CloudService {
 		}
 		return this.http.put(`${this.api}/wallet`, JSON.stringify(body))
   }
+
+	listIDs() {
+		return this.http.get(`${this.api}/id`)
+	}
+
+	deleteID(id:string, address: string, name:string) {
+		return this.http.delete(`${this.api}/id/delete?id=${id}&address=${address}&name=${name}`)
+	}
+
+	createID(address: string, addressToCreate:string, id:string, name:string) {
+		const body = {
+			address, 						// Payment Address
+			addressToCreate, 		// Linked Address
+			id, 								// Conceal ID
+			name								// Label
+		}
+		return this.http.post(`${this.api}/id`, JSON.stringify(body))
+	}
 
 }
