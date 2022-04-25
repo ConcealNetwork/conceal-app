@@ -17,6 +17,7 @@ export const environment = {
 	defaultFee: 0.001000,
 	depositBlocksPerMonth: 21900,
 	walletLimit: 2,
+	idValue: 20.001,
 	currency: 'usd',
 	interestRates: [
 		[0.24, 0.33, 0.41],
