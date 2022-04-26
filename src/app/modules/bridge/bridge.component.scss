@@ -22,14 +22,41 @@
     line-height: 1.1em;
 		font-weight: normal;
 		margin-block-end: 0em;
+		margin-block-start: 0em;
+		backdrop-filter: blur(3px);
+		padding: 5px;
+		border-radius: 35px;
+	}
+
+	.headline::before {
+		z-index: 1;
+		background-color: darkslategray;
+		filter: invert(1);
+	}
+
+	.headline::after {
+		backdrop-filter: invert(1);
+		z-index: 3;
 	}
 
 	.description {
-		padding: 3rem 0;
     text-transform: uppercase;
 		letter-spacing: 0.1em;
-		margin-block-start: 0em;
 		font-size: 1.3rem;
+		backdrop-filter: blur(5px);
+		padding: 5px;
+		border-radius: 25px;
+	}
+
+	.description::before {
+		z-index: 1;
+		background-color: darkslategray;
+		filter: invert(1);
+	}
+
+	.description::after {
+		backdrop-filter: invert(1);
+		z-index: 3;
 	}
 
 	.direction {

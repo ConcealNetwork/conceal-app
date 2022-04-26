@@ -22,14 +22,14 @@ export class BridgeComponent implements OnInit {
 	fromNetwork: Networks[] = [
     {value: 'ccx', viewValue: 'Conceal (CCX)'},
     {value: 'eth', viewValue: 'Ethereum (wCCX)'},
-    {value: 'bsc', viewValue: 'Binance Smart Chain (wCCX)'},
+    {value: 'bsc', viewValue: 'Binance (wCCX)'},
     {value: 'plg', viewValue: 'Polygon (wCCX)'},
   ];
 
 	toNetwork: Networks[] = [
     {value: 'ccx', viewValue: 'Conceal (CCX)'},
     {value: 'eth', viewValue: 'Ethereum (wCCX)'},
-		{value: 'bsc', viewValue: 'Binance Smart Chain (wCCX)'},
+		{value: 'bsc', viewValue: 'Binance (wCCX)'},
 		{value: 'plg', viewValue: 'Polygon (wCCX)'},
   ];
 

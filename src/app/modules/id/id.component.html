@@ -7,7 +7,19 @@
 		<p class="description">Branding the Blockchain.</p>
 	</div>
 
-	<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
+	<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
+
+		<div class="help" fxLayout="column" fxLayoutAlign="start stretch" fxFill.lt.sm fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
+			<mat-card id="cards" class="mat-elevation-z8">
+				<div fxLayout="column" fxLayoutAlign="space-evenly">
+					<mat-nav-list>
+						<a href="https://conceal.network/wiki/doku.php?id=conceal-id" rel="noreferrer" target="_blank" mat-list-item>User Guide</a>
+						<a href="https://conceal.network/support/index.php?a=add&category=2" rel="noreferrer" target="_blank" mat-list-item>Support</a>
+						<a href="https://conceal.network/tc.html" rel="noreferrer" target="_blank" mat-list-item>Terms & Conditions</a>
+					</mat-nav-list>
+				</div>
+			</mat-card>
+		</div>
 
 		<mat-card id="cards" class="form mat-elevation-z8" fxLayout="column" fxFlex fxLayoutAlign="start stretch">
 			<form [formGroup]="createID">
@@ -76,7 +88,7 @@
 						<fieldset fxLayout="column" fxFlex="noshrink" fxLayoutGap="15px">
 
 							<legend fxLayout="row" fxLayoutAlign="space-between center">
-								<mat-icon class="orange" aria-hidden="false">money</mat-icon>
+								<mat-icon class="orange" aria-hidden="false">price_change</mat-icon>
 								Payment
 							</legend>
 
