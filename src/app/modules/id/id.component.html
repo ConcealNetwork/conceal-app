@@ -4,7 +4,7 @@
 
 	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
 		<h1 class="headline">Conceal <strong>ID</strong></h1>
-		<p class="description">Branding the Blockchain.</p>
+		<p class="description">Create your own personalized wallet address.</p>
 	</div>
 
 	<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
@@ -40,7 +40,7 @@
 
 								<mat-form-field color="accent" hintLabel="Your public ID" appearance="fill">
 									<mat-label>ID</mat-label>
-									<input matInput #name type="text" name="name" placeholder="My ID" formControlName="name" (blur)="updateName(createID.controls.name.value)">
+									<input matInput #name type="text" name="name" placeholder="My ID" formControlName="name">
 									<span matSuffix class="orange">.conceal.id</span>
 									<mat-error *ngIf="createID.controls.name.hasError('required')">
 										Your ID name is <strong>required</strong>
@@ -60,17 +60,6 @@
 									<mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
 									<span>Checking if this name is available...</span>
 								</div>
-
-								<mat-form-field color="accent" hintLabel="Your private label" appearance="fill">
-									<mat-label>Label</mat-label>
-									<input matInput #label type="text" name="label" placeholder="My Label" formControlName="label">
-									<mat-error *ngIf="createID.controls.label.hasError('required')">
-										Your Label is <strong>required</strong>
-									</mat-error>
-									<mat-error *ngIf="createID.controls.label.hasError('minlength') || createID.controls.label.hasError('maxlength')">
-										Your Label should be between <strong>3</strong> and <strong>20</strong> characters.
-									</mat-error>
-								</mat-form-field>
 
 								<mat-form-field color="accent" hintLabel="Address to link to your ID" appearance="fill">
 									<mat-label>Address</mat-label>
