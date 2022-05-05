@@ -59,11 +59,6 @@ export class IdComponent implements OnInit {
 			asyncValidators: this.nameService.uniqueNameValidator(),
 			updateOn: 'blur',
 		}),
-		label: new FormControl('', [
-			Validators.required,
-			Validators.minLength(3),
-			Validators.maxLength(20),
-		]),
 		address: new FormControl('', [
 			Validators.required,
 		]),
@@ -148,11 +143,6 @@ export class IdComponent implements OnInit {
 		}
 	}
 
-	updateName(value:any) {
-		this.createID.controls.label.patchValue(value);
-		this.createID.controls.label.markAsTouched();
-	}
-
 	updateAddress(value:any) {
 		this.createID.controls.payment.patchValue(value);
 		this.createID.controls.payment.markAsTouched();
@@ -165,7 +155,7 @@ export class IdComponent implements OnInit {
 				this.createID.value.payment.address,
 				this.createID.value.address.address,
 				this.createID.value.name,
-				this.createID.value.label
+				this.createID.value.name
 			).subscribe((data:any) => {
 				if (data.result === 'success') {
 					this.snackbarService.openSnackBar('Your ID has been successfully created', 'Dismiss');
