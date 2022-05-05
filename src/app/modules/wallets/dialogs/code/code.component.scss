@@ -10,9 +10,7 @@
 }
 
 .mat-dialog-content {
-	.mat-form-field {
-		font-size: 1rem;
-	}
+	overflow: hidden;
 }
 
 .mat-dialog-actions {
@@ -25,8 +23,8 @@
 
 .code {
 	align-self: center;
-	height: 315px;
-	width: 315px;
+	height: 300px;
+	width: 300px;
 	border: 5px solid #222;
 	border-radius: 5px;
 }

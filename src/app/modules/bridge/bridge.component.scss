@@ -6,10 +6,19 @@
 		min-width: fit-content;
 	}
 
-	.network {
-		padding: 1.6rem;
-		border-radius: 5px;
-		max-width: 400px;
+	.swap {
+		max-width: 550px;
+		.networks {
+			padding: 15px;
+			border-radius: 5px;
+		}
+		.mat-card-content {
+			.title {
+				font-size: 1.2rem;
+				margin-block-start: 0;
+				margin-block-end: 0;
+			}
+		}
 	}
 
 	.mat-list-item {

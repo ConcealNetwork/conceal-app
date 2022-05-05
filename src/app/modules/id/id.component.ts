@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
+import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
+
 // Services
 import { NameService } from './name.validator';
 import { BalanceService } from './balance.validator';
 import { CloudService } from 'src/app/shared/services/cloud.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 @Component({
   selector: 'app-id',
@@ -40,7 +43,9 @@ export class IdComponent implements OnInit {
 		private balanceService: BalanceService,
 		private cloudService: CloudService,
 		private helperService: HelperService,
-		private snackbarService: SnackbarService
+		private snackbarService: SnackbarService,
+		private cordovaService: CordovaService,
+		private clipboard: Clipboard,
 	) { }
 
 	createID: FormGroup = new FormGroup({
@@ -129,6 +134,18 @@ export class IdComponent implements OnInit {
 				}, 5000);
 			}
 		})
+	}
+
+	copyID(value: any) {
+		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
+			this.clipboard.copy(value);
+			this.snackbarService.openSnackBar('ID has been copied to clipboard', 'Dismiss');
+		} else if (navigator.clipboard) {
+			navigator.clipboard.writeText(value);
+			this.snackbarService.openSnackBar('ID has been copied to clipboard', 'Dismiss');
+		} else {
+			this.snackbarService.openSnackBar('Could not access the clipboard', 'Dismiss');
+		}
 	}
 
 	updateName(value:any) {

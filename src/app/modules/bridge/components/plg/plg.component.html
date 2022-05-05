@@ -12,15 +12,14 @@
 				<div fxLayout="column" fLayoutAlign="center center" fxLayoutGap="25px">
 
 					<div fxLayout="column" fxLayoutAlign="center center">
-						<img class="token" src="./assets/images/branding/plg.png" width="86" height="86">
+						<img class="token" src="./assets/images/branding/plg.png" width="100" height="100">
 						<p class="description">
 							There are currently <strong class="orange">{{ this.getDataService().wccxSwapBalance | number: '1.0-0' }}</strong> $wCCX tokens available.
 						</p>
-					</div>
-
-					<div class="actions" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="15px">
-						<button mat-flat-button color="accent" (click)="addCustomChains()">Import Polygon Network</button>
-						<button mat-flat-button color="accent" (click)="addToken()">Import wCCX Token</button>
+						<div class="actions" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="25px">
+							<button mat-flat-button color="accent" (click)="addCustomChains()">Import Network</button>
+							<button mat-flat-button color="accent" (click)="addToken($event)">Import Token</button>
+						</div>
 					</div>
 
 					<div class="forms" fxLayout="column" fxLayoutGap="25px">
@@ -135,7 +134,7 @@
 							<input matInput #ccxAddress type="text" [value]="this.getDataService().ccxAccountAddress">
 						</mat-form-field>
 						<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().ccxAccountAddress" (click)="getSnackbarService().openSnackBar('Address Copied!', 'Dismiss')">Copy Address</button>
-						<div #qrcode1 class="code"></div>
+						<qrcode class="code" [qrdata]="this.dataService.ccxAccountAddress" [width]="275" [margin]="2" [elementType]="'canvas'" [colorDark]="'#333'" [errorCorrectionLevel]="'H'" [allowEmptyString]="true"></qrcode>
 					</div>
 
 					<div fxLayout="column" fxFlex fxLayoutGap="10px">
@@ -144,7 +143,7 @@
 							<input matInput #ccxPaymentId type="text" [value]="this.getDataService().paymentId">
 						</mat-form-field>
 						<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().paymentId" (click)="getSnackbarService().openSnackBar('Payment ID Copied!', 'Dismiss')">Copy Payment ID</button>
-						<div #qrcode2 class="code"></div>
+						<qrcode class="code" [qrdata]="this.paymentId" [width]="275" [margin]="2" [elementType]="'canvas'" [colorDark]="'#333'" [errorCorrectionLevel]="'H'" [allowEmptyString]="true"></qrcode>
 					</div>
 
 				</div>

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { QRCodeModule } from 'angularx-qrcode';
+
 import { SharedModule } from 'src/app/shared.module';
 import { MaterialModule } from 'src/app/material.module';
 
@@ -11,7 +13,7 @@ import { WalletsComponent } from './wallets.component';
 import { SendDialog } from "./dialogs/send/send.component";
 import { ReceiveDialog } from "./dialogs/receive/receive.component";
 import { ExportDialog } from './dialogs/export/export.component';
-import { QrcodeDialog } from './dialogs/qrcode/qrcode.component';
+import { CodeDialog } from './dialogs/code/code.component';
 
 
 @NgModule({
@@ -20,14 +22,15 @@ import { QrcodeDialog } from './dialogs/qrcode/qrcode.component';
 		SendDialog,
 		ReceiveDialog,
 		ExportDialog,
-  	QrcodeDialog
+  	CodeDialog
   ],
   imports: [
 		FormsModule,
     ReactiveFormsModule,
     WalletsRoutingModule,
 		SharedModule,
-		MaterialModule
+		MaterialModule,
+		QRCodeModule
   ]
 })
 export class WalletModule { }
