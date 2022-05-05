@@ -83,6 +83,7 @@ export class ThemingService {
 					this.isSmallScreen = false;
 					this.stroke = 3;
 					this.dialogWidth = '600px';
+					this.qrcodeDialogWidth = '350px';
 					this.dialogMaxWidth = '600px';
 					this.exportDialogWidth = '450px';
 					this.dialogHeight = 'auto';
@@ -94,6 +95,7 @@ export class ThemingService {
 					this.isSmallScreen = false;
 					this.stroke = 5;
 					this.dialogWidth = '600px';
+					this.qrcodeDialogWidth = '350px';
 					this.exportDialogWidth = '450px';
 					this.dialogMaxWidth = '600px';
 					this.dialogHeight = 'auto';
@@ -105,6 +107,7 @@ export class ThemingService {
 					this.isSmallScreen = false;
 					this.stroke = 5;
 					this.dialogWidth = '600px';
+					this.qrcodeDialogWidth = '350px';
 					this.exportDialogWidth = '450px';
 					this.dialogMaxWidth = '600px';
 					this.dialogHeight = 'auto';

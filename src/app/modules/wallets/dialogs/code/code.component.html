@@ -4,7 +4,7 @@
 	<p class="subtitle">Scan this code on your device</p>
 
 	<div mat-dialog-content fxLayout="column" fxLayoutGap="5px">
-		<div #qrcode class="code"></div>
+		<qrcode class="code" [qrdata]="this.data.address" [width]="300" [margin]="2" [elementType]="'canvas'" [colorDark]="'#333'" [errorCorrectionLevel]="'H'" [allowEmptyString]="true"></qrcode>
 	</div>
 
 	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">

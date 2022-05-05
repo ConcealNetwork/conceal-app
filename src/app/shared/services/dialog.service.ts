@@ -10,7 +10,7 @@ import { TwoFactorDialog } from 'src/app/shared/dialogs/twofactor/twofactor.comp
 import { SendDialog } from 'src/app/modules/wallets/dialogs/send/send.component';
 import { ReceiveDialog } from 'src/app/modules/wallets/dialogs/receive/receive.component';
 import { ExportDialog } from 'src/app/modules/wallets/dialogs/export/export.component';
-import { QrcodeDialog } from 'src/app/modules/wallets/dialogs/qrcode/qrcode.component';
+import { CodeDialog } from 'src/app/modules/wallets/dialogs/code/code.component';
 import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix/matrix.dialog';
 import { PendingDialog } from 'src/app/modules/deposits/dialogs/pending/pending.dialog';
 import { ConfirmationDialog } from 'src/app/modules/deposits/dialogs/confirmation/confirmation.dialog';
@@ -73,7 +73,7 @@ export class DialogService {
   }
 
 	openQrcodeDialog(address:any): void {
-		const dialogRef = this.dialog.open(QrcodeDialog, {
+		const dialogRef = this.dialog.open(CodeDialog, {
 			width: this.themingService.qrcodeDialogWidth,
 			maxWidth: this.themingService.dialogMaxWidth,
 			height: this.themingService.dialogHeight,

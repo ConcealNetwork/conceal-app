@@ -46,6 +46,11 @@
 		border-radius: 25px;
 	}
 
+	.id {
+		font-size: 1.1rem;
+		max-width: 225px;
+	}
+
 	.description::before {
 		z-index: 1;
 		background-color: darkslategray;
@@ -72,6 +77,14 @@
 		.mat-icon {
 			margin-right: 5px;
 		}
+	}
+
+	.code {
+		align-self: center;
+		height: 215px;
+		width: 215px;
+		border: 5px solid #222;
+		border-radius: 5px;
 	}
 
 }

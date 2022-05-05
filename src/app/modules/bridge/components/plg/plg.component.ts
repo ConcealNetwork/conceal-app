@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 
 // 3rd Party
 import { Subscription } from "rxjs";
-import QRCodeStyling from 'qr-code-styling';
 
 // Services
 import { DialogService } from '../../services/dialog.service';
@@ -22,14 +21,10 @@ import { DataService } from '../../services/data.service';
 
 export class PlgSwapComponent implements OnInit, OnDestroy {
 
-  watcherSubscription!: Subscription;
-
-	// QR Code Element
-	@ViewChild('qrcode1', {static: true}) qrcode1!: ElementRef;
-	@ViewChild('qrcode2', {static: true}) qrcode2!: ElementRef;
-
+	private watcherSubscription!: Subscription;
 	public isEditable: boolean = false;
 	public form1!: FormGroup;
+	public paymentId: string = '';
 
   constructor (
 		private _routes: ActivatedRoute,
@@ -102,7 +97,10 @@ export class PlgSwapComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	addToken() {
+	addToken(e:Event) {
+		//prevent default
+		e.preventDefault();
+		e.stopPropagation();
 		this.ethersService.addWCCXToken('0x137Ee749f0F8c2eD34cA00dE33BB59E3dafA494A');
 	}
 
@@ -129,7 +127,7 @@ export class PlgSwapComponent implements OnInit, OnDestroy {
     this.watcherSubscription = this.dataService.paymentIdChange.subscribe(
       (paymentId: string) => {
 				if(paymentId) {
-					this.createCodes(paymentId);
+					this.paymentId = paymentId;
 				}
       }
     );
@@ -178,66 +176,6 @@ export class PlgSwapComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy() {
     this.watcherSubscription.unsubscribe();
-  }
-
-	createCodes(paymentId: string){
-    const qr1 = new QRCodeStyling({
-			width: 285,
-			height: 285,
-      margin: 0,
-      data: this.dataService.ccxAccountAddress,
-			image: "../assets/images/qrcode.png",
-      dotsOptions: {
-        color: "#33383B",
-        type: "dots"
-      },
-			cornersSquareOptions: {
-				color:' #33383B',
-				type: 'dot'
-			},
-			cornersDotOptions: {
-				color:' #33383B',
-				type: 'dot'
-			},
-      backgroundOptions: {
-        color: "#fff"
-      },
-      imageOptions: {
-        margin: 0,
-				imageSize: 0.3,
-				hideBackgroundDots: false
-      }
-    });
-		const qr2 = new QRCodeStyling({
-			width: 285,
-			height: 285,
-      margin: 0,
-      data: paymentId,
-			image: "../assets/images/qrcode.png",
-      dotsOptions: {
-        color: "#33383B",
-        type: "dots"
-      },
-			cornersSquareOptions: {
-				color:' #33383B',
-				type: 'dot'
-			},
-			cornersDotOptions: {
-				color:' #33383B',
-				type: 'dot'
-			},
-      backgroundOptions: {
-        color: "#fff"
-      },
-      imageOptions: {
-        margin: 0,
-				imageSize: 0.3,
-				hideBackgroundDots: false
-      }
-    });
-    // Create new QRCode Object
-    qr1.append(this.qrcode1.nativeElement);
-    qr2.append(this.qrcode2.nativeElement);
   }
 
 }
