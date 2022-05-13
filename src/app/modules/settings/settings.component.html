@@ -138,7 +138,7 @@
 								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="copy(this.secret, 'Copied secret to clipboard')">Copy Secret Key</button>
 							</div>
 							<p class="title">Enter the code from your authenticator app to {{this.hasTwoFa ? 'disable' : 'enable'}} two-factor authentication.</p>
-							<mat-form-field fxFlex hintLabel="6 Numbers" appearance="fill">
+							<mat-form-field fxFlex hintLabel="6 Numbers" color="accent" appearance="fill">
 								<mat-label>Two-factor Code</mat-label>
 								<input matInput minlength="6" maxlength="6" placeholder="00000" formControlName="code">
 								<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste()">
