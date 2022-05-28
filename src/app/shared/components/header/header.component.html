@@ -5,7 +5,8 @@
 	</a>
 
 	<div class="links" fxLayoutGap="10px">
-		<button class="navlink" mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">news</button>
+		<button class="navlink" mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">home</button>
+		<button class="navlink" mat-button routerLink="/media" routerLinkActive="active">News</button>
 		<button class="navlink" mat-button routerLink="/wallets" routerLinkActive="active">Wallets</button>
 		<button class="navlink" mat-button routerLink="/deposits" routerLinkActive="active">Deposits</button>
 		<button class="navlink" mat-button routerLink="/id" routerLinkActive="active">ID</button>
@@ -32,7 +33,7 @@
 		<button *ngIf="activeTheme == 'dark-theme'" mat-icon-button mdTooltip="Change theme" matTooltip="Light Mode" (click)="changeTheme('light-theme')">
 			<mat-icon aria-hidden="false">light_mode</mat-icon>
 		</button>
-		<a mat-icon-button aria-label="service status" matTooltip="Service Status" href="https://status.conceal.network" target="_blank" >
+		<a mat-icon-button aria-label="service status" matTooltip="Service Status" href="https://status.conceal.network" target="_blank">
 			<mat-icon aria-hidden="false">monitor_heart</mat-icon>
 		</a>
 		<button mat-icon-button aria-label="settings" matTooltip="Settings" routerLink="/settings" routerLinkActive="active">

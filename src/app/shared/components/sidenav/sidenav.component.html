@@ -1,8 +1,11 @@
 <aside fxLayout="column" fxLayoutGap="10px">
 
 		<div fxLayout="column" fxLayoutGap="15px">
+			<a mat-button class="link" routerLink="/media" routerLinkActive="active">Conceal News</a>
+			<a mat-button class="link" routerLink="/wallets" routerLinkActive="active">Conceal Wallets</a>
+			<a mat-button class="link" routerLink="/deposits" routerLinkActive="active">Conceal Deposits</a>
 			<a mat-button class="link" routerLink="/id" routerLinkActive="active">Conceal ID</a>
-			<a mat-button class="link" (click)="close()" routerLink="/bridge"routerLinkActive="active">Conceal Bridge</a>
+			<a mat-button class="link" (click)="close()" routerLink="/bridge" routerLinkActive="active">Conceal Bridge</a>
 			<!--
 			<a mat-button class="link" (click)="close()" routerLink="/pay" routerLinkActive="active">Pay</a>
 			<a mat-button class="link" (click)="close()" routerLink="/explorer" routerLinkActive="active">Explorer</a>

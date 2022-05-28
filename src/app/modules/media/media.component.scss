@@ -1,0 +1,43 @@
+.posts {
+	font-size: 0.9rem;
+	border-radius: 5px;
+	padding: 15px;
+	.mat-stroked-button {
+		font-size: 1rem !important;
+	}
+}
+
+.date {
+	font-size: 1rem;
+	margin-bottom: 10px;
+}
+
+.title {
+	word-break: break-all;
+	margin-bottom: 15px;
+}
+
+fieldset {
+	border-radius: 5px;
+	border: 1px solid rgba($color: #999, $alpha: 0.5);
+	padding: 20px;
+	mat-icon {
+		margin-right: 6px;
+	}
+	@media only screen and (max-width: 960px) {
+		padding: 15px;
+	}
+}
+
+.image {
+	width: 100%; /* or any custom size */
+	height: 100%;
+	object-fit: contain;
+	border-radius: 5px;
+	margin-bottom: 15px;
+}
+
+.platform {
+	margin-left: 5px;
+	font-weight: 600;
+}
