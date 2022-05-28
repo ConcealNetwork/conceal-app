@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { HelpDialog } from "../dialogs/help.component";
 import { MetaMaskDialog } from "../dialogs/metamask.component";
 import { TransactionDialog } from "../dialogs/transaction.component";
+import { SendDialog } from 'src/app/modules/wallets/dialogs/send/send.component';
 
 @Injectable({
 	providedIn: 'root'
@@ -39,6 +40,21 @@ export class DialogService {
 			width: 'auto',
 			height: 'auto',
 			disableClose: true
+		})
+		dialogRef.afterClosed().subscribe(result => { })
+  }
+
+	openSendDialog(wallet:any, address?: string, payment?: string, amount?: string): void {
+		const dialogRef = this.dialog.open(SendDialog, {
+			width: 'auto',
+			height: 'auto',
+			disableClose: true,
+			data: {
+				wallet: wallet,
+				address: address,
+				payment: payment,
+				amount: amount
+			}
 		})
 		dialogRef.afterClosed().subscribe(result => { })
   }

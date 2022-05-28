@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {Router, ActivatedRoute} from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
 // Services
 import { DataService } from './services/data.service';
@@ -13,7 +14,19 @@ interface Networks {
 @Component({
   selector: 'app-bridge',
   templateUrl: './bridge.component.html',
-  styleUrls: ['./bridge.component.scss']
+  styleUrls: ['./bridge.component.scss'],
+	animations: [
+		trigger('transition', [
+			transition(':enter', [
+				query('#cards', [
+					style({ opacity: 0}),
+					stagger(100, [
+						animate('0.4s', style({ opacity: 1 }))
+					])
+				], {optional: true})
+			])
+		])
+	]
 })
 export class BridgeComponent implements OnInit {
 

@@ -25,6 +25,7 @@ import { SnackbarService } from './services/snackbar.service';
 import { APIService } from './services/api.service';
 import { EthersService } from './services/ethers.service';
 
+
 @NgModule({
   declarations: [
     BridgeComponent,

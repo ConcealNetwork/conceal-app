@@ -14,12 +14,8 @@
 					<div fxLayout="column" fxLayoutAlign="center center">
 						<img class="token" src="./assets/images/branding/eth.png" width="100" height="100">
 						<p class="description">
-							There are currently <strong class="orange">{{ this.getDataService().wccxSwapBalance | number: '1.0-0' }}</strong> $wCCX tokens available to swap
+							There are currently <strong class="orange">{{ this.getDataService().wccxSwapBalance | number: '1.0-0' }}</strong> tokens available to swap
 						</p>
-						<div class="actions" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="25px">
-							<button mat-flat-button color="accent" (click)="addToken($event)">Import Token</button>
-						</div>
-
 					</div>
 
 					<div class="forms" fxLayout="column" fxLayoutGap="25px">
@@ -39,7 +35,7 @@
 									The maximum allowed is {{this.getDataService().maxSwapAmount}}
 								</mat-error>
 								<mat-error *ngIf="form1.controls.amount.hasError('min')">
-									From address is required {{this.getDataService().minSwapAmount}}
+									The minimum allowed is {{this.getDataService().minSwapAmount}}
 								</mat-error>
 							</mat-form-field>
 						</div>

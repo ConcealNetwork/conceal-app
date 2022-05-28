@@ -215,12 +215,10 @@ $app-dark-theme: mat-dark-theme($mat-primary-dark-palette, $mat-accent-palette, 
 }
 
 mat-horizontal-stepper {
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 .mat-horizontal-stepper-header-container {
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
 	padding: 0px;
 }
 
