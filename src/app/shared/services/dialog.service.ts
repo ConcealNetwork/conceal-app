@@ -14,7 +14,7 @@ import { CodeDialog } from 'src/app/modules/wallets/dialogs/code/code.component'
 import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix/matrix.dialog';
 import { PendingDialog } from 'src/app/modules/deposits/dialogs/pending/pending.dialog';
 import { ConfirmationDialog } from 'src/app/modules/deposits/dialogs/confirmation/confirmation.dialog';
-import { ArticleDialog } from 'src/app/modules/home/dialogs/article/article.dialog';
+import { ArticleDialog } from 'src/app/modules/media/dialogs/article/article.dialog';
 
 @Injectable({
 	providedIn: 'root'

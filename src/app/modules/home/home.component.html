@@ -1,56 +1,131 @@
 <app-loader *ngIf="this.isLoading"></app-loader>
 
-<div class="container" fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-md="25px" *ngIf="!this.isLoading">
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start" *ngIf="!this.isLoading">
 
-	<div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
+	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
+		<h1 class="headline">Conceal <strong>App</strong></h1>
+		<p class="description">Brining the conceal ecosystem together in once place.</p>
+	</div>
 
-		<!-- recent posts -->
-		<div fxLayout="column" fxFlex="35" fxFlex.md="50" fxFlex.lt-md="100" fxLayoutAlign="start" [@listAnimation1]="posts.length">
+	<div class="modules" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
 
-			<mat-card class="mat-elevation-z6">
+		<div fxLayout="row" fxLayout.lt-sm="column" fxFlex fxLayoutAlign="space-evenly stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
 
-				<mat-card-header fxLayout="column">
-					<h2 class="title">Recent Posts</h2>
-				</mat-card-header>
-
-				<mat-card-content fxLayout="column" fxLayoutGap="15px">
-					<fieldset class="posts" fxLayout="column" fxFlex *ngFor="let item of posts | orderByImpure: '-pubDate'">
-						<legend fxLayout="row" fxLayoutAlign="space-between center">
-							<mat-icon class="orange" aria-hidden="false">article</mat-icon>
-							{{ this.toDate(item.pubDate) | timeAgo | wrap: 'Posted ': ' on' }} <span class="platform orange">{{item.source}}</span>
-						</legend>
-						<div class="title">
-							{{item.title | shorten: 125: '...'}}
+			<div class="module" fxLayout="column" fxFlex>
+				<mat-card id="cards" class="mat-elevation-z8">
+					<mat-card-header fxLayout="column">
+						<h2 class="title">Conceal News</h2>
+					</mat-card-header>
+					<mat-card-content>
+						<div fxLayout="row" fxLayoutAlign="center center">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">newspaper</mat-icon>
+							<p fxFlex class="text">Get the latest project related news and updates all through a single interface.</p>
 						</div>
-						<img class="image" *ngIf="item.thumbnail" src="{{item.thumbnail}}" />
-						<div fxLayout="row" fxFill>
-							<a fxFlex color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Open {{item.source}}</a>
+					</mat-card-content>
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<button color="accent" mat-flat-button fxFlex routerLink="/media">Launch</button>
 						</div>
-					</fieldset>
-				</mat-card-content>
+					</mat-card-actions>
+				</mat-card>
+			</div>
 
-			</mat-card>
+			<div class="module" fxLayout="column" fxFlex>
+				<mat-card id="cards" class="mat-elevation-z8">
+					<mat-card-header fxLayout="column">
+						<h2 class="title">Conceal Wallets</h2>
+					</mat-card-header>
+					<mat-card-content>
+						<div fxLayout="row" fxLayoutAlign="center center">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">account_balance_wallet</mat-icon>
+							<p fxFlex class="text">Conceal wallets that lets you send and receive money easily.</p>
+						</div>
+					</mat-card-content>
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<button color="accent" mat-flat-button fxFlex routerLink="/wallets">Launch</button>
+						</div>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+
+			<div class="module" fxLayout="column" fxFlex>
+				<mat-card id="cards" class="mat-elevation-z8">
+					<mat-card-header fxLayout="column">
+						<h2 class="title">Conceal Deposits</h2>
+					</mat-card-header>
+					<mat-card-content>
+						<div fxLayout="row" fxLayoutAlign="center center">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">savings</mat-icon>
+							<p fxFlex class="text">Directly deposits your ccx in the conceal app and earn passive income.</p>
+						</div>
+					</mat-card-content>
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<button color="accent" mat-flat-button fxFlex routerLink="/deposits">Launch</button>
+						</div>
+					</mat-card-actions>
+				</mat-card>
+			</div>
 
 		</div>
 
-		<!-- articles -->
-		<div fxLayout="column" fxFlex="65" fxFlex.md="50" fxLayoutAlign="start" fxHide.lt-md>
+		<div fxLayout="row" fxLayout.lt-sm="column" fxFlex fxLayoutAlign="space-evenly stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
 
-			<div fxLayout="row" [@listAnimation2]="posts.length">
-				<mat-card class="mat-elevation-z6">
+			<div class="module" fxLayout="column" fxFlex>
+				<mat-card id="cards" class="mat-elevation-z8">
 					<mat-card-header fxLayout="column">
-						<h2 class="title">Social Feed</h2>
+						<h2 class="title">Conceal ID</h2>
 					</mat-card-header>
 					<mat-card-content>
-						<div *ngFor="let item of posts | orderByImpure: '-pubDate'">
-							<div class="date orange">
-								{{ this.toDate(item.pubDate) | timeAgo | wrap: 'Posted ': ' on' }} {{item.source}} {{item.author | wrap: 'By '}}
-							</div>
-							<p class="description">{{item.description | stripTags | shorten: 1000: '...' }}</p>
-							<p *ngIf="item.description === ''" class="description">{{item.title | stripTags | shorten: 1000: '...' }}</p>
-							<div class="break"></div>
+						<div fxLayout="row" fxLayoutAlign="center center">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">portrait</mat-icon>
+							<p fxFlex class="text">Enabling memorable and recognizable names to be used as addresses.</p>
 						</div>
 					</mat-card-content>
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<button color="accent" mat-flat-button fxFlex routerLink="/id">Launch</button>
+						</div>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+
+			<div class="module" fxLayout="column" fxFlex>
+				<mat-card id="cards" class="mat-elevation-z8">
+					<mat-card-header fxLayout="column">
+						<h2 class="title">Conceal Bridge</h2>
+					</mat-card-header>
+					<mat-card-content>
+						<div fxLayout="row" fxLayoutAlign="center center">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">swap_horiz</mat-icon>
+							<p fxFlex class="text">The swap tool lets you keep your privacy when you're done with DeFi.</p>
+						</div>
+					</mat-card-content>
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<button color="accent" mat-flat-button fxFlex routerLink="/bridge">Launch</button>
+						</div>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+
+			<div class="module" fxLayout="column" fxFlex>
+				<mat-card id="cards" class="mat-elevation-z8">
+					<mat-card-header fxLayout="column">
+						<h2 class="title">Conceal Status</h2>
+					</mat-card-header>
+					<mat-card-content>
+						<div fxLayout="row" fxLayoutAlign="center center">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">dns</mat-icon>
+							<p fxFlex class="text">View the current status of all the conceal services on single page.</p>
+						</div>
+					</mat-card-content>
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<a color="accent" mat-flat-button fxFlex href="https://status.conceal.network" target="_blank">Launch</a>
+						</div>
+					</mat-card-actions>
 				</mat-card>
 			</div>
 
