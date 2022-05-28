@@ -108,6 +108,8 @@ export class EthersService {
 		let accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 		if (accounts) {
 			this.dataService.account = accounts[0];
+			// this.checkChainId();
+			// this.dataService.isWalletConnected = true;
 			this.snackbarService.openSnackBar('Wallet Connected!', 'Dismiss');
 		} else {
 			this.snackbarService.openSnackBar('Could not detect your address', 'Dismiss');
@@ -121,6 +123,7 @@ export class EthersService {
 		if (typeof window.ethereum !== 'undefined') {
 			let chainId = window.ethereum.request({ method: 'eth_chainId' });
 			this.dataService.setChainId(chainId); // Store the chainId
+			this.dataService.isWalletNetworkConnected = true; // Set the network connection status
 		} else {
 			// if not found open dialog
 			this.dialogService.openMetaMaskDialog();

@@ -57,4 +57,8 @@ export class DataService {
 	txHash1: string = '';
 	txHash2: string = '';
 
+	// wallet data
+	isWalletConnected: boolean = false;
+	isWalletNetworkConnected: boolean = false;
+
 }
