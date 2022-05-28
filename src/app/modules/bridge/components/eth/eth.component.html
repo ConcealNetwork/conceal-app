@@ -16,6 +16,9 @@
 						<p class="description">
 							There are currently <strong class="orange">{{ this.getDataService().wccxSwapBalance | number: '1.0-0' }}</strong> tokens available to swap
 						</p>
+						<div class="actions" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="25px">
+							<button mat-flat-button color="accent" (click)="addToken($event)">Import Token</button>
+						</div>
 					</div>
 
 					<div class="forms" fxLayout="column" fxLayoutGap="25px">

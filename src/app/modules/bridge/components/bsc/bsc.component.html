@@ -14,7 +14,7 @@
 					<div fxLayout="column" fxLayoutAlign="center center">
 						<img class="token" src="./assets/images/branding/bsc.png" width="100" height="100">
 						<p class="description">
-							There are currently <strong class="orange">{{ this.getDataService().wccxSwapBalance | number: '1.0-0' }}</strong> $wCCX tokens available.
+							There are currently <strong class="orange">{{ this.getDataService().wccxSwapBalance | number: '1.0-0' }}</strong> tokens available to swap
 						</p>
 						<div class="actions" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="25px">
 							<button mat-flat-button color="accent" (click)="addCustomChains()">Import Network</button>
@@ -39,7 +39,7 @@
 									The maximum allowed is {{this.getDataService().maxSwapAmount}}
 								</mat-error>
 								<mat-error *ngIf="form1.controls.amount.hasError('min')">
-									From address is required {{this.getDataService().minSwapAmount}}
+									The minimum allowed is {{this.getDataService().minSwapAmount}}
 								</mat-error>
 							</mat-form-field>
 						</div>
@@ -134,7 +134,6 @@
 							<input matInput #ccxAddress type="text" [value]="this.getDataService().ccxAccountAddress">
 						</mat-form-field>
 						<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().ccxAccountAddress" (click)="getSnackbarService().openSnackBar('Address Copied!', 'Dismiss')">Copy Address</button>
-						<div #qrcode1 class="code"></div>
 						<qrcode class="code" [qrdata]="this.dataService.ccxAccountAddress" [width]="275" [margin]="2" [elementType]="'canvas'" [colorDark]="'#333'" [errorCorrectionLevel]="'H'" [allowEmptyString]="true"></qrcode>
 					</div>
 
@@ -144,7 +143,6 @@
 							<input matInput #ccxPaymentId type="text" [value]="this.getDataService().paymentId">
 						</mat-form-field>
 						<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().paymentId" (click)="getSnackbarService().openSnackBar('Payment ID Copied!', 'Dismiss')">Copy Payment ID</button>
-						<div #qrcode2 class="code"></div>
 						<qrcode class="code" [qrdata]="this.paymentId" [width]="275" [margin]="2" [elementType]="'canvas'" [colorDark]="'#333'" [errorCorrectionLevel]="'H'" [allowEmptyString]="true"></qrcode>
 					</div>
 
