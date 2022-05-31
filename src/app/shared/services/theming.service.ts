@@ -13,8 +13,10 @@ export class ThemingService {
 	dialogWidth: string = '600px';
 	exportDialogWidth: string = '450px';
 	qrcodeDialogWidth: string = 'auto';
+	articleDialogWidth: string = 'auto';
 	dialogMaxWidth: string = '600px';
 	dialogHeight: string = 'auto';
+	articleDialogHeight: string = 'auto';
 	walletGridColumns: number = 0;
 	articleGridColumns: number = 0;
 	depositGridColumns: number = 0;
@@ -75,6 +77,7 @@ export class ThemingService {
 					this.dialogMaxWidth = '95vw';
 					this.exportDialogWidth = '95vw';
 					this.dialogHeight = 'auto';
+					this.articleDialogWidth = '95vw';
 					this.articleGridColumns = 1;
 					this.walletGridColumns = 1;
 					this.depositGridColumns = 1;
@@ -87,6 +90,7 @@ export class ThemingService {
 					this.dialogMaxWidth = '600px';
 					this.exportDialogWidth = '450px';
 					this.dialogHeight = 'auto';
+					this.articleDialogWidth = '80vw';
 					this.articleGridColumns = 1;
 					this.walletGridColumns = 3;
 					this.depositGridColumns = 1;
@@ -99,6 +103,7 @@ export class ThemingService {
 					this.exportDialogWidth = '450px';
 					this.dialogMaxWidth = '600px';
 					this.dialogHeight = 'auto';
+					this.articleDialogWidth = '70vw';
 					this.articleGridColumns = 1;
 					this.walletGridColumns = 3;
 					this.depositGridColumns = 2;
@@ -110,6 +115,7 @@ export class ThemingService {
 					this.qrcodeDialogWidth = '350px';
 					this.exportDialogWidth = '450px';
 					this.dialogMaxWidth = '600px';
+					this.articleDialogWidth = '60vw';
 					this.dialogHeight = 'auto';
 					this.articleGridColumns = 1;
 					this.walletGridColumns = 3;

@@ -1,59 +1,34 @@
 <app-loader *ngIf="this.isLoading"></app-loader>
 
-<div class="container" fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-md="25px" *ngIf="!this.isLoading">
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start" *ngIf="!this.isLoading">
 
-	<div fxLayout="row" fxLayoutGap="15px" fxLayoutGap.gt-md="25px">
+	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
+		<h1 class="headline">Project <strong>Updates</strong></h1>
+		<p class="description">Get the latest project updates and news.</p>
+	</div>
 
-		<!-- recent posts -->
-		<div fxLayout="column" fxFlex="35" fxFlex.md="50" fxFlex.lt-md="100" fxLayoutAlign="start" [@listAnimation1]="posts.length">
+	<div class="articles" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" [@listAnimation1]="posts.length">
 
-			<mat-card class="mat-elevation-z6">
+		<mat-card class="mat-elevation-z6" *ngFor="let item of posts.slice(0, this.limit) | orderByImpure: '-pubDate'">
 
-				<mat-card-header fxLayout="column">
-					<h2 class="title">Recent Posts</h2>
-				</mat-card-header>
+			<mat-card-header fxLayout="column">
+				<h2 class="title">{{item.title | shorten: 125: '...'}}</h2>
+			</mat-card-header>
 
-				<mat-card-content fxLayout="column" fxLayoutGap="15px">
-					<fieldset class="posts" fxLayout="column" fxFlex *ngFor="let item of posts | orderByImpure: '-pubDate'">
-						<legend fxLayout="row" fxLayoutAlign="space-between center">
-							<mat-icon class="orange" aria-hidden="false">article</mat-icon>
-							{{ this.toDate(item.pubDate) | timeAgo | wrap: 'Posted ': ' on' }} <span class="platform orange">{{item.source}}</span>
-						</legend>
-						<div class="title">
-							{{item.title | shorten: 125: '...'}}
-						</div>
-						<img class="image" *ngIf="item.thumbnail" src="{{item.thumbnail}}" />
-						<div fxLayout="row" fxFill>
-							<a fxFlex color="accent" mat-stroked-button type="button" [href]="item.link" target="_blank">Open {{item.source}}</a>
-						</div>
-					</fieldset>
-				</mat-card-content>
+			<mat-card-content fxLayout="column" fxLayoutGap="15px">
+				<div fxLayout="row" fxLayoutGap="25px">
+					<img *ngIf="item.thumbnail.includes('https://cdn-images')" class="image" fxHide fxShow.gt-xs src="{{item.thumbnail}}">
+					<p>
+						{{item.description | stripTags | shorten: 400: '...' }}
+					</p>
+				</div>
+				<a mat-flat-button color="accent" (click)="this.openArticle(item)">Open this article</a>
+			</mat-card-content>
 
-			</mat-card>
+		</mat-card>
 
-		</div>
-
-		<!-- articles -->
-		<div fxLayout="column" fxFlex="65" fxFlex.md="50" fxLayoutAlign="start" fxHide.lt-md>
-
-			<div fxLayout="row" [@listAnimation2]="posts.length">
-				<mat-card class="mat-elevation-z6">
-					<mat-card-header fxLayout="column">
-						<h2 class="title">Social Feed</h2>
-					</mat-card-header>
-					<mat-card-content>
-						<div *ngFor="let item of posts | orderByImpure: '-pubDate'">
-							<div class="date orange">
-								{{ this.toDate(item.pubDate) | timeAgo | wrap: 'Posted ': ' on' }} {{item.source}} {{item.author | wrap: 'By '}}
-							</div>
-							<p class="description">{{item.description | stripTags | shorten: 1000: '...' }}</p>
-							<p *ngIf="item.description === ''" class="description">{{item.title | stripTags | shorten: 1000: '...' }}</p>
-							<div class="break"></div>
-						</div>
-					</mat-card-content>
-				</mat-card>
-			</div>
-
+		<div *ngIf="this.limit !== 10" fxLayout="column" fxLayoutAlign="center center">
+			<button mat-stroked-button color="accent" (click)="setLimit(10)">Show more articles...</button>
 		</div>
 
 	</div>

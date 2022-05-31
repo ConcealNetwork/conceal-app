@@ -1,12 +1,12 @@
 <div fxLayout="column" fxLayoutGap="25px">
-	<div fxLayout="row" class="title">{{data.article.title | shorten: 25: '...'}}</div>
+	<div fxLayout="row" class="title orange">{{data.article.title}}</div>
 
 	<div fxLayout="row" mat-dialog-content class="content">
-		<span>{{data.article.description | stripTags | shorten: 800: '...'}}</span>
+		<span>{{data.article.description | stripTags}}</span>
 	</div>
 
 	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
-		<button mat-stroked-button color="warn" type="button" (click)="close()" fxFlex>Close Article</button>
-		<a [href]="data.article.link" target="_blank" color="accent" mat-stroked-button fxFlex>Full Article</a>
+		<button mat-stroked-button color="warn" type="button" (click)="close()" fxFlex>Close</button>
+		<a [href]="data.article.link" target="_blank" color="accent" mat-flat-button fxFlex>Open in Medium</a>
 	</div>
 </div>
