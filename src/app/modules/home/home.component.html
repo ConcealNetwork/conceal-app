@@ -7,28 +7,9 @@
 		<p class="description">Brining the conceal ecosystem together in once place.</p>
 	</div>
 
-	<div class="modules" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
+	<div class="modules" fxLayout="column" fxLayout.sm="row" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
 
-		<div fxLayout="row" fxLayout.lt-sm="column" fxFlex fxLayoutAlign="space-evenly stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
-
-			<div class="module" fxLayout="column" fxFlex>
-				<mat-card id="cards" class="mat-elevation-z8">
-					<mat-card-header fxLayout="column">
-						<h2 class="title">Conceal News</h2>
-					</mat-card-header>
-					<mat-card-content>
-						<div fxLayout="row" fxLayoutAlign="center center">
-							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">newspaper</mat-icon>
-							<p fxFlex class="text">Get the latest project related news and updates all through a single interface.</p>
-						</div>
-					</mat-card-content>
-					<mat-card-actions>
-						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-							<button color="accent" mat-flat-button fxFlex routerLink="/media">Launch</button>
-						</div>
-					</mat-card-actions>
-				</mat-card>
-			</div>
+		<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="space-evenly stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
 
 			<div class="module" fxLayout="column" fxFlex>
 				<mat-card id="cards" class="mat-elevation-z8">
@@ -68,10 +49,6 @@
 				</mat-card>
 			</div>
 
-		</div>
-
-		<div fxLayout="row" fxLayout.lt-sm="column" fxFlex fxLayoutAlign="space-evenly stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
-
 			<div class="module" fxLayout="column" fxFlex>
 				<mat-card id="cards" class="mat-elevation-z8">
 					<mat-card-header fxLayout="column">
@@ -91,6 +68,10 @@
 				</mat-card>
 			</div>
 
+		</div>
+
+		<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="space-evenly stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
+
 			<div class="module" fxLayout="column" fxFlex>
 				<mat-card id="cards" class="mat-elevation-z8">
 					<mat-card-header fxLayout="column">
@@ -98,7 +79,7 @@
 					</mat-card-header>
 					<mat-card-content>
 						<div fxLayout="row" fxLayoutAlign="center center">
-							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">swap_horiz</mat-icon>
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">swap_horizontal_circle</mat-icon>
 							<p fxFlex class="text">The swap tool lets you keep your privacy when you're done with DeFi.</p>
 						</div>
 					</mat-card-content>
@@ -113,11 +94,30 @@
 			<div class="module" fxLayout="column" fxFlex>
 				<mat-card id="cards" class="mat-elevation-z8">
 					<mat-card-header fxLayout="column">
-						<h2 class="title">Conceal Status</h2>
+						<h2 class="title">Project Updates</h2>
 					</mat-card-header>
 					<mat-card-content>
 						<div fxLayout="row" fxLayoutAlign="center center">
-							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">dns</mat-icon>
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">tips_and_updates</mat-icon>
+							<p fxFlex class="text">Get the latest project related news and updates all through a single interface.</p>
+						</div>
+					</mat-card-content>
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<button color="accent" mat-flat-button fxFlex routerLink="/media">Launch</button>
+						</div>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+
+			<div class="module" fxLayout="column" fxFlex>
+				<mat-card id="cards" class="mat-elevation-z8">
+					<mat-card-header fxLayout="column">
+						<h2 class="title">Service Status</h2>
+					</mat-card-header>
+					<mat-card-content>
+						<div fxLayout="row" fxLayoutAlign="center center">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">monitor_heart</mat-icon>
 							<p fxFlex class="text">View the current status of all the conceal services on single page.</p>
 						</div>
 					</mat-card-content>
