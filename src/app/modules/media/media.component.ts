@@ -42,7 +42,7 @@ export class MediaComponent implements OnInit {
 
 	// Variables
 	isLoading: boolean = true;
-	limit: number = 1;
+	limit: number = 2;
 	posts: any = [];
 
   constructor(
