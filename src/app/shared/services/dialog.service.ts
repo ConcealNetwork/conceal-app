@@ -121,10 +121,10 @@ export class DialogService {
 
 	openArticleDialog(article:any): void {
 		const dialogRef = this.dialog.open(ArticleDialog, {
-			width: this.themingService.dialogWidth,
-			maxWidth: this.themingService.dialogMaxWidth,
-			height: this.themingService.dialogHeight,
-			maxHeight: this.themingService.dialogHeight,
+			width: this.themingService.articleDialogWidth,
+			maxWidth: this.themingService.articleDialogWidth,
+			height: this.themingService.articleDialogHeight,
+			maxHeight: this.themingService.articleDialogHeight,
 			disableClose: false,
 			data: {article: article}
 		})
