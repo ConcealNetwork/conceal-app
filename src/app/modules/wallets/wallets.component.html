@@ -4,27 +4,84 @@
 
 	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
 		<h1 class="headline">Conceal <strong>Wallets</strong></h1>
-		<p class="description">Brining the conceal ecosystem together in once place.</p>
+		<p class="description">Providing multiple wallet options for every situation</p>
 	</div>
 
-	<div class="modules" fxLayout="column" fxLayout.sm="row" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
+	<div class="modules" fxLayout="column" fxLayout.lt-md="row" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
 
 		<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="space-evenly stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
 
-			<div class="module" fxLayout="column" fxFlex>
+			<div class="module" fxLayout="column">
 				<mat-card id="cards" class="mat-elevation-z8">
 					<mat-card-header fxLayout="column">
 						<h2 class="title">Cloud Wallet</h2>
 					</mat-card-header>
 					<mat-card-content>
-						<div fxLayout="row" fxLayoutAlign="center center">
-							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">cloud</mat-icon>
+						<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">cloud_circle</mat-icon>
 							<p fxFlex class="text">Conceal Cloud Wallet.</p>
 						</div>
 					</mat-card-content>
 					<mat-card-actions>
 						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
 							<button color="accent" mat-flat-button fxFlex routerLink="/wallets/cloud">Launch</button>
+						</div>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+
+			<div class="module" fxLayout="column">
+				<mat-card id="cards" class="mat-elevation-z8">
+					<mat-card-header fxLayout="column">
+						<h2 class="title">Web Wallet</h2>
+					</mat-card-header>
+					<mat-card-content>
+						<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">public</mat-icon>
+							<p fxFlex class="text">Conceal Web Wallet.</p>
+						</div>
+					</mat-card-content>
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<a color="accent" mat-flat-button fxFlex href="https://wallet.conceal.network" target="_blank">Open</a>
+						</div>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+
+			<div class="module" fxLayout="column">
+				<mat-card id="cards" class="mat-elevation-z8">
+					<mat-card-header fxLayout="column">
+						<h2 class="title">Desktop Wallet</h2>
+					</mat-card-header>
+					<mat-card-content>
+						<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">computer</mat-icon>
+							<p fxFlex class="text">Conceal Desktop Wallet.</p>
+						</div>
+					</mat-card-content>
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<a color="accent" mat-flat-button fxFlex href="https://github.com/ConcealNetwork/conceal-desktop/releases" target="_blank">Download</a>
+						</div>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+
+			<div class="module" fxLayout="column">
+				<mat-card id="cards" class="mat-elevation-z8">
+					<mat-card-header fxLayout="column">
+						<h2 class="title">Paper Wallet</h2>
+					</mat-card-header>
+					<mat-card-content>
+						<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">article</mat-icon>
+							<p fxFlex class="text">Conceal Paper Wallet.</p>
+						</div>
+					</mat-card-content>
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<a color="accent" mat-flat-button fxFlex href="https://conceal.network/paperwallet" target="_blank">Open</a>
 						</div>
 					</mat-card-actions>
 				</mat-card>
