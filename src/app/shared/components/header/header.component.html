@@ -20,12 +20,6 @@
 	<span class="fill-space"></span>
 
 	<div class="options" fxLayoutGap="15px">
-		<button *ngIf="isLoggedIn" mat-icon-button aria-label="logout" matTooltip="Logout" (click)="logout()">
-			<mat-icon aria-hidden="false">logout</mat-icon>
-		</button>
-		<button *ngIf="!isLoggedIn" mat-icon-button aria-label="login" matTooltip="Login" (click)="login()">
-			<mat-icon aria-hidden="false">login</mat-icon>
-		</button>
 		<button *ngIf="activeTheme == 'light-theme'" mat-icon-button mdTooltip="Change theme" matTooltip="Dark Mode" (click)="changeTheme('dark-theme')">
 			<mat-icon aria-hidden="false">dark_mode</mat-icon>
 		</button>
@@ -40,6 +34,12 @@
 		</a>
 		<button mat-icon-button aria-label="settings" matTooltip="Settings" routerLink="/settings" routerLinkActive="active">
 			<mat-icon aria-hidden="false">settings</mat-icon>
+		</button>
+		<button *ngIf="isLoggedIn" mat-icon-button aria-label="logout" matTooltip="Logout" (click)="logout()">
+			<mat-icon class="orange" aria-hidden="false">logout</mat-icon>
+		</button>
+		<button *ngIf="!isLoggedIn" mat-icon-button aria-label="login" matTooltip="Login" (click)="login()">
+			<mat-icon class="orange" aria-hidden="false">login</mat-icon>
 		</button>
 	</div>
 

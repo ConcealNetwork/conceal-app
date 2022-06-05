@@ -1,0 +1,185 @@
+<app-loader *ngIf="this.isDataLoading"></app-loader>
+
+<div class="container" fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-md="25px" *ngIf="!this.isDataLoading" @transition>
+
+	<!-- Wallets -->
+	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
+		<div [ngClass]="{'emulated-flex-gap' : this.isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid">
+
+			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'" fxFlex="100%">
+				<mat-card id="cards" class="mat-elevation-z6">
+
+					<mat-card-header fxLayout="column">
+						<h2 class="title">My Portfolio</h2>
+					</mat-card-header>
+
+					<mat-card-content fxLayout="column">
+						<div class="portfolio" fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="7px">
+							<div fxLayout="row" fxFlex="25">
+								<span>{{getHelperService().formatAmount(this.portfolioFiat, 2, 2) || 0}} {{this.currency | uppercase}}</span>
+							</div>
+							<div fxLayout="row" fxFlex="25">
+								<span>{{getHelperService().formatAmount(this.portfolioBTC, 8, 8) || 0}} BTC</span>
+							</div>
+							<div fxLayout="row" fxFlex="25">
+								<span>{{getHelperService().formatAmount(this.portfolioCCX, 1, 6) || 0}} CCX</span>
+							</div>
+						</div>
+					</mat-card-content>
+
+					<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+						<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<button fxFlex fxFlex="noshrink" color="accent" mat-stroked-button routerLink="/deposits" >My Deposits</button>
+							<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button (click)="this.createWallet()" [disabled]="isLoading" *ngIf="this.activeWallets < this.walletLimit">Create Wallet</button>
+						</div>
+					</mat-card-actions>
+
+				</mat-card>
+			</div>
+
+			<div [fxFlex]="(100/this.getThemingService().walletGridColumns) + '%'" fxFlex="100%" *ngFor="let item of this.wallets">
+				<mat-card id="cards" class="mat-elevation-z6">
+
+					<mat-card-header fxLayout="column">
+						<div fxLayout="row" fxLayoutAlign="space-between center">
+							<h2 class="title">{{ this.getHelperService().formatAddress(item.address) }}</h2>
+							<button color="accent" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options">
+								<mat-icon>more_vert</mat-icon>
+							</button>
+							<mat-menu #menu="matMenu">
+								<button mat-menu-item (click)="copy(item.address, 'Address copied to clipboard')">
+									<mat-icon color="accent">content_copy</mat-icon>
+									<span>Copy Address</span>
+								</button>
+								<button mat-menu-item (click)="this.getDialogService().openQrcodeDialog(item.address)">
+									<mat-icon color="accent">qr_code</mat-icon>
+									<span>Show QR Code</span>
+								</button>
+								<button mat-menu-item (click)="this.getDialogService().openExportDialog(item.address)">
+									<mat-icon color="accent">vpn_key</mat-icon>
+									<span>Export Keys</span>
+								</button>
+								<button mat-menu-item (click)="this.deleteWallet(item.address,item.total)" [disabled]="isLoading">
+									<mat-icon color="warn">delete</mat-icon>
+									<span>Delete Wallet</span>
+								</button>
+							</mat-menu>
+						</div>
+					</mat-card-header>
+
+					<mat-card-content fxLayout="column">
+						<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
+							<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+								<span>Available</span>
+								<span class="amount">{{ this.getHelperService().formatAmount(item.total, 6, 6) }} CCX</span>
+							</div>
+							<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+								<span>Pending</span>
+								<span class="amount">{{ this.getHelperService().formatAmount(item.locked, 6, 6) }} CCX</span>
+							</div>
+							<div fxLayout="row" fxFlex="25" fxLayoutAlign="space-between stretch">
+								<span>Withdrawable</span>
+								<span class="amount">{{ this.getHelperService().formatAmount(item.balance, 6, 6) }} CCX</span>
+							</div>
+						</div>
+					</mat-card-content>
+
+					<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+						<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button (click)="this.getDialogService().openSendDialog(item)">Transfer</button>
+							<button fxFlex fxFlex="noshrink" color="accent" mat-stroked-button routerLink="/deposits">Deposits</button>
+						</div>
+					</mat-card-actions>
+
+				</mat-card>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Transactions -->
+	<div class="search" fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
+		<mat-card id="cards" class="mat-elevation-z6">
+
+			<mat-card-header fxLayout="column">
+				<div fxLayout="row" class="controls" fxLayoutAlign="center center">
+					<mat-form-field color="accent" fxFlex="auto" class="filter" appearance="standard">
+						<mat-label class="searchbox">Search Transactions</mat-label>
+						<input matInput (keyup)="applyFilter($event)">
+						<mat-icon color="accent" matSuffix>search</mat-icon>
+					</mat-form-field>
+				</div>
+			</mat-card-header>
+
+			<mat-card-content fxLayout="column">
+				<mat-progress-bar color="accent" mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+				<table [hidden]="isLoadingResults" class="transactions" mat-table [dataSource]="dataSource" matSort matSortDisableClear matSortActive="timestamp" matSortDirection="desc">
+
+					<!-- timestamp column -->
+					<ng-container matColumnDef="timestamp">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
+						<td mat-cell *matCellDef="let row">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<mat-icon class="icon" *ngIf="!isSmallScreen" aria-hidden="true">event</mat-icon>
+								{{getHelperService().formatDatetime(row.timestamp)}}
+							</div>
+						</td>
+					</ng-container>
+
+					<!-- status column {'success': (row.status === 'processed'), 'warn': (row.status !== 'processed')} -->
+					<ng-container matColumnDef="status">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+						<td mat-cell *matCellDef="let row">
+							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
+								<mat-icon class="icon" *ngIf="row.status === 'processed'" color="accent" aria-hidden="true">gpp_good</mat-icon>
+								<mat-icon class="icon" *ngIf="row.status !== 'processed'" color="warn" aria-hidden="true">report</mat-icon>
+								{{row.status}}
+							</div>
+						</td>
+					</ng-container>
+
+					<!-- type column -->
+					<ng-container matColumnDef="type">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Direction</th>
+						<td mat-cell *matCellDef="let row">
+							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
+								<mat-icon class="icon" *ngIf="row.type === 'sent'" color="warn" aria-hidden="true">call_made</mat-icon>
+								<mat-icon class="icon" *ngIf="row.type === 'received'" color="accent" aria-hidden="true">call_received</mat-icon>
+								{{row.type}}
+							</div>
+						</td>
+					</ng-container>
+
+					<!-- address column -->
+					<ng-container matColumnDef="address">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+						<td mat-cell *matCellDef="let row" class="uppercase">{{ this.getHelperService().formatAddress(row.address) }}</td>
+					</ng-container>
+
+					<!-- amount column -->
+					<ng-container matColumnDef="amount">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+						<td mat-cell *matCellDef="let row">{{getHelperService().formatAmount(row.amount, 1, 6)}} CCX</td>
+					</ng-container>
+
+					<!-- fee column -->
+					<ng-container matColumnDef="fee">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Fee</th>
+						<td mat-cell *matCellDef="let row">{{getHelperService().formatAmount(row.fee, 1, 6)}} CCX</td>
+					</ng-container>
+
+					<tr mat-header-row class="header" *matHeaderRowDef="displayedColumns;"></tr>
+					<tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;" (click)="openExplorer(row.hash)"></tr>
+
+				</table>
+
+			</mat-card-content>
+
+			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+				<mat-paginator color="accent" class="mat-paginator" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+			</mat-card-actions>
+
+		</mat-card>
+	</div>
+
+</div>

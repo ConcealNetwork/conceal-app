@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { HelpDialog } from "../dialogs/help.component";
 import { MetaMaskDialog } from "../dialogs/metamask.component";
 import { TransactionDialog } from "../dialogs/transaction.component";
-import { SendDialog } from 'src/app/modules/wallets/dialogs/send/send.component';
+import { SendDialog } from 'src/app/modules/wallets/cloud/dialogs/send/send.component';
 
 @Injectable({
 	providedIn: 'root'

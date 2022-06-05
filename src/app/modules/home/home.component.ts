@@ -22,6 +22,7 @@ import { ThemingService } from 'src/app/shared/services/theming.service';
 		])
 	]
 })
+
 export class HomeComponent implements OnInit {
 
 	// Variables

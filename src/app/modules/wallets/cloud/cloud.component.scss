@@ -1,0 +1,47 @@
+.search {
+	.mat-card {
+		.mat-card-header {
+			padding-top: 5px;
+			padding-bottom: 10px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		.mat-card-content {
+			padding: 0;
+			margin: 0;
+		}
+		.mat-card-actions {
+			padding: 0;
+			margin: 0;
+		}
+	}
+}
+
+.portfolio {
+	font-size: 1rem;
+}
+
+table {
+	width: 100%;
+	th {
+		width: 100px;
+	}
+}
+
+.controls {
+	.filter {
+		font-size: 1.2rem;
+	}
+}
+
+@media only screen and (max-width: 960px) {
+	.mat-header-cell {
+		font-size: 0.8rem !important;
+	}
+	.mat-cell {
+		font-size: 0.8rem !important;
+	}
+	.icon {
+		font-size: 1.2rem !important;
+	}
+}
