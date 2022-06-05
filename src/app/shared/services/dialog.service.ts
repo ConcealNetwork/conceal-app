@@ -7,10 +7,10 @@ import { ThemingService } from './theming.service';
 
 // Dialog Components
 import { TwoFactorDialog } from 'src/app/shared/dialogs/twofactor/twofactor.component';
-import { SendDialog } from 'src/app/modules/wallets/dialogs/send/send.component';
-import { ReceiveDialog } from 'src/app/modules/wallets/dialogs/receive/receive.component';
-import { ExportDialog } from 'src/app/modules/wallets/dialogs/export/export.component';
-import { CodeDialog } from 'src/app/modules/wallets/dialogs/code/code.component';
+import { SendDialog } from 'src/app/modules/wallets/cloud/dialogs/send/send.component';
+import { ReceiveDialog } from 'src/app/modules/wallets/cloud/dialogs/receive/receive.component';
+import { ExportDialog } from 'src/app/modules/wallets/cloud/dialogs/export/export.component';
+import { CodeDialog } from 'src/app/modules/wallets/cloud/dialogs/code/code.component';
 import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix/matrix.dialog';
 import { PendingDialog } from 'src/app/modules/deposits/dialogs/pending/pending.dialog';
 import { ConfirmationDialog } from 'src/app/modules/deposits/dialogs/confirmation/confirmation.dialog';
