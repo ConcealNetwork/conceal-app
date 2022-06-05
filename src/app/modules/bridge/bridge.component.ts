@@ -37,6 +37,7 @@ export class BridgeComponent implements OnInit {
     {value: 'eth', viewValue: 'Ethereum (wCCX)'},
     {value: 'bsc', viewValue: 'Binance (wCCX)'},
     {value: 'plg', viewValue: 'Polygon (wCCX)'},
+    {value: 'avax', viewValue: 'Avalanche (wCCX)'},
   ];
 
 	toNetwork: Networks[] = [
@@ -44,6 +45,7 @@ export class BridgeComponent implements OnInit {
     {value: 'eth', viewValue: 'Ethereum (wCCX)'},
 		{value: 'bsc', viewValue: 'Binance (wCCX)'},
 		{value: 'plg', viewValue: 'Polygon (wCCX)'},
+		{value: 'avax', viewValue: 'Avalanche (wCCX)'},
   ];
 
 	fromControl = new FormControl(this.fromNetwork[0].value);
@@ -69,6 +71,8 @@ export class BridgeComponent implements OnInit {
 				this.form.controls.from.patchValue('ccx');
 			} else if (value === 'plg') {
 				this.form.controls.from.patchValue('ccx');
+			} else if (value === 'avax') {
+				this.form.controls.from.patchValue('ccx');
 			} else {
 				return false;
 			}
@@ -79,6 +83,8 @@ export class BridgeComponent implements OnInit {
 			} else if (value === 'eth') {
 				this.form.controls.to.patchValue('ccx');
 			} else if (value === 'plg') {
+				this.form.controls.to.patchValue('ccx');
+			} else if (value === 'avax') {
 				this.form.controls.to.patchValue('ccx');
 			} else {
 				return false;
@@ -100,6 +106,10 @@ export class BridgeComponent implements OnInit {
 			this.dataService.apiPath = 'plg';
 			this.router.navigate(['plg'], { relativeTo: this.route, skipLocationChange: true });
 		}
+		if (from === 'ccx' && to === 'avax') {
+			this.dataService.apiPath = 'avax';
+			this.router.navigate(['avax'], { relativeTo: this.route, skipLocationChange: true });
+		}
 		if (from === 'eth' && to === 'ccx') {
 			this.dataService.apiPath = 'eth';
 			this.router.navigate(['ccx'], { relativeTo: this.route, skipLocationChange: true });
@@ -110,6 +120,10 @@ export class BridgeComponent implements OnInit {
 		}
 		if (from === 'plg' && to === 'ccx') {
 			this.dataService.apiPath = 'plg';
+			this.router.navigate(['ccx'], { relativeTo: this.route, skipLocationChange: true });
+		}
+		if (from === 'avax' && to === 'ccx') {
+			this.dataService.apiPath = 'avax';
 			this.router.navigate(['ccx'], { relativeTo: this.route, skipLocationChange: true });
 		}
 	}

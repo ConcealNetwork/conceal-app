@@ -11,6 +11,7 @@ import { CcxSwapComponent } from './components/ccx/ccx.component';
 import { EthSwapComponent } from './components/eth/eth.component';
 import { BscSwapComponent } from './components/bsc/bsc.component';
 import { PlgSwapComponent } from './components/plg/plg.component';
+import { AvaxSwapComponent } from './components/avax/avax.component';
 
 // Shared
 import { NumericDirective } from "./directive/numeric.directive";
@@ -33,6 +34,7 @@ import { EthersService } from './services/ethers.service';
 		EthSwapComponent,
 		BscSwapComponent,
 		PlgSwapComponent,
+		AvaxSwapComponent,
 		HelpDialog,
 		MetaMaskDialog,
 		TransactionDialog,
