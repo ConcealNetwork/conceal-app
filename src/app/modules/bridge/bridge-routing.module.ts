@@ -11,6 +11,7 @@ import { CcxSwapComponent } from './components/ccx/ccx.component';
 import { EthSwapComponent } from './components/eth/eth.component';
 import { BscSwapComponent } from './components/bsc/bsc.component';
 import { PlgSwapComponent } from './components/plg/plg.component';
+import { AvaxSwapComponent } from './components/avax/avax.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
 	},
 	{
 		path: 'plg', component: PlgSwapComponent,
+		resolve: { config: APIService }
+	},
+	{
+		path: 'avax', component: AvaxSwapComponent,
 		resolve: { config: APIService }
 	},
 	{ path: '**', redirectTo: '', pathMatch: 'full' }
