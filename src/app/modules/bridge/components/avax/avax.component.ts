@@ -93,7 +93,7 @@ export class AvaxSwapComponent implements OnInit, OnDestroy {
 
 	addCustomChains() {
 		let chainId = this.hex(0xA86A);
-		let chainName = 'Avalanche C-Chain Main Network';
+		let chainName = 'Avalanche C-Chain';
 		let name ='Avalanche Network';
 		let symbol = 'AVAX';
 		let decimals = 18;
