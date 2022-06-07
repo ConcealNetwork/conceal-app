@@ -1,91 +1,124 @@
 <app-loader *ngIf="this.isLoading"></app-loader>
 
-<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start" *ngIf="!this.isLoading">
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="!this.isLoading">
 
 	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
 		<h1 class="headline">Conceal <strong>Wallets</strong></h1>
 		<p class="description">Providing multiple wallet options for every situation</p>
 	</div>
 
-	<div class="modules" fxLayout="column" fxLayout.lt-md="row" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
+	<div class="modules" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
 
-		<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="space-evenly stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
+		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
 
-			<div class="module" fxLayout="column">
-				<mat-card id="cards" class="mat-elevation-z8">
-					<mat-card-header fxLayout="column">
-						<h2 class="title">Cloud Wallet</h2>
-					</mat-card-header>
-					<mat-card-content>
-						<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">cloud_circle</mat-icon>
-							<p fxFlex class="text">Conceal Cloud Wallet.</p>
-						</div>
-					</mat-card-content>
-					<mat-card-actions>
-						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-							<button color="accent" mat-flat-button fxFlex routerLink="/wallets/cloud">Launch</button>
-						</div>
-					</mat-card-actions>
-				</mat-card>
-			</div>
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Cloud</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<div fxLayout="row">
+						<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">cloud_circle</mat-icon>
+						<p fxFlex class="text">Our <strong>Cloud Wallet</strong> is a centralized solution focusing on ease of use and convenience. Funds are instantly available with no node syncing required.</p>
+					</div>
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<button color="accent" mat-flat-button fxFlex routerLink="/wallets/cloud">Launch</button>
+					</div>
+				</mat-card-actions>
+			</mat-card>
 
-			<div class="module" fxLayout="column">
-				<mat-card id="cards" class="mat-elevation-z8">
-					<mat-card-header fxLayout="column">
-						<h2 class="title">Web Wallet</h2>
-					</mat-card-header>
-					<mat-card-content>
-						<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">public</mat-icon>
-							<p fxFlex class="text">Conceal Web Wallet.</p>
-						</div>
-					</mat-card-content>
-					<mat-card-actions>
-						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-							<a color="accent" mat-flat-button fxFlex href="https://wallet.conceal.network" target="_blank">Open</a>
-						</div>
-					</mat-card-actions>
-				</mat-card>
-			</div>
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Web</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<div fxLayout="row">
+						<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">public</mat-icon>
+						<p fxFlex class="text">Our <strong>Web Wallet</strong> is a completely decentralized solution focusing on ease of use and portability leveraging our smart remote node network.</p>
+					</div>
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<a color="accent" mat-flat-button fxFlex href="https://wallet.conceal.network" target="_blank">Open</a>
+					</div>
+				</mat-card-actions>
+			</mat-card>
 
-			<div class="module" fxLayout="column">
-				<mat-card id="cards" class="mat-elevation-z8">
-					<mat-card-header fxLayout="column">
-						<h2 class="title">Desktop Wallet</h2>
-					</mat-card-header>
-					<mat-card-content>
-						<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">computer</mat-icon>
-							<p fxFlex class="text">Conceal Desktop Wallet.</p>
-						</div>
-					</mat-card-content>
-					<mat-card-actions>
-						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-							<a color="accent" mat-flat-button fxFlex href="https://github.com/ConcealNetwork/conceal-desktop/releases" target="_blank">Download</a>
-						</div>
-					</mat-card-actions>
-				</mat-card>
-			</div>
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Paper</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<div fxLayout="row">
+						<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">article</mat-icon>
+						<p fxFlex class="text">Paper Wallet.</p>
+					</div>
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<a color="accent" mat-flat-button fxFlex href="https://conceal.network/paperwallet" target="_blank">Open</a>
+					</div>
+				</mat-card-actions>
+			</mat-card>
 
-			<div class="module" fxLayout="column">
-				<mat-card id="cards" class="mat-elevation-z8">
-					<mat-card-header fxLayout="column">
-						<h2 class="title">Paper Wallet</h2>
-					</mat-card-header>
-					<mat-card-content>
-						<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-							<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">article</mat-icon>
-							<p fxFlex class="text">Conceal Paper Wallet.</p>
-						</div>
-					</mat-card-content>
-					<mat-card-actions>
-						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-							<a color="accent" mat-flat-button fxFlex href="https://conceal.network/paperwallet" target="_blank">Open</a>
-						</div>
-					</mat-card-actions>
-				</mat-card>
-			</div>
+		</div>
+
+		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
+
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Desktop</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<div fxLayout="row">
+						<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">computer</mat-icon>
+						<p fxFlex class="text">Our <strong>Desktop Wallet</strong> is a fully featured full-node client with both graphical and command-line interfaces available for multiple operating systems.</p>
+					</div>
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<a color="accent" mat-flat-button fxFlex href="https://github.com/ConcealNetwork/conceal-desktop/releases" target="_blank">GUI</a>
+						<a color="accent" mat-flat-button fxFlex href="https://github.com/ConcealNetwork/conceal-core/releases" target="_blank">CLI</a>
+					</div>
+				</mat-card-actions>
+			</mat-card>
+
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Mobile</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<div fxLayout="row">
+						<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">phone_android</mat-icon>
+						<p fxFlex class="text">Mobile Wallet.</p>
+					</div>
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<a color="accent" mat-flat-button fxFlex href="https://play.google.com/store/apps/details?id=app.conceal.hub" target="_blank">Google</a>
+						<a color="accent" mat-flat-button fxFlex href="https://github.com/ConcealNetwork/conceal-hub/releases" target="_blank">Github</a>
+					</div>
+				</mat-card-actions>
+			</mat-card>
+
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Extension</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<div fxLayout="row">
+						<mat-icon fxFlex="25" class="module_icon orange" aria-hidden="false">extension</mat-icon>
+						<p fxFlex class="text">Browser Extension Wallet.</p>
+					</div>
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<a color="accent" mat-flat-button fxFlex href="https://chrome.google.com/webstore/detail/conceal-browser-extension/ajclelbbigjopijfkgfeblgikbhaofgp" target="_blank">Chrome</a>
+						<a color="accent" mat-flat-button fxFlex href="https://addons.mozilla.org/en-GB/firefox/addon/conceal-browser-extension" target="_blank">FireFox</a>
+					</div>
+				</mat-card-actions>
+			</mat-card>
 
 		</div>
 
