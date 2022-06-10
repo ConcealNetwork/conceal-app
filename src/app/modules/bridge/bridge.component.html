@@ -2,7 +2,7 @@
 
 	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
 		<h1 class="headline">Conceal <strong>Bridge</strong></h1>
-		<p class="description">The simple swap tool that lets you keep your privacy.</p>
+		<p class="description">The simple tool that lets you keep your privacy</p>
 	</div>
 
 	<div class="swap" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.gt-md="25px" @transition>
@@ -25,7 +25,7 @@
 
 			<mat-card class="swap mat-elevation-z8">
 				<mat-card-header fxLayout="column">
-					<h2 class="title">Currently supported networks:</h2>
+					<h2 class="title">Supported Networks</h2>
 				</mat-card-header>
 				<mat-card-content>
 					<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px">
@@ -73,7 +73,7 @@
 				</mat-card-content>
 				<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 					<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-						<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value!, this.toControl.value!)">Swap between these networks</button>
+						<button fxFlex fxFlex="noshrink" color="accent" class="uppercase" mat-flat-button [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value!, this.toControl.value!)">Swap your tokens</button>
 					</div>
 				</mat-card-actions>
 			</mat-card>

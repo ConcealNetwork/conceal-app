@@ -16,9 +16,9 @@
 					<h2 class="title">Cloud Wallet</h2>
 				</mat-card-header>
 				<mat-tab-group mat-align-tabs="start" color="accent">
-					<mat-tab label="What is it?">
+					<mat-tab label="Summary">
 						<div fxLayout="row" fxLayoutAlign="center center">
-							<mat-icon fxFlex="20" class="module_icon orange" aria-hidden="false">cloud</mat-icon>
+							<mat-icon fxFlex="20" fxFlex.xs="22" class="module_icon orange" aria-hidden="false">cloud</mat-icon>
 							<p class="text">Centralized solution focusing on ease of use and convenience. Everything is managed by us so you can get on with managing your funds.</p>
 						</div>
 					</mat-tab>
@@ -31,7 +31,11 @@
 								</mat-list-item>
 								<mat-list-item>
 									<mat-icon matListIcon class="success">check</mat-icon>
-									<p matLine>Deposit & Withdrawal</p>
+									<p matLine>Deposits</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="success">check</mat-icon>
+									<p matLine>Encrypted Messages</p>
 								</mat-list-item>
 							</mat-list>
 							<mat-list class="feature right-list">
@@ -42,6 +46,10 @@
 								<mat-list-item>
 									<mat-icon matListIcon class="success">check</mat-icon>
 									<p matLine>Export Keys</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="danger">close</mat-icon>
+									<p matLine>Seed Phases</p>
 								</mat-list-item>
 							</mat-list>
 						</div>
@@ -59,10 +67,10 @@
 					<h2 class="title">Web Wallet</h2>
 				</mat-card-header>
 				<mat-tab-group mat-align-tabs="start" color="accent">
-					<mat-tab label="What is it?">
+					<mat-tab label="Summary">
 						<div fxLayout="row" fxLayoutAlign="center center">
-							<mat-icon fxFlex="20" class="module_icon orange" aria-hidden="false">public</mat-icon>
-							<p fxFlex class="text">Completely decentralized and works in any browser. Focusing on ease of use and portability and utilizing our smart remote node network.</p>
+							<mat-icon fxFlex="20" fxFlex.xs="22" class="module_icon orange" aria-hidden="false">public</mat-icon>
+							<p fxFlex class="text">Decentralized and able to run in any browser. Focusing on ease of use, portability and utilizing our smart remote node network.</p>
 						</div>
 					</mat-tab>
 					<mat-tab label="What features are supported?">
@@ -74,7 +82,11 @@
 								</mat-list-item>
 								<mat-list-item>
 									<mat-icon matListIcon class="danger">close</mat-icon>
-									<p matLine>Deposit & Withdrawal</p>
+									<p matLine>Deposits</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="danger">close</mat-icon>
+									<p matLine>Encrypted Messages</p>
 								</mat-list-item>
 							</mat-list>
 							<mat-list class="feature right-list">
@@ -85,6 +97,10 @@
 								<mat-list-item>
 									<mat-icon matListIcon class="success">check</mat-icon>
 									<p matLine>Export Keys</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="success">check</mat-icon>
+									<p matLine>Seed Phases</p>
 								</mat-list-item>
 							</mat-list>
 						</div>
@@ -102,9 +118,9 @@
 					<h2 class="title">Paper Wallet</h2>
 				</mat-card-header>
 				<mat-tab-group mat-align-tabs="start" color="accent">
-					<mat-tab label="What is it?">
+					<mat-tab label="Summary">
 						<div fxLayout="row" fxLayoutAlign="center center">
-							<mat-icon fxFlex="20" class="module_icon orange" aria-hidden="false">article</mat-icon>
+							<mat-icon fxFlex="20" fxFlex.xs="22" class="module_icon orange" aria-hidden="false">article</mat-icon>
 							<p fxFlex class="text">An offline mechanism for generating wallets. Print your private keys and addresses, store them in a safe place and import only when required.</p>
 						</div>
 					</mat-tab>
@@ -117,7 +133,11 @@
 								</mat-list-item>
 								<mat-list-item>
 									<mat-icon matListIcon class="danger">close</mat-icon>
-									<p matLine>Deposit & Withdrawal</p>
+									<p matLine>Deposits</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="danger">close</mat-icon>
+									<p matLine>Encrypted Messages</p>
 								</mat-list-item>
 							</mat-list>
 							<mat-list class="feature right-list">
@@ -128,6 +148,10 @@
 								<mat-list-item>
 									<mat-icon matListIcon class="success">check</mat-icon>
 									<p matLine>Export Keys</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="success">check</mat-icon>
+									<p matLine>Seed Phases</p>
 								</mat-list-item>
 							</mat-list>
 						</div>
@@ -149,10 +173,10 @@
 					<h2 class="title">Desktop Wallet</h2>
 				</mat-card-header>
 				<mat-tab-group mat-align-tabs="start" color="accent">
-					<mat-tab label="What is it?">
+					<mat-tab label="Summary">
 						<div fxLayout="row" fxLayoutAlign="center center">
-							<mat-icon fxFlex="20" class="module_icon orange" aria-hidden="false">computer</mat-icon>
-							<p fxFlex class="text">Fully featured and beautiful with both graphical and command-line interfaces available for multiple operating systems.</p>
+							<mat-icon fxFlex="20" fxFlex.xs="22" class="module_icon orange" aria-hidden="false">computer</mat-icon>
+							<p fxFlex class="text">Fully featured and beautiful with both graphical and command-line interfaces options and available for multiple operating systems.</p>
 						</div>
 					</mat-tab>
 					<mat-tab label="What features are supported?">
@@ -164,7 +188,11 @@
 								</mat-list-item>
 								<mat-list-item>
 									<mat-icon matListIcon class="success">check</mat-icon>
-									<p matLine>Deposit & Withdrawal</p>
+									<p matLine>Deposits</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="success">check</mat-icon>
+									<p matLine>Encrypted Messages</p>
 								</mat-list-item>
 							</mat-list>
 							<mat-list class="feature right-list">
@@ -175,6 +203,10 @@
 								<mat-list-item>
 									<mat-icon matListIcon class="success">check</mat-icon>
 									<p matLine>Export Keys</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="success">check</mat-icon>
+									<p matLine>Seed Phases</p>
 								</mat-list-item>
 							</mat-list>
 						</div>
@@ -193,9 +225,9 @@
 					<h2 class="title">Mobile Wallet</h2>
 				</mat-card-header>
 				<mat-tab-group mat-align-tabs="start" color="accent">
-					<mat-tab label="What is it?">
+					<mat-tab label="Summary">
 						<div fxLayout="row" fxLayoutAlign="center center">
-							<mat-icon fxFlex="20" class="module_icon orange" aria-hidden="false">phone_android</mat-icon>
+							<mat-icon fxFlex="20" fxFlex.xs="22" class="module_icon orange" aria-hidden="false">phone_android</mat-icon>
 							<p fxFlex class="text">Utilizing our Cloud infrastructure, users can easily manage their funds and make and receive payments all while on the go.</p>
 						</div>
 					</mat-tab>
@@ -208,7 +240,11 @@
 								</mat-list-item>
 								<mat-list-item>
 									<mat-icon matListIcon class="success">check</mat-icon>
-									<p matLine>Deposit & Withdrawal</p>
+									<p matLine>Deposits</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="success">check</mat-icon>
+									<p matLine>Encrypted Messages</p>
 								</mat-list-item>
 							</mat-list>
 							<mat-list class="feature right-list">
@@ -219,6 +255,10 @@
 								<mat-list-item>
 									<mat-icon matListIcon class="success">check</mat-icon>
 									<p matLine>Export Keys</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="danger">close</mat-icon>
+									<p matLine>Seed Phases</p>
 								</mat-list-item>
 							</mat-list>
 						</div>
@@ -237,9 +277,9 @@
 					<h2 class="title">Extension Wallet</h2>
 				</mat-card-header>
 				<mat-tab-group mat-align-tabs="start" color="accent">
-					<mat-tab label="What is it?">
+					<mat-tab label="Summary">
 						<div fxLayout="row" fxLayoutAlign="center center">
-							<mat-icon fxFlex="20" class="module_icon orange" aria-hidden="false">extension</mat-icon>
+							<mat-icon fxFlex="20" fxFlex.xs="22" class="module_icon orange" aria-hidden="false">extension</mat-icon>
 							<p fxFlex class="text">Utilizing our Cloud infrastructure, users can users manage their funds and make and receive payments right in their browser.</p>
 						</div>
 					</mat-tab>
@@ -252,7 +292,11 @@
 								</mat-list-item>
 								<mat-list-item>
 									<mat-icon matListIcon class="danger">close</mat-icon>
-									<p matLine>Deposit & Withdrawal</p>
+									<p matLine>Deposits</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="success">check</mat-icon>
+									<p matLine>Encrypted Messages</p>
 								</mat-list-item>
 							</mat-list>
 							<mat-list class="feature right-list">
@@ -263,6 +307,10 @@
 								<mat-list-item>
 									<mat-icon matListIcon class="success">check</mat-icon>
 									<p matLine>Export Keys</p>
+								</mat-list-item>
+								<mat-list-item>
+									<mat-icon matListIcon class="danger">close</mat-icon>
+									<p matLine>Seed Phases</p>
 								</mat-list-item>
 							</mat-list>
 						</div>
