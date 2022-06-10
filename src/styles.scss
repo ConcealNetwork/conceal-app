@@ -230,6 +230,8 @@ mat-horizontal-stepper {
 	background-color: green !important;
 }
 
-.mat-list-item-content {
-	padding: 0 !important;
+.feature {
+	.mat-list-item-content {
+		padding: 0px !important;
+	}
 }
