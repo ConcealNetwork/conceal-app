@@ -36,6 +36,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   exports: [
@@ -65,7 +66,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 		MatTabsModule,
 		MatPaginatorModule,
 		MatSortModule,
-		MatSlideToggleModule
+		MatSlideToggleModule,
+		MatExpansionModule
   ]
 })
 
