@@ -33,19 +33,19 @@ export class BridgeComponent implements OnInit {
 	form: FormGroup;
 
 	fromNetwork: Networks[] = [
-    {value: 'ccx', viewValue: 'Conceal (CCX)'},
-    {value: 'eth', viewValue: 'Ethereum (wCCX)'},
-    {value: 'bsc', viewValue: 'Binance (wCCX)'},
-    {value: 'plg', viewValue: 'Polygon (wCCX)'},
-    {value: 'avax', viewValue: 'Avalanche (wCCX)'},
+    {value: 'ccx', viewValue: 'Conceal CCX'},
+    {value: 'eth', viewValue: 'Ethereum wCCX'},
+    {value: 'bsc', viewValue: 'Binance wCCX'},
+    {value: 'plg', viewValue: 'Polygon wCCX'},
+    {value: 'avax', viewValue: 'Avalanche wCCX'},
   ];
 
 	toNetwork: Networks[] = [
-    {value: 'ccx', viewValue: 'Conceal (CCX)'},
-    {value: 'eth', viewValue: 'Ethereum (wCCX)'},
-		{value: 'bsc', viewValue: 'Binance (wCCX)'},
-		{value: 'plg', viewValue: 'Polygon (wCCX)'},
-		{value: 'avax', viewValue: 'Avalanche (wCCX)'},
+    {value: 'ccx', viewValue: 'Conceal CCX'},
+    {value: 'eth', viewValue: 'Ethereum wCCX'},
+		{value: 'bsc', viewValue: 'Binance wCCX'},
+		{value: 'plg', viewValue: 'Polygon wCCX'},
+		{value: 'avax', viewValue: 'Avalanche wCCX'},
   ];
 
 	fromControl = new FormControl(this.fromNetwork[0].value);

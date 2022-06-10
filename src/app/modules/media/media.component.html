@@ -1,10 +1,10 @@
 <app-loader *ngIf="this.isLoading"></app-loader>
 
-<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start" *ngIf="!this.isLoading">
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="!this.isLoading">
 
 	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
-		<h1 class="headline">Project <strong>Updates</strong></h1>
-		<p class="description">Get the latest project updates and news.</p>
+		<h1 class="headline">Conceal <strong>Updates</strong></h1>
+		<p class="description">Get the latest conceal project news and updates</p>
 	</div>
 
 	<div class="articles" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" [@listAnimation1]="posts.length">
