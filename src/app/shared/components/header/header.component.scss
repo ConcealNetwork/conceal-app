@@ -28,8 +28,12 @@
 	.options {
 		-webkit-app-region: no-drag;
 		-webkit-user-select: none;
+		.button-text {
+			margin-left: 0.6rem;
+			text-transform: uppercase;
+			font-size: 1.1rem;
+		}
 	}
-
 
 	.navlink {
 		-webkit-app-region: no-drag;
