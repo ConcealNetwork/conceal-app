@@ -71,7 +71,29 @@
 	}
 
 	mat-list-item {
-		font-size: 1rem;
+		font-size: 0.85rem;
+		height: auto;
+	}
+
+	.mat-list {
+		padding: 0px;
+	}
+
+	.mat-list-text {
+		padding-left: 5px !important;
+	}
+
+	.features {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	.success {
+		color: #00b300;
+	}
+
+	.danger {
+		color: #ff0000;
 	}
 
 }
