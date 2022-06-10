@@ -70,17 +70,17 @@
 		margin-bottom: 0px;
 	}
 
-	mat-list-item {
-		font-size: 0.85rem;
+	.mat-list-item {
+		font-size: 0.9rem;
 		height: auto;
 	}
 
-	.mat-list {
-		padding: 0px;
+	.right-list {
+		margin-left: 15px;
 	}
 
-	.mat-list-text {
-		padding-left: 5px !important;
+	.mat-tab-group {
+		height: 100%;
 	}
 
 	.features {
