@@ -35,11 +35,13 @@
 		<button mat-icon-button aria-label="settings" matTooltip="Settings" routerLink="/settings" routerLinkActive="active">
 			<mat-icon aria-hidden="false">settings</mat-icon>
 		</button>
-		<button *ngIf="isLoggedIn" mat-icon-button aria-label="logout" matTooltip="Logout" (click)="logout()">
+		<button *ngIf="isLoggedIn" mat-button aria-label="logout" matTooltip="Logout" (click)="logout()">
 			<mat-icon class="orange" aria-hidden="false">logout</mat-icon>
+			<span class="orange button-text">Logout</span>
 		</button>
-		<button *ngIf="!isLoggedIn" mat-icon-button aria-label="login" matTooltip="Login" (click)="login()">
+		<button *ngIf="!isLoggedIn" mat-button aria-label="login" matTooltip="Login" (click)="login()">
 			<mat-icon class="orange" aria-hidden="false">login</mat-icon>
+			<span class="orange button-text">Login</span>
 		</button>
 	</div>
 
