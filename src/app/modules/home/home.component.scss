@@ -55,6 +55,7 @@
 	.module_icon {
 		font-size: 3.8rem;
 		height: 100%;
+		min-width: 60px;
 	}
 
 	.mat-card-content {
@@ -67,6 +68,10 @@
 
 	.mat-card-actions {
 		margin-bottom: 0px;
+	}
+
+	mat-list-item {
+		font-size: 1rem;
 	}
 
 }
