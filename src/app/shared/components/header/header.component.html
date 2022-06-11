@@ -28,7 +28,7 @@
 				Discover
 			</button>
 		</mat-menu>
-		<button class="navlink" mat-button [matMenuTriggerFor]="id" [class.active]="this.router.url.includes('id')">ID</button>
+		<button class="navlink" mat-button [matMenuTriggerFor]="id" [class.active]="this.router.url == '/id' || this.router.url == '/id/cloud'">ID</button>
 		<mat-menu #id="matMenu">
 			<button mat-menu-item routerLink="/id/cloud" routerLinkActive="active">
 				<mat-icon [class.active]="this.router.url == '/id/cloud'">portrait</mat-icon>
