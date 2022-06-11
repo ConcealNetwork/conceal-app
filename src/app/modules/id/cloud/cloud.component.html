@@ -1,0 +1,150 @@
+<app-loader *ngIf="this.isWalletsLoading || this.isIDsLoading"></app-loader>
+
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start" *ngIf="!this.isWalletsLoading && !this.isIDsLoading">
+
+	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
+		<h1 class="headline">Conceal <strong>ID</strong></h1>
+		<p class="description">Create your own personalized wallet address.</p>
+	</div>
+
+	<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
+
+		<div class="help" fxLayout="column" fxLayoutAlign="start stretch" fxFill.lt.sm fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
+			<mat-card id="cards" class="mat-elevation-z8">
+				<div fxLayout="column" fxLayoutAlign="space-evenly">
+					<mat-nav-list>
+						<a href="https://conceal.network/wiki/doku.php?id=conceal-id" rel="noreferrer" target="_blank" mat-list-item>User Guide</a>
+						<a href="https://conceal.network/support/index.php?a=add&category=2" rel="noreferrer" target="_blank" mat-list-item>Support</a>
+						<a href="https://conceal.network/tc.html" rel="noreferrer" target="_blank" mat-list-item>Terms & Conditions</a>
+					</mat-nav-list>
+				</div>
+			</mat-card>
+		</div>
+
+		<div class="form" fxLayout="column" fxFlex fxLayoutAlign="start stretch">
+			<mat-card id="cards" class="mat-elevation-z8">
+				<form [formGroup]="createID">
+
+					<mat-card-header fxLayout="column">
+						<h2 class="title">Create an ID</h2>
+					</mat-card-header>
+
+					<mat-card-content>
+						<div fxLayout="column" fxFlex fxLayoutGap="25px">
+
+							<fieldset fxLayout="column" fxFlex="noshrink" fxLayoutGap="15px">
+								<legend fxLayout="row" fxLayoutAlign="space-between center">
+									<mat-icon class="orange" aria-hidden="false">badge</mat-icon>
+									Your Conceal ID
+								</legend>
+
+								<mat-form-field color="accent" hintLabel="Your public ID" appearance="fill">
+									<mat-label>ID</mat-label>
+									<input matInput #name type="text" name="name" placeholder="My ID" formControlName="name">
+									<span matSuffix class="orange">.conceal.id</span>
+									<mat-error *ngIf="createID.controls.name.hasError('required')">
+										Your ID name is <strong>required</strong>
+									</mat-error>
+									<mat-error *ngIf="createID.controls.name.hasError('nameExists')">
+										This name is already registered.
+									</mat-error>
+									<mat-error *ngIf="createID.controls.name.hasError('pattern')">
+										Only alphanumerical characters are allowed.
+									</mat-error>
+									<mat-error *ngIf="createID.controls.name.hasError('minlength') || createID.controls.name.hasError('maxlength')">
+										Your ID should be between <strong>3</strong> and <strong>20</strong> characters.
+									</mat-error>
+								</mat-form-field>
+
+								<div fxLayout="column" fxFlex="noshrink" fxLayoutAlign="center center" fxLayoutGap="5px" *ngIf="createID.controls.name.pending">
+									<mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+									<span>Checking if this name is available...</span>
+								</div>
+
+								<mat-form-field color="accent" hintLabel="Address to link to your ID" appearance="fill">
+									<mat-label>Address</mat-label>
+									<mat-select #address name="address" placeholder="My Address" formControlName="address" (selectionChange)="updateAddress(createID.controls.address.value)">
+										<mat-option *ngFor="let value of wallets" [value]="value">
+											{{ this.getHelperService().formatAddress(value.address) }}
+										</mat-option>
+									</mat-select>
+									<mat-error *ngIf="createID.controls.address.hasError('required')">
+										Your linked address is <strong>required</strong>
+									</mat-error>
+								</mat-form-field>
+
+							</fieldset>
+
+							<fieldset fxLayout="column" fxFlex="noshrink" fxLayoutGap="15px">
+
+								<legend fxLayout="row" fxLayoutAlign="space-between center">
+									<mat-icon class="orange" aria-hidden="false">price_change</mat-icon>
+									Payment
+								</legend>
+
+								<span>Creating an ID has a fixed fee of <span class="orange">20.001 CCX.</span> After submitting, this fee will be deducted from the below wallet.</span>
+
+								<mat-form-field color="accent" hintLabel="Payment Address" appearance="fill">
+									<mat-label>Payment Wallet</mat-label>
+									<mat-select #payment name="payment" placeholder="CCX Address" formControlName="payment">
+										<mat-option *ngFor="let value of wallets" [value]="value">
+											{{ this.getHelperService().formatAddress(value.address) }} ({{ this.getHelperService().formatAmount(value.balance, 3, 3) || 0 }} CCX)
+										</mat-option>
+									</mat-select>
+									<mat-error *ngIf="createID.controls.payment.hasError('required')">
+										Your payment address is <strong>required</strong>
+									</mat-error>
+									<mat-error *ngIf="createID.controls.payment.hasError('hasBalance')">
+										You do not have enough CCX in this wallet.
+									</mat-error>
+								</mat-form-field>
+
+							</fieldset>
+
+							<div fxLayout="column" fxFlex="noshrink" fxLayoutAlign="center center" fxLayoutGap="5px" *ngIf="this.isLoading">
+								<mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+								<span>Please wait, creating your new ID...</span>
+							</div>
+
+						</div>
+					</mat-card-content>
+
+					<mat-card-actions>
+						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+							<button type="submit" color="warn" mat-stroked-button fxFlex="50" (click)="reset()">Reset</button>
+							<button type="submit" color="accent" mat-flat-button fxFlex="50" (click)="submit()" [disabled]="!createID.valid || this.isLoading">Create</button>
+						</div>
+					</mat-card-actions>
+
+				</form>
+			</mat-card>
+		</div>
+
+		<div class="ids" fxLayout="column" fxLayoutAlign="start stretch" fxFill.lt.sm fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="this.ids.length > 0">
+			<mat-card id="cards" class="mat-elevation-z8" *ngFor="let value of ids">
+
+				<mat-card-header fxLayout="column">
+					<h2 class="title">{{ value.label }}</h2>
+				</mat-card-header>
+
+				<mat-card-content>
+					<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px">
+						<div class="id"><span class="orange">{{ value.id }}.conceal.id </span> <small>({{ this.getHelperService().formatAddress(value.address) }})</small></div>
+						<div #qrcode ></div>
+						<qrcode class="code" [qrdata]="value.id" [width]="215" [margin]="1" [elementType]="'canvas'" [colorDark]="'#333'" [errorCorrectionLevel]="'H'" [allowEmptyString]="true"></qrcode>
+					</div>
+				</mat-card-content>
+
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<button type="submit" color="warn" mat-flat-button fxFlex (click)="deleteID(value.id, value.address, value.label)">Delete</button>
+						<button color="accent" mat-flat-button fxFlex (click)="copyID(value.id)">Copy</button>
+					</div>
+				</mat-card-actions>
+
+			</mat-card>
+		</div>
+
+	</div>
+
+</div>

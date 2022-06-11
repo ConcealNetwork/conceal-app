@@ -2,12 +2,17 @@
 	min-height: calc(100vh - 115px - 50px);
 	overflow: hidden;
 
-	.modules {
-		// Large
-		@media screen and (min-width: 1280px) {
-			max-width: 80vw;
-		}
+	.form {
+		max-width: 550px;
+	}
 
+	.mat-list-item {
+		font-size: 1rem !important;
+		border-radius: 5px;
+	}
+
+	.mat-list-base {
+		padding-top: 0px;
 	}
 
 	.headline {
@@ -41,6 +46,11 @@
 		border-radius: 25px;
 	}
 
+	.id {
+		font-size: 1.1rem;
+		max-width: 225px;
+	}
+
 	.description::before {
 		z-index: 1;
 		background-color: darkslategray;
@@ -52,52 +62,29 @@
 		z-index: 3;
 	}
 
-	.module_icon {
-		font-size: 3.8rem;
-		height: 100%;
-		min-width: 60px;
-	}
-
-	.mat-card-content {
-		min-height: 70px;
-	}
-
-	.text {
-		margin: 0;
+	.mat-form-field {
+		font-size: 1rem;
 	}
 
 	.mat-card-actions {
 		margin-bottom: 0px;
 	}
 
-	.mat-list-base {
-		padding: 0;
+	fieldset {
+		border-radius: 5px;
+		border: 1px solid rgba($color: #999, $alpha: 0.5);
+		padding: 0 15px 15px 15px;
+		.mat-icon {
+			margin-right: 5px;
+		}
 	}
 
-	.mat-list-item {
-		font-size: 0.9rem;
-		height: auto;
-	}
-
-	.right-list {
-		margin-left: 15px;
-	}
-
-	.mat-tab-group {
-		height: 100%;
-	}
-
-	.features {
-		padding-left: 1rem;
-		padding-right: 1rem;
-	}
-
-	.success {
-		color: #00b300;
-	}
-
-	.danger {
-		color: #ff0000;
+	.code {
+		align-self: center;
+		height: 215px;
+		width: 215px;
+		border: 5px solid #222;
+		border-radius: 5px;
 	}
 
 }
