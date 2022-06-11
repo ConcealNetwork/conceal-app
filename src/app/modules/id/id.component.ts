@@ -1,16 +1,9 @@
+// Angular Core
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
-import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
-
 // Services
-import { NameService } from './name.validator';
-import { BalanceService } from './balance.validator';
-import { CloudService } from 'src/app/shared/services/cloud.service';
-import { HelperService } from 'src/app/shared/services/helper.service';
-import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { CordovaService } from 'src/app/shared/services/cordova.service';
+import { ThemingService } from 'src/app/shared/services/theming.service';
 
 @Component({
   selector: 'app-id',
@@ -32,152 +25,18 @@ import { CordovaService } from 'src/app/shared/services/cordova.service';
 export class IdComponent implements OnInit {
 
 	// Variables
-	wallets:any;
-	ids:any;
-	isLoading: boolean = false;
-	isWalletsLoading: boolean = true;
-	isIDsLoading: boolean = true;
+	isLoading: boolean = true;
 
   constructor(
-		private nameService: NameService,
-		private balanceService: BalanceService,
-		private cloudService: CloudService,
-		private helperService: HelperService,
-		private snackbarService: SnackbarService,
-		private cordovaService: CordovaService,
-		private clipboard: Clipboard,
+		private themingService: ThemingService,
 	) { }
 
-	createID: FormGroup = new FormGroup({
-		name: new FormControl('', {
-			validators: [
-				Validators.required,
-				Validators.minLength(3),
-				Validators.maxLength(20),
-				Validators.pattern('^[a-zA-Z0-9]*'),
-			],
-			asyncValidators: this.nameService.uniqueNameValidator(),
-			updateOn: 'blur',
-		}),
-		address: new FormControl('', [
-			Validators.required,
-		]),
-		payment: new FormControl('', {
-			validators: [
-				Validators.required,
-			],
-			asyncValidators: this.balanceService.checkBalance(),
-			updateOn: 'blur'
-		})
-	});
-
-	getHelperService() {
-		return this.helperService;
+	getThemingService() {
+		return this.themingService;
 	}
 
   ngOnInit(): void {
-		this.getWallets();
-		this.getIDs();
-  }
-
-	getWallets() {
-		this.cloudService.getWalletsData().subscribe((data:any) => {
-			if (data.result === 'success') {
-			let wallet = Object.keys(data.message.wallets).map(key => {
-				return {
-					address: key,
-					balance: data.message.wallets[key].balance
-				}
-			})
-			this.wallets = wallet;
-			this.isWalletsLoading = false;
-			} else {
-				this.snackbarService.openSnackBar('Whoops, something went wrong', 'Dismiss');
-			}
-		})
-	}
-
-	getIDs() {
-		this.cloudService.listIDs().subscribe((data:any) => {
-			if (data.result === 'success') {
-				let ids = Object.keys(data.message).map(key => {
-					return {
-						address: data.message[key].address,
-						label: data.message[key].name,
-						id: data.message[key].id
-					}
-				})
-				this.ids = ids;
-				this.isIDsLoading = false;
-			} else {
-				this.snackbarService.openSnackBar('Whoops, something went wrong', 'Dismiss');
-			}
-		})
-	}
-
-	deleteID(id:string, address:string, label:string) {
-		this.cloudService.deleteID(id, address, label).subscribe((data:any) => {
-			if (data.result === 'success') {
-				this.snackbarService.openSnackBar('ID deleted', 'Dismiss');
-				setTimeout(() => {
-					this.getIDs();
-				}, 5000);
-			} else {
-				this.snackbarService.openSnackBar('Whoops, something went wrong', 'Dismiss');
-				setTimeout(() => {
-					this.getIDs();
-				}, 5000);
-			}
-		})
-	}
-
-	copyID(value: any) {
-		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
-			this.clipboard.copy(value);
-			this.snackbarService.openSnackBar('ID has been copied to clipboard', 'Dismiss');
-		} else if (navigator.clipboard) {
-			navigator.clipboard.writeText(value);
-			this.snackbarService.openSnackBar('ID has been copied to clipboard', 'Dismiss');
-		} else {
-			this.snackbarService.openSnackBar('Could not access the clipboard', 'Dismiss');
-		}
-	}
-
-	updateAddress(value:any) {
-		this.createID.controls.payment.patchValue(value);
-		this.createID.controls.payment.markAsTouched();
-	}
-
-	submit() {
-		if (this.createID.valid) {
-			this.isLoading = true;
-			this.cloudService.createID(
-				this.createID.value.payment.address,
-				this.createID.value.address.address,
-				this.createID.value.name,
-				this.createID.value.name
-			).subscribe((data:any) => {
-				if (data.result === 'success') {
-					this.snackbarService.openSnackBar('Your ID has been successfully created', 'Dismiss');
-					this.isLoading = false;
-					setTimeout(() => {
-						this.getWallets();
-						this.getIDs();
-					}, 1000);
-				} else {
-					this.snackbarService.openSnackBar('Whoops, something went wrong', 'Dismiss');
-					this.isLoading = false;
-					setTimeout(() => {
-						this.getWallets();
-						this.getIDs();
-					}, 1000);
-				}
-			})
-		}
-	}
-
-	reset() {
-		this.createID.reset();
+		this.isLoading = false;
 	}
 
 }
