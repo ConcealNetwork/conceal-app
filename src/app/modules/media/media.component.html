@@ -9,26 +9,17 @@
 
 	<div class="articles" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" [@listAnimation1]="posts.length">
 
-		<mat-card class="mat-elevation-z6" *ngFor="let item of posts.slice(0, this.limit) | orderByImpure: '-pubDate'">
-
-			<mat-card-header fxLayout="column">
-				<h2 class="title">{{item.title | shorten: 125: '...'}}</h2>
-			</mat-card-header>
-
-			<mat-card-content fxLayout="column" fxLayoutGap="15px">
-				<div fxLayout="row" fxLayoutGap="25px">
-					<img *ngIf="item.thumbnail.includes('https://cdn-images')" class="image" fxHide fxShow.gt-xs src="{{item.thumbnail}}">
-					<p>
-						{{item.description | stripTags | shorten: 400: '...' }}
-					</p>
-				</div>
-				<a mat-flat-button color="accent" (click)="this.openArticle(item)">Open this article</a>
-			</mat-card-content>
-
-		</mat-card>
+		<mat-expansion-panel class="pannel mat-elevation-z6" *ngFor="let item of posts.slice(0, this.limit) | orderByImpure: '-pubDate'; index as i" [expanded]="i == 0">
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					{{item.title | shorten: 125: '...'}} {{item.index}}
+				</mat-panel-title>
+			</mat-expansion-panel-header>
+			<p [innerHTML]="item.description | stripTags: '[a, p, br, ol, ul, h1, h2, h3, h4, strong]'" class="text"></p>
+		</mat-expansion-panel>
 
 		<div *ngIf="this.limit !== 10" fxLayout="column" fxLayoutAlign="center center">
-			<button mat-stroked-button color="accent" (click)="setLimit(10)">Show more articles...</button>
+			<button class="more" mat-stroked-button color="accent" (click)="setLimit(10)">Show more articles...</button>
 		</div>
 
 	</div>

@@ -42,7 +42,7 @@ export class MediaComponent implements OnInit {
 
 	// Variables
 	isLoading: boolean = true;
-	limit: number = 2;
+	limit: number = 4;
 	posts: any = [];
 
   constructor(
@@ -65,7 +65,7 @@ export class MediaComponent implements OnInit {
 		]).subscribe((state: BreakpointState) => {
 			if (state.matches) {
 				if (state.breakpoints[Breakpoints.XSmall]) {
-					this.limit = 5;
+					this.limit = 6;
 				}
 			}
 		});
