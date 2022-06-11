@@ -11,9 +11,9 @@ import { SendDialog } from 'src/app/modules/wallets/cloud/dialogs/send/send.comp
 import { ReceiveDialog } from 'src/app/modules/wallets/cloud/dialogs/receive/receive.component';
 import { ExportDialog } from 'src/app/modules/wallets/cloud/dialogs/export/export.component';
 import { CodeDialog } from 'src/app/modules/wallets/cloud/dialogs/code/code.component';
-import { MatrixDialog } from 'src/app/modules/deposits/dialogs/matrix/matrix.dialog';
-import { PendingDialog } from 'src/app/modules/deposits/dialogs/pending/pending.dialog';
-import { ConfirmationDialog } from 'src/app/modules/deposits/dialogs/confirmation/confirmation.dialog';
+import { MatrixDialog } from 'src/app/modules/deposits/cloud/dialogs/matrix/matrix.dialog';
+import { PendingDialog } from 'src/app/modules/deposits/cloud/dialogs/pending/pending.dialog';
+import { ConfirmationDialog } from 'src/app/modules/deposits/cloud/dialogs/confirmation/confirmation.dialog';
 import { ArticleDialog } from 'src/app/modules/media/dialogs/article/article.dialog';
 
 @Injectable({

@@ -1,0 +1,94 @@
+fieldset {
+	border-radius: 5px;
+	border: 1px solid rgba($color: #999, $alpha: 0.5);
+	padding: 20px;
+	mat-icon {
+		margin-right: 6px;
+	}
+	@media only screen and (max-width: 960px) {
+		padding: 15px;
+	}
+}
+
+.mat-option, .mat-select {
+	text-transform: uppercase;
+}
+
+.deposits {
+	font-size: 0.9rem;
+	.mat-icon {
+		margin-right: 5px;
+	}
+	legend {
+		margin-bottom: 0px !important;
+	}
+	.title {
+		margin-right: 10px;
+	}
+}
+
+.progress {
+	font-size: 1rem;
+}
+
+.mat-progress-bar {
+	height: 10px;
+	border-radius: 5px;
+}
+
+.nothing {
+	font-size: 1rem;
+}
+
+.search {
+	.mat-card {
+		.mat-card-header {
+			padding-top: 5px;
+			padding-bottom: 10px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		.mat-card-content {
+			padding: 0;
+			margin: 0;
+		}
+		.mat-card-actions {
+			padding: 0;
+			margin: 0;
+		}
+	}
+}
+
+table {
+	width: 100%;
+	th {
+		width: 100px;
+	}
+}
+
+.controls {
+	.filter {
+		font-size: 1.2rem;
+	}
+}
+
+.unlocked {
+	color: #4caf50;
+}
+
+.ready {
+	margin-top: 10px;
+	background-color: #4caf50;
+}
+
+@media only screen and (max-width: 960px) {
+	.mat-header-cell {
+		font-size: 0.8rem !important;
+	}
+	.mat-cell {
+		font-size: 0.8rem !important;
+	}
+	.icon {
+		font-size: 1.2rem !important;
+	}
+}
