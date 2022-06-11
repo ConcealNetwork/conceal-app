@@ -13,6 +13,10 @@
 	color: #e53935 !important;
 }
 
+.green {
+	color: #00b300;
+}
+
 .mat-card {
 	background: rgba(255, 255, 255, 0.9) !important;
 	.mat-card-header {
@@ -45,14 +49,18 @@
 }
 
 .mat-menu-panel {
-	background: #5a5a5a;
+	background: #f9f9f9;
 	.mat-menu-item {
-		color: #fff;
+		color: #111;
 	}
 }
 
 .mat-menu-item:hover:not([disabled]) {
-	background: #666;
+	background: #f0f0f0;
+}
+
+.mat-menu-item.active {
+	background: #faaa3310;
 }
 
 .amount {
