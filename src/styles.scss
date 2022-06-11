@@ -235,3 +235,10 @@ mat-horizontal-stepper {
 		padding: 0px !important;
 	}
 }
+
+.ball {
+	z-index: -1;
+  position: absolute;
+  border-radius: 100%;
+  opacity: 0.7;
+}

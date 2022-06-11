@@ -19,6 +19,10 @@ mat-sidenav-content  {
   overflow: auto; // Keeps header from scrolling away
 }
 
+.mat-drawer-content {
+	overflow: hidden;
+}
+
 @media only screen and (max-width: 960px) {
 	mat-sidenav {
 		width: 55vw;

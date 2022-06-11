@@ -8,7 +8,7 @@
 
 		<app-header *ngIf="!getThemingService().isSmallScreen"></app-header> <!-- header -->
 
-    <main class="container">
+    <main #main class="container">
 			<router-outlet></router-outlet> <!-- content -->
     </main>
 

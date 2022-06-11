@@ -1,9 +1,9 @@
-.mat-drawer-container {
-	background-image: url(./../../assets/images/bg-light.webp);
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-}
+// .mat-drawer-container {
+// 	background-image: url(./../../assets/images/bg-light.webp);
+// 	background-position: center;
+// 	background-size: cover;
+// 	background-repeat: no-repeat;
+// }
 
 .active {
 	color: #f8ac22 !important;
@@ -68,8 +68,9 @@
 }
 
 .mat-toolbar {
-	background: rgba($color: #fff, $alpha: 0.8);
-	border-bottom: 1px solid #ccc;
+	background: #333 !important;
+	border-bottom: 1px solid #000;
+	color: #f0f0f0 !important;
 }
 
 .card-content {
