@@ -54,14 +54,32 @@
 
 	.text {
 		margin: 0;
+		padding: 0;
+	}
+
+	.more {
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 
 	.mat-card-actions {
 		margin-bottom: 0px;
 	}
 
-	.image {
-		max-width: 250px;
+	.pannel {
+
+		.mat-expansion-panel-header-title {
+			font-size: 1.4rem;
+			color: orange;
+		}
+
+		.mat-expansion-panel-header {
+			font-size: 1rem;
+			height: auto;
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+		}
+
 	}
 
 }
