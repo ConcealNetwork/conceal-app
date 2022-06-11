@@ -6,9 +6,39 @@
 
 	<div class="links" fxLayoutGap="10px">
 		<button class="navlink" mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">home</button>
-		<button class="navlink" mat-button routerLink="/wallets" routerLinkActive="active">Wallets</button>
-		<button class="navlink" mat-button routerLink="/deposits" routerLinkActive="active">Deposits</button>
-		<button class="navlink" mat-button routerLink="/id" routerLinkActive="active">ID</button>
+		<button class="navlink" mat-button [matMenuTriggerFor]="wallets" [class.active]="this.router.url.includes('wallets')">Wallets</button>
+		<mat-menu #wallets="matMenu">
+			<button mat-menu-item routerLink="/wallets/cloud" routerLinkActive="active">
+				<mat-icon [class.active]="this.router.url == '/wallets/cloud'">account_balance_wallet</mat-icon>
+				Cloud Wallet
+			</button>
+			<button mat-menu-item routerLink="/wallets" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+				<mat-icon [class.active]="this.router.url == '/wallets'">search</mat-icon>
+				Discover
+			</button>
+		</mat-menu>
+		<button class="navlink" mat-button [matMenuTriggerFor]="deposits" [class.active]="this.router.url.includes('deposits')">Deposits</button>
+		<mat-menu #deposits="matMenu">
+			<button mat-menu-item routerLink="/deposits/cloud" routerLinkActive="active">
+				<mat-icon [class.active]="this.router.url == '/deposits/cloud'">savings</mat-icon>
+				Cloud Deposits
+			</button>
+			<button mat-menu-item routerLink="/deposits" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+				<mat-icon [class.active]="this.router.url == '/deposits'">search</mat-icon>
+				Discover
+			</button>
+		</mat-menu>
+		<button class="navlink" mat-button [matMenuTriggerFor]="id" [class.active]="this.router.url.includes('id')">ID</button>
+		<mat-menu #id="matMenu">
+			<button mat-menu-item routerLink="/id/cloud" routerLinkActive="active">
+				<mat-icon [class.active]="this.router.url == '/id/cloud'">portrait</mat-icon>
+				Cloud ID
+			</button>
+			<button mat-menu-item routerLink="/id" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+				<mat-icon [class.active]="this.router.url == '/id'">search</mat-icon>
+				Discover
+			</button>
+		</mat-menu>
 		<button class="navlink" mat-button routerLink="/bridge" routerLinkActive="active">Bridge</button>
 		<!-- future updates
 		<button class="navlink" mat-button routerLink="/pay" routerLinkActive="active">Pay</button>
