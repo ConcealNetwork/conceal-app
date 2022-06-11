@@ -73,7 +73,7 @@
 				</mat-card-content>
 				<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 					<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-						<button fxFlex fxFlex="noshrink" color="accent" class="uppercase" mat-flat-button [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value!, this.toControl.value!)">Swap your tokens</button>
+						<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value!, this.toControl.value!)">Swap your tokens</button>
 					</div>
 				</mat-card-actions>
 			</mat-card>
