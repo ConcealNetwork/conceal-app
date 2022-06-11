@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from 'src/app/shared.module';
 import { MaterialModule } from 'src/app/material.module';
@@ -14,6 +15,8 @@ import { DepositsComponent } from './deposits.component';
     DepositsRoutingModule,
 		SharedModule,
 		MaterialModule,
+		FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class DepositsModule { }

@@ -11,6 +11,144 @@
 
 		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
 
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Conceal Deposits</h2>
+				</mat-card-header>
+				<mat-card-content fxLayout="column" fxLayoutGap="15px">
+
+					<div fxLayout="row" fxLayoutAlign="start">
+						<mat-icon fxFlex="20" fxFlex.xs="22" class="module_icon orange" aria-hidden="false">savings</mat-icon>
+						<p fxFlex class="text">Deposits form the backbone of the Conceal ecosystem, providing users with a decentralized and egalitarian form of cold staking that earns interests on locked deposits.</p>
+					</div>
+
+					<mat-divider fxFlex></mat-divider>
+
+					<h3 fxFlexAlign="center" class="orange title">Compound Interest Calculator</h3>
+					<div fxLayout="row" fxLayoutAlign="start">
+
+						<form [formGroup]="calculator" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px" fxFlex>
+
+							<fieldset fxLayout="column" fxFlex="noshrink" fxLayoutGap="15px">
+								<legend fxLayout="row" fxLayoutAlign="space-between center">
+									<mat-icon class="orange" aria-hidden="false">schedule</mat-icon>
+									Deposit Duration
+								</legend>
+								<div fxLayout="row" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
+									<mat-form-field hintLabel="The amount for the deposit" color="accent" appearance="fill" fxFlex="noshrink" fxLayout="column" fxFlex="50">
+										<mat-label>Amount</mat-label>
+										<input #amount matInput numeric steps="0" min="1" type="number" name="amount" placeholder="100" formControlName="amount">
+										<span matSuffix>CCX</span>
+										<mat-error *ngIf="calculator.controls.amount.hasError('required')">
+											Amount is <strong>required</strong>
+										</mat-error>
+										<mat-error *ngIf="calculator.controls.amount.hasError('pattern') || !calculator.controls.amount.valid">
+											<strong>Not a valid value</strong>
+										</mat-error>
+										<mat-error *ngIf="calculator.controls.amount.hasError('min')">
+											Must be <strong>at least 1 CCX</strong>
+										</mat-error>
+									</mat-form-field>
+									<mat-form-field hintLabel="The term of the deposit" color="accent" appearance="fill" fxFlex="50">
+										<mat-label>Fixed Term</mat-label>
+										<input #term matInput numeric steps="1" min="1" max="12" type="number" name="term" placeholder="1" formControlName="term" (input)="termChanges(term.value)">
+										<span matSuffix>Month<span *ngIf="(termLength > 1 || termLength === 0)">s</span></span>
+										<mat-error *ngIf="calculator.controls.term.hasError('required')">
+											Term is <strong>required</strong>
+										</mat-error>
+										<mat-error *ngIf="calculator.controls.term.hasError('pattern') || calculator.controls.term.hasError('minlength') || calculator.controls.term.hasError('maxlength')">
+											Term must be between <strong>1 and 12</strong>
+										</mat-error>
+									</mat-form-field>
+								</div>
+								<div *ngIf="this.showSlider" fxLayout="column">
+									<mat-slider [value]="termLength" class="slider" color="accent" thumbLabel tickInterval="1" step="1" min="0" max="12" aria-label="units" (input)="termChanges($event.value)"></mat-slider>
+								</div>
+							</fieldset>
+
+							<fieldset fxLayout="column" fxFlex="noshrink">
+								<legend fxLayout="row" fxLayoutAlign="space-between center">
+									<mat-icon class="orange" aria-hidden="false">calculate</mat-icon>
+									Calculation
+								</legend>
+								<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
+									<div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between stretch">
+										<span class="orange">Your Interest Rate</span>
+										<span class="amount">{{this.rate}} %</span>
+									</div>
+									<div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between stretch">
+										<span class="orange">Interest Earned</span>
+										<span class="amount">{{this.interest}} CCX</span>
+									</div>
+								</div>
+							</fieldset>
+
+						</form>
+
+					</div>
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<button color="accent" mat-flat-button fxFlex routerLink="/deposits/cloud">Launch Deposits</button>
+						<button color="accent" mat-stroked-button fxFlex href="https://github.com/ConcealNetwork/conceal-desktop/releases" target="_blank">Desktop Wallet</button>
+					</div>
+				</mat-card-actions>
+			</mat-card>
+
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Conceal Interest Rates</h2>
+				</mat-card-header>
+				<mat-card-content>
+
+					<div fxLayout="column">
+
+						<div fxLayout="row">
+							<mat-tab-group color="accent" mat-align-tabs="center" fxFlex>
+								<mat-tab label="Tier 1">Deposits of less then <span class="orange">10,000 CCX</span></mat-tab>
+								<mat-tab label="Tier 2">Deposits between <span class="orange">10,000 CCX</span> and <span class="orange">19,999 CCX</span></mat-tab>
+								<mat-tab label="Tier 3">Deposits of <span class="orange">20,000 CCX</span> or more</mat-tab>
+							</mat-tab-group>
+						</div>
+
+						<div fxLayout="row" fxFlex>
+							<table mat-table [dataSource]="dataSource">
+								<!--- Note that these columns can be defined in any order. The actual rendered columns are set as a property on the row definition" -->
+
+								<!-- Position Column -->
+								<ng-container matColumnDef="month">
+									<th mat-header-cell *matHeaderCellDef style="width:30%">Term</th>
+									<td mat-cell *matCellDef="let element">{{element.month}} Month<span *ngIf="element.month > 1">s</span></td>
+								</ng-container>
+
+								<!-- Name Column -->
+								<ng-container matColumnDef="tier1">
+									<th mat-header-cell *matHeaderCellDef style="width:20%">Tier 1</th>
+									<td mat-cell *matCellDef="let element">{{element.tier1.toFixed(2)}}%</td>
+								</ng-container>
+
+								<!-- Weight Column -->
+								<ng-container matColumnDef="tier2">
+									<th mat-header-cell *matHeaderCellDef style="width:20%">Tier 2</th>
+									<td mat-cell *matCellDef="let element">{{element.tier2.toFixed(2)}}%</td>
+								</ng-container>
+
+								<!-- Symbol Column -->
+								<ng-container matColumnDef="tier3">
+									<th mat-header-cell *matHeaderCellDef style="width:20%">Tier 3</th>
+									<td mat-cell *matCellDef="let element">{{element.tier3.toFixed(2)}}%</td>
+								</ng-container>
+
+								<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+								<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+							</table>
+						</div>
+
+					</div>
+
+				</mat-card-content>
+			</mat-card>
+
 		</div>
 
 	</div>
