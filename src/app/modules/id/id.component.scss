@@ -5,7 +5,7 @@
 	.modules {
 		// Large
 		@media screen and (min-width: 1920px) {
-			max-width: 1500px;
+			max-width: 1200px;
 		}
 
 	}
@@ -90,6 +90,16 @@
 	.features {
 		padding-left: 1rem;
 		padding-right: 1rem;
+	}
+
+	.screenshot {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+
+	.subheading {
+		margin-block-end: 0em;
 	}
 
 }
