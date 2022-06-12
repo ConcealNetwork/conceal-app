@@ -5,9 +5,9 @@
 		<p class="description">Bridge between networks while keeping your privacy</p>
 	</div>
 
-	<div class="swap" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="15px" fxLayoutGap.gt-md="25px" @transition>
+	<div class="swap" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
 
-		<mat-card id="cards" class="help mat-elevation-z8" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="start">
+		<mat-card id="cards" class="help mat-elevation-z8" fxFill.lt.md fxLayout="column" fxLayoutAlign="start stretch">
 
 			<div fxLayout="column" fxLayoutAlign="space-evenly">
 				<mat-nav-list>
@@ -21,64 +21,60 @@
 			</div>
 		</mat-card>
 
-		<div id="cards" fxFill fxLayout="column" fxLayoutGap="15px">
-
-			<mat-card class="swap mat-elevation-z8">
-				<mat-card-header fxLayout="column">
-					<h2 class="title">Supported Networks</h2>
-				</mat-card-header>
-				<mat-card-content>
-					<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px">
-						<div class="networks" fxLayout="column" fxFlex>
-							<div fxLayout="column" fxLayoutAlign="center stretch">
-								<div fxLayout="column">
-									<h2 class="title">From</h2>
-								</div>
-								<div>
-									<div fxLayout="row" fxLayoutAlign="center stretch">
-										<img src="./assets/images/branding/{{fromControl.value}}.png" width="100" height="100">
-									</div>
-									<mat-form-field fxFill color="accent" appearance="fill">
-										<mat-label>From Network</mat-label>
-										<mat-select [formControl]="fromControl" (selectionChange)="changeNetwork($event.value, 'from')" name="from">
-											<mat-option *ngFor="let from of fromNetwork" [value]="from.value">
-												{{from.viewValue}}
-											</mat-option>
-										</mat-select>
-									</mat-form-field>
-								</div>
+		<mat-card id="cards" class="action mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign.xs="start">
+			<mat-card-header fxLayout="column">
+				<h2 class="title">Supported Networks</h2>
+			</mat-card-header>
+			<mat-card-content>
+				<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px">
+					<div class="networks" fxLayout="column" fxFlex>
+						<div fxLayout="column" fxLayoutAlign="center stretch">
+							<div fxLayout="column">
+								<h2 class="title">From</h2>
 							</div>
-						</div>
-						<div class="networks" fxLayout="column" fxFlex>
-							<div fxLayout="column" fxLayoutAlign="center stretch">
-								<div fxLayout="column">
-									<h2 class="title">To</h2>
+							<div>
+								<div fxLayout="row" fxLayoutAlign="center stretch">
+									<img src="./assets/images/branding/{{fromControl.value}}.png" width="100" height="100">
 								</div>
-								<div>
-									<div fxLayout="row" fxLayoutAlign="center stretch">
-										<img src="./assets/images/branding/{{toControl.value}}.png" width="100" height="100">
-									</div>
-									<mat-form-field fxFill color="accent" appearance="fill">
-										<mat-label>To Network</mat-label>
-										<mat-select [formControl]="toControl" (selectionChange)="changeNetwork($event.value, 'to')" name="to">
-											<mat-option *ngFor="let to of toNetwork" [value]="to.value">
-												{{to.viewValue}}
-											</mat-option>
-										</mat-select>
-									</mat-form-field>
-								</div>
+								<mat-form-field fxFill color="accent" appearance="fill">
+									<mat-label>From Network</mat-label>
+									<mat-select [formControl]="fromControl" (selectionChange)="changeNetwork($event.value, 'from')" name="from">
+										<mat-option *ngFor="let from of fromNetwork" [value]="from.value">
+											{{from.viewValue}}
+										</mat-option>
+									</mat-select>
+								</mat-form-field>
 							</div>
 						</div>
 					</div>
-				</mat-card-content>
-				<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
-					<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-						<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value!, this.toControl.value!)">Swap your tokens</button>
+					<div class="networks" fxLayout="column" fxFlex>
+						<div fxLayout="column" fxLayoutAlign="center stretch">
+							<div fxLayout="column">
+								<h2 class="title">To</h2>
+							</div>
+							<div>
+								<div fxLayout="row" fxLayoutAlign="center stretch">
+									<img src="./assets/images/branding/{{toControl.value}}.png" width="100" height="100">
+								</div>
+								<mat-form-field fxFill color="accent" appearance="fill">
+									<mat-label>To Network</mat-label>
+									<mat-select [formControl]="toControl" (selectionChange)="changeNetwork($event.value, 'to')" name="to">
+										<mat-option *ngFor="let to of toNetwork" [value]="to.value">
+											{{to.viewValue}}
+										</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+						</div>
 					</div>
-				</mat-card-actions>
-			</mat-card>
-
-		</div>
+				</div>
+			</mat-card-content>
+			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+				<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+					<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value!, this.toControl.value!)">Swap your assets</button>
+				</div>
+			</mat-card-actions>
+		</mat-card>
 
 	</div>
 
