@@ -2,15 +2,15 @@
 	min-height: calc(100vh - 115px - 50px);
 	overflow: hidden;
 
-	.help {
-		min-width: fit-content;
-	}
-
 	.swap {
-		max-width: 550px;
+		// Large
+		@media screen and (min-width: 1920px) {
+			max-width: 1500px;
+		}
 		.networks {
 			padding: 15px;
 			border-radius: 5px;
+			min-width: 15rem;
 		}
 		.mat-card-content {
 			.title {
@@ -19,6 +19,10 @@
 				margin-block-end: 0;
 			}
 		}
+	}
+
+	.help {
+		height: fit-content;
 	}
 
 	.mat-list-item {
