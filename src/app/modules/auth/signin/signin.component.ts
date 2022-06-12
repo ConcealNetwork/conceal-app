@@ -23,7 +23,6 @@ export class SigninComponent implements AfterViewInit, OnInit {
 	date: Date = new Date();
 	timeOfDay: number = this.date.getHours();
 	loginTypes: string[] = ['Email Address', 'Username'];
-	twofa: boolean = false;
 
 	constructor(
 		private authService: AuthService,
@@ -45,16 +44,13 @@ export class SigninComponent implements AfterViewInit, OnInit {
 
 	form: FormGroup = new FormGroup({
 		passwordFormControl: new FormControl('', [
-			Validators.required
-		])
-	});
-
-	twofaForm: FormGroup = new FormGroup({
-		twofaFormControl: new FormControl('', [
-			Validators.minLength(6),
-			Validators.maxLength(6),
-			Validators.pattern('^[0-9]*$')
-		])
+      Validators.required
+    ]),
+    twofaFormControl: new FormControl('', [
+      Validators.minLength(6),
+      Validators.maxLength(6),
+      Validators.pattern('^[0-9]*$')
+    ])
 	});
 
 	changeAuthType(type: string) {
@@ -67,7 +63,7 @@ export class SigninComponent implements AfterViewInit, OnInit {
 			this.authService.login(
 				this.form.value.emailFormControl || this.form.value.usernameFormControl,
 				this.form.value.passwordFormControl,
-				this.twofaForm.value.twofaFormControl,
+				this.form.value.twofaFormControl,
 				token).subscribe((data: any) => {
 				if (data.message.token && data.result === 'success') {
 					this.isLoading = false;
@@ -89,9 +85,6 @@ export class SigninComponent implements AfterViewInit, OnInit {
 					this.zone.run(() => {
 						this.router.navigate([this.returnURL]);
 					});
-				} else if (data.result === 'error' && data.message == 'Looks like you have two factor authentication enabled. Please provide the code.') {
-					this.twofa = true;
-					this.isLoading = false;
 				} else {
 					this.isLoading = false;
 					this.zone.run(() => {

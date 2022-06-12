@@ -1,4 +1,4 @@
-<mat-card class="login mat-elevation-z6" *ngIf="!twofa">
+<mat-card class="login mat-elevation-z6">
 
 	<mat-card-header fxLayout="column" fxLayoutGap="5px">
 		<h2 class="title">Conceal Cloud Login</h2>
@@ -47,32 +47,6 @@
 				</mat-error>
 			</mat-form-field>
 
-			<div fxLayout="column" fxLayoutAlign="start space-between" fxLayoutGap="15px">
-				<!-- Invisible captcha -->
-				<button ngHcaptchaInvisibleButton mat-flat-button color="accent" (verify)="onVerify($event)" (expired)="onExpired($event)" (error)="onError($event)" [class.spinner]="this.isLoading" [disabled]="this.isLoading || !this.form.valid || !this.login.value.loginTypeFromControl">{{ !this.isLoading ? 'Login' : 'Loading' }}</button>
-			</div>
-
-			<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-				<a mat-stroked-button fxFlex (click)="changeAuthType('signUp')">Create Account</a>
-				<a mat-stroked-button fxFlex (click)="changeAuthType('reset')">Password Recovery</a>
-			</div>
-
-		</form>
-
-	</mat-card-content>
-
-</mat-card>
-
-<mat-card class="signup mat-elevation-z6" *ngIf="twofa">
-
-	<mat-card-header fxLayout="column" fxLayoutGap="5px">
-		<h2 class="title">2FA Verification Code</h2>
-	</mat-card-header>
-
-	<mat-card-content fxLayout="column" fxLayoutGap="15px">
-		<form [formGroup]="twofaForm" fxLayout="column" fxLayoutGap="25px">
-			<span>Please enter the 6-digit code from your authentication app.</span>
-
 			<mat-form-field fxFill hintLabel="6 Numbers" appearance="fill" color="accent">
 				<mat-label>2FA (If Enabled)</mat-label>
 				<input #twofa matInput type="text" inputmode="numeric" minlength="6" maxlength="6" placeholder="00000" pattern="[0-9]*" formControlName="twofaFormControl" autocomplete="one-time-code">
@@ -80,19 +54,26 @@
 					<mat-icon>content_paste</mat-icon>
 				</button>
 				<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
-				<mat-error *ngIf="twofaForm.controls.twofaFormControl.hasError('minlength') || twofaForm.controls.twofaFormControl.hasError('maxlength')">
+				<mat-error *ngIf="form.controls.twofaFormControl.hasError('minlength') || form.controls.twofaFormControl.hasError('maxlength')">
 					2FA code should be <strong>6 numbers</strong>
 				</mat-error>
-				<mat-error *ngIf="twofaForm.controls.twofaFormControl.hasError('pattern')">
+				<mat-error *ngIf="form.controls.twofaFormControl.hasError('pattern')">
 					2FA code should be <strong>only numbers</strong>
 				</mat-error>
 			</mat-form-field>
 
 			<div fxLayout="column" fxLayoutAlign="start space-between" fxLayoutGap="15px">
+				<!-- Invisible captcha -->
 				<button ngHcaptchaInvisibleButton mat-flat-button color="accent" (verify)="onVerify($event)" (expired)="onExpired($event)" (error)="onError($event)" [class.spinner]="this.isLoading" [disabled]="this.isLoading || !this.form.valid || !this.login.value.loginTypeFromControl">{{ !this.isLoading ? 'Login' : 'Loading' }}</button>
 			</div>
 
+			<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+				<a mat-stroked-button fxFlex (click)="changeAuthType('signUp')">Create Account</a>
+				<a mat-stroked-button fxFlex (click)="changeAuthType('reset')">Password Reset</a>
+			</div>
+
 		</form>
+
 	</mat-card-content>
 
 </mat-card>
