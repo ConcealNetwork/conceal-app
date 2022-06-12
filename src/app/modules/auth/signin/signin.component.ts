@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NgHcaptchaService } from 'ng-hcaptcha';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
@@ -16,6 +15,7 @@ import { CordovaService } from 'src/app/shared/services/cordova.service';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
+
 export class SigninComponent implements AfterViewInit, OnInit {
 
 	isLoading: boolean = false;
@@ -23,8 +23,9 @@ export class SigninComponent implements AfterViewInit, OnInit {
 	date: Date = new Date();
 	timeOfDay: number = this.date.getHours();
 	loginTypes: string[] = ['Email Address', 'Username'];
+	twofa: boolean = false;
 
-  constructor(
+	constructor(
 		private authService: AuthService,
 		private dataService: DataService,
 		private snackbarService: SnackbarService,
@@ -34,100 +35,104 @@ export class SigninComponent implements AfterViewInit, OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private zone: NgZone,
-		private hcaptchaService: NgHcaptchaService,
-	) { }
+	) {}
 
 	login: FormGroup = new FormGroup({
 		loginTypeFromControl: new FormControl('', [
-      Validators.required
-    ]),
+			Validators.required
+		]),
 	});
 
 	form: FormGroup = new FormGroup({
 		passwordFormControl: new FormControl('', [
-      Validators.required
-    ]),
-    twofaFormControl: new FormControl('', [
-      Validators.minLength(6),
-      Validators.maxLength(6),
-      Validators.pattern('^[0-9]*$')
-    ])
+			Validators.required
+		])
+	});
+
+	twofaForm: FormGroup = new FormGroup({
+		twofaFormControl: new FormControl('', [
+			Validators.minLength(6),
+			Validators.maxLength(6),
+			Validators.pattern('^[0-9]*$')
+		])
 	});
 
 	changeAuthType(type: string) {
-    this.dataService.announceAuthType(type);
-  }
+		this.dataService.announceAuthType(type);
+	}
 
-	submit() {
-		if(this.form.valid) {
+	onVerify(token: string) {
+		if (this.form.valid) {
 			this.isLoading = true;
-			this.hcaptchaService.verify().subscribe(
-				(result) => {
-					this.authService.login(
-						this.form.value.emailFormControl || this.form.value.usernameFormControl,
-						this.form.value.passwordFormControl,
-						this.form.value.twofaFormControl,
-						result
-					).subscribe((data: any) => {
-						if (data.message.token && data.result === 'success') {
-							this.isLoading = false;
-							// set auth token
-							this.authService.setToken(data.message.token);
-							// Check if 2fa is enabled
-							this.authService.check2fa().subscribe((result: any) => {
-								if(!result.message.enabled) this.zone.run(() => {
-									this.dialogService.openTwoFactorDialog();
-								})
-							});
-							// Login message
-							this.authService.getUser().subscribe((result: any) => {
-								if(result.message.name) this.zone.run(() => {
-								 	this.snackbarService.openSnackBar(`👋 ${this.timeOfDay < 12 ? 'Good morning' : 'Good evening'}, ${result.message.name} (Logged in)`, 'Dismiss')
-								})
-							});
-							// navigate to previous route
-							this.zone.run(() => {
-								this.router.navigate([this.returnURL]);
-							});
-						}	else {
-							this.isLoading = false;
-							this.zone.run(() => {
-								this.snackbarService.openSnackBar(data.message, 'Dismiss');
-							});
-						}
-					})
-				},
-				(err) => {
-					this.snackbarService.openSnackBar(err, 'Dismiss');
-				},
-				() => {
-					console.log('hCaptcha Completed');
+			this.authService.login(
+				this.form.value.emailFormControl || this.form.value.usernameFormControl,
+				this.form.value.passwordFormControl,
+				this.twofaForm.value.twofaFormControl,
+				token).subscribe((data: any) => {
+				if (data.message.token && data.result === 'success') {
+					this.isLoading = false;
+					// set auth token
+					this.authService.setToken(data.message.token);
+					// Check if 2fa is enabled
+					this.authService.check2fa().subscribe((result: any) => {
+						if (!result.message.enabled) this.zone.run(() => {
+							this.dialogService.openTwoFactorDialog();
+						})
+					});
+					// Login message
+					this.authService.getUser().subscribe((result: any) => {
+						if (result.message.name) this.zone.run(() => {
+							this.snackbarService.openSnackBar(`👋 ${this.timeOfDay < 12 ? 'Good morning' : 'Good evening'}, ${result.message.name} (Logged in)`, 'Dismiss')
+						})
+					});
+					// navigate to previous route
+					this.zone.run(() => {
+						this.router.navigate([this.returnURL]);
+					});
+				} else if (data.result === 'error' && data.message == 'Looks like you have two factor authentication enabled. Please provide the code.') {
+					this.twofa = true;
+					this.isLoading = false;
+				} else {
+					this.isLoading = false;
+					this.zone.run(() => {
+						this.snackbarService.openSnackBar(data.message, 'Dismiss');
+					});
 				}
-			)
+			});
 		}
+	}
+
+	onExpired(response: any) {
+		// The verification expired.
+		this.snackbarService.openSnackBar(response, 'Dismiss');
+	}
+
+	onError(error: any) {
+		// An error occurred during the verification process.
+		this.snackbarService.openSnackBar(error, 'Dismiss');
 	}
 
 	paste() {
 		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
 			this.clipboard.paste().then(
 				(resolve: string) => {
-						this.form.controls.twofaFormControl.setValue(resolve);
-						this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
-					},
-					(reject: string) => {
-						this.snackbarService.openSnackBar(reject, 'Dismiss');
-					}
+					this.form.controls.twofaFormControl.setValue(resolve);
+					this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+				},
+				(reject: string) => {
+					this.snackbarService.openSnackBar(reject, 'Dismiss');
+				}
 			)
 		} else if (navigator.clipboard) {
 			if (navigator.clipboard) {
 				navigator.clipboard.readText()
-				.then(text => {
-					this.form.controls.twofaFormControl.setValue(text);
-					this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
-				})
-				.catch(err => {
-					this.snackbarService.openSnackBar(err, 'Dismiss');
-				});
+					.then(text => {
+						this.form.controls.twofaFormControl.setValue(text);
+						this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
+					})
+					.catch(err => {
+						this.snackbarService.openSnackBar(err, 'Dismiss');
+					});
 			}
 		}
 	}
@@ -153,8 +158,10 @@ export class SigninComponent implements AfterViewInit, OnInit {
 		})
 	}
 
-  ngOnInit(): void {
-		this.route.queryParams.subscribe(x => {this.returnURL = x.return || ''});
+	ngOnInit(): void {
+		this.route.queryParams.subscribe(x => {
+			this.returnURL = x.return || ''
+		});
 	}
 
 }
