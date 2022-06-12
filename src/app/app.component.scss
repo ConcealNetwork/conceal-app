@@ -17,6 +17,7 @@ mat-sidenav-content  {
 .container {
 	height: 100vh;
   overflow: auto; // Keeps header from scrolling away
+	padding: 0px;
 }
 
 .mat-drawer-content {
