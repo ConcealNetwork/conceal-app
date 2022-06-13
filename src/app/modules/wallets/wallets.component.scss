@@ -53,9 +53,11 @@
 	}
 
 	.module_icon {
-		font-size: 3.8rem;
+		font-size: 4rem;
+		margin-right: 15px;
 		height: 100%;
-		min-width: 60px;
+		width: fit-content;
+		line-height: 1;
 	}
 
 	.mat-card-content {
@@ -63,6 +65,7 @@
 	}
 
 	.text {
+		font-size: 1rem;
 		margin: 0;
 	}
 

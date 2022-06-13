@@ -64,6 +64,15 @@
 
 	.text {
 		margin: 0;
+		font-size: 1rem;
+	}
+
+	.module_icon {
+		font-size: 4rem;
+		margin-right: 15px;
+		height: 100%;
+		width: fit-content;
+		line-height: 1;
 	}
 
 	.mat-card-actions {
