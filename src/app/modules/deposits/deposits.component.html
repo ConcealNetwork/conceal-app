@@ -24,7 +24,7 @@
 
 					<mat-divider fxFlex></mat-divider>
 
-					<h3 fxFlexAlign="center" class="orange title">Interest Calculator</h3>
+					<h3 fxFlexAlign="center" class="orange subheading">Interest Calculator</h3>
 					<div fxLayout="row" fxLayoutAlign="start">
 
 						<form [formGroup]="calculator" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px" fxFlex>
@@ -34,7 +34,7 @@
 									<mat-icon class="orange" aria-hidden="false">schedule</mat-icon>
 									Deposit Duration
 								</legend>
-								<div fxLayout="row" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
+								<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
 									<mat-form-field hintLabel="The amount for the deposit" color="accent" appearance="fill" fxFlex="noshrink" fxLayout="column" fxFlex="50">
 										<mat-label>Amount</mat-label>
 										<input #amount matInput numeric steps="0" min="1" type="number" name="amount" placeholder="100" formControlName="amount">
