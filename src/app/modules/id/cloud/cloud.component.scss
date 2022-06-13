@@ -1,6 +1,12 @@
 .container {
-	min-height: calc(100vh - 115px - 50px);
-	overflow: hidden;
+	height: auto !important;
+
+	.modules {
+		// Large
+		@media screen and (min-width: 1920px) {
+			max-width: 1400px;
+		}
+	}
 
 	.form {
 		max-width: 550px;

@@ -1,6 +1,6 @@
 <app-loader *ngIf="this.isWalletsLoading || this.isIDsLoading"></app-loader>
 
-<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start" *ngIf="!this.isWalletsLoading && !this.isIDsLoading">
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxFill fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="!this.isWalletsLoading && !this.isIDsLoading">
 
 	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
 		<h1 class="headline">Conceal <strong>ID</strong></h1>
@@ -9,7 +9,7 @@
 
 	<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
 
-		<div class="help" fxLayout="column" fxLayoutAlign="start stretch" fxFill.lt.sm fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
+		<div class="help" fxLayout="column" fxLayoutAlign="start stretch" fxHide fxShow.gt-xs fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
 			<mat-card id="cards" class="mat-elevation-z8">
 				<div fxLayout="column" fxLayoutAlign="space-evenly">
 					<mat-nav-list>
@@ -120,7 +120,7 @@
 			</mat-card>
 		</div>
 
-		<div class="ids" fxLayout="column" fxLayoutAlign="start stretch" fxFill.lt.sm fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="this.ids.length > 0">
+		<div class="ids" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="this.ids.length > 0">
 			<mat-card id="cards" class="mat-elevation-z8" *ngFor="let value of ids">
 
 				<mat-card-header fxLayout="column">

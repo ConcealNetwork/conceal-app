@@ -1,323 +1,325 @@
 <app-loader *ngIf="this.depositsLoading || this.walletsLoading"></app-loader>
 
-<div class="container" fxLayout="column" fxLayoutGap="15px" fxLayoutGap.gt-sm="25px" *ngIf="!this.depositsLoading && !this.walletsLoading" @transition>
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxFill fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="!this.depositsLoading && !this.walletsLoading" @transition>
 
-	<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
+	<div class="modules" fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
 
-		<!-- Deposits -->
-		<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid">
+		<div fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
+			<!-- Deposits -->
+			<div [ngClass]="{'emulated-flex-gap' : this.getThemingService().isSmallScreen}" fxLayout="row wrap" fxLayoutGap="0px" fxLayoutGap.gt-sm="25px grid">
 
-			<!-- New Deposit -->
-			<div id="cards" fxLayout="column" fxFlex="100" fxFlex.gt-md="35">
-				<form [formGroup]="deposit">
-					<mat-card class="mat-elevation-z6">
+				<!-- New Deposit -->
+				<div id="cards" fxLayout="column" fxFlex="100" fxFlex.gt-md="35">
+					<form [formGroup]="deposit">
+						<mat-card class="mat-elevation-z6">
 
-						<mat-card-header fxLayout="column">
-							<h2 class="title">Create Deposit</h2>
-						</mat-card-header>
+							<mat-card-header fxLayout="column">
+								<h2 class="title">Create Deposit</h2>
+							</mat-card-header>
 
-						<mat-card-content fxLayout="column" fxLayoutGap="15px">
+							<mat-card-content fxLayout="column" fxLayoutGap="15px">
 
-							<fieldset fxLayout="column" fxFlex="noshrink">
-								<legend fxLayout="row" fxLayoutAlign="space-between center">
-									<mat-icon class="orange" aria-hidden="false">price_change</mat-icon>
-									Deposit Value
-								</legend>
-
-								<div fxLayout="column" fxFlex="noshrink" fxLayoutGap="25px">
-
-									<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-										<mat-form-field hintLabel="The wallet for the deposit" color="accent" appearance="fill" fxFlex="noshrink">
-											<mat-label>Wallet</mat-label>
-											<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">
-												<mat-option [value]="item.key" *ngFor="let item of this.wallets | keyvalue" >
-													{{ this.getHelperService().formatAddress(item.key) + ' (' + this.getHelperService().formatAmount($any(item).value.balance, 1, 6) + ')' }}
-												</mat-option>
-											</mat-select>
-											<mat-error *ngIf="deposit.controls.wallet.hasError('required')">
-												Wallet is <strong>required</strong>
-											</mat-error>
-											<mat-error *ngIf="deposit.controls.wallet.hasError('minlength') || deposit.controls.wallet.hasError('maxlength')">
-												Address must be <strong>98 characters</strong>
-											</mat-error>
-										</mat-form-field>
-
-										<mat-form-field hintLabel="The amount for the deposit" color="accent" appearance="fill" fxFlex="noshrink">
-											<mat-label>Amount</mat-label>
-											<input #amount matInput numeric steps="0" min="1" type="number" name="amount" placeholder="100" formControlName="amount">
-											<span matSuffix>CCX</span>
-											<mat-error *ngIf="deposit.controls.amount.hasError('required')">
-												Amount is <strong>required</strong>
-											</mat-error>
-											<mat-error *ngIf="deposit.controls.amount.hasError('pattern') || !deposit.controls.amount.valid">
-												<strong>Not a valid value</strong>
-											</mat-error>
-											<mat-error *ngIf="deposit.controls.amount.hasError('min')">
-												Must be <strong>at least 1 CCX</strong>
-											</mat-error>
-										</mat-form-field>
-									</div>
-
-									<div fxLayout="row wrap" fxLayoutAlign="space-between stretch" fxFlex="noshrink" fxLayoutGap="15px">
-										<button fxFlex="noshrink" color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(25, wallet.value)" [disabled]="!this.selectedWallet">25%</button>
-										<button fxFlex="noshrink" color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(50, wallet.value)" [disabled]="!this.selectedWallet">50%</button>
-										<button fxFlex="noshrink" fxHide.xs color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 75% of balance" matTooltip="Add 75% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(75, wallet.value)" [disabled]="!this.selectedWallet">75%</button>
-										<button fxFlex="noshrink" color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(100, wallet.value)" [disabled]="!this.selectedWallet">Max</button>
-									</div>
-
-								</div>
-
-							</fieldset>
-
-							<fieldset fxLayout="column" fxFlex="noshrink">
-								<legend fxLayout="row" fxLayoutAlign="space-between center">
-									<mat-icon class="orange" aria-hidden="false">schedule</mat-icon>
-									Deposit Duration
-								</legend>
-								<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
-									<mat-form-field hintLabel="The term of the deposit" color="accent" appearance="fill" fxFlex="noshrink">
-										<mat-label>Fixed Term</mat-label>
-										<input #term matInput numeric steps="1" min="1" max="12" type="number" name="term" placeholder="1" formControlName="term" (input)="termChanges(term.value)">
-										<span matSuffix>Month<span *ngIf="(termLength > 1 || termLength === 0)">s</span></span>
-										<mat-error *ngIf="deposit.controls.term.hasError('required')">
-											Term is <strong>required</strong>
-										</mat-error>
-										<mat-error *ngIf="deposit.controls.term.hasError('pattern') || deposit.controls.term.hasError('minlength') || deposit.controls.term.hasError('maxlength')">
-											Term must be between <strong>1 and 12</strong>
-										</mat-error>
-									</mat-form-field>
-									<div *ngIf="this.showSlider" fxLayout="column">
-										<mat-slider [value]="termLength" class="slider" color="accent" thumbLabel tickInterval="1" step="1" min="0" max="12" aria-label="units" (input)="termChanges($event.value)"></mat-slider>
-									</div>
-								</div>
-							</fieldset>
-
-							<fieldset fxLayout="column" fxFlex="noshrink">
-								<legend fxLayout="row" fxLayoutAlign="space-between center">
-									<mat-icon class="orange" aria-hidden="false">calculate</mat-icon>
-									Calculation
-								</legend>
-								<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
-									<div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between stretch">
-										<span class="orange">Your Rate</span>
-										<span class="amount">{{this.rate}} %</span>
-									</div>
-									<div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between stretch">
-										<span class="orange">Your Interest</span>
-										<span class="amount">{{this.interest}} CCX</span>
-									</div>
-									<div fxLayout="row wrap" fxLayoutAlign="space-between stretch" fxFlex="noshrink">
-										<button type="button" mat-stroked-button fxFlex (click)="getDialogService().openMatrixDialog()">View interest rates</button>
-									</div>
-								</div>
-							</fieldset>
-
-						</mat-card-content>
-
-						<mat-card-actions fxLayout="column">
-							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-								<button type="submit" color="warn" mat-stroked-button fxFlex="50" (click)="reset()">Reset</button>
-								<button type="submit" color="accent" mat-flat-button fxFlex="50" (click)="submit()" [disabled]="!deposit.valid">Create Deposit</button>
-							</div>
-						</mat-card-actions>
-
-					</mat-card>
-				</form>
-			</div>
-
-			<!-- Pending Deposits -->
-			<div id="cards" fxLayout="column" fxFlex="100"  fxFlex.gt-md="65">
-				<mat-card class="deposit mat-elevation-z6" fxFlex="100%">
-					<mat-card-header fxLayout="column">
-						<h2 class="title">Pending Deposits</h2>
-					</mat-card-header>
-					<mat-card-content>
-						<div *ngIf="this.deposits.length == 0">
-							<span class="nothing">No deposits...</span>
-						</div>
-						<div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="15px grid" *ngIf="this.deposits.length !== 0">
-							<div fxLayout="column" fxLayoutGap="15px" fxFlex="33.33" *ngFor="let item of (this.deposits | filter:'spendingTransactionHash') | orderByImpure: 'height'">
-								<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" fxFlex *ngIf="item.locked">
-									<legend class="" fxLayout="row" fxLayoutAlign="space-between center">
-										<mat-icon class="orange" aria-hidden="false">lock</mat-icon>
-										Unlocks {{this.getHelperService().getUnlockTime(item.unlockHeight, this.blockchainHeight)}}
+								<fieldset fxLayout="column" fxFlex="noshrink">
+									<legend fxLayout="row" fxLayoutAlign="space-between center">
+										<mat-icon class="orange" aria-hidden="false">price_change</mat-icon>
+										Deposit Value
 									</legend>
-									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Wallet</span>
-										<span class="amount">{{this.getHelperService().formatAddress(item.address || '')}}</span>
-									</div>
-									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Created</span>
-										<span class="amount">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
-									</div>
-									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Deposited</span>
-										<span class="amount">{{(item.amount / 1000000).toFixed(6)}} CCX</span>
-									</div>
-									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Earning</span>
-										<span class="amount">{{(item.interest / 1000000).toFixed(6)}} CCX</span>
-									</div>
-									<div class="progress" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
-										<div fxLayout="row">
-											<span class="title">Progress:</span>
-											<span class="amount">{{this.getHelperService().getUnlockPercent(item.height, item.unlockHeight, this.blockchainHeight)}}%</span>
+
+									<div fxLayout="column" fxFlex="noshrink" fxLayoutGap="25px">
+
+										<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+											<mat-form-field hintLabel="The wallet for the deposit" color="accent" appearance="fill" fxFlex="noshrink">
+												<mat-label>Wallet</mat-label>
+												<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">
+													<mat-option [value]="item.key" *ngFor="let item of this.wallets | keyvalue" >
+														{{ this.getHelperService().formatAddress(item.key) + ' (' + this.getHelperService().formatAmount($any(item).value.balance, 1, 6) + ')' }}
+													</mat-option>
+												</mat-select>
+												<mat-error *ngIf="deposit.controls.wallet.hasError('required')">
+													Wallet is <strong>required</strong>
+												</mat-error>
+												<mat-error *ngIf="deposit.controls.wallet.hasError('minlength') || deposit.controls.wallet.hasError('maxlength')">
+													Address must be <strong>98 characters</strong>
+												</mat-error>
+											</mat-form-field>
+
+											<mat-form-field hintLabel="The amount for the deposit" color="accent" appearance="fill" fxFlex="noshrink">
+												<mat-label>Amount</mat-label>
+												<input #amount matInput numeric steps="0" min="1" type="number" name="amount" placeholder="100" formControlName="amount">
+												<span matSuffix>CCX</span>
+												<mat-error *ngIf="deposit.controls.amount.hasError('required')">
+													Amount is <strong>required</strong>
+												</mat-error>
+												<mat-error *ngIf="deposit.controls.amount.hasError('pattern') || !deposit.controls.amount.valid">
+													<strong>Not a valid value</strong>
+												</mat-error>
+												<mat-error *ngIf="deposit.controls.amount.hasError('min')">
+													Must be <strong>at least 1 CCX</strong>
+												</mat-error>
+											</mat-form-field>
 										</div>
-										<mat-progress-bar color="accent" mode="buffer" [value]="this.getHelperService().getUnlockPercent(item.height, item.unlockHeight, this.blockchainHeight)"></mat-progress-bar>
-									</div>
-								</fieldset>
-								<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" fxFlex *ngIf="!item.locked">
-									<legend class="" fxLayout="row" fxLayoutAlign="space-between center">
-										<mat-icon class="unlocked" aria-hidden="false">lock_open</mat-icon>
-										Unlocked
-									</legend>
-									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Wallet</span>
-										<span class="amount">{{this.getHelperService().formatAddress(item.address || '')}}</span>
-									</div>
-									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Created</span>
-										<span class="amount">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
-									</div>
-									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Deposited</span>
-										<span class="amount">{{(item.amount / 1000000).toFixed(6)}} CCX</span>
-									</div>
-									<div fxLayout="row" fxLayoutAlign="space-between stretch">
-										<span class="title">Earning</span>
-										<span class="amount">{{(item.interest / 1000000).toFixed(6)}} CCX</span>
-									</div>
-									<button type="button" class="ready" mat-flat-button fxFlex (click)="unlock(item.depositId)" [disabled]="this.isUnlocking">Redeem Deposit</button>
-								</fieldset>
-							</div>
-						</div>
-					</mat-card-content>
-				</mat-card>
-			</div>
 
+										<div fxLayout="row wrap" fxLayoutAlign="space-between stretch" fxFlex="noshrink" fxLayoutGap="15px">
+											<button fxFlex="noshrink" color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 25% of balance" matTooltip="Add 25% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(25, wallet.value)" [disabled]="!this.selectedWallet">25%</button>
+											<button fxFlex="noshrink" color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 50% of balance" matTooltip="Add 50% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(50, wallet.value)" [disabled]="!this.selectedWallet">50%</button>
+											<button fxFlex="noshrink" fxHide.xs color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 75% of balance" matTooltip="Add 75% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(75, wallet.value)" [disabled]="!this.selectedWallet">75%</button>
+											<button fxFlex="noshrink" color="accent" class="balance" mat-stroked-button aria-hidden="false" aria-label="Add 100% of balance" matTooltip="Add 100% of balance" matTooltipPosition="below" matTooltipClass="custom-tooltip" type="button" (click)="setAmount(100, wallet.value)" [disabled]="!this.selectedWallet">Max</button>
+										</div>
+
+									</div>
+
+								</fieldset>
+
+								<fieldset fxLayout="column" fxFlex="noshrink">
+									<legend fxLayout="row" fxLayoutAlign="space-between center">
+										<mat-icon class="orange" aria-hidden="false">schedule</mat-icon>
+										Deposit Duration
+									</legend>
+									<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
+										<mat-form-field hintLabel="The term of the deposit" color="accent" appearance="fill" fxFlex="noshrink">
+											<mat-label>Fixed Term</mat-label>
+											<input #term matInput numeric steps="1" min="1" max="12" type="number" name="term" placeholder="1" formControlName="term" (input)="termChanges(term.value)">
+											<span matSuffix>Month<span *ngIf="(termLength > 1 || termLength === 0)">s</span></span>
+											<mat-error *ngIf="deposit.controls.term.hasError('required')">
+												Term is <strong>required</strong>
+											</mat-error>
+											<mat-error *ngIf="deposit.controls.term.hasError('pattern') || deposit.controls.term.hasError('minlength') || deposit.controls.term.hasError('maxlength')">
+												Term must be between <strong>1 and 12</strong>
+											</mat-error>
+										</mat-form-field>
+										<div *ngIf="this.showSlider" fxLayout="column">
+											<mat-slider [value]="termLength" class="slider" color="accent" thumbLabel tickInterval="1" step="1" min="0" max="12" aria-label="units" (input)="termChanges($event.value)"></mat-slider>
+										</div>
+									</div>
+								</fieldset>
+
+								<fieldset fxLayout="column" fxFlex="noshrink">
+									<legend fxLayout="row" fxLayoutAlign="space-between center">
+										<mat-icon class="orange" aria-hidden="false">calculate</mat-icon>
+										Calculation
+									</legend>
+									<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px">
+										<div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between stretch">
+											<span class="orange">Your Rate</span>
+											<span class="amount">{{this.rate}} %</span>
+										</div>
+										<div fxLayout="row" fxFlex="50" fxLayoutAlign="space-between stretch">
+											<span class="orange">Your Interest</span>
+											<span class="amount">{{this.interest}} CCX</span>
+										</div>
+										<div fxLayout="row wrap" fxLayoutAlign="space-between stretch" fxFlex="noshrink">
+											<button type="button" mat-stroked-button fxFlex (click)="getDialogService().openMatrixDialog()">View interest rates</button>
+										</div>
+									</div>
+								</fieldset>
+
+							</mat-card-content>
+
+							<mat-card-actions fxLayout="column">
+								<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+									<button type="submit" color="warn" mat-stroked-button fxFlex="50" (click)="reset()">Reset</button>
+									<button type="submit" color="accent" mat-flat-button fxFlex="50" (click)="submit()" [disabled]="!deposit.valid">Create Deposit</button>
+								</div>
+							</mat-card-actions>
+
+						</mat-card>
+					</form>
+				</div>
+
+				<!-- Pending Deposits -->
+				<div id="cards" fxLayout="column" fxFlex="100"  fxFlex.gt-md="65">
+					<mat-card class="deposit mat-elevation-z6" fxFlex="100%">
+						<mat-card-header fxLayout="column">
+							<h2 class="title">Pending Deposits</h2>
+						</mat-card-header>
+						<mat-card-content>
+							<div *ngIf="this.deposits.length == 0">
+								<span class="nothing">No deposits...</span>
+							</div>
+							<div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="15px grid" *ngIf="this.deposits.length !== 0">
+								<div fxLayout="column" fxLayoutGap="15px" fxFlex="33.33" *ngFor="let item of (this.deposits | filter:'spendingTransactionHash') | orderByImpure: 'height'">
+									<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" fxFlex *ngIf="item.locked">
+										<legend class="" fxLayout="row" fxLayoutAlign="space-between center">
+											<mat-icon class="orange" aria-hidden="false">lock</mat-icon>
+											Unlocks {{this.getHelperService().getUnlockTime(item.unlockHeight, this.blockchainHeight)}}
+										</legend>
+										<div fxLayout="row" fxLayoutAlign="space-between stretch">
+											<span class="title">Wallet</span>
+											<span class="amount">{{this.getHelperService().formatAddress(item.address || '')}}</span>
+										</div>
+										<div fxLayout="row" fxLayoutAlign="space-between stretch">
+											<span class="title">Created</span>
+											<span class="amount">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
+										</div>
+										<div fxLayout="row" fxLayoutAlign="space-between stretch">
+											<span class="title">Deposited</span>
+											<span class="amount">{{(item.amount / 1000000).toFixed(6)}} CCX</span>
+										</div>
+										<div fxLayout="row" fxLayoutAlign="space-between stretch">
+											<span class="title">Earning</span>
+											<span class="amount">{{(item.interest / 1000000).toFixed(6)}} CCX</span>
+										</div>
+										<div class="progress" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+											<div fxLayout="row">
+												<span class="title">Progress:</span>
+												<span class="amount">{{this.getHelperService().getUnlockPercent(item.height, item.unlockHeight, this.blockchainHeight)}}%</span>
+											</div>
+											<mat-progress-bar color="accent" mode="buffer" [value]="this.getHelperService().getUnlockPercent(item.height, item.unlockHeight, this.blockchainHeight)"></mat-progress-bar>
+										</div>
+									</fieldset>
+									<fieldset class="deposits" fxLayout="column" fxLayoutGap="5px" fxFlex *ngIf="!item.locked">
+										<legend class="" fxLayout="row" fxLayoutAlign="space-between center">
+											<mat-icon class="unlocked" aria-hidden="false">lock_open</mat-icon>
+											Unlocked
+										</legend>
+										<div fxLayout="row" fxLayoutAlign="space-between stretch">
+											<span class="title">Wallet</span>
+											<span class="amount">{{this.getHelperService().formatAddress(item.address || '')}}</span>
+										</div>
+										<div fxLayout="row" fxLayoutAlign="space-between stretch">
+											<span class="title">Created</span>
+											<span class="amount">{{this.getHelperService().formatDatetime(item.timestamp)}}</span>
+										</div>
+										<div fxLayout="row" fxLayoutAlign="space-between stretch">
+											<span class="title">Deposited</span>
+											<span class="amount">{{(item.amount / 1000000).toFixed(6)}} CCX</span>
+										</div>
+										<div fxLayout="row" fxLayoutAlign="space-between stretch">
+											<span class="title">Earning</span>
+											<span class="amount">{{(item.interest / 1000000).toFixed(6)}} CCX</span>
+										</div>
+										<button type="button" class="ready" mat-flat-button fxFlex (click)="unlock(item.depositId)" [disabled]="this.isUnlocking">Redeem Deposit</button>
+									</fieldset>
+								</div>
+							</div>
+						</mat-card-content>
+					</mat-card>
+				</div>
+
+			</div>
 		</div>
 
-	</div>
+		<!-- Deposit History -->
+		<div class="search" fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
+			<mat-card id="cards" class="mat-elevation-z6">
 
-	<!-- Deposit History -->
-	<div class="search" fxLayout="column" fxFlex="auto" fxLayoutAlign="start">
-		<mat-card id="cards" class="mat-elevation-z6">
+				<mat-card-header fxLayout="column">
+					<div fxLayout="row" class="controls" fxLayoutAlign="center center">
+						<mat-form-field color="accent" fxFlex="auto" class="filter" appearance="standard">
+							<mat-label class="searchbox">Search Deposits</mat-label>
+							<input matInput (keyup)="applyFilter($event)">
+							<mat-icon color="accent" matSuffix>search</mat-icon>
+						</mat-form-field>
+					</div>
+				</mat-card-header>
 
-			<mat-card-header fxLayout="column">
-				<div fxLayout="row" class="controls" fxLayoutAlign="center center">
-					<mat-form-field color="accent" fxFlex="auto" class="filter" appearance="standard">
-						<mat-label class="searchbox">Search Deposits</mat-label>
-						<input matInput (keyup)="applyFilter($event)">
-						<mat-icon color="accent" matSuffix>search</mat-icon>
-					</mat-form-field>
-				</div>
-			</mat-card-header>
+				<mat-card-content fxLayout="column">
+					<mat-progress-bar color="accent" mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+					<table [hidden]="isLoadingResults" class="transactions" mat-table [dataSource]="dataSource" matSort matSortDisableClear matSortActive="timestamp" matSortDirection="desc">
 
-			<mat-card-content fxLayout="column">
-				<mat-progress-bar color="accent" mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
-				<table [hidden]="isLoadingResults" class="transactions" mat-table [dataSource]="dataSource" matSort matSortDisableClear matSortActive="timestamp" matSortDirection="desc">
+						<!-- timestamp column -->
+						<ng-container matColumnDef="timestamp">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header>Locked Time</th>
+							<td mat-cell *matCellDef="let row">
+								<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
+									<mat-icon class="icon" *ngIf="!isSmallScreen" aria-hidden="true">event</mat-icon>
+									{{getHelperService().formatDatetime(row.timestamp)}}
+								</div>
+							</td>
+						</ng-container>
 
-					<!-- timestamp column -->
-					<ng-container matColumnDef="timestamp">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header>Locked Time</th>
-						<td mat-cell *matCellDef="let row">
-							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
-								<mat-icon class="icon" *ngIf="!isSmallScreen" aria-hidden="true">event</mat-icon>
-								{{getHelperService().formatDatetime(row.timestamp)}}
-							</div>
-						</td>
-					</ng-container>
+						<!-- term column -->
+						<ng-container matColumnDef="term">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header >Unlock Time</th>
+							<td mat-cell *matCellDef="let row" class="capitalize">
+								{{this.getHelperService().getUnlockTime(row.unlockHeight, this.blockchainHeight)}}
+							</td>
+						</ng-container>
 
-					<!-- term column -->
-					<ng-container matColumnDef="term">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header >Unlock Time</th>
-						<td mat-cell *matCellDef="let row" class="capitalize">
-							{{this.getHelperService().getUnlockTime(row.unlockHeight, this.blockchainHeight)}}
-						</td>
-					</ng-container>
+						<!-- locked column -->
+						<ng-container matColumnDef="locked">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header>Locked</th>
+							<td mat-cell *matCellDef="let row">
+								<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
+									<mat-icon class="icon" *ngIf="row.locked" color="accent" aria-hidden="true">lock</mat-icon>
+									<mat-icon class="icon unlocked" *ngIf="!row.locked" aria-hidden="true">lock_open</mat-icon>
+									{{row.locked}}
+								</div>
+							</td>
+						</ng-container>
 
-					<!-- locked column -->
-					<ng-container matColumnDef="locked">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header>Locked</th>
-						<td mat-cell *matCellDef="let row">
-							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
-								<mat-icon class="icon" *ngIf="row.locked" color="accent" aria-hidden="true">lock</mat-icon>
-								<mat-icon class="icon unlocked" *ngIf="!row.locked" aria-hidden="true">lock_open</mat-icon>
-								{{row.locked}}
-							</div>
-						</td>
-					</ng-container>
+						<!-- spent column -->
+						<ng-container matColumnDef="spendingTransactionHash">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header>Redeemed</th>
+							<td mat-cell *matCellDef="let row">
+								<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
+									<mat-icon class="icon unlocked" *ngIf="row.spendingTransactionHash !== ''" aria-hidden="true">redeem</mat-icon>
+									<mat-icon class="icon" *ngIf="row.spendingTransactionHash === ''" color="accent" aria-hidden="true">pending</mat-icon>
+									{{row.spendingTransactionHash === '' ? false : true}}
+								</div>
+							</td>
+						</ng-container>
 
-					<!-- spent column -->
-					<ng-container matColumnDef="spendingTransactionHash">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header>Redeemed</th>
-						<td mat-cell *matCellDef="let row">
-							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
-								<mat-icon class="icon unlocked" *ngIf="row.spendingTransactionHash !== ''" aria-hidden="true">redeem</mat-icon>
-								<mat-icon class="icon" *ngIf="row.spendingTransactionHash === ''" color="accent" aria-hidden="true">pending</mat-icon>
-								{{row.spendingTransactionHash === '' ? false : true}}
-							</div>
-						</td>
-					</ng-container>
+						<!-- unlockHeight column -->
+						<ng-container matColumnDef="unlockHeight">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header>Unlock Height</th>
+							<td mat-cell *matCellDef="let row">
+								<div fxLayout="row" fxLayoutAlign="start center">
+									{{row.unlockHeight}}
+								</div>
+							</td>
+						</ng-container>
 
-					<!-- unlockHeight column -->
-					<ng-container matColumnDef="unlockHeight">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header>Unlock Height</th>
-						<td mat-cell *matCellDef="let row">
-							<div fxLayout="row" fxLayoutAlign="start center">
-								{{row.unlockHeight}}
-							</div>
-						</td>
-					</ng-container>
+						<!-- height column -->
+						<ng-container matColumnDef="height">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header>Lock Height</th>
+							<td mat-cell *matCellDef="let row">
+								<div fxLayout="row" fxLayoutAlign="start center">
+									{{row.height}}
+								</div>
+							</td>
+						</ng-container>
 
-					<!-- height column -->
-					<ng-container matColumnDef="height">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header>Lock Height</th>
-						<td mat-cell *matCellDef="let row">
-							<div fxLayout="row" fxLayoutAlign="start center">
-								{{row.height}}
-							</div>
-						</td>
-					</ng-container>
+						<!-- interest column -->
+						<ng-container matColumnDef="interest">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header>Interest Amount</th>
+							<td mat-cell *matCellDef="let row">
+								<div fxLayout="row" fxLayoutAlign="start center">
+									{{(row.interest / 1000000).toFixed(6)}} CCX
+								</div>
+							</td>
+						</ng-container>
 
-					<!-- interest column -->
-					<ng-container matColumnDef="interest">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header>Interest Amount</th>
-						<td mat-cell *matCellDef="let row">
-							<div fxLayout="row" fxLayoutAlign="start center">
-								{{(row.interest / 1000000).toFixed(6)}} CCX
-							</div>
-						</td>
-					</ng-container>
+						<!-- address column -->
+						<ng-container matColumnDef="address">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header>Deposit Wallet</th>
+							<td mat-cell *matCellDef="let row" class="uppercase">
+								{{this.getHelperService().formatAddress(row.address || '')}}
+							</td>
+						</ng-container>
 
-					<!-- address column -->
-					<ng-container matColumnDef="address">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header>Deposit Wallet</th>
-						<td mat-cell *matCellDef="let row" class="uppercase">
-							{{this.getHelperService().formatAddress(row.address || '')}}
-						</td>
-					</ng-container>
+						<!-- amount column -->
+						<ng-container matColumnDef="amount">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header>Deposit Amount</th>
+							<td mat-cell *matCellDef="let row">
+								{{(row.amount / 1000000).toFixed(6)}} CCX
+							</td>
+						</ng-container>
 
-					<!-- amount column -->
-					<ng-container matColumnDef="amount">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header>Deposit Amount</th>
-						<td mat-cell *matCellDef="let row">
-							{{(row.amount / 1000000).toFixed(6)}} CCX
-						</td>
-					</ng-container>
+						<tr mat-header-row class="header" *matHeaderRowDef="displayedColumns;"></tr>
+						<tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></tr>
 
-					<tr mat-header-row class="header" *matHeaderRowDef="displayedColumns;"></tr>
-					<tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></tr>
+					</table>
 
-				</table>
+				</mat-card-content>
 
-			</mat-card-content>
+				<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+					<mat-paginator color="accent" class="mat-paginator" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+				</mat-card-actions>
 
-			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
-				<mat-paginator color="accent" class="mat-paginator" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-			</mat-card-actions>
+			</mat-card>
+		</div>
 
-		</mat-card>
 	</div>
 
 </div>
