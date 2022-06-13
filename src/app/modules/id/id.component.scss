@@ -1,6 +1,5 @@
 .container {
-	min-height: calc(100vh - 115px - 50px);
-	overflow: hidden;
+	height: auto !important;
 
 	.modules {
 		// Large
@@ -101,16 +100,19 @@
 		padding-right: 1rem;
 	}
 
-	.screenshot {
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
-
-		border-radius: 5px;
+	.sceenshots {
+		height: fit-content;
+		.screenshot {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+			border-radius: 5px;
+		}
 	}
 
 	.subheading {
-		margin-block-end: 0em;
+    margin-block-start: 1.33em;
+    margin-block-end: 0em;
 		text-transform: uppercase;
 	}
 

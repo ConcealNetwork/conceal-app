@@ -1,11 +1,10 @@
 .container {
-	min-height: calc(100vh - 115px - 50px);
-	overflow: hidden;
+	height: auto !important;
 
 	.swap {
 		// Large
 		@media screen and (min-width: 1920px) {
-			max-width: 1500px;
+			max-width: 1200px;
 		}
 		.networks {
 			padding: 15px;

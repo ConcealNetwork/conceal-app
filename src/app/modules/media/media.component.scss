@@ -1,6 +1,5 @@
 .container {
-	min-height: calc(100vh - 115px - 50px);
-	overflow: hidden;
+	height: auto !important;
 
 	.articles {
 		// Large
@@ -67,6 +66,8 @@
 	}
 
 	.pannel {
+
+		word-break: break-all;
 
 		.mat-expansion-panel-header-title {
 			font-size: 1.4rem;
