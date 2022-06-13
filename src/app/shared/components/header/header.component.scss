@@ -29,8 +29,7 @@
 		-webkit-app-region: no-drag;
 		-webkit-user-select: none;
 		.button-text {
-			margin-left: 0.6rem;
-			text-transform: uppercase;
+			text-transform: capitalize;
 			font-size: 1.1rem;
 		}
 	}
@@ -52,6 +51,7 @@
 	.auth {
 		padding-left: 1rem;
 		padding-right: 1rem;
+		border: #faaa33d5 solid 2px;
 	}
 
 }
