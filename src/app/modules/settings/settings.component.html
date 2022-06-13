@@ -2,7 +2,7 @@
 
 <div class="container" fxLayout="column" fxLayoutAlign="center center" fxFill fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="!this.isLoading">
 
-	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
+	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-sm>
 		<h1 class="headline">Application <strong>Settings</strong></h1>
 		<p class="description">Configure various options and settings for the Conceal App(lication)</p>
 	</div>
@@ -12,7 +12,7 @@
 		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
 
 			<!-- General settings -->
-			<mat-card id="cards" class="setting mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="space-between">
+			<mat-card id="cards" class="general mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start">
 
 				<mat-card-header fxLayout="column">
 					<h2 class="title">General Settings</h2>
@@ -56,7 +56,7 @@
 			</mat-card>
 
 			<!-- Account settings -->
-			<mat-card id="cards" class="setting mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start" *ngIf="isLoggedIn">
+			<mat-card id="cards" class="account mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start" *ngIf="isLoggedIn">
 
 				<mat-card-header fxLayout="column">
 					<h2 class="title">Account Settings</h2>
@@ -104,7 +104,7 @@
 			</mat-card>
 
 			<!-- Security settings -->
-			<mat-card id="cards" class="setting mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start" *ngIf="isLoggedIn">
+			<mat-card id="cards" class="security mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start" *ngIf="isLoggedIn">
 
 				<mat-card-header fxLayout="column">
 					<h2 class="title">Security Settings</h2>

@@ -2,14 +2,32 @@
 	height: auto !important;
 
 	.modules {
+		width: 100%;
+
+		// medium
+		@media (min-width: 960px) and (max-width: 1920px) {
+			max-width: 1200px;
+		}
+
 		// Large
 		@media screen and (min-width: 1920px) {
 			max-width: 1200px;
 		}
+
 	}
 
-	.setting {
+	.general, .security, .account {
+		max-width: 500px;
 		height: fit-content;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.general {
+		// small
+		@media screen and (max-width: 960px) {
+			width: 100%;
+		}
 	}
 
 	.headline {
