@@ -1,16 +1,16 @@
 <aside fxLayout="column" fxLayoutGap="10px">
 
-		<div fxLayout="column" fxLayoutGap="15px">
-			<a mat-button class="link" routerLink="/wallets" routerLinkActive="active">Conceal Wallets</a>
-			<a mat-button class="link" routerLink="/deposits" routerLinkActive="active">Conceal Deposits</a>
-			<a mat-button class="link" routerLink="/id" routerLinkActive="active">Conceal ID</a>
-			<a mat-button class="link" (click)="close()" routerLink="/bridge" routerLinkActive="active">Conceal Bridge</a>
+		<div fxLayout="column" fxLayoutGap="10px">
+			<a mat-stroked-button class="link" color="accent" routerLink="/wallets" routerLinkActive="active">Wallets</a>
+			<a mat-stroked-button class="link" color="accent" routerLink="/deposits" routerLinkActive="active">Deposits</a>
+			<a mat-stroked-button class="link" color="accent" routerLink="/id" routerLinkActive="active">ID</a>
+			<a mat-stroked-button class="link" color="accent" (click)="close()" routerLink="/bridge" routerLinkActive="active">Bridge</a>
 			<!--
 			<a mat-button class="link" (click)="close()" routerLink="/pay" routerLinkActive="active">Pay</a>
 			<a mat-button class="link" (click)="close()" routerLink="/explorer" routerLinkActive="active">Explorer</a>
 			-->
-			<a mat-button class="link" routerLink="/media" routerLinkActive="active">Conceal Updates</a>
-			<a mat-button class="link" href="https://status.conceal.network" target="_blank" routerLinkActive="active">Conceal Status</a>
+			<a mat-stroked-button class="link" color="accent" routerLink="/media" routerLinkActive="active">Updates</a>
+			<a mat-stroked-button class="link" color="accent" href="https://status.conceal.network" target="_blank" routerLinkActive="active">Status</a>
 		</div>
 
 		<div class="fill-space"></div>

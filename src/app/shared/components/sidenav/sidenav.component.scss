@@ -4,7 +4,13 @@ aside {
 
 .link {
 	display: block;
-	text-align: left;
+	text-align: center;
+}
+
+.active {
+	color: #fff;
+	background-color: rgba(255, 166, 0, 0.096);
+	border: 1px solid orange !important;
 }
 
 .close {
