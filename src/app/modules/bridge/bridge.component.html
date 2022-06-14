@@ -21,10 +21,7 @@
 			</div>
 		</mat-card>
 
-		<mat-card id="cards" class="action mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign.xs="start">
-			<mat-card-header fxLayout="column">
-				<h2 class="title">Supported Networks</h2>
-			</mat-card-header>
+		<mat-card id="cards" class="action mat-elevation-z8" fxLayout="column" fxLayoutAlign.xs="start">
 			<mat-card-content>
 				<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px">
 					<div class="networks" fxLayout="column" fxFlex>
@@ -34,7 +31,7 @@
 							</div>
 							<div>
 								<div fxLayout="row" fxLayoutAlign="center stretch">
-									<img src="./assets/images/branding/{{fromControl.value}}.png" width="100" height="100">
+									<img src="./assets/images/branding/{{fromControl.value}}.png" width="128" height="128">
 								</div>
 								<mat-form-field fxFill color="accent" appearance="fill">
 									<mat-label>From Network</mat-label>
@@ -54,7 +51,7 @@
 							</div>
 							<div>
 								<div fxLayout="row" fxLayoutAlign="center stretch">
-									<img src="./assets/images/branding/{{toControl.value}}.png" width="100" height="100">
+									<img src="./assets/images/branding/{{toControl.value}}.png" width="128" height="128">
 								</div>
 								<mat-form-field fxFill color="accent" appearance="fill">
 									<mat-label>To Network</mat-label>
@@ -71,7 +68,7 @@
 			</mat-card-content>
 			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
 				<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-					<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value!, this.toControl.value!)">Swap your assets</button>
+					<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value!, this.toControl.value!)">Swap these assets</button>
 				</div>
 			</mat-card-actions>
 		</mat-card>
