@@ -7,7 +7,7 @@ import { AuthGuard } from 'src/app/shared/services/auth.guard';
 
 const routes: Routes = [
 	{ path: '', component: DepositsComponent },
-	{ path: 'cloud', loadChildren: () => import('./cloud/cloud.module').then(m => m.CloudModule), data: { title: "Conceal Cloud Depsoits" }, canActivate: [AuthGuard] },
+	{ path: 'cloud', loadChildren: () => import('./cloud/cloud.module').then(m => m.CloudModule), data: { title: "Conceal Cloud Deposits" }, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

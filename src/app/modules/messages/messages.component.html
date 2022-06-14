@@ -1,0 +1,18 @@
+<app-loader *ngIf="this.isLoading"></app-loader>
+
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxFill fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="!this.isLoading">
+
+	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
+		<h1 class="headline">Conceal <strong>Messages</strong></h1>
+		<p class="description">Fully integrated encrypted messaging on the Blockchain.</p>
+	</div>
+
+	<div class="modules" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
+
+		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
+
+		</div>
+
+	</div>
+
+</div>
