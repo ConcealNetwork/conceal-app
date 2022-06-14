@@ -9,7 +9,7 @@
 
 	<div class="articles" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px" [@listAnimation1]="posts.length">
 
-		<mat-expansion-panel class="pannel mat-elevation-z6" *ngFor="let item of posts.slice(0, this.limit) | orderByImpure: '-pubDate'; index as i" [expanded]="i == 0">
+		<mat-expansion-panel class="pannel mat-elevation-z6" *ngFor="let item of posts.slice(0, this.limit) | orderByImpure: '-pubDate'; index as i" [expanded]="i == 0 && this.expanded">
 			<mat-expansion-panel-header>
 				<mat-panel-title>
 					{{item.title | shorten: 125: '...'}} {{item.index}}
@@ -18,8 +18,8 @@
 			<p [innerHTML]="item.description | stripTags: '[a, p, br, ol, ul, h1, h2, h3, h4, strong]'" class="text"></p>
 		</mat-expansion-panel>
 
-		<div *ngIf="this.limit !== 10" fxLayout="column" fxLayoutAlign="center center">
-			<button class="more" mat-raised-button color="accent" (click)="setLimit(10)">Show more articles...</button>
+		<div fxHide fxShow.gt-xs *ngIf="this.limit !== 10" fxLayout="column" fxLayoutAlign="center center">
+			<button class="more" mat-stroked-button color="accent" (click)="setLimit(10)">Show more articles...</button>
 		</div>
 
 	</div>

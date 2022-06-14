@@ -2,9 +2,14 @@
 	height: auto !important;
 
 	.articles {
+		// medium
+		@media (min-width: 960px) and (max-width: 1920px) {
+			max-width: 1000px;
+		}
+
 		// Large
 		@media screen and (min-width: 1920px) {
-			max-width: 50vw;
+			max-width: 1400px;
 		}
 
 	}
@@ -70,7 +75,7 @@
 		word-break: break-all;
 
 		.mat-expansion-panel-header-title {
-			font-size: 1.4rem;
+			font-size: 1.2rem;
 			color: orange;
 		}
 
