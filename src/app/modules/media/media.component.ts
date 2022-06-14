@@ -44,6 +44,7 @@ export class MediaComponent implements OnInit {
 	isLoading: boolean = true;
 	limit: number = 4;
 	posts: any = [];
+	expanded: boolean = true;
 
   constructor(
 		private apiService: ApiService,
@@ -65,7 +66,8 @@ export class MediaComponent implements OnInit {
 		]).subscribe((state: BreakpointState) => {
 			if (state.matches) {
 				if (state.breakpoints[Breakpoints.XSmall]) {
-					this.limit = 6;
+					this.limit = 10;
+					this.expanded = false;
 				}
 			}
 		});
