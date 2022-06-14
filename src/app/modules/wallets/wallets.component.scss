@@ -52,20 +52,22 @@
 	}
 
 	.module_icon {
-		font-size: 4rem;
-		margin-right: 15px;
-		height: 100%;
-		width: fit-content;
+		font-size: 4.2rem;
 		line-height: 1;
+		height: 65px;
+		width: 70px;
+		margin-right: 15px;
+		margin-bottom: 10px;
+		float: left;
+	}
+
+	.text {
+		margin: 0;
+		font-size: 1.1rem;
 	}
 
 	.mat-card-content {
 		min-height: 70px;
-	}
-
-	.text {
-		font-size: 1rem;
-		margin: 0;
 	}
 
 	.mat-card-actions {
