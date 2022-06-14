@@ -67,17 +67,19 @@
 		text-transform: uppercase;
 	}
 
-	.text {
-		margin: 0;
-		font-size: 1rem;
+	.module_icon {
+		font-size: 4.2rem;
+		line-height: 1;
+		height: 65px;
+		width: 70px;
+		margin-right: 15px;
+		margin-bottom: 10px;
+		float: left;
 	}
 
-	.module_icon {
-		font-size: 4rem;
-		margin-right: 15px;
-		height: 100%;
-		width: fit-content;
-		line-height: 1;
+	.text {
+		margin: 0;
+		font-size: 1.1rem;
 	}
 
 	.mat-card-actions {
