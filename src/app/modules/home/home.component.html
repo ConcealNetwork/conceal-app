@@ -49,6 +49,28 @@
 
 			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
 				<mat-card-header fxLayout="column">
+					<h2 class="title">Conceal Messages</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<p fxFlex class="text">
+						<mat-icon class="module_icon orange" aria-hidden="false">message</mat-icon>
+						Launch our <span class="orange">Cloud Messages</span> in this app or explore how our integrated encrypted messaging on the blockchain works.
+					</p>
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<button color="accent" mat-flat-button fxFlex routerLink="/messaging/cloud">Launch</button>
+						<button color="accent" mat-stroked-button fxFlex routerLink="/messaging">Discover</button>
+					</div>
+				</mat-card-actions>
+			</mat-card>
+
+		</div>
+
+		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
+
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
 					<h2 class="title">Conceal ID</h2>
 				</mat-card-header>
 				<mat-card-content>
@@ -65,9 +87,23 @@
 				</mat-card-actions>
 			</mat-card>
 
-		</div>
-
-		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Conceal Pay</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<p fxFlex class="text">
+						<mat-icon class="module_icon orange" aria-hidden="false">payment</mat-icon>
+						Launch our <span class="orange">Cloud Pay</span> in this app or explore Conceal Pay makes it simple for businesses and people to receive payments on the Conceal Network.
+					</p>
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<button color="accent" mat-flat-button fxFlex disabled routerLink="/pay/cloud">Coming Soon</button>
+						<button color="accent" mat-stroked-button fxFlex routerLink="/pay">Discover</button>
+					</div>
+				</mat-card-actions>
+			</mat-card>
 
 			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
 				<mat-card-header fxLayout="column">
@@ -85,6 +121,10 @@
 					</div>
 				</mat-card-actions>
 			</mat-card>
+
+		</div>
+
+		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
 
 			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
 				<mat-card-header fxLayout="column">
