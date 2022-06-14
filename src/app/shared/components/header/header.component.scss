@@ -19,9 +19,7 @@
 		margin-left: 35px;
 		.active {
 			color: #faa933 !important;
-			border-bottom: 2px solid #faa933;
-			border-bottom-left-radius: 0px;
-			border-bottom-right-radius: 0px;
+			background-color: #faaa331e;
 		}
 	}
 
@@ -30,7 +28,7 @@
 		-webkit-user-select: none;
 		.button-text {
 			text-transform: capitalize;
-			font-size: 1.1rem;
+			font-size: 1.2rem;
 		}
 	}
 
@@ -40,7 +38,7 @@
 		padding-top: 5px;
 		padding-bottom: 5px;
 		font-weight: 400;
-		text-transform: uppercase;
+		text-transform: capitalize;
 		font-size: 1.3rem;
 	}
 
@@ -51,7 +49,7 @@
 	.auth {
 		padding-left: 1rem;
 		padding-right: 1rem;
-		border: #faaa33d5 solid 2px;
+		border: 2px solid #faa933;
 	}
 
 }
