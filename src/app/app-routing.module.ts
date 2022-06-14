@@ -9,6 +9,7 @@ const routes: Routes = [
 	{ path: 'media', loadChildren: () => import('./modules/media/media.module').then(m => m.MediaModule), data: { title: "Conceal Updates" } },
 	{ path: 'wallets', loadChildren: () => import('./modules/wallets/wallets.module').then(m => m.WalletModule), data: { title: "Conceal Wallets" } },
 	{ path: 'deposits', loadChildren: () => import('./modules/deposits/deposits.module').then(m => m.DepositsModule), data: { title: "Conceal Deposits" } },
+	{ path: 'messages', loadChildren: () => import('./modules/messages/messages.module').then(m => m.MessagesModule), data: { title: "Conceal Messages" } },
 	{ path: 'pay', loadChildren: () => import('./modules/pay/pay.module').then(m => m.PayModule), data: { title: "Conceal Pay" }, canActivate: [AuthGuard] },
 	{ path: 'id', loadChildren: () => import('./modules/id/id.module').then(m => m.IdModule), data: { title: "Conceal ID" } },
 	{ path: 'live', loadChildren: () => import('./modules/live/live.module').then(m => m.LiveModule), data: { title: "Conceal Live" } },

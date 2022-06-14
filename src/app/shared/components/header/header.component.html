@@ -28,14 +28,14 @@
 				Discover
 			</button>
 		</mat-menu>
-		<button class="navlink" mat-button [matMenuTriggerFor]="messaging" [class.active]="this.router.url == '/messaging' || this.router.url == '/messaging/cloud'">Messages</button>
-		<mat-menu #messaging="matMenu">
-			<button mat-menu-item routerLink="/messaging/cloud" routerLinkActive="active">
-				<mat-icon [class.active]="this.router.url == '/messaging/cloud'">message</mat-icon>
+		<button class="navlink" mat-button [matMenuTriggerFor]="messages" [class.active]="this.router.url == '/messages' || this.router.url == '/messages/cloud'">Messages</button>
+		<mat-menu #messages="matMenu">
+			<button mat-menu-item routerLink="/messages/cloud" routerLinkActive="active">
+				<mat-icon [class.active]="this.router.url == '/messages/cloud'">message</mat-icon>
 				Cloud Messages
 			</button>
-			<button mat-menu-item routerLink="/messaging" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-				<mat-icon [class.active]="this.router.url == '/messaging'">search</mat-icon>
+			<button mat-menu-item routerLink="/messages" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+				<mat-icon [class.active]="this.router.url == '/messages'">search</mat-icon>
 				Discover
 			</button>
 		</mat-menu>

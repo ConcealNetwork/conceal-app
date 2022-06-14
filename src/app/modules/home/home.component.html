@@ -18,7 +18,7 @@
 				<mat-card-content>
 					<p fxFlex class="text">
 						<mat-icon class="module_icon orange" aria-hidden="false">account_balance_wallet</mat-icon>
-						Launch our <span class="orange">Cloud Wallet</span> in this app or explore all the other wallets available for managing your funds on the Conceal Network.
+						Launch our <span class="orange">Cloud Wallet</span> in the app or explore all the other wallets available for managing your funds on the Conceal Network.
 					</p>
 				</mat-card-content>
 				<mat-card-actions>
@@ -36,7 +36,7 @@
 				<mat-card-content>
 					<p fxFlex class="text">
 						<mat-icon class="module_icon orange" aria-hidden="false">savings</mat-icon>
-						Launch our <span class="orange">Cloud Deposits</span> in this app or explore how you can deposit your coins and earn passive income from our sustainable interest rates.
+						Launch our <span class="orange">Cloud Deposits</span> in the app or explore how you can earn passive income from our sustainable interest rates.
 					</p>
 				</mat-card-content>
 				<mat-card-actions>
@@ -53,14 +53,14 @@
 				</mat-card-header>
 				<mat-card-content>
 					<p fxFlex class="text">
-						<mat-icon class="module_icon orange" aria-hidden="false">message</mat-icon>
-						Launch our <span class="orange">Cloud Messages</span> in this app or explore how our integrated encrypted messaging on the blockchain works.
+						<mat-icon class="module_icon orange" aria-hidden="false">mail_lock</mat-icon>
+						Launch our <span class="orange">Cloud Messages</span> in the app or explore how our integrated encrypted messaging on the blockchain works.
 					</p>
 				</mat-card-content>
 				<mat-card-actions>
 					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-						<button color="accent" mat-flat-button fxFlex routerLink="/messaging/cloud">Launch</button>
-						<button color="accent" mat-stroked-button fxFlex routerLink="/messaging">Discover</button>
+						<button color="accent" mat-flat-button fxFlex routerLink="/messages/cloud">Launch</button>
+						<button color="accent" mat-stroked-button fxFlex routerLink="/messages">Discover</button>
 					</div>
 				</mat-card-actions>
 			</mat-card>
@@ -76,7 +76,7 @@
 				<mat-card-content>
 					<p fxFlex class="text">
 						<mat-icon class="module_icon orange" aria-hidden="false">portrait</mat-icon>
-						Launch our <span class="orange">Cloud ID</span> in this app or explore how you can enable memorable and recognizable names instead of wallet addresses.
+						Launch our <span class="orange">Cloud ID</span> in the app or explore how you can enable memorable and recognizable names instead of wallet addresses.
 					</p>
 				</mat-card-content>
 				<mat-card-actions>
@@ -94,30 +94,29 @@
 				<mat-card-content>
 					<p fxFlex class="text">
 						<mat-icon class="module_icon orange" aria-hidden="false">payment</mat-icon>
-						Launch our <span class="orange">Cloud Pay</span> in this app or explore Conceal Pay makes it simple for businesses and people to receive payments on the Conceal Network.
+						Conceal Pay empowers businesses and people to quick and easily accept payments on the Conceal Blockchain.
 					</p>
 				</mat-card-content>
 				<mat-card-actions>
 					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
 						<button color="accent" mat-flat-button fxFlex disabled routerLink="/pay/cloud">Coming Soon</button>
-						<button color="accent" mat-stroked-button fxFlex routerLink="/pay">Discover</button>
 					</div>
 				</mat-card-actions>
 			</mat-card>
 
 			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
 				<mat-card-header fxLayout="column">
-					<h2 class="title">Conceal Bridge</h2>
+					<h2 class="title">Conceal Vault</h2>
 				</mat-card-header>
 				<mat-card-content>
 					<p fxFlex class="text">
-						<mat-icon class="module_icon orange" aria-hidden="false">swap_horizontal_circle</mat-icon>
-						The swap tool lets you keep your privacy when you're done with DeFi.
+						<mat-icon class="module_icon orange" aria-hidden="false">lock</mat-icon>
+						Encrypt text and files on the blockchain, protect your sensitive data such as passwords, credit card numbers and keys.
 					</p>
 				</mat-card-content>
 				<mat-card-actions>
 					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-						<button color="accent" mat-flat-button fxFlex routerLink="/bridge">Launch</button>
+						<button color="accent" mat-flat-button fxFlex disabled routerLink="/pay/cloud">Coming in 2023</button>
 					</div>
 				</mat-card-actions>
 			</mat-card>
@@ -128,12 +127,29 @@
 
 			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
 				<mat-card-header fxLayout="column">
+					<h2 class="title">Conceal Bridge</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<p fxFlex class="text">
+						<mat-icon class="module_icon orange" aria-hidden="false">swap_horizontal_circle</mat-icon>
+						Facilitating the communication between two blockchain networks and aiding in the exchange of our wrapped conceal coins.
+					</p>
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<button color="accent" mat-flat-button fxFlex routerLink="/bridge">Launch Bridge</button>
+					</div>
+				</mat-card-actions>
+			</mat-card>
+
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
 					<h2 class="title">Conceal Explorer</h2>
 				</mat-card-header>
 				<mat-card-content>
 					<p fxFlex class="text">
 						<mat-icon class="module_icon orange" aria-hidden="false">explore</mat-icon>
-						Access key network details such as supply and the status of transactions.
+						Access key network metrics such as circulating supply, total supply, total banked, transactions, block height and more.
 					</p>
 				</mat-card-content>
 				<mat-card-actions>
@@ -145,34 +161,17 @@
 
 			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
 				<mat-card-header fxLayout="column">
-					<h2 class="title">Conceal Updates</h2>
+					<h2 class="title">Conceal Live v2.0</h2>
 				</mat-card-header>
 				<mat-card-content>
 					<p fxFlex class="text">
-						<mat-icon class="module_icon orange" aria-hidden="false">newspaper</mat-icon>
-						Get the latest project news and updates all through a single interface.
+						<mat-icon class="module_icon orange" aria-hidden="false">chat</mat-icon>
+						Powerful privacy protected communications, peer-to-peer and end-to-end encrypted audio, video and messages.
 					</p>
 				</mat-card-content>
 				<mat-card-actions>
 					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-						<button color="accent" mat-flat-button fxFlex routerLink="/media">Launch</button>
-					</div>
-				</mat-card-actions>
-			</mat-card>
-
-			<mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
-				<mat-card-header fxLayout="column">
-					<h2 class="title">Conceal Status</h2>
-				</mat-card-header>
-				<mat-card-content>
-					<p fxFlex class="text">
-						<mat-icon class="module_icon orange" aria-hidden="false">monitor_heart</mat-icon>
-						View the current status of all the conceal services on single page.
-					</p>
-				</mat-card-content>
-				<mat-card-actions>
-					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-						<a color="accent" mat-stroked-button fxFlex href="https://status.conceal.network" target="_blank">Open</a>
+						<button color="accent" mat-flat-button fxFlex routerLink="/explorer" disabled="true">Coming in 2023</button>
 					</div>
 				</mat-card-actions>
 			</mat-card>
