@@ -4,12 +4,12 @@
 	.swap {
 		// Large
 		@media screen and (min-width: 1920px) {
-			max-width: 1200px;
+			max-width: 1000px;
 		}
 		.networks {
 			padding: 15px;
 			border-radius: 5px;
-			min-width: 15rem;
+			min-width: 238px;
 		}
 		.mat-card-content {
 			.title {
@@ -21,6 +21,10 @@
 	}
 
 	.help {
+		height: fit-content;
+	}
+
+	.action {
 		height: fit-content;
 	}
 
