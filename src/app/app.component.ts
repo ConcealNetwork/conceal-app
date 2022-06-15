@@ -1,6 +1,9 @@
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { getSupportedInputTypes, Platform, supportsPassiveEventListeners, supportsScrollBehavior } from '@angular/cdk/platform';
+import { Title } from '@angular/platform-browser';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 // 3rd Party Modules
 import { Subscription } from 'rxjs';
@@ -28,7 +31,10 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
 		private themingService: ThemingService,
 		private overlayContainer: OverlayContainer,
-		public platform: Platform
+		public platform: Platform,
+		private router: Router,
+		private activatedRoute: ActivatedRoute,
+		private titleService: Title,
 	) {}
 
 	getThemingService() {
@@ -40,6 +46,20 @@ export class AppComponent implements OnInit, OnDestroy {
       this.className = theme;
       this.applyThemeOnOverlays();
     });
+
+		const appTitle = this.titleService.getTitle();
+    this.router.events.pipe(
+			filter(event => event instanceof NavigationEnd),
+			map(() => {
+				const child = this.activatedRoute.firstChild;
+				if (child?.snapshot.data['title']) {
+					return child.snapshot.data['title'];
+				}
+				return appTitle;
+			})
+		).subscribe((ttl: string) => {
+			this.titleService.setTitle(ttl);
+		})
 
 		// Some random colors
 		const colors = ["#FFC55C", "#FFB52E", "#D18700", "#A36A00", "#754C00"];

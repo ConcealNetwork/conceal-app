@@ -52,18 +52,18 @@
 	}
 
 	.module_icon {
-		font-size: 4.2rem;
-		line-height: 1;
-		height: 65px;
-		width: 70px;
-		margin-right: 15px;
-		margin-bottom: 10px;
+		font-size: 2.7rem;
+		height: fit-content;
+		width: fit-content;
+		margin-right: 10px;
+		margin-bottom: 5px;
 		float: left;
+		text-align: center;
 	}
 
 	.text {
 		margin: 0;
-		font-size: 1.1rem;
+		font-size: 1rem;
 	}
 
 	.mat-card-content {

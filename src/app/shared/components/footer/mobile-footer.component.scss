@@ -3,11 +3,15 @@ footer {
 	.menu {
 		.toolbar-icon {
 			line-height:1; // Set to zero or will affect spacing between icon and text
+			mat-icon {
+				height: fit-content;
+				width: fit-content;
+			}
 		}
 
 		.toolbar-icon-text {
 			line-height: 1.8; // Proper spacing between icon and text
-			font-size: 60%; // Smaller text size for proper display under icon
+			font-size: 65%; // Smaller text size for proper display under icon
 			text-transform: capitalize;
 		}
 	}

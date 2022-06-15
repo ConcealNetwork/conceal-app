@@ -7,6 +7,7 @@
   <mat-sidenav-content fxLayout="column">
 
 		<app-header *ngIf="!getThemingService().isSmallScreen"></app-header> <!-- header -->
+		<app-mobile-header *ngIf="getThemingService().isSmallScreen"></app-mobile-header> <!-- mobile header -->
 
     <main #main class="container">
 			<router-outlet></router-outlet> <!-- content -->
