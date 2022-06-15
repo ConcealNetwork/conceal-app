@@ -11,7 +11,7 @@
 
 		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
 
-			<mat-card id="cards" class="mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="space-between">
+			<mat-card id="cards" class="mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start">
 				<mat-card-header fxLayout="column">
 					<h2 class="title">Conceal Deposits</h2>
 				</mat-card-header>
@@ -24,7 +24,10 @@
 						</p>
 					</div>
 
-					<mat-divider fxFlex></mat-divider>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<button color="accent" mat-flat-button fxFlex routerLink="/deposits/cloud">Launch Deposits</button>
+						<button color="accent" mat-stroked-button fxFlex href="https://github.com/ConcealNetwork/conceal-desktop/releases" target="_blank">Use Desktop Wallet</button>
+					</div>
 
 					<h3 fxFlexAlign="center" class="orange subheading">Interest Calculator</h3>
 					<div fxLayout="row" fxLayoutAlign="start">
@@ -89,12 +92,7 @@
 
 					</div>
 				</mat-card-content>
-				<mat-card-actions>
-					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-						<button color="accent" mat-flat-button fxFlex routerLink="/deposits/cloud">Launch Deposits</button>
-						<button color="accent" mat-stroked-button fxFlex href="https://github.com/ConcealNetwork/conceal-desktop/releases" target="_blank">Use Desktop Wallet</button>
-					</div>
-				</mat-card-actions>
+
 			</mat-card>
 
 			<mat-card id="cards" class="mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="space-between">

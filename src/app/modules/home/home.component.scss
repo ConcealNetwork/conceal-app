@@ -52,12 +52,13 @@
 	}
 
 	.module_icon {
-		font-size: 3rem;
-		height: 48px;
-		width: 48px;
+		font-size: 2.7rem;
+		height: fit-content;
+		width: fit-content;
 		margin-right: 10px;
-		margin-bottom: 0px;
+		margin-bottom: 5px;
 		float: left;
+		text-align: center;
 	}
 
 	.text {
