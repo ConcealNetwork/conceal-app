@@ -11,6 +11,55 @@
 
 		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
 
+			<mat-card id="cards" class="sceenshots mat-elevation-z8" fxFlex="45" fxLayout="column" fxLayoutAlign="space-between">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">Conceal Messaging</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<img class="screenshot" src="assets/images/screenshots/conceal_id.png">
+				</mat-card-content>
+				<mat-card-actions>
+					<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+						<button color="accent" mat-flat-button fxFlex routerLink="/id/cloud">Launch Messages</button>
+						<button color="accent" mat-stroked-button fxFlex href="https://github.com/ConcealNetwork/conceal-desktop/releases" target="_blank">Use Desktop Wallet</button>
+					</div>
+				</mat-card-actions>
+			</mat-card>
+
+			<mat-card id="cards" class="messages mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start">
+				<mat-card-header fxLayout="column">
+					<h2 class="title">What are Conceal Messages?</h2>
+				</mat-card-header>
+				<mat-card-content>
+					<div fxLayout="row" fxLayoutAlign="start">
+						<p fxFlex class="text">
+							<mat-icon class="module_icon orange" aria-hidden="false">mail_lock</mat-icon>
+							Conceal Messaging expands our ecosystem by providing fully integrated encrypted messaging on the Blockchain.
+						</p>
+					</div>
+					<div fxLayout="column" fxLayoutAlign="start">
+						<h4 class="subheading orange">SELF-DESTRUCTING MESSAGES</h4>
+						<p fxFlex class="text">Conceal Messaging supports self-destructing messages that delete themselves after being read.</p>
+					</div>
+					<div fxLayout="column" fxLayoutAlign="start">
+						<h4 class="subheading orange">DECENTRALIZED</h4>
+						<p fxFlex class="text">Conceal Messaging is a decentralized service that operates on the Blockchain.</p>
+					</div>
+					<div fxLayout="column" fxLayoutAlign="start">
+						<h4 class="subheading orange">ENCRYPTED</h4>
+						<p fxFlex class="text">All Conceal Messages are encrypted and cannot be read by anyone other than the sender and receiver.</p>
+					</div>
+					<div fxLayout="column" fxLayoutAlign="start">
+						<h4 class="subheading orange">ADDRESS BOOK</h4>
+						<p fxFlex class="text">There is no need to copy / paste an address every time. Maintain your address book for easily sending messages to your contacts.</p>
+					</div>
+					<div fxLayout="column" fxLayoutAlign="start">
+						<h4 class="subheading orange">MOBILE, DESKTOP OR CLOUD</h4>
+						<p fxFlex class="text">Conceal Messaging works in the Conceal Cloud, Desktop and Mobile.</p>
+					</div>
+				</mat-card-content>
+			</mat-card>
+
 		</div>
 
 	</div>
