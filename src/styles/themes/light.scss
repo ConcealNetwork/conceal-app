@@ -121,3 +121,19 @@
 .description {
 	color: #333;
 }
+
+.mat-expansion-panel {
+	background: #5a5a5a !important;
+}
+
+.mat-expansion-panel-body {
+	background: #fff !important;
+}
+
+.mat-expansion-indicator::after {
+	color: #ccc !important;
+}
+
+.mat-header-row {
+	background: #dbdbdbea !important;
+}

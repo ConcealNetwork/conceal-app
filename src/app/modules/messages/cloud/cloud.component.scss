@@ -1,0 +1,76 @@
+.container {
+	height: auto !important;
+
+	.modules {
+		// Large
+		@media screen and (min-width: 1920px) {
+			max-width: 1400px;
+		}
+	}
+
+	.headline {
+		font-size: 3.6rem;
+    line-height: 1.1em;
+		font-weight: normal;
+		margin-block-end: 0em;
+		margin-block-start: 0em;
+		backdrop-filter: blur(3px);
+		padding: 5px;
+		border-radius: 35px;
+	}
+
+	.headline::before {
+		z-index: 1;
+		background-color: darkslategray;
+		filter: invert(1);
+	}
+
+	.headline::after {
+		backdrop-filter: invert(1);
+		z-index: 3;
+	}
+
+	.description {
+    text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-size: 1.3rem;
+		backdrop-filter: blur(5px);
+		padding: 5px;
+		border-radius: 25px;
+	}
+
+	.description::before {
+		z-index: 1;
+		background-color: darkslategray;
+		filter: invert(1);
+	}
+
+	.description::after {
+		backdrop-filter: invert(1);
+		z-index: 3;
+	}
+
+	.text {
+		font-size: 1.1rem;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	.controls {
+		min-width: fit-content;
+	}
+
+	table {
+		width: 100%;
+		th {
+			width: 100px;
+		}
+	}
+
+	.mat-expansion-panel-header-title {
+		color: orange;
+		font-size: 1.3rem;
+		min-height: 64px;
+	}
+
+}
