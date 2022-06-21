@@ -1,13 +1,13 @@
-<app-loader *ngIf="this.isLoading"></app-loader>
+<app-loader *ngIf="this.isContactsLoading && this.isMessagesLoading"></app-loader>
 
-<div class="container" fxLayout="column" fxLayoutAlign="center center" fxFill fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="!this.isLoading">
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxFill fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="!this.isContactsLoading && !this.isMessagesLoading">
 
 	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
 		<h1 class="headline">Cloud <strong>Messages</strong></h1>
 		<p class="description">Fully integrated encrypted messaging on the Blockchain.</p>
 	</div>
 
-	<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center start" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
+	<div class="modules" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center start" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
 
 		<div class="controls" fxLayout="column" fxLayoutAlign="start">
 			<div fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
@@ -15,33 +15,30 @@
 				<mat-expansion-panel [expanded]="true" class="mat-elevation-z8">
 					<mat-expansion-panel-header>
 						<mat-panel-title>
-							Wallets
+							<mat-icon class="icon" aria-hidden="false">mail_lock</mat-icon> Inbox
 						</mat-panel-title>
 					</mat-expansion-panel-header>
 					<div fxLayout="column" fxLayoutGap="10px">
-						<div *ngFor="let item of addresses">
-							<button fxFlex mat-flat-button color="accent">{{this.getHelperService().formatAddress(item)}}</button>
-						</div>
-						<button fxFlex mat-flat-button color="primary">New Message</button>
-					</div>
-				</mat-expansion-panel>
-
-				<mat-expansion-panel [expanded]="true" class="mat-elevation-z8">
-					<mat-expansion-panel-header>
-						<mat-panel-title>
+						<button fxFlex mat-flat-button color="accent" (click)="toggleMessages();" *ngIf="this.showMessages">
+							<mat-icon class="icon" aria-hidden="false">check</mat-icon>
+							Messages
+						</button>
+						<button fxFlex mat-stroked-button color="accent" (click)="toggleMessages();" *ngIf="!this.showMessages">Messages</button>
+						<button fxFlex mat-flat-button color="accent" (click)="toggleContacts();" *ngIf="this.showContacts">
+							<mat-icon class="icon" aria-hidden="false">check</mat-icon>
 							Address Book
-						</mat-panel-title>
-					</mat-expansion-panel-header>
-					<div fxLayout="column" fxLayoutGap="10px">
-						<button fxFlex mat-flat-button color="accent">Contacts</button>
-						<button fxFlex mat-flat-button color="primary">New Contact</button>
+						</button>
+						<button fxFlex mat-stroked-button color="accent" (click)="toggleContacts();" *ngIf="!this.showContacts">Address Book</button>
+						<mat-divider class="divider"></mat-divider>
+						<button fxFlex mat-flat-button color="primary">Send Message</button>
+						<button fxFlex mat-flat-button color="primary">Create Contact</button>
 					</div>
 				</mat-expansion-panel>
 
 			</div>
 		</div>
 
-		<div class="messages" fxLayout="column" fxFill fxLayoutAlign="start">
+		<div class="messages" fxLayout="column" fxLayoutAlign="start" *ngIf="showMessages">
 
 			<mat-card id="cards" class="mat-elevation-z8">
 
@@ -55,10 +52,12 @@
 					</div>
 				</mat-card-header>
 
-				<p class="text">Incoming and outgoing messages for all wallets</p>
-				<table mat-table [dataSource]="messages">
+				<p class="text" fxLayoutAlign="start center">
+					Incoming and outgoing messages for all wallets
+				</p>
 
-					<!-- Position Column -->
+				<table mat-table [dataSource]="messages" *ngIf="!this.isMessagesLoading">
+
 					<ng-container matColumnDef="date">
 						<th mat-header-cell *matHeaderCellDef> Time </th>
 						<td mat-cell *matCellDef="let message">
@@ -68,7 +67,6 @@
 						</td>
 					</ng-container>
 
-					<!-- Name Column -->
 					<ng-container matColumnDef="address">
 						<th mat-header-cell *matHeaderCellDef> Address </th>
 						<td mat-cell *matCellDef="let message">
@@ -78,7 +76,6 @@
 						</td>
 					</ng-container>
 
-					<!-- Weight Column -->
 					<ng-container matColumnDef="type">
 						<th mat-header-cell *matHeaderCellDef> Direction </th>
 						<td mat-cell *matCellDef="let message">
@@ -90,7 +87,6 @@
 						</td>
 					</ng-container>
 
-					<!-- Symbol Column -->
 					<ng-container matColumnDef="message">
 						<th mat-header-cell *matHeaderCellDef> Message </th>
 						<td mat-cell *matCellDef="let message">
@@ -100,10 +96,82 @@
 						</td>
 					</ng-container>
 
-					<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+					<tr mat-header-row *matHeaderRowDef="messageColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: messageColumns;"></tr>
 				</table>
 			</mat-card>
 		</div>
+
+		<div class="contacts" fxLayout="column" fxLayoutAlign="start" *ngIf="showContacts">
+
+			<mat-card id="cards" class="mat-elevation-z8">
+
+				<mat-card-header fxLayout="column">
+					<div fxLayout="row" class="controls" fxLayoutAlign="center center">
+						<mat-form-field color="accent" fxFlex="auto" class="filter" appearance="standard">
+							<mat-label class="searchbox">Search Contacts</mat-label>
+							<input matInput (keyup)="applyFilter($event)">
+							<mat-icon color="accent" matSuffix>search</mat-icon>
+						</mat-form-field>
+					</div>
+				</mat-card-header>
+
+				<p class="text" fxLayoutAlign="start center">
+					Address book contacts for all wallets
+				</p>
+				<table mat-table [dataSource]="contacts" *ngIf="!this.isContactsLoading">
+
+					<!-- Checkbox Column -->
+					<ng-container matColumnDef="select">
+						<th mat-header-cell *matHeaderCellDef>
+							<mat-checkbox (change)="$event ? masterToggle() : null"
+								[checked]="selection.hasValue() && isAllSelected()"
+								[indeterminate]="selection.hasValue() && !isAllSelected()"
+								[aria-label]="checkboxLabel()">
+							</mat-checkbox>
+						</th>
+						<td mat-cell *matCellDef="let row">
+							<mat-checkbox (click)="$event.stopPropagation()"
+								(change)="$event ? selection.toggle(row) : null"
+								[checked]="selection.isSelected(row)"
+								[aria-label]="checkboxLabel(row)">
+							</mat-checkbox>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="label">
+						<th mat-header-cell *matHeaderCellDef> Label </th>
+						<td mat-cell *matCellDef="let contact">
+							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
+								{{contact.label}}
+							</div>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="address">
+						<th mat-header-cell *matHeaderCellDef> Address </th>
+						<td mat-cell *matCellDef="let contact">
+							<div fxLayout="row" fxLayoutAlign="start center" class="uppercase">
+								{{ this.getHelperService().formatAddress(contact.address) }}
+							</div>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="paymentId">
+						<th mat-header-cell *matHeaderCellDef> Payment ID </th>
+						<td mat-cell *matCellDef="let contact">
+							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
+								{{contact.paymentId}}
+							</div>
+						</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="contactColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: contactColumns;" (click)="selection.toggle(row)"></tr>
+				</table>
+			</mat-card>
+		</div>
+
+	</div>
 
 </div>
