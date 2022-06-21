@@ -242,3 +242,22 @@ mat-horizontal-stepper {
   border-radius: 100%;
   opacity: 0.7;
 }
+
+.mat-expansion-panel-header-title {
+	font-size: 1.2rem;
+	color: orange;
+}
+.mat-expansion-panel-header {
+	font-size: 1rem !important;
+	height: auto;
+}
+
+.mat-expansion-panel-header-description {
+	font-size: 1rem;
+}
+
+.mat-expansion-panel-body {
+	background: #414141 !important;
+	padding: 15px !important;
+	font-size: 1rem;
+}
