@@ -31,7 +31,7 @@
 		<button class="navlink" mat-button [matMenuTriggerFor]="messages" [class.active]="this.router.url == '/messages' || this.router.url == '/messages/cloud'">Messages</button>
 		<mat-menu #messages="matMenu">
 			<button mat-menu-item routerLink="/messages/cloud" routerLinkActive="active">
-				<mat-icon [class.active]="this.router.url == '/messages/cloud'">message</mat-icon>
+				<mat-icon [class.active]="this.router.url == '/messages/cloud'">mail_lock</mat-icon>
 				Cloud Messages
 			</button>
 			<button mat-menu-item routerLink="/messages" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
