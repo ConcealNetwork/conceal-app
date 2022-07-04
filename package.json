@@ -23,80 +23,40 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~14.0.3",
-    "@angular/cdk": "^14.0.3",
-    "@angular/common": "~14.0.3",
-    "@angular/compiler": "~14.0.3",
-    "@angular/core": "~14.0.3",
-    "@angular/flex-layout": "^13.0.0-beta.38",
-    "@angular/forms": "~14.0.3",
-    "@angular/material": "^14.0.3",
-    "@angular/platform-browser": "~14.0.3",
-    "@angular/platform-browser-dynamic": "~14.0.3",
-    "@angular/router": "~14.0.3",
-    "@angular/service-worker": "~14.0.3",
+    "@angular/animations": "~14.0.4",
+    "@angular/cdk": "^14.0.4",
+    "@angular/common": "~14.0.4",
+    "@angular/compiler": "~14.0.4",
+    "@angular/core": "~14.0.4",
+    "@angular/flex-layout": "^14.0.0-beta.40",
+    "@angular/forms": "~14.0.4",
+    "@angular/material": "^14.0.4",
+    "@angular/platform-browser": "~14.0.4",
+    "@angular/platform-browser-dynamic": "~14.0.4",
+    "@angular/router": "~14.0.4",
+    "@angular/service-worker": "~14.0.4",
     "@auth0/angular-jwt": "^5.0.2",
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "@awesome-cordova-plugins/clipboard": "^5.40.0",
-    "@awesome-cordova-plugins/core": "^5.40.0",
-    "@awesome-cordova-plugins/http": "^5.40.0",
-    "@fontsource/material-icons": "^4.5.2",
-<<<<<<< HEAD
-    "@fontsource/poppins": "^4.5.1",
->>>>>>> 3d136e3 (update deps)
-=======
-    "@fontsource/poppins": "^4.5.2",
->>>>>>> 5c9dd8b (update deps)
-    "@types/cordova": "^0.0.34",
-<<<<<<< HEAD
->>>>>>> 83bf6df (add conditional code for cordova)
-=======
-    "ethers": "^5.5.4",
->>>>>>> 40d6ac9 (add bridge module)
-    "moment": "^2.29.1",
-=======
-    "@awesome-cordova-plugins/clipboard": "^5.41.0",
-    "@awesome-cordova-plugins/core": "^5.41.0",
-    "@awesome-cordova-plugins/http": "^5.41.0",
-    "@fontsource/material-icons": "^4.5.4",
-    "@fontsource/poppins": "^4.5.8",
-    "@types/cordova": "^0.0.34",
-<<<<<<< HEAD
-    "ethers": "^5.6.4",
-<<<<<<< HEAD
-    "moment": "^2.29.2",
->>>>>>> 98a9908 (update deps)
-=======
-    "moment": "^2.29.3",
->>>>>>> 85119b7 (update deps)
-    "ng-hcaptcha": "^1.3.0",
-=======
-    "angularx-qrcode": "^13.0.14",
-    "ethers": "^5.6.5",
-=======
-    "@awesome-cordova-plugins/clipboard": "^5.43.0",
-    "@awesome-cordova-plugins/core": "^5.43.0",
-    "@awesome-cordova-plugins/http": "^5.43.0",
+    "@awesome-cordova-plugins/clipboard": "^5.44.0",
+    "@awesome-cordova-plugins/core": "^5.44.0",
+    "@awesome-cordova-plugins/http": "^5.44.0",
     "@fontsource/material-icons": "^4.5.4",
     "@fontsource/poppins": "^4.5.8",
     "@types/cordova": "^0.0.34",
     "angularx-qrcode": "^14.0.0",
     "ethers": "^5.6.9",
     "moment": "^2.29.3",
-    "ng-hcaptcha": "^1.3.1",
->>>>>>> 182d5db (update deps, swap qr lib)
+    "ng-hcaptcha": "^2.0.0",
     "ngx-pipes": "^3.0.0",
     "rxjs": "^7.5.5",
     "tslib": "^2.4.0",
     "zone.js": "~0.11.6"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.0.3",
-    "@angular/cli": "~14.0.3",
-    "@angular/compiler-cli": "~14.0.3",
+    "@angular-devkit/build-angular": "^14.0.4",
+    "@angular/cli": "~14.0.4",
+    "@angular/compiler-cli": "~14.0.4",
     "@types/jasmine": "~4.0.3",
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.0.1",
     "jasmine-core": "~4.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.1",
