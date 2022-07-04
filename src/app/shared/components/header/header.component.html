@@ -4,8 +4,8 @@
 		<h1>Conceal Network</h1>
 	</a>
 
-	<div class="links" fxLayoutGap="10px">
-		<button class="navlink" mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">home</button>
+	<div class="links" fxLayoutGap="8px">
+		<button class="navlink" mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Overview</button>
 		<button class="navlink" mat-button [matMenuTriggerFor]="wallets" [class.active]="this.router.url.includes('wallets')">Wallets</button>
 		<mat-menu #wallets="matMenu">
 			<button mat-menu-item routerLink="/wallets/cloud" routerLinkActive="active">
@@ -74,10 +74,12 @@
 			<mat-icon aria-hidden="false">settings</mat-icon>
 		</button>
 		<button class="auth" *ngIf="isLoggedIn" mat-button color="accent" aria-label="logout" matTooltip="Logout" (click)="logout()">
-			<span class="orange button-text">Logout?</span>
+			<mat-icon class="login-icon" aria-hidden="false">cloud</mat-icon>
+			<span class="orange button-text">Logout</span>
 		</button>
 		<button class="auth" *ngIf="!isLoggedIn" mat-button color="accent" aria-label="login" matTooltip="Login" (click)="login()">
-			<span class="orange button-text">Login?</span>
+			<mat-icon class="login-icon" aria-hidden="false">cloud</mat-icon>
+			<span class="orange button-text">Login</span>
 		</button>
 	</div>
 
