@@ -1,6 +1,6 @@
 .mat-toolbar {
 	-webkit-app-region: drag;
-	padding: 0 1.5rem 0 1.5rem;
+	padding: 0 0.5rem 0 1.4rem;
 	height: 80px;
 	overflow: hidden;
 
@@ -16,7 +16,7 @@
 	.links {
 		-webkit-app-region: no-drag;
 		-webkit-user-select: none;
-		margin-left: 35px;
+		margin-left: 25px;
 		.active {
 			color: #faa933 !important;
 			background-color: #faaa331e;
@@ -47,9 +47,12 @@
 	}
 
 	.auth {
-		padding-left: 1rem;
-		padding-right: 1rem;
 		border: 2px solid #faa933;
+		transform: scale(0.9);
+	}
+
+	.login-icon {
+		margin-right: 10px;
 	}
 
 }
