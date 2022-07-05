@@ -1,0 +1,13 @@
+[debug] [2022-07-05T05:32:10.373Z] ----------------------------------------------------------------------
+[debug] [2022-07-05T05:32:10.374Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-07-05T05:32:10.375Z] CLI Version:   11.1.0
+[debug] [2022-07-05T05:32:10.375Z] Platform:      win32
+[debug] [2022-07-05T05:32:10.375Z] Node Version:  v18.4.0
+[debug] [2022-07-05T05:32:10.375Z] Time:          Tue Jul 05 2022 15:32:10 GMT+1000 (Australian Eastern Standard Time)
+[debug] [2022-07-05T05:32:10.375Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-07-05T05:32:10.422Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-07-05T05:32:10.423Z] > authorizing via signed-in user (travis.winsor.au@gmail.com)
+[debug] [2022-07-05T05:32:10.423Z] [iam] checking project conceal-hub for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-07-05T05:32:10.424Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/conceal-hub:testIamPermissions [none]
+[debug] [2022-07-05T05:32:10.425Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/conceal-hub:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
