@@ -1,10 +1,11 @@
 // Angular Core
-import { Component, OnInit } from '@angular/core';
-import { SelectionModel } from '@angular/cdk/collections';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 
 // Angular Material
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 // Services
@@ -13,17 +14,12 @@ import { HelperService } from 'src/app/shared/services/helper.service';
 
 // Interfaces
 export interface Messages {
+	id: number;
 	address: string;
 	message: string;
 	sdm: string;
-	datetime: string;
+	timestamp: string;
 	type: string;
-}
-export interface Contacts {
-	address: string;
-	id: number;
-	label: string;
-	paymentId: string;
 }
 
 @Component({
@@ -46,16 +42,35 @@ export interface Contacts {
 
 export class CloudComponent implements OnInit {
 
-	isMessagesLoading: boolean = true;
-	isContactsLoading: boolean = true;
-	messages: Messages[] = [];
-	contacts: Contacts[] = [];
+  @ViewChild(MatPaginator, {static: false})
+  set paginator(value: MatPaginator) {
+    if (this.messagesSource){
+      this.messagesSource.paginator = value;
+    }
+  }
+
+  @ViewChild(MatSort, {static: false})
+  set sort(value: MatSort) {
+    if (this.messagesSource){
+      this.messagesSource.sort = value;
+    }
+  }
+
+	isLoading: boolean = true;
+	isLoadingResults: boolean = false;
+	isIncoming: boolean = true;
 	addresses: any;
-	messageColumns: string[] = ['date', 'address', 'type', 'message'];
-	contactColumns: string[] = ['select', 'label', 'address', 'paymentId'];
-	selection = new SelectionModel<Contacts>(true, []);
-	showMessages: boolean = true;
-	showContacts: boolean = false;
+	revalAll: boolean = false;
+	revalOne: boolean = false;
+	revealItem: number = -1;
+
+	// tables
+	messages: Messages[] = [];
+	messagesSource!: MatTableDataSource<Messages>;
+	pageEvent!: PageEvent;
+	pageSize: number = 10;
+	pageSizeOptions: number[] = [5, 10, 25];
+	messageColumns: string[] = ['timestamp', 'address', 'message'];
 
   constructor(
 		private cloudService: CloudService,
@@ -68,103 +83,86 @@ export class CloudComponent implements OnInit {
 	}
 
   ngOnInit(): void {
-		this.getMessages();
-		this.getContacts();
 		this.checkBreakpoint();
+		this.getMessages();
+		this.isLoading = false;
   }
 
 	checkBreakpoint() {
 		this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe((state: BreakpointState) => {
 			if (state.matches) {
 				// Matches small viewport or handset in portrait mode
-				this.messageColumns = ['date', 'type', 'message'];
-				this.contactColumns = ['select', 'label', 'address',];
+				this.messageColumns = ['timestamp', 'message'];
 			}
 		})
 	}
 
 	getMessages() {
-		this.isMessagesLoading = true;
-		this.cloudService.getMessages().subscribe(
-			(data: any) => {
-				if (data.result === 'success') {
-					// convert object to array with key as address
-					Object.keys(data.message).map(key => {
-						for (let i = 0; i < data.message[key].length; i++) {
-							this.messages.push({
-								address: key,
-								message: data.message[key][i].message,
-								sdm: data.message[key][i].sdm,
-								datetime: data.message[key][i].timestamp,
-								type: data.message[key][i].type,
-							});
-						}
-					});
-					// get addresses from messages
-					let addresses = this.messages.map(message => message.address);
-					this.addresses = addresses.filter((address:any, index:any, self:any) => self.indexOf(address) === index); // remove duplicates
-					this.isMessagesLoading = false;
-				}
-			}
-		)
-	}
-
-	getContacts() {
-		this.isContactsLoading = true;
-		this.cloudService.getContacts().subscribe(
-			(data: any) => {
-				if (data.result === 'success') {
-					// convert object to array with key as address
-					for (let i = 0; i < data.message.addressBook.length; i++) {
-						this.contacts.push({
-							address: data.message.addressBook[i].address,
-							id: data.message.addressBook[i].entryID,
-							label: data.message.addressBook[i].label,
-							paymentId: data.message.addressBook[i].paymentID,
-						});
+		// empty this.messages array
+		this.isLoadingResults = true;
+		this.messages = [];
+		this.messagesSource = new MatTableDataSource(this.messages);
+		// if this messages is empty, get the messages from the cloud
+		if (this.messages.length === 0) {
+			this.cloudService.getMessages().subscribe(
+				(data: any) => {
+					if (data.result === 'success') {
+						// convert object to array with key as address
+						Object.keys(data.message).map(key => {
+							for (let i = 0; i < data.message[key].length; i++) {
+								this.messages.push({
+									id: i,
+									address: key,
+									message: data.message[key][i].message,
+									sdm: data.message[key][i].sdm,
+									timestamp: data.message[key][i].timestamp,
+									type: data.message[key][i].type,
+								});
+							}
+						})
+						// get addresses from messages
+						let addresses = this.messages.map(message => message.address);
+						this.addresses = addresses.filter((address:any, index:any, self:any) => self.indexOf(address) === index); // remove duplicates
+						this.messagesSource = new MatTableDataSource(this.messages);
+						if (this.isIncoming) this.messagesSource = new MatTableDataSource(this.messages.filter(message => message.type === 'in'));
+						this.isLoadingResults = false;
 					}
-					this.isContactsLoading = false;
-					//console.log(this.contacts);
 				}
-			}
-		)
+			)
+		}
 	}
 
-	applyFilter(event: Event) {
+	inComing() {
+		this.isIncoming = true;
+		this.messagesSource = new MatTableDataSource(this.messages.filter(message => message.type === 'in'));
+	}
+
+	outGoing() {
+		this.isIncoming = false;
+		this.messagesSource = new MatTableDataSource(this.messages.filter(message => message.type === 'out'));
+	}
+
+	// hide the text of the messages in the table
+	revealMessage(item: any) {
+		this.revalOne = !this.revalOne;
+		if (item && this.revalOne) {
+			// get the row of the message and append the text in the td
+			this.revealItem = item.id;
+		} else {
+			this.revealItem = -1;
+		}
+	}
+
+	revealAllToggle() {
+		this.revalAll = !this.revalAll;
+	}
+
+	applyFilter(event: Event, source: any) {
+		const filterValue = (event.target as HTMLInputElement).value;
+		source.filter = filterValue.trim().toLowerCase();
+    if (source.paginator) {
+			source.paginator.firstPage();
+    }
   }
-
-	/** Whether the number of selected elements matches the total number of rows. */
-	isAllSelected() {
-		const numSelected = this.selection.selected.length;
-		const numRows = this.contacts.length;
-		return numSelected === numRows;
-	}
-
-	/** Selects all rows if they are not all selected; otherwise clear selection. */
-	masterToggle() {
-		if (this.isAllSelected()) {
-			this.selection.clear();
-			return;
-		}
-		this.selection.select(...this.contacts);
-	}
-
-	/** The label for the checkbox on the passed row */
-	checkboxLabel(row?: Contacts): string {
-		if (!row) {
-			return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-		}
-		return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.label + 1}`;
-	}
-
-	toggleMessages() {
-		this.showMessages = true;
-		this.showContacts = false;
-	}
-
-	toggleContacts() {
-		this.showContacts = true;
-		this.showMessages = false;
-	}
 
 }
