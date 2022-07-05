@@ -55,8 +55,12 @@
 					</div>
 				</mat-card-header>
 
-				<p class="text" fxLayoutAlign="start center">
+				<p *ngIf="isIncoming" class="text" fxLayoutAlign="start center">
 					Incoming messages for all wallets
+				</p>
+
+				<p *ngIf="!isIncoming" class="text" fxLayoutAlign="start center">
+					Outgoing messages for all wallets
 				</p>
 
 				<mat-progress-bar color="accent" mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
@@ -66,8 +70,8 @@
 					<ng-container matColumnDef="timestamp">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
 						<td mat-cell *matCellDef="let item">
-							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
-								{{getHelperService().formatDatetime(item.datetime)}}
+							<div fxLayout="row" fxLayoutAlign="start center" class="uppercase">
+								{{getHelperService().formatDatetime(item.timestamp)}}
 							</div>
 						</td>
 					</ng-container>
@@ -77,17 +81,6 @@
 						<td mat-cell *matCellDef="let item">
 							<div fxLayout="row" fxLayoutAlign="start center" class="uppercase">
 								{{ this.getHelperService().formatAddress(item.address) }}
-							</div>
-						</td>
-					</ng-container>
-
-					<ng-container matColumnDef="type">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header> Direction </th>
-						<td mat-cell *matCellDef="let item">
-							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
-								<mat-icon class="icon" *ngIf="item.type === 'out'" color="warn" aria-hidden="true">call_made</mat-icon>
-								<mat-icon class="icon" *ngIf="item.type === 'in'" color="accent" aria-hidden="true">call_received</mat-icon>
-								{{item.type}}
 							</div>
 						</td>
 					</ng-container>
