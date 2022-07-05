@@ -20,10 +20,10 @@
 					</mat-expansion-panel-header>
 					<div fxLayout="column" fxLayoutGap="10px">
 						<button fxFlex mat-stroked-button color="accent" [class.selected]="isIncoming" (click)="this.inComing()">
-							<div fxLayoutAlign="center center"><mat-icon class="icon">call_received</mat-icon>Received</div>
+							<div fxLayoutAlign="center center"><mat-icon class="icon">call_received</mat-icon>Incoming</div>
 						</button>
 						<button fxFlex mat-stroked-button color="accent" [class.selected]="!isIncoming" (click)="this.outGoing()">
-							<div fxLayoutAlign="center center"><mat-icon class="icon">call_made</mat-icon>Sent</div>
+							<div fxLayoutAlign="center center"><mat-icon class="icon">call_made</mat-icon>Outgoing</div>
 						</button>
 						<button fxFlex mat-flat-button color="accent" (click)="this.getMessages()" [disabled]="this.isLoadingResults">
 							<div fxLayoutAlign="center center"><mat-icon class="icon">refresh</mat-icon>Refresh</div>
@@ -89,8 +89,8 @@
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> Message </th>
 						<td mat-cell *matCellDef="let item">
 							<div fxLayout="row" fxLayoutAlign="start center" class="capitalize">
-								<span *ngIf="revalAll || revealItem === item.id">{{item.message}}</span>
-								<span *ngIf="!revalAll && revealItem !== item.id">######</span>
+								<span *ngIf="revalAll || revealItem === item.id"  matTooltip="Conceal this message">{{item.message}}</span>
+								<span *ngIf="!revalAll && revealItem !== item.id" matTooltip="Reveal this message">######</span>
 							</div>
 						</td>
 					</ng-container>
