@@ -56,6 +56,11 @@
 		z-index: 3;
 	}
 
+	.selected {
+		background-color: rgba(250, 170, 51, 0.1);
+		border-color: orange;
+	}
+
 	.text {
 		padding-left: 15px;
 		padding-right: 15px;
@@ -100,6 +105,10 @@
 		th {
 			width: 100px;
 		}
+		tr:hover {
+			background: darken($color: #00000015, $amount: 1);
+			cursor: pointer;
+		}
 	}
 
 	.filter {
@@ -123,7 +132,6 @@
 	}
 
 	.mat-expansion-panel-header-title {
-		color: orange;
 		font-size: 1.3rem;
 		min-height: 64px;
 	}
