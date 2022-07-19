@@ -1,5 +1,12 @@
 # Conceal App
 
+## "One App" to rule them all.
+
+Conceal App is the convergence of all Conceal functionalities and modules brought together in one simple and visually stuning app for the end user.
+
+Conceal brings all the best features together in one app.
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
 
 ## Install Notes
