@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 // Services
 import { CloudService } from 'src/app/shared/services/cloud.service';
 import { HelperService } from 'src/app/shared/services/helper.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 // Interfaces
 export interface Messages {
@@ -75,8 +76,13 @@ export class CloudComponent implements OnInit {
   constructor(
 		private cloudService: CloudService,
 		private helperService: HelperService,
+		private dialogService: DialogService,
 		public breakpointObserver: BreakpointObserver,
 	) { }
+
+	getDialogService() {
+		return this.dialogService;
+	}
 
 	getHelperService() {
 		return this.helperService;

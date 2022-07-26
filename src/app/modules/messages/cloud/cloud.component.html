@@ -25,11 +25,11 @@
 						<button fxFlex mat-stroked-button color="accent" [class.selected]="!isIncoming" (click)="this.outGoing()">
 							<div fxLayoutAlign="center center"><mat-icon class="icon">call_made</mat-icon>Outgoing</div>
 						</button>
+						<button fxFlex mat-flat-button color="accent" (click)="this.getDialogService().openComposeMsgDialog()">
+							<div fxLayoutAlign="center center"><mat-icon class="icon">edit</mat-icon>Compose</div>
+						</button>
 						<button fxFlex mat-flat-button color="accent" (click)="this.getMessages()" [disabled]="this.isLoadingResults">
 							<div fxLayoutAlign="center center"><mat-icon class="icon">refresh</mat-icon>Refresh</div>
-						</button>
-						<button fxFlex mat-flat-button color="accent">
-							<div fxLayoutAlign="center center"><mat-icon class="icon">edit</mat-icon>Compose</div>
 						</button>
 						<button fxFlex mat-flat-button color="accent" (click)="this.revealAllToggle()">
 							<div fxLayoutAlign="center center" *ngIf="!revalAll"><mat-icon class="icon">visibility</mat-icon>Reveal All</div>
