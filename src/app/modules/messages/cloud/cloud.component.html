@@ -28,13 +28,6 @@
 						<button fxFlex mat-flat-button color="accent" (click)="this.getDialogService().openComposeMsgDialog()">
 							<div fxLayoutAlign="center center"><mat-icon class="icon">edit</mat-icon>Compose</div>
 						</button>
-						<button fxFlex mat-flat-button color="accent" (click)="this.getMessages()" [disabled]="this.isLoadingResults">
-							<div fxLayoutAlign="center center"><mat-icon class="icon">refresh</mat-icon>Refresh</div>
-						</button>
-						<button fxFlex mat-flat-button color="accent" (click)="this.revealAllToggle()">
-							<div fxLayoutAlign="center center" *ngIf="!revalAll"><mat-icon class="icon">visibility</mat-icon>Reveal All</div>
-							<div fxLayoutAlign="center center" *ngIf="revalAll"><mat-icon class="icon">visibility_off</mat-icon>Conceal All</div>
-						</button>
 					</div>
 				</mat-expansion-panel>
 
@@ -55,13 +48,17 @@
 					</div>
 				</mat-card-header>
 
-				<p *ngIf="isIncoming" class="text" fxLayoutAlign="start center">
-					Incoming messages for all wallets
-				</p>
-
-				<p *ngIf="!isIncoming" class="text" fxLayoutAlign="start center">
-					Outgoing messages for all wallets
-				</p>
+				<div class="tableControls" fxLayout="row" fxLayoutAlign="center center">
+					<p *ngIf="isIncoming" fxFlex fxLayoutAlign="start center">Incoming messages for all wallets</p>
+					<p *ngIf="!isIncoming" fxFlex fxLayoutAlign="start center">Outgoing messages for all wallets</p>
+					<button mat-icon-button color="accent" (click)="this.revealAllToggle()">
+						<div fxLayoutAlign="center center" *ngIf="!revalAll"><mat-icon>visibility</mat-icon></div>
+						<div fxLayoutAlign="center center" *ngIf="revalAll"><mat-icon>visibility_off</mat-icon></div>
+					</button>
+					<button mat-icon-button color="accent" (click)="this.getMessages()" [disabled]="this.isLoadingResults">
+						<div fxLayoutAlign="center center"><mat-icon>refresh</mat-icon></div>
+					</button>
+				</div>
 
 				<mat-progress-bar color="accent" mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
 
