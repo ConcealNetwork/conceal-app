@@ -6,6 +6,8 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { trigger, transition, style, animate } from '@angular/animations';
+
+// 3rd Party
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 // Services
@@ -185,6 +187,8 @@ export class SendDialog {
 					this.snackbarService.openSnackBar(err, 'Dismiss');
 				});
 			}
+		} else {
+			this.snackbarService.openSnackBar('Clipboard not available', 'Dismiss');
 		}
 	}
 

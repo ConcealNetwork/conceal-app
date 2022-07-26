@@ -74,11 +74,9 @@
 			<mat-icon aria-hidden="false">settings</mat-icon>
 		</button>
 		<button class="auth" *ngIf="isLoggedIn" mat-button color="accent" aria-label="logout" matTooltip="Logout" (click)="logout()">
-			<mat-icon class="login-icon" aria-hidden="false">cloud</mat-icon>
 			<span class="orange button-text">Logout</span>
 		</button>
 		<button class="auth" *ngIf="!isLoggedIn" mat-button color="accent" aria-label="login" matTooltip="Login" (click)="login()">
-			<mat-icon class="login-icon" aria-hidden="false">cloud</mat-icon>
 			<span class="orange button-text">Login</span>
 		</button>
 	</div>

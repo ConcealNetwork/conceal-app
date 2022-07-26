@@ -31,7 +31,7 @@
 			<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste()">
 				<mat-icon>content_paste</mat-icon>
 			</button>
-			<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+			<mat-hint align="end">{{twofa.value.length || 0}}/6</mat-hint>
 			<mat-error *ngIf="export.controls.code.hasError('minlength') || export.controls.code.hasError('maxlength')">
 				2FA code should be <strong>6 numbers</strong>
 			</mat-error>
