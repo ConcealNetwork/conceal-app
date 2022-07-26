@@ -1,0 +1,147 @@
+<!-- form to compose a new message -->
+<form [formGroup]="form" *ngIf="!confirmed" @transition>
+
+	<h1 mat-dialog-title class="title">New Message</h1>
+	<p class="subtitle">Send a message to another address</p>
+
+	<div mat-dialog-content fxLayout="column" fxLayoutGap="25px">
+
+		<div fxLayout="column" fxFlex fxLayoutGap="15px">
+
+			<fieldset fxFlex fxLayout="column">
+				<legend>Message</legend>
+
+				<div fxLayout="column" fxFlex fxLayoutGap="25px">
+
+					<mat-form-field hintLabel="Origin address" color="accent" appearance="fill" fxFlex="noshrink">
+						<mat-label>Origin</mat-label>
+						<mat-select #wallet name="fromAddress" formControlName="fromAddress" (selectionChange)="selectWallet($event.value)">
+							<mat-option [value]="item.key" *ngFor="let item of this.wallets | keyvalue">
+								{{ this.getHelperService().formatAddress(item.key) }}
+							</mat-option>
+						</mat-select>
+						<mat-error *ngIf="form.controls.fromAddress.hasError('required')">
+							Wallet is <strong>required</strong>
+						</mat-error>
+						<mat-error *ngIf="form.controls.fromAddress.hasError('minlength') || form.controls.fromAddress.hasError('maxlength')">
+							Address must be <strong>98 characters</strong>
+						</mat-error>
+					</mat-form-field>
+
+					<mat-form-field hintLabel="Destination address" color="accent" appearance="fill">
+						<mat-label>Destination</mat-label>
+						<input matInput #toAddress type="text" name="toAddress" maxlength="98" placeholder="CCX Address" formControlName="toAddress">
+						<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste('toAddress')">
+							<mat-icon>content_paste</mat-icon>
+						</button>
+						<mat-hint align="end">{{toAddress.value.length}} / 98</mat-hint>
+						<mat-error *ngIf="form.controls.toAddress.hasError('required')">
+							Address is <strong>required</strong>
+						</mat-error>
+						<mat-error *ngIf="form.controls.toAddress.hasError('match')">
+							<strong>From</strong> and <strong>To</strong> addresses cannot be the same.
+						</mat-error>
+						<mat-error *ngIf="form.controls.toAddress.hasError('minlength')">
+							Address must be <strong>98 characters</strong>
+						</mat-error>
+					</mat-form-field>
+
+					<mat-form-field hintLabel="Enter your message" color="accent" appearance="fill">
+						<mat-label>Message</mat-label>
+						<textarea matInput #message type="text" rows="5" autocomplete="disabled" maxlength="260" placeholder="Message" formControlName="message"></textarea>
+						<mat-hint align="end">{{message.value.length}} / 260</mat-hint>
+						<mat-error *ngIf="form.controls.message.hasError('required')">
+							Message is <strong>required</strong>
+						</mat-error>
+						<mat-error *ngIf="form.controls.message.hasError('minlength')">
+							Message must be more then <strong>1 character</strong>
+						</mat-error>
+						<mat-error *ngIf="form.controls.message.hasError('maxlength')">
+							Message cannot be longer then <strong>260 characters</strong>
+						</mat-error>
+					</mat-form-field>
+
+					<mat-slide-toggle formControlName="selfDestruct">Enable Self-Destruct</mat-slide-toggle>
+
+				</div>
+
+			</fieldset>
+
+			<fieldset fxFlex fxLayout="column" *ngIf="this.form.value.selfDestruct">
+				<legend>Self-Destruct Timer</legend>
+
+				<div fxLayout="column" fxFlex fxLayoutGap="25px">
+					<mat-form-field hintLabel="How long until the message is deleted" color="accent" appearance="fill" fxFlex="noshrink">
+						<mat-label>Time</mat-label>
+						<input #time matInput numeric steps="1" min="0" max="14" type="number" name="destructTime" formControlName="destructTime" placeholder="1" (input)="destructTime(time.value)">
+						<span matSuffix>Hours</span>
+					</mat-form-field>
+					<mat-slider [value]="destruct" class="slider" color="accent" thumbLabel tickInterval="1" step="1" min="0" max="14" aria-label="units" (input)="destructTime($event.value)"></mat-slider>
+				</div>
+
+			</fieldset>
+
+		</div>
+
+	</div>
+
+	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+		<button mat-stroked-button color="warn" type="button" fxFlex (click)="close()">Cancel</button>
+		<button mat-flat-button color="accent" type="submit" fxFlex (click)="confirm()" [disabled]="!form.valid">Send Message</button>
+	</div>
+
+</form>
+
+<!-- form to authorize the transaction -->
+<form [formGroup]="authorize" *ngIf="confirmed" @transition>
+
+	<h1 mat-dialog-title class="title">Authorization</h1>
+	<p class="subtitle" *ngIf="this.hasTwoFa">Please provide your 2FA code</p>
+	<p class="subtitle" *ngIf="!this.hasTwoFa">Please provide your password</p>
+
+	<div mat-dialog-content fxLayout="column" fxLayoutGap="25px">
+
+		<div fxLayout="row" fxLayoutGap="15px" *ngIf="!isLoading">
+			<div fxFlex fxLayout="column" *ngIf="this.hasTwoFa">
+				<mat-form-field fxFill hintLabel="6 Numbers" color="accent" appearance="fill">
+					<mat-label>2FA Code</mat-label>
+					<input #twofa matInput minlength="6" maxlength="6" placeholder="00000" formControlName="code">
+					<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste('twofa')">
+						<mat-icon>content_paste</mat-icon>
+					</button>
+					<mat-hint align="end">{{twofa.value.length || 0}}/6</mat-hint>
+					<mat-error *ngIf="authorize.controls.code.hasError('minlength') || authorize.controls.code.hasError('maxlength')">
+						2FA code should be <strong>6 numbers</strong>
+					</mat-error>
+					<mat-error *ngIf="authorize.controls.code.hasError('pattern')">
+						2FA code should be <strong>numbers only</strong>
+					</mat-error>
+					<mat-error *ngIf="authorize.controls.code.hasError('required')">
+						2FA Code is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+			</div>
+			<div fxFlex fxLayout="column" *ngIf="!this.hasTwoFa">
+				<mat-form-field fxFill appearance="fill" color="accent" hintLabel="Your password">
+					<mat-label>Password</mat-label>
+					<input type='text' hidden name='email' autoComplete='username email' />
+					<input type="password" autocomplete="current-password" matInput placeholder="password" formControlName="password">
+					<mat-error *ngIf="authorize.controls.password.hasError('required')">
+						Password is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div fxLayout="row" *ngIf="this.isLoading">
+			<div fxFill><mat-progress-bar color="accent" mode="query"></mat-progress-bar></div>
+		</div>
+
+	</div>
+
+	<div mat-dialog-actions fxLayout="row" fxLayoutGap="15px">
+		<button mat-stroked-button color="warn" type="button" fxFlex (click)="close()">Cancel</button>
+		<button mat-flat-button color="accent" type="submit" fxFlex (click)="authorise()" [disabled]="!authorize.valid || this.isLoading">Submit</button>
+	</div>
+
+</form>

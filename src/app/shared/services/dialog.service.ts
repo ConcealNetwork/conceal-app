@@ -15,6 +15,7 @@ import { MatrixDialog } from 'src/app/modules/deposits/cloud/dialogs/matrix/matr
 import { PendingDialog } from 'src/app/modules/deposits/cloud/dialogs/pending/pending.dialog';
 import { ConfirmationDialog } from 'src/app/modules/deposits/cloud/dialogs/confirmation/confirmation.dialog';
 import { ArticleDialog } from 'src/app/modules/media/dialogs/article/article.dialog';
+import { ComposeDialog } from 'src/app/modules/messages/cloud/dialogs/compose/compose.component';
 
 @Injectable({
 	providedIn: 'root'
@@ -130,6 +131,17 @@ export class DialogService {
 		})
 		dialogRef.afterClosed().subscribe(result => { })
   }
+
+	openComposeMsgDialog(): void {
+		const dialogRef = this.dialog.open(ComposeDialog, {
+			width: this.themingService.dialogWidth,
+			maxWidth: this.themingService.dialogMaxWidth,
+			height: this.themingService.dialogHeight,
+			maxHeight: this.themingService.dialogHeight,
+			disableClose: false
+		})
+		dialogRef.afterClosed().subscribe(result => { })
+	}
 
 	closeDialogs(): void {
 		 this.dialog.closeAll();
