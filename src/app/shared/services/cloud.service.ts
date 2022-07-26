@@ -46,7 +46,7 @@ export class CloudService {
     return this.http.get(`${this.api}/wallet/messages`)
 	}
 
-	sendMessage(address: string, message: string, wallet:string, code:string, password: string) {
+	sendMessage(address: string, wallet:string, message: string, code:string, password: string) {
 		const body = {
 			address, message, wallet, code, password
 		}

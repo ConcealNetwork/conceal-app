@@ -78,7 +78,7 @@ export class SigninComponent implements AfterViewInit, OnInit {
 					// Login message
 					this.authService.getUser().subscribe((result: any) => {
 						if (result.message.name) this.zone.run(() => {
-							this.snackbarService.openSnackBar(`👋 ${this.timeOfDay < 12 ? 'Good morning' : 'Good evening'}, ${result.message.name} (Logged in)`, 'Dismiss')
+							this.snackbarService.openSnackBar(`👋 ${this.timeOfDay < 12 ? 'Good morning' : 'Good evening'}, ${result.message.name}`, 'Dismiss')
 						})
 					});
 					// navigate to previous route

@@ -28,6 +28,7 @@
 									<div fxLayout="column" fxFlex="noshrink" fxLayoutGap="25px">
 
 										<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+
 											<mat-form-field hintLabel="The wallet for the deposit" color="accent" appearance="fill" fxFlex="noshrink">
 												<mat-label>Wallet</mat-label>
 												<mat-select #wallet name="wallet" formControlName="wallet" (selectionChange)="selectWallet($event.value)">

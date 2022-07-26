@@ -15,8 +15,6 @@ import { ReceiveDialog } from "./dialogs/receive/receive.component";
 import { ExportDialog } from './dialogs/export/export.component';
 import { CodeDialog } from './dialogs/code/code.component';
 
-
-
 @NgModule({
   declarations: [
     CloudComponent,
