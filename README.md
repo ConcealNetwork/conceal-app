@@ -1,8 +1,17 @@
-# Conceal app
+# Conceal App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+
+
+## "One App" to rule them all.
+
+Conceal App is the convergence of all Conceal functionalities and modules brought together in one simple and visually stuning app for the end user.
+
+Conceal brings all the best features together in one app.
+
 
 ## Install Notes
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
 
 Due to a conflicting peer dependency you may need to install with `npm install --legacy-peer-deps`
 
