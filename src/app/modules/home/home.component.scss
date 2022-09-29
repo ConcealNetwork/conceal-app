@@ -4,7 +4,11 @@
 	.modules {
 		// Large
 		@media screen and (min-width: 1920px) {
-			max-width: 1400px;
+			max-width: 1200px;
+		}
+		// medium
+		@media (min-width: 960px) and (max-width: 1920px) {
+			max-width: 1000px;
 		}
 
 	}
