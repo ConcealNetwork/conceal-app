@@ -1,9 +1,8 @@
 <aside fxLayout="column" fxLayoutGap="10px">
 
 		<div fxLayout="column" fxLayoutGap="10px">
-			<a mat-stroked-button class="link" color="accent" (click)="close()" routerLink="/id" routerLinkActive="active">ID</a>
-			<a mat-stroked-button class="link" color="accent" (click)="close()" routerLink="/bridge" routerLinkActive="active">Bridge</a>
 			<!--
+			<a mat-stroked-button class="link" color="accent" (click)="close()" routerLink="/bridge" routerLinkActive="active">Bridge</a>
 			<a mat-button class="link" (click)="close()" routerLink="/pay" routerLinkActive="active">Pay</a>
 			<a mat-button class="link" (click)="close()" routerLink="/explorer" routerLinkActive="active">Explorer</a>
 			-->
@@ -34,12 +33,12 @@
 			<a mat-icon-button (click)="changeTheme('light-theme')" *ngIf="activeTheme == 'dark-theme'">
 				<mat-icon>light_mode</mat-icon>
 			</a>
-			<a mat-icon-button (click)="logout()" *ngIf="isLoggedIn">
+			<!-- <a mat-icon-button (click)="logout()" *ngIf="isLoggedIn">
 				<mat-icon>logout</mat-icon>
 			</a>
 			<a mat-icon-button (click)="login()" *ngIf="!isLoggedIn">
 				<mat-icon>login</mat-icon>
-			</a>
+			</a> -->
 		</div>
 
 </aside>

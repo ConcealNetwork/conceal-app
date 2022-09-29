@@ -5,9 +5,10 @@
 	</a>
 
 	<div class="links" fxLayoutGap="8px">
-		<button class="navlink" mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Overview</button>
-		<button class="navlink" mat-button [matMenuTriggerFor]="wallets" [class.active]="this.router.url.includes('wallets')">Wallets</button>
-		<mat-menu #wallets="matMenu">
+		<button class="navlink" mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</button>
+		<!-- <button class="navlink" mat-button [matMenuTriggerFor]="wallets" [class.active]="this.router.url.includes('wallets')">Wallets</button> -->
+		<!--
+			<mat-menu #wallets="matMenu">
 			<button mat-menu-item routerLink="/wallets/cloud" routerLinkActive="active">
 				<mat-icon [class.active]="this.router.url == '/wallets/cloud'">account_balance_wallet</mat-icon>
 				Cloud Wallet
@@ -39,7 +40,6 @@
 				Discover
 			</button>
 		</mat-menu>
-		<button class="navlink" mat-button [matMenuTriggerFor]="id" [class.active]="this.router.url == '/id' || this.router.url == '/id/cloud'">ID</button>
 		<mat-menu #id="matMenu">
 			<button mat-menu-item routerLink="/id/cloud" routerLinkActive="active">
 				<mat-icon [class.active]="this.router.url == '/id/cloud'">portrait</mat-icon>
@@ -50,12 +50,12 @@
 				Discover
 			</button>
 		</mat-menu>
+		-->
+		<a class="navlink" mat-button href="https://wallet.conceal.network" target="_blank">Wallet</a>
 		<button class="navlink" mat-button routerLink="/bridge" routerLinkActive="active">Bridge</button>
-		<!-- future updates
-		<button class="navlink" mat-button routerLink="/pay" routerLinkActive="active">Pay</button>
-		<button class="navlink" mat-button routerLink="/live" routerLinkActive="active">Live</button>
-		<button class="navlink" mat-button routerLink="/explorer" routerLinkActive="active">Explorer</button>
-	 	-->
+		<a class="navlink" mat-button href="https://conceal.network/clive" target="_blank">Live</a>
+		<a class="navlink" mat-button href="https://explorer.conceal.network" target="_blank">Explorer</a>
+
 	</div>
 
 	<span class="fill-space"></span>
@@ -73,12 +73,13 @@
 		<button mat-icon-button aria-label="settings" matTooltip="Settings" routerLink="/settings" routerLinkActive="active">
 			<mat-icon aria-hidden="false">settings</mat-icon>
 		</button>
+		<!--
 		<button class="auth" *ngIf="isLoggedIn" mat-button color="accent" aria-label="logout" matTooltip="Logout" (click)="logout()">
 			<span class="orange button-text">Logout</span>
 		</button>
 		<button class="auth" *ngIf="!isLoggedIn" mat-button color="accent" aria-label="login" matTooltip="Login" (click)="login()">
 			<span class="orange button-text">Login</span>
-		</button>
+		</button> -->
 	</div>
 
 </mat-toolbar>

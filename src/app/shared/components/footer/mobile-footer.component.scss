@@ -1,19 +1,27 @@
 footer {
+	.mat-toolbar {
+		height: 65px;
+		margin: 0px;
+		padding: 0px;
+		border-bottom: 0px;
+		.mat-button {
+			max-width: fit-content;
+			padding: 0px;
+		}
+		.menu {
+			.toolbar-icon {
+				line-height:1; // Set to zero or will affect spacing between icon and text
+				mat-icon {
+					height: fit-content;
+					width: fit-content;
+				}
+			}
 
-	.menu {
-		.toolbar-icon {
-			line-height:1; // Set to zero or will affect spacing between icon and text
-			mat-icon {
-				height: fit-content;
-				width: fit-content;
+			.toolbar-icon-text {
+				line-height: 1.5; // Proper spacing between icon and text
+				font-size: 85%; // Smaller text size for proper display under icon
+				text-transform: capitalize;
 			}
 		}
-
-		.toolbar-icon-text {
-			line-height: 1.8; // Proper spacing between icon and text
-			font-size: 65%; // Smaller text size for proper display under icon
-			text-transform: capitalize;
-		}
 	}
-
 }

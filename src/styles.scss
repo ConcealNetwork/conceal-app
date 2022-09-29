@@ -249,7 +249,7 @@ mat-horizontal-stepper {
 }
 .mat-expansion-panel-header {
 	font-size: 1rem !important;
-	height: auto;
+	height: 60px;
 }
 
 .mat-expansion-panel-header-description {
@@ -257,7 +257,11 @@ mat-horizontal-stepper {
 }
 
 .mat-expansion-panel-body {
-	background: #414141 !important;
+	//background: #414141 !important;
 	padding: 15px !important;
 	font-size: 1rem;
+	a {
+		max-width: 200px;
+		overflow-wrap: anywhere;
+	 }
 }

@@ -1,24 +1,53 @@
 <footer class="footer">
   <mat-toolbar class="footer mat-elevation-z0" color="primary">
-    <div fxFlex fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="0px">
 
-      <button mat-button class="menu" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a mat-button class="menu" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <div class="toolbar-icon">
-          <mat-icon>dashboard</mat-icon>
+          <mat-icon>workspaces</mat-icon>
         </div>
         <div class="toolbar-icon-text">
-          <span>overview</span>
+          <span>Home</span>
         </div>
-      </button>
+      </a>
 
-      <button mat-button class="menu" routerLink="/wallets" routerLinkActive="active">
+      <a mat-button class="menu" href="https://wallet.conceal.network" target="_blank">
         <div class="toolbar-icon">
           <mat-icon>account_balance_wallet</mat-icon>
         </div>
         <div class="toolbar-icon-text">
-          <span>wallets</span>
+          <span>Wallet</span>
         </div>
-      </button>
+      </a>
+
+			<a mat-button class="menu" routerLink="/bridge" routerLinkActive="active">
+        <div class="toolbar-icon">
+          <mat-icon>swap_horizontal_circle</mat-icon>
+        </div>
+        <div class="toolbar-icon-text">
+          <span>Bridge</span>
+        </div>
+      </a>
+
+			<a mat-button class="menu" href="https://conceal.network/clive" target="_blank">
+        <div class="toolbar-icon">
+          <mat-icon>duo</mat-icon>
+        </div>
+        <div class="toolbar-icon-text">
+          <span>CLive</span>
+        </div>
+      </a>
+
+			<a mat-button class="menu" href="https://explorer.conceal.network" target="_blank">
+        <div class="toolbar-icon">
+          <mat-icon>query_stats</mat-icon>
+        </div>
+        <div class="toolbar-icon-text">
+          <span>Explorer</span>
+        </div>
+      </a>
+
+			<!--
 
       <button mat-button class="menu" routerLink="/deposits" routerLinkActive="active">
         <div class="toolbar-icon">
@@ -36,7 +65,7 @@
         <div class="toolbar-icon-text">
           <span>messages</span>
         </div>
-      </button>
+      </button> -->
 
 			<!-- future updates
 			<button mat-button class="menu" routerLink="/live" routerLinkActive="active">
