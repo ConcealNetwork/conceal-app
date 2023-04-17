@@ -46,7 +46,7 @@
     "ethers": "^5.7.2",
     "moment": "^2.29.4",
     "ng-hcaptcha": "^2.0.0",
-    "ngx-pipes": "^3.1.0",
+    "ngx-pipes": "^3.2.0",
     "rxjs": "^7.5.7",
     "tslib": "^2.4.1",
     "zone.js": "~0.12.0"
