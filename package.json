@@ -41,7 +41,7 @@
     "@awesome-cordova-plugins/http": "^6.2.0",
     "@fontsource/material-icons": "^4.5.4",
     "@fontsource/poppins": "^4.5.10",
-    "@types/cordova": "^0.0.34",
+    "@types/cordova": "^11.0.0",
     "angularx-qrcode": "^14.0.0",
     "ethers": "^6.3.0",
     "moment": "^2.29.4",
