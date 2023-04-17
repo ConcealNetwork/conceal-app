@@ -43,7 +43,7 @@
     "@fontsource/poppins": "^4.5.10",
     "@types/cordova": "^0.0.34",
     "angularx-qrcode": "^14.0.0",
-    "ethers": "^5.7.2",
+    "ethers": "^6.3.0",
     "moment": "^2.29.4",
     "ng-hcaptcha": "^2.1.0",
     "ngx-pipes": "^3.2.0",
