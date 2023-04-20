@@ -42,7 +42,7 @@
     "@fontsource/material-icons": "^4.5.4",
     "@fontsource/poppins": "^4.5.10",
     "@types/cordova": "^11.0.0",
-    "angularx-qrcode": "^14.0.0",
+    "angularx-qrcode": "^15.0.1",
     "ethers": "^6.3.0",
     "moment": "^2.29.4",
     "ng-hcaptcha": "^2.1.0",
