@@ -45,7 +45,7 @@
     "angularx-qrcode": "^15.0.1",
     "ethers": "^6.3.0",
     "moment": "^2.29.4",
-    "ng-hcaptcha": "^2.1.0",
+    "ng-hcaptcha": "^2.2.0",
     "ngx-pipes": "^3.2.2",
     "rxjs": "^7.8.1",
     "tslib": "^2.4.1",
