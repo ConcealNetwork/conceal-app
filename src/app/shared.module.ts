@@ -1,7 +1,7 @@
 // Angular Core
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { NgPipesModule } from 'ngx-pipes';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
@@ -15,7 +15,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
   ],
   exports: [
 		CommonModule,
-    LoaderComponent,
+		LoaderComponent,
 		NgPipesModule,
 		FlexLayoutModule
 	],

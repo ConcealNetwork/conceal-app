@@ -1,16 +1,16 @@
+// Angular core
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { getSupportedInputTypes, Platform, supportsPassiveEventListeners, supportsScrollBehavior } from '@angular/cdk/platform';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
 
 // 3rd Party Modules
 import { Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 // Services
 import { ThemingService } from './shared/services/theming.service';
-
 
 @Component({
   selector: 'app-root',

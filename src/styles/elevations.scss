@@ -1,0 +1,102 @@
+// mat elevations from 0 to 24
+// https://material.io/design/environment/elevation.html#elevation-in-material-design
+
+.mat-elevation-z0 {
+    box-shadow: none !important;
+}
+
+.mat-elevation-z1 {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 3px -1px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z2 {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 5px -1px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z3 {
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 3px -2px rgba(0, 0, 0, 0.14), 0 1px 8px -3px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z4 {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.14), 0 2px 4px -1px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z5 {
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.14), 0 3px 5px -1px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z6 {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.14), 0 3px 5px -1px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z7 {
+    box-shadow: 0 7px 10px 1px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.14), 0 5px 5px -3px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z8 {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z9 {
+    box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.2), 0 3px 16px 2px rgba(0, 0, 0, 0.12), 0 5px 6px -3px rgba(0, 0, 0, 0.14) !important;
+}
+
+.mat-elevation-z10 {
+    box-shadow: 0 10px 13px 1px rgba(0, 0, 0, 0.2), 0 4px 20px 1px rgba(0, 0, 0, 0.14), 0 5px 8px -5px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z11 {
+    box-shadow: 0 11px 14px 1px rgba(0, 0, 0, 0.2), 0 4px 23px 3px rgba(0, 0, 0, 0.14), 0 6px 10px -5px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z12 {
+    box-shadow: 0 12px 15px 1px rgba(0, 0, 0, 0.2), 0 5px 25px 3px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z13 {
+    box-shadow: 0 13px 16px 1px rgba(0, 0, 0, 0.2), 0 5px 27px 4px rgba(0, 0, 0, 0.14), 0 8px 10px -5px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z14 {
+    box-shadow: 0 14px 17px 2px rgba(0, 0, 0, 0.2), 0 6px 29px 4px rgba(0, 0, 0, 0.14), 0 9px 11px -5px rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-elevation-z15 {
+    box-shadow: 0 17px 17px -10px rgba(0, 0, 0, 0.4), 0 25px 50px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.mat-elevation-z16 {
+    box-shadow: 0 17px 19px -10px rgba(0, 0, 0, 0.4), 0 28px 72px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.mat-elevation-z17 {
+    box-shadow: 0 19px 21px -10px rgba(0, 0, 0, 0.4), 0 33px 87px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.mat-elevation-z18 {
+    box-shadow: 0 20px 22px -10px rgba(0, 0, 0, 0.4), 0 36px 100px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.mat-elevation-z19 {
+    box-shadow: 0 22px 25px -10px rgba(0, 0, 0, 0.4), 0 40px 115px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.mat-elevation-z20 {
+    box-shadow: 0 24px 28px -10px rgba(0, 0, 0, 0.4), 0 44px 130px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.mat-elevation-z21 {
+    box-shadow: 0 27px 31px -10px rgba(0, 0, 0, 0.4), 0 48px 145px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.mat-elevation-z22 {
+    box-shadow: 0 30px 34px -10px rgba(0, 0, 0, 0.4), 0 54px 160px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.mat-elevation-z23 {
+    box-shadow: 0 33px 38px -10px rgba(0, 0, 0, 0.4), 0 60px 180px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.mat-elevation-z24 {
+    box-shadow: 0 36px 40px -12px rgba(0, 0, 0, 0.4), 0 68px 220px 0 rgba(0, 0, 0, 0.3) !important;
+}

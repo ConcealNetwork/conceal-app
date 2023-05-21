@@ -2,19 +2,19 @@
 import { environment } from 'src/environments/environment';
 
 // Angular Core
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // 3rd Party
 import { JwtModule } from "@auth0/angular-jwt";
 
 // Modules
-import { SharedModule } from './shared.module';
-import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material.module';
+import { SharedModule } from './shared.module';
 
 // Services
 import { HttpInterceptorService } from "./shared/services/exception.interceptor";
@@ -35,25 +35,28 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
+	declarations: [
+		AppComponent,
     HeaderComponent,
     SidenavComponent,
 		FooterComponent,
     MobileFooterComponent,
 		MobileHeaderComponent,
 		TwoFactorDialog
-  ],
-  imports: [
-    BrowserModule,
-		BrowserAnimationsModule,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
 		MaterialModule,
 		SharedModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.worker,
-      // Register the ServiceWorker as soon as the app is stable or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
+		HttpClientModule,
+		BrowserAnimationsModule,
+		ServiceWorkerModule.register('ngsw-worker.js', {
+			enabled: !isDevMode() || environment.worker,
+			// Register the ServiceWorker as soon as the application is stable
+			// or after 30 seconds (whichever comes first).
+			registrationStrategy: 'registerWhenStable:30000'
+		}),
 		JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -62,9 +65,7 @@ export function tokenGetter() {
         authScheme: ""
       },
     }),
-		HttpClientModule,
-		AppRoutingModule,
-  ],
+	],
 	providers: [
 		ThemingService,
 		CordovaService,
@@ -74,6 +75,7 @@ export function tokenGetter() {
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+	bootstrap: [AppComponent]
 })
+
 export class AppModule { }

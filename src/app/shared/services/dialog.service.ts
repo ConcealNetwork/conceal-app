@@ -7,15 +7,15 @@ import { ThemingService } from './theming.service';
 
 // Dialog Components
 import { TwoFactorDialog } from 'src/app/shared/dialogs/twofactor/twofactor.component';
-import { SendDialog } from 'src/app/modules/wallets/cloud/dialogs/send/send.component';
-import { ReceiveDialog } from 'src/app/modules/wallets/cloud/dialogs/receive/receive.component';
-import { ExportDialog } from 'src/app/modules/wallets/cloud/dialogs/export/export.component';
-import { CodeDialog } from 'src/app/modules/wallets/cloud/dialogs/code/code.component';
-import { MatrixDialog } from 'src/app/modules/deposits/cloud/dialogs/matrix/matrix.dialog';
-import { PendingDialog } from 'src/app/modules/deposits/cloud/dialogs/pending/pending.dialog';
-import { ConfirmationDialog } from 'src/app/modules/deposits/cloud/dialogs/confirmation/confirmation.dialog';
+// import { SendDialog } from 'src/app/modules/wallets/cloud/dialogs/send/send.component';
+// import { ReceiveDialog } from 'src/app/modules/wallets/cloud/dialogs/receive/receive.component';
+// import { ExportDialog } from 'src/app/modules/wallets/cloud/dialogs/export/export.component';
+// import { CodeDialog } from 'src/app/modules/wallets/cloud/dialogs/code/code.component';
+// import { MatrixDialog } from 'src/app/modules/deposits/cloud/dialogs/matrix/matrix.dialog';
+// import { PendingDialog } from 'src/app/modules/deposits/cloud/dialogs/pending/pending.dialog';
+// import { ConfirmationDialog } from 'src/app/modules/deposits/cloud/dialogs/confirmation/confirmation.dialog';
 import { ArticleDialog } from 'src/app/modules/media/dialogs/article/article.dialog';
-import { ComposeDialog } from 'src/app/modules/messages/cloud/dialogs/compose/compose.component';
+//import { ComposeDialog } from 'src/app/modules/messages/cloud/dialogs/compose/compose.component';
 
 @Injectable({
 	providedIn: 'root'
@@ -28,39 +28,39 @@ export class DialogService {
 		public themingService: ThemingService
 	) { }
 
-	openConfirmationDialog(deposit:any): void {
-		const dialogRef = this.dialog.open(ConfirmationDialog, {
-			width: this.themingService.exportDialogWidth,
-			maxWidth: this.themingService.exportDialogWidth,
-			height: this.themingService.dialogHeight,
-			maxHeight: this.themingService.dialogHeight,
-			disableClose: true,
-			data: {deposit: deposit}
-		})
-		dialogRef.afterClosed().subscribe(result => { })
-  }
+	// openConfirmationDialog(deposit:any): void {
+	// 	const dialogRef = this.dialog.open(ConfirmationDialog, {
+	// 		width: this.themingService.exportDialogWidth,
+	// 		maxWidth: this.themingService.exportDialogWidth,
+	// 		height: this.themingService.dialogHeight,
+	// 		maxHeight: this.themingService.dialogHeight,
+	// 		disableClose: true,
+	// 		data: {deposit: deposit}
+	// 	})
+	// 	dialogRef.afterClosed().subscribe(result => { })
+  // }
 
-	openMatrixDialog(): void {
-		const dialogRef = this.dialog.open(MatrixDialog, {
-			width: this.themingService.dialogWidth,
-			maxWidth: this.themingService.dialogMaxWidth,
-			height: this.themingService.dialogHeight,
-			maxHeight: this.themingService.dialogHeight,
-			disableClose: false
-		})
-		dialogRef.afterClosed().subscribe(result => { })
-  }
+	// openMatrixDialog(): void {
+	// 	const dialogRef = this.dialog.open(MatrixDialog, {
+	// 		width: this.themingService.dialogWidth,
+	// 		maxWidth: this.themingService.dialogMaxWidth,
+	// 		height: this.themingService.dialogHeight,
+	// 		maxHeight: this.themingService.dialogHeight,
+	// 		disableClose: false
+	// 	})
+	// 	dialogRef.afterClosed().subscribe(result => { })
+  // }
 
-	openPendingDialog(): void {
-		const dialogRef = this.dialog.open(PendingDialog, {
-			width: this.themingService.exportDialogWidth,
-			maxWidth: this.themingService.exportDialogWidth,
-			height: this.themingService.dialogHeight,
-			maxHeight: this.themingService.dialogHeight,
-			disableClose: false
-		})
-		dialogRef.afterClosed().subscribe(result => { })
-  }
+	// openPendingDialog(): void {
+	// 	const dialogRef = this.dialog.open(PendingDialog, {
+	// 		width: this.themingService.exportDialogWidth,
+	// 		maxWidth: this.themingService.exportDialogWidth,
+	// 		height: this.themingService.dialogHeight,
+	// 		maxHeight: this.themingService.dialogHeight,
+	// 		disableClose: false
+	// 	})
+	// 	dialogRef.afterClosed().subscribe(result => { })
+  // }
 
 	openTwoFactorDialog(): void {
 		const dialogRef = this.dialog.open(TwoFactorDialog, {
@@ -73,52 +73,52 @@ export class DialogService {
 		dialogRef.afterClosed().subscribe(result => { })
   }
 
-	openQrcodeDialog(address:any): void {
-		const dialogRef = this.dialog.open(CodeDialog, {
-			width: this.themingService.qrcodeDialogWidth,
-			maxWidth: this.themingService.dialogMaxWidth,
-			height: this.themingService.dialogHeight,
-			maxHeight: this.themingService.dialogHeight,
-			disableClose: false,
-			data: {address: address}
-		})
-		dialogRef.afterClosed().subscribe(result => { })
-  }
+	// openQrcodeDialog(address:any): void {
+	// 	const dialogRef = this.dialog.open(CodeDialog, {
+	// 		width: this.themingService.qrcodeDialogWidth,
+	// 		maxWidth: this.themingService.dialogMaxWidth,
+	// 		height: this.themingService.dialogHeight,
+	// 		maxHeight: this.themingService.dialogHeight,
+	// 		disableClose: false,
+	// 		data: {address: address}
+	// 	})
+	// 	dialogRef.afterClosed().subscribe(result => { })
+  // }
 
-	openExportDialog(address:any): void {
-		const dialogRef = this.dialog.open(ExportDialog, {
-			width: this.themingService.exportDialogWidth,
-			maxWidth: this.themingService.dialogMaxWidth,
-			height: this.themingService.dialogHeight,
-			maxHeight: this.themingService.dialogHeight,
-			disableClose: true,
-			data: {address: address}
-		})
-		dialogRef.afterClosed().subscribe(result => { })
-  }
+	// openExportDialog(address:any): void {
+	// 	const dialogRef = this.dialog.open(ExportDialog, {
+	// 		width: this.themingService.exportDialogWidth,
+	// 		maxWidth: this.themingService.dialogMaxWidth,
+	// 		height: this.themingService.dialogHeight,
+	// 		maxHeight: this.themingService.dialogHeight,
+	// 		disableClose: true,
+	// 		data: {address: address}
+	// 	})
+	// 	dialogRef.afterClosed().subscribe(result => { })
+  // }
 
-	openSendDialog(wallet:any): void {
-		const dialogRef = this.dialog.open(SendDialog, {
-			width: this.themingService.dialogWidth,
-			maxWidth: this.themingService.dialogMaxWidth,
-			height: this.themingService.dialogHeight,
-			maxHeight: this.themingService.dialogHeight,
-			disableClose: true,
-			data: {wallet: wallet}
-		})
-		dialogRef.afterClosed().subscribe(result => { })
-  }
+	// openSendDialog(wallet:any): void {
+	// 	const dialogRef = this.dialog.open(SendDialog, {
+	// 		width: this.themingService.dialogWidth,
+	// 		maxWidth: this.themingService.dialogMaxWidth,
+	// 		height: this.themingService.dialogHeight,
+	// 		maxHeight: this.themingService.dialogHeight,
+	// 		disableClose: true,
+	// 		data: {wallet: wallet}
+	// 	})
+	// 	dialogRef.afterClosed().subscribe(result => { })
+  // }
 
-	openReceiveDialog(): void {
-		const dialogRef = this.dialog.open(ReceiveDialog, {
-			width: this.themingService.dialogWidth,
-			maxWidth: this.themingService.dialogMaxWidth,
-			height: this.themingService.dialogHeight,
-			maxHeight: this.themingService.dialogHeight,
-			disableClose: true
-		})
-		dialogRef.afterClosed().subscribe(result => { })
-  }
+	// openReceiveDialog(): void {
+	// 	const dialogRef = this.dialog.open(ReceiveDialog, {
+	// 		width: this.themingService.dialogWidth,
+	// 		maxWidth: this.themingService.dialogMaxWidth,
+	// 		height: this.themingService.dialogHeight,
+	// 		maxHeight: this.themingService.dialogHeight,
+	// 		disableClose: true
+	// 	})
+	// 	dialogRef.afterClosed().subscribe(result => { })
+  // }
 
 	openArticleDialog(article:any): void {
 		const dialogRef = this.dialog.open(ArticleDialog, {
@@ -132,16 +132,16 @@ export class DialogService {
 		dialogRef.afterClosed().subscribe(result => { })
   }
 
-	openComposeMsgDialog(): void {
-		const dialogRef = this.dialog.open(ComposeDialog, {
-			width: this.themingService.dialogWidth,
-			maxWidth: this.themingService.dialogMaxWidth,
-			height: this.themingService.dialogHeight,
-			maxHeight: this.themingService.dialogHeight,
-			disableClose: false
-		})
-		dialogRef.afterClosed().subscribe(result => { })
-	}
+	// openComposeMsgDialog(): void {
+	// 	const dialogRef = this.dialog.open(ComposeDialog, {
+	// 		width: this.themingService.dialogWidth,
+	// 		maxWidth: this.themingService.dialogMaxWidth,
+	// 		height: this.themingService.dialogHeight,
+	// 		maxHeight: this.themingService.dialogHeight,
+	// 		disableClose: false
+	// 	})
+	// 	dialogRef.afterClosed().subscribe(result => { })
+	// }
 
 	closeDialogs(): void {
 		 this.dialog.closeAll();

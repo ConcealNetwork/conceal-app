@@ -33,7 +33,7 @@
 								<div fxLayout="row" fxLayoutAlign="center stretch">
 									<img src="./assets/images/branding/{{fromControl.value}}.png" width="128" height="128">
 								</div>
-								<mat-form-field fxFill color="accent" appearance="fill">
+								<mat-form-field class="bridge-field" fxLayout.xs="column" color="accent" appearance="fill">
 									<mat-label>From Network</mat-label>
 									<mat-select [formControl]="fromControl" (selectionChange)="changeNetwork($event.value, 'from')" name="from">
 										<mat-option *ngFor="let from of fromNetwork" [value]="from.value">
@@ -53,7 +53,7 @@
 								<div fxLayout="row" fxLayoutAlign="center stretch">
 									<img src="./assets/images/branding/{{toControl.value}}.png" width="128" height="128">
 								</div>
-								<mat-form-field fxFill color="accent" appearance="fill">
+								<mat-form-field class="bridge-field" fxLayout.xs="column" color="accent" appearance="fill">
 									<mat-label>To Network</mat-label>
 									<mat-select [formControl]="toControl" (selectionChange)="changeNetwork($event.value, 'to')" name="to">
 										<mat-option *ngFor="let to of toNetwork" [value]="to.value">

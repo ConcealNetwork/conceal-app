@@ -1,31 +1,31 @@
 mat-sidenav-container, mat-sidenav-content, mat-sidenav {
-  height: 100%; // Component content fills entire vertical space
-}
+    height: 100%; // Component content fills entire vertical space
+  }
 
-mat-sidenav {
-	width: 30vw;
-	padding: 1rem 1.5rem;
-	text-transform: uppercase;
-}
+  mat-sidenav {
+      width: 30vw;
+      padding: 1rem 1.5rem;
+      text-transform: uppercase;
+  }
 
-mat-sidenav-content  {
-	padding-top: env(safe-area-inset-top);
-	padding-bottom: env(safe-area-inset-bottom);
-}
+  mat-sidenav-content  {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+  }
 
-// Component content area
-.container {
-	height: 100vh;
-  overflow: auto; // Keeps header from scrolling away
-	padding: 0px;
-}
+  // Component content area
+  .container {
+      height: 100vh;
+    overflow: auto; // Keeps header from scrolling away
+      padding: 0px;
+  }
 
-.mat-drawer-content {
-	overflow: hidden;
-}
+  .mat-drawer-content {
+      overflow: hidden;
+  }
 
-@media only screen and (max-width: 960px) {
-	mat-sidenav {
-		width: 60vw;
-	}
-}
+  @media only screen and (max-width: 960px) {
+      mat-sidenav {
+          width: 60vw;
+      }
+  }

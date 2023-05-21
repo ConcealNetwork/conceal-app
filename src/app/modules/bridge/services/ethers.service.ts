@@ -8,7 +8,7 @@ import { DialogService } from './dialog.service';
 import { SnackbarService } from './snackbar.service';
 
 // 3rd Party
-import { ethers } from 'ethers'
+import { ethers } from "ethers";
 
 declare const window: any;
 
@@ -137,7 +137,7 @@ export class EthersService {
 		this.dataService.loading = true;
 
 		// Setup Ethers
-		let provider = new ethers.providers.Web3Provider(window.ethereum);
+		let provider = new ethers.BrowserProvider(window.ethereum);
 		let signer = provider.getSigner();
 
 		// Check if we are on the same network
@@ -173,7 +173,7 @@ export class EthersService {
 
 				// Set Gas Fee
 				const txGasFee = {
-					value: ethers.utils.parseEther(estimatedGas.gas.toString()),
+					value: ethers.parseEther(estimatedGas.gas.toString()),
 					to: this.dataService.wccxAccountAddress,
 					chainId: this.dataService.chainId,
 					gasPrice: gasPrice.gas
@@ -182,7 +182,7 @@ export class EthersService {
 				this.dialogService.openTransactionDialog();
 
 				// Send the actual tx using the signer as sender
-				let txResult: any = await signer.sendTransaction(txGasFee).then((response) => {
+				let txResult: any = (await signer).sendTransaction(txGasFee).then((response) => {
 					return response;
 				}, (error: any) => {
 					this.dialogService.closeDialogs();
@@ -238,7 +238,7 @@ export class EthersService {
 		this.dataService.loading = true;
 
 		// Setup Ethers
-		let provider = new ethers.providers.Web3Provider(window.ethereum);
+		let provider = new ethers.BrowserProvider(window.ethereum);
 		let signer = provider.getSigner();
 
 		// Check if we are on the same network
@@ -250,7 +250,7 @@ export class EthersService {
 
 		// Create the contract with the metamask user as the signer
 		this.snackbarService.openSnackBar('Making Deposit...', 'Dismiss');
-		let contract = new ethers.Contract(this.dataService.contractAddress, this.dataService.contractAbi, signer);
+		let contract = new ethers.Contract(this.dataService.contractAddress, this.dataService.contractAbi, await signer);
 
 		// Check swap balance
 		let balance: any = await this.apiService.getCCXSwapBalance();
@@ -274,7 +274,7 @@ export class EthersService {
 			};
 
       // Call the transfer contract and initialize the TX then wait for the TX to be confirmed before finalizing it
-      let txResult: any = await contract.transfer(this.dataService.wccxAccountAddress, parseFloat(amount) * this.dataService.wccxUnits, options).then((response: any) => {
+      let txResult: any = await contract['transfer'](this.dataService.wccxAccountAddress, parseFloat(amount) * this.dataService.wccxUnits, options).then((response: any) => {
 				return response;
 			}, (error: any) => {
 				this.snackbarService.openSnackBar(error.message, 'Dismiss');

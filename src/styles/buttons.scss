@@ -1,6 +1,11 @@
-.mat-raised-button,
-.mat-stroked-button,
-.mat-flat-button {
-	font-size: 1rem;
+mat-raised-button,
+mat-stroked-button,
+mat-flat-button {
 	padding: .25rem;
+}
+
+.mdc-button {
+	font-size: 1rem;
+	min-height: 44px;
+	text-decoration: none;
 }

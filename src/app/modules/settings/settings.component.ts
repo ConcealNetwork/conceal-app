@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
-import { NgHcaptchaService } from 'ng-hcaptcha';
+//import { NgHcaptchaService } from 'ng-hcaptcha';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ApiService } from 'src/app/shared/services/api.service';
@@ -66,7 +66,7 @@ export class SettingsComponent implements OnInit {
 		private snackbarService: SnackbarService,
 		private theming: ThemingService,
 		private clipboard: Clipboard,
-		private hcaptchaService: NgHcaptchaService,
+		//private hcaptchaService: NgHcaptchaService,
 	) { }
 
 	hub: FormGroup = new FormGroup({
@@ -105,7 +105,7 @@ export class SettingsComponent implements OnInit {
 							]))
 							this.accountButtonLabel = 'Update Email';
 							this.loginMethodLabel = 'Switch to Username';
-							this.cloud.controls.email.setValue(user.message.email);
+							this.cloud.controls['email'].setValue(user.message.email);
 							this.passwordReset = false;
 						} else {
 							this.cloud.removeControl('email');
@@ -117,7 +117,7 @@ export class SettingsComponent implements OnInit {
 							]))
 							this.accountButtonLabel = 'Update Username';
 							this.loginMethodLabel = 'Switch to Email';
-							this.cloud.controls.username.setValue(user.message.email);
+							this.cloud.controls['username'].setValue(user.message.email);
 							this.passwordReset = true;
 						}
 					}
@@ -151,7 +151,7 @@ export class SettingsComponent implements OnInit {
 			if(currencies) {
 				this.currencies = currencies;
 				if (!localStorage.getItem('currency')) {
-					this.hub.controls.currency.patchValue('usd');
+					this.hub.controls['currency'].patchValue('usd');
 				}
 			} else {
 				this.snackbarService.openSnackBar('Could not get list of currencies', 'Dismiss');
@@ -170,12 +170,12 @@ export class SettingsComponent implements OnInit {
 		});
 
 		let currency = localStorage.getItem('currency');
-		this.hub.controls.currency.patchValue(currency);
+		this.hub.controls['currency'].patchValue(currency);
 		let mode = localStorage.getItem('mode');
 		if (mode) {
-			this.hub.controls.mode.patchValue(mode);
+			this.hub.controls['mode'].patchValue(mode);
 		} else {
-			this.hub.controls.mode.patchValue('follow-system');
+			this.hub.controls['mode'].patchValue('follow-system');
 		}
 
   }
@@ -217,8 +217,8 @@ export class SettingsComponent implements OnInit {
 	}
 
 	changeSettings() {
-		let currency = this.hub.controls.currency.value;
-		let mode = this.hub.controls.mode.value;
+		let currency = this.hub.controls['currency'].value;
+		let mode = this.hub.controls['mode'].value;
 		localStorage.setItem('currency', currency);
 		if (mode === 'follow-system') {
 			localStorage.removeItem('mode');
@@ -239,7 +239,7 @@ export class SettingsComponent implements OnInit {
 
 	changeEmail(value:string) {
 		if(value === 'Update Email' || value === 'Save Email') {
-			let email = this.cloud.controls.email.value;
+			let email = this.cloud.controls['email'].value;
 			this.authService.changeEmail(email).subscribe((result: any) => {
 				if(result.result === 'success') {
 					this.snackbarService.openSnackBar(`Success! Check ${email} to confirm`, 'Dismiss');
@@ -249,7 +249,7 @@ export class SettingsComponent implements OnInit {
 			})
 		}
 		if(value === 'Update Username' || value === 'Save Username') {
-			let email = this.cloud.controls.username.value;
+			let email = this.cloud.controls['username'].value;
 			this.authService.changeEmail(email).subscribe((result: any) => {
 				if(result.result === 'success') {
 					this.snackbarService.openSnackBar(`Success! your username has been updated.`, 'Dismiss');
@@ -260,22 +260,22 @@ export class SettingsComponent implements OnInit {
 		}
 	}
 
-	resetPassword() {
-		this.hcaptchaService.verify().subscribe(
-			(result) => {
-				this.authService.resetPassword(this.email, result).subscribe((result: any) => {
-					if(result.result === 'success') {
-						this.snackbarService.openSnackBar(`Success! Check ${this.email} to reset your password`, 'Dismiss');
-					} else {
-						this.snackbarService.openSnackBar("Could not reset password", 'Dismiss');
-					}
-				})
-			}
-		)
-	}
+	// resetPassword() {
+	// 	this.hcaptchaService.verify().subscribe(
+	// 		(result) => {
+	// 			this.authService.resetPassword(this.email, result).subscribe((result: any) => {
+	// 				if(result.result === 'success') {
+	// 					this.snackbarService.openSnackBar(`Success! Check ${this.email} to reset your password`, 'Dismiss');
+	// 				} else {
+	// 					this.snackbarService.openSnackBar("Could not reset password", 'Dismiss');
+	// 				}
+	// 			})
+	// 		}
+	// 	)
+	// }
 
 	change2fa(enabled: boolean) {
-		let code = this.twofa.controls.code.value;
+		let code = this.twofa.controls['code'].value;
 		if(enabled) {
 			this.authService.disable2FA(code).subscribe((result: any) => {
 				if(result.result === 'success') {
@@ -299,7 +299,7 @@ export class SettingsComponent implements OnInit {
 		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
 			this.clipboard.paste().then(
 				(resolve: string) => {
-						this.twofa.controls.code.setValue(resolve);
+						this.twofa.controls['code'].setValue(resolve);
 						this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
 					},
 					(reject: string) => {
@@ -310,7 +310,7 @@ export class SettingsComponent implements OnInit {
 			if (navigator.clipboard) {
 				navigator.clipboard.readText()
 				.then(text => {
-					this.twofa.controls.code.setValue(text);
+					this.twofa.controls['code'].setValue(text);
 					this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
 				})
 				.catch(err => {

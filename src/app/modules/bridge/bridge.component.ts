@@ -66,26 +66,26 @@ export class BridgeComponent implements OnInit {
   changeNetwork(value: string, direction: string) {
     if (direction === 'to') {
 			if (value === 'eth') {
-				this.form.controls.from.patchValue('ccx');
+				this.form.controls['from'].patchValue('ccx');
 			} else if (value === 'bsc') {
-				this.form.controls.from.patchValue('ccx');
+				this.form.controls['from'].patchValue('ccx');
 			} else if (value === 'plg') {
-				this.form.controls.from.patchValue('ccx');
+				this.form.controls['from'].patchValue('ccx');
 			} else if (value === 'avax') {
-				this.form.controls.from.patchValue('ccx');
+				this.form.controls['from'].patchValue('ccx');
 			} else {
 				return false;
 			}
 		}
 		if (direction === 'from') {
 			if (value === 'bsc') {
-				this.form.controls.to.patchValue('ccx');
+				this.form.controls['to'].patchValue('ccx');
 			} else if (value === 'eth') {
-				this.form.controls.to.patchValue('ccx');
+				this.form.controls['to'].patchValue('ccx');
 			} else if (value === 'plg') {
-				this.form.controls.to.patchValue('ccx');
+				this.form.controls['to'].patchValue('ccx');
 			} else if (value === 'avax') {
-				this.form.controls.to.patchValue('ccx');
+				this.form.controls['to'].patchValue('ccx');
 			} else {
 				return false;
 			}

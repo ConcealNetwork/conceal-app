@@ -28,7 +28,7 @@
 									{{ item.symbol }} {{ item.name | uppercase }}
 								</mat-option>
 							</mat-select>
-							<mat-error *ngIf="hub.controls.currency.hasError('required')">
+							<mat-error *ngIf="hub.controls['currency'].hasError('required')">
 								Currency is <strong>required</strong>
 							</mat-error>
 						</mat-form-field>
@@ -40,7 +40,7 @@
 									{{ item.name }}
 								</mat-option>
 							</mat-select>
-							<mat-error *ngIf="hub.controls.mode.hasError('required')">
+							<mat-error *ngIf="hub.controls['mode'].hasError('required')">
 								This setting is <strong>required</strong>
 							</mat-error>
 						</mat-form-field>
@@ -65,27 +65,27 @@
 				<mat-card-content fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
 					<form fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" [formGroup]="cloud">
 
-						<mat-form-field hintLabel="Your username" appearance="fill" color="accent" fxFlex *ngIf="this.cloud.controls.username">
+						<mat-form-field hintLabel="Your username" appearance="fill" color="accent" fxFlex *ngIf="this.cloud.controls['username']">
 							<mat-label>Username</mat-label>
 							<input matInput type="text" name="username" minlength="4" maxlength="24" formControlName="username" autocomplete="username">
-							<mat-error *ngIf="cloud.controls.username.hasError('minlength') || cloud.controls.username.hasError('maxlength')">
+							<mat-error *ngIf="cloud.controls['username'].hasError('minlength') || cloud.controls['username'].hasError('maxlength')">
 								Username should be at least <strong>4 characters</strong>
 							</mat-error>
-							<mat-error *ngIf="cloud.controls.username.hasError('pattern')">
+							<mat-error *ngIf="cloud.controls['username'].hasError('pattern')">
 								Please enter a valid username
 							</mat-error>
-							<mat-error *ngIf="cloud.controls.username.hasError('required')">
+							<mat-error *ngIf="cloud.controls['username'].hasError('required')">
 								Username is <strong>required</strong>
 							</mat-error>
 						</mat-form-field>
 
-						<mat-form-field hintLabel="Your email address" appearance="fill" color="accent" fxFlex *ngIf="this.cloud.controls.email">
+						<mat-form-field hintLabel="Your email address" appearance="fill" color="accent" fxFlex *ngIf="this.cloud.controls['email']">
 							<mat-label>Email Address</mat-label>
 							<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="email" autocomplete="email">
-							<mat-error *ngIf="cloud.controls.email.hasError('email') && !cloud.controls.email.hasError('required')">
+							<mat-error *ngIf="cloud.controls['email'].hasError('email') && !cloud.controls['email'].hasError('required')">
 								Please enter a valid email address
 							</mat-error>
-							<mat-error *ngIf="cloud.controls.email.hasError('required')">
+							<mat-error *ngIf="cloud.controls['email'].hasError('required')">
 								Email address is <strong>required</strong>
 							</mat-error>
 						</mat-form-field>
@@ -115,7 +115,7 @@
 						<div fxLayout="row wrap" fxLayoutGap="15px grid" fxFlex="noshrink">
 							<h4 class="subheading orange">Change your authentication settings</h4>
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex fxFlex="noshrink" color="warn" mat-flat-button type="button" [disabled]="this.passwordReset" (click)="resetPassword()">Reset Password</button>
+								<button fxFlex fxFlex="noshrink" color="warn" mat-flat-button type="button" [disabled]="this.passwordReset">Reset Password</button>
 							</div>
 							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
 								<button fxFlex fxFlex="noshrink" color="warn" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button" (click)="this.show2fa = !this.show2fa">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
@@ -145,13 +145,13 @@
 									<mat-icon>content_paste</mat-icon>
 								</button>
 								<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
-								<mat-error *ngIf="twofa.controls.code.hasError('minlength') || twofa.controls.code.hasError('maxlength')">
+								<mat-error *ngIf="twofa.controls['code'].hasError('minlength') || twofa.controls['code'].hasError('maxlength')">
 									2FA code should be <strong>6 numbers</strong>
 								</mat-error>
-								<mat-error *ngIf="twofa.controls.code.hasError('pattern')">
+								<mat-error *ngIf="twofa.controls['code'].hasError('pattern')">
 									2FA code should be <strong>numbers only</strong>
 								</mat-error>
-								<mat-error *ngIf="twofa.controls.code.hasError('required')">
+								<mat-error *ngIf="twofa.controls['code'].hasError('required')">
 									2FA Code is <strong>required</strong>
 								</mat-error>
 							</mat-form-field>

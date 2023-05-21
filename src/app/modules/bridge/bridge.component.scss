@@ -11,7 +11,7 @@
 			border-radius: 5px;
 			min-width: 238px;
 		}
-		.mat-card-content {
+		mat-card-content {
 			.title {
 				font-size: 1.2rem;
 				margin-block-start: 0;
@@ -82,7 +82,7 @@
 		margin-block-end: 1rem;
 	}
 
-	.mat-form-field {
+	.bridge-field {
 		margin-top: 1rem;
 		margin-bottom: -1rem;
 	}

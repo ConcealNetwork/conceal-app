@@ -28,16 +28,16 @@
 								<mat-label>Amount</mat-label>
 								<input matInput numeric steps="0" #amount formControlName="amount" placeholder="100" required>
 								<mat-hint align="end">{{amount.value || 0}} / {{this.getDataService().maxSwapAmount}}</mat-hint>
-								<mat-error *ngIf="form1.controls.amount.hasError('required')">
+								<mat-error *ngIf="form1.controls['amount'].hasError('required')">
 									Amount is required
 								</mat-error>
-								<mat-error *ngIf="form1.controls.amount.hasError('pattern')">
+								<mat-error *ngIf="form1.controls['amount'].hasError('pattern')">
 									Amount is not a valid number
 								</mat-error>
-								<mat-error *ngIf="form1.controls.amount.hasError('max')">
+								<mat-error *ngIf="form1.controls['amount'].hasError('max')">
 									The maximum allowed is {{this.getDataService().maxSwapAmount}}
 								</mat-error>
-								<mat-error *ngIf="form1.controls.amount.hasError('min')">
+								<mat-error *ngIf="form1.controls['amount'].hasError('min')">
 									The minimum allowed is {{this.getDataService().minSwapAmount}}
 								</mat-error>
 							</mat-form-field>
@@ -48,13 +48,13 @@
 								<mat-label>From Address</mat-label>
 								<input matInput #fromAddress maxlength="98" formControlName="fromAddress" placeholder="ccx7RfyjfYKTYA51SSzEXXfuBB9HtDvuXXDsvC8ST1E2F2cw18KsJSuGxafmf13nyUdjWnsFMhL4AJJBRHB1RTnA84CzYGYqZt" autocomplete="off" required>
 								<mat-hint align="end">{{fromAddress.value.length}} / 98</mat-hint>
-								<mat-error *ngIf="form1.controls.fromAddress.hasError('required')">
+								<mat-error *ngIf="form1.controls['fromAddress'].hasError('required')">
 									From address is required
 								</mat-error>
-								<mat-error *ngIf="form1.controls.fromAddress.hasError('pattern')">
+								<mat-error *ngIf="form1.controls['fromAddress'].hasError('pattern')">
 									Please enter a valid address
 								</mat-error>
-								<mat-error *ngIf="form1.controls.fromAddress.hasError('minlength')">
+								<mat-error *ngIf="form1.controls['fromAddress'].hasError('minlength')">
 									Address must be 98 characters
 								</mat-error>
 							</mat-form-field>
@@ -65,13 +65,13 @@
 								<mat-label>To Address</mat-label>
 								<input matInput #toAddress maxlength="42" formControlName="toAddress" [(ngModel)]="this.getDataService().account" placeholder="0x885eB20a5439831fb90fC774a826d6680e4A2414" autocomplete="off" required>
 								<mat-hint align="end">{{toAddress.value.length}} / 42</mat-hint>
-								<mat-error *ngIf="form1.controls.toAddress.hasError('required')">
+								<mat-error *ngIf="form1.controls['toAddress'].hasError('required')">
 									To address is required
 								</mat-error>
-								<mat-error *ngIf="form1.controls.toAddress.hasError('pattern')">
+								<mat-error *ngIf="form1.controls['toAddress'].hasError('pattern')">
 									Please enter a valid address
 								</mat-error>
-								<mat-error *ngIf="form1.controls.toAddress.hasError('minlength')">
+								<mat-error *ngIf="form1.controls['toAddress'].hasError('minlength')">
 									Address must be 42 characters
 								</mat-error>
 							</mat-form-field>
@@ -81,10 +81,10 @@
 							<mat-form-field fxFill hintLabel="Confirmation receipt" color="accent" appearance="fill">
 								<mat-label>Email</mat-label>
 								<input type="email" matInput placeholder="you@youremail.com" formControlName="email">
-								<mat-error *ngIf="form1.controls.email.hasError('email') && !form1.controls.email.hasError('required')">
+								<mat-error *ngIf="form1.controls['email'].hasError('email') && !form1.controls['email'].hasError('required')">
 									Please enter a valid email address
 								</mat-error>
-								<mat-error *ngIf="form1.controls.email.hasError('required')">
+								<mat-error *ngIf="form1.controls['email'].hasError('required')">
 									Email address is required
 								</mat-error>
 							</mat-form-field>

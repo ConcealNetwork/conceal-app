@@ -2,6 +2,10 @@
 	background-color: #f1f0ef;
 }
 
+.container {
+	color: #111;
+}
+
 .active {
 	color: #f8ac22 !important;
 }
@@ -14,9 +18,9 @@
 	color: #00b300;
 }
 
-.mat-card {
+mat-card {
 	background: rgba(255, 255, 255, 0.9) !important;
-	.mat-card-header {
+	mat-card-header {
 		background-color: #5a5a5a;
 		color: #fff;
 	}
@@ -92,6 +96,9 @@
 
 .mat-horizontal-stepper-header-container {
 	background: #424242;
+	border: 5px solid #fff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
 .mat-stepper-horizontal-line {
@@ -130,6 +137,11 @@
 	background: #fff !important;
 }
 
+.mat-expansion-panel-body a {
+	color: orange;
+	text-decoration: none;
+}
+
 .mat-expansion-indicator::after {
 	color: #ccc !important;
 }
@@ -139,5 +151,10 @@
 }
 
 .mat-expansion-panel-header-title {
-	color: #ccc !important;
+	color: orange;
+}
+
+::placeholder {
+	color: #999 !important;
+	opacity: 1;
 }

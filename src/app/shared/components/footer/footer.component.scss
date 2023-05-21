@@ -10,13 +10,11 @@
 		line-height: 1.3;
 	}
 
-	.mat-icon-button {
-		height: 30px;
-		width: 30px;
-	}
-
-	.fab, .far {
-    margin-top: -10px;
+	.mat-mdc-icon-button {
+		//transform: scale(0.6);
+		--mdc-icon-button-state-layer-size: 30px;
+		--mdc-icon-button-icon-size: 16px;
+		padding: 4px;
 	}
 
 }
