@@ -12,13 +12,13 @@
 				<div fxLayout="column" fLayoutAlign="center center" fxLayoutGap="25px">
 
 					<div fxLayout="column" fxLayoutAlign="center center">
-						<img class="token" src="./assets/images/branding/avax.png" width="100" height="100">
+						<img class="token" src="./assets/images/branding/avax.png" width="100" height="100" alt="AVAX Token">
 						<p class="description">
 							There are currently <strong class="orange">{{ this.getDataService().wccxSwapBalance | number: '1.0-0' }}</strong> tokens available to swap
 						</p>
 						<div class="actions" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="center stretch" fxLayoutGap="25px">
-							<button mat-flat-button color="accent" (click)="addCustomChains()">Import Network</button>
-							<button mat-flat-button color="accent" (click)="addToken($event)">Import Token</button>
+							<button mat-flat-button color="accent" type="button" (click)="addCustomChains()">Import Network</button>
+							<button mat-flat-button color="accent" type="button" (click)="addToken($event)">Import Token</button>
 						</div>
 					</div>
 
@@ -94,8 +94,8 @@
 
 					<div class="actions" fxLayout="row" fxLayout.xs="column" fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
 						<button mat-flat-button color="accent" type="submit" (click)="formSubmit()" [class.spinner]="this.getDataService().loading" [disabled]="!form1.valid || this.getDataService().loading">Continue</button>
-						<button mat-flat-button color="warn" routerLink="/bridge">Cancel</button>
-						<a mat-flat-button color="primary" type="button" href="https://concealnetwork.medium.com/conceal-bridge-user-guide-2ad03eee4963" target="_blank">User Guide</a>
+						<button mat-flat-button color="warn" type="button" routerLink="/bridge">Cancel</button>
+						<a mat-flat-button color="primary" type="button" href="https://concealnetwork.medium.com/conceal-bridge-user-guide-2ad03eee4963" target="_blank" rel="noopener">User Guide</a>
 					</div>
 
 				</div>
@@ -131,7 +131,7 @@
 					<div fxLayout="column" fxFlex fxLayoutGap="10px">
 						<mat-form-field class="payment" color="accent">
 							<mat-label>Address</mat-label>
-							<input matInput #ccxAddress type="text" [value]="this.getDataService().ccxAccountAddress">
+							<input title="CCX Address" placeholder="ccx7RfyjfYKTYA51SSzEXXfuBB9HtDvuXXDsvC8ST1E2F2cw18KsJSuGxafmf13nyUdjWnsFMhL4AJJBRHB1RTnA84CzYGYqZt" matInput #ccxAddress type="text" [value]="this.getDataService().ccxAccountAddress">
 						</mat-form-field>
 						<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().ccxAccountAddress" (click)="getSnackbarService().openSnackBar('Address Copied!', 'Dismiss')">Copy Address</button>
 						<qrcode class="code" [qrdata]="this.dataService.ccxAccountAddress" [width]="275" [margin]="2" [elementType]="'canvas'" [colorDark]="'#333'" [errorCorrectionLevel]="'H'" [allowEmptyString]="true"></qrcode>
@@ -140,7 +140,7 @@
 					<div fxLayout="column" fxFlex fxLayoutGap="10px">
 						<mat-form-field class="payment" color="accent">
 							<mat-label>Payment ID</mat-label>
-							<input matInput #ccxPaymentId type="text" [value]="this.getDataService().paymentId">
+							<input title="Payment ID" placeholder="Your Payment ID" matInput #ccxPaymentId type="text" [value]="this.getDataService().paymentId">
 						</mat-form-field>
 						<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().paymentId" (click)="getSnackbarService().openSnackBar('Payment ID Copied!', 'Dismiss')">Copy Payment ID</button>
 						<qrcode class="code" [qrdata]="this.paymentId" [width]="275" [margin]="2" [elementType]="'canvas'" [colorDark]="'#333'" [errorCorrectionLevel]="'H'" [allowEmptyString]="true"></qrcode>
@@ -177,29 +177,29 @@
 							<mat-label *ngIf="this.getDataService().chainId === 137 || this.getDataService().chainId === 80001">Polygon Transaction ID</mat-label>
 							<mat-label *ngIf="this.getDataService().chainId === 56 || this.getDataService().chainId === 97">Binance Transaction ID</mat-label>
 							<mat-label *ngIf="this.getDataService().chainId === 1 || this.getDataService().chainId === 42">Ethereum Transaction ID</mat-label>
-							<input matInput #ccxAddress type="text" [value]="this.getDataService().txHash1">
+							<input title="hash" matInput #ccxAddress type="text" [value]="this.getDataService().txHash1">
 						</mat-form-field>
 						<div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="15px">
 							<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().txHash1" (click)="getSnackbarService().openSnackBar('Transaction Copied!', 'Dismiss')">Copy</button>
-							<a *ngIf="this.getDataService().chainId === 43114" href="https://snowtrace.io/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on SnowTrace</a>
-							<a *ngIf="this.getDataService().chainId === 43113" href="https://testnet.snowtrace.io/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on SnowTrace</a>
-							<a *ngIf="this.getDataService().chainId === 137" href="https://polygonscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on PolygonScan</a>
-							<a *ngIf="this.getDataService().chainId === 80001" href="https://mumbai.polygonscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on PolygonScan</a>
-							<a *ngIf="this.getDataService().chainId === 56" href="https://bscscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on BscScan</a>
-							<a *ngIf="this.getDataService().chainId === 97" href="https://testnet.bscscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on BscScan</a>
-							<a *ngIf="this.getDataService().chainId === 1" href="https://etherscan.io/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on EtherScan</a>
-							<a *ngIf="this.getDataService().chainId === 42" href="https://{{this.getDataService().provider}}.etherscan.io/tx/{{this.getDataService().txHash2}}" target="_blank" mat-flat-button color="primary">View on EtherScan</a>
+							<a *ngIf="this.getDataService().chainId === 43114" href="https://snowtrace.io/tx/{{this.getDataService().txHash2}}" target="_blank" rel="noopener" mat-flat-button color="primary">View on SnowTrace</a>
+							<a *ngIf="this.getDataService().chainId === 43113" href="https://testnet.snowtrace.io/tx/{{this.getDataService().txHash2}}" target="_blank" rel="noopener" mat-flat-button color="primary">View on SnowTrace</a>
+							<a *ngIf="this.getDataService().chainId === 137" href="https://polygonscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" rel="noopener" mat-flat-button color="primary">View on PolygonScan</a>
+							<a *ngIf="this.getDataService().chainId === 80001" href="https://mumbai.polygonscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" rel="noopener" mat-flat-button color="primary">View on PolygonScan</a>
+							<a *ngIf="this.getDataService().chainId === 56" href="https://bscscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" rel="noopener" mat-flat-button color="primary">View on BscScan</a>
+							<a *ngIf="this.getDataService().chainId === 97" href="https://testnet.bscscan.com/tx/{{this.getDataService().txHash2}}" target="_blank" rel="noopener" mat-flat-button color="primary">View on BscScan</a>
+							<a *ngIf="this.getDataService().chainId === 1" href="https://etherscan.io/tx/{{this.getDataService().txHash2}}" target="_blank" rel="noopener" mat-flat-button color="primary">View on EtherScan</a>
+							<a *ngIf="this.getDataService().chainId === 42" href="https://{{this.getDataService().provider}}.etherscan.io/tx/{{this.getDataService().txHash2}}" rel="noopener" target="_blank" mat-flat-button color="primary">View on EtherScan</a>
 						</div>
 					</div>
 
 					<div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="5px">
 						<mat-form-field class="payment" color="accent">
 							<mat-label>Conceal Transaction ID</mat-label>
-							<input matInput #ccxPaymentId type="text" [value]="this.getDataService().txHash2">
+							<input title="CCX Payment ID" matInput #ccxPaymentId type="text" [value]="this.getDataService().txHash2">
 						</mat-form-field>
 						<div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="15px">
 							<button mat-flat-button color="accent" [cdkCopyToClipboard]="this.getDataService().txHash2" (click)="getSnackbarService().openSnackBar('Transaction Copied!', 'Dismiss')">Copy</button>
-							<a href="https://explorer.conceal.network/index.html?hash={{this.getDataService().txHash2}}" target="_blank"  mat-flat-button color="primary">View on Explorer</a>
+							<a href="https://explorer.conceal.network/index.html?hash={{this.getDataService().txHash2}}" target="_blank" rel="noopener" mat-flat-button color="primary">View on Explorer</a>
 						</div>
 					</div>
 
