@@ -37,7 +37,7 @@
     "@auth0/angular-jwt": "^5.1.2",
     "@awesome-cordova-plugins/clipboard": "^6.3.0",
     "@awesome-cordova-plugins/core": "^6.3.0",
-    "@awesome-cordova-plugins/http": "^6.3.0",
+    "@awesome-cordova-plugins/http": "^6.4.0",
     "@fontsource/poppins": "^5.0.8",
     "@ngbracket/ngx-layout": "^16.0.0",
     "angularx-qrcode": "^16.0.0",
