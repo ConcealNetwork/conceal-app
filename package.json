@@ -46,7 +46,7 @@
     "ngx-pipes": "^3.2.2",
     "rxjs": "~7.8.1",
     "tslib": "^2.5.2",
-    "zone.js": "~0.13.0"
+    "zone.js": "~0.13.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.2",
