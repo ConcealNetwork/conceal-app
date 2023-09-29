@@ -35,7 +35,7 @@
     "@angular/router": "^16.0.2",
     "@angular/service-worker": "^16.2.0",
     "@auth0/angular-jwt": "^5.1.2",
-    "@awesome-cordova-plugins/clipboard": "^6.3.0",
+    "@awesome-cordova-plugins/clipboard": "^6.4.0",
     "@awesome-cordova-plugins/core": "^6.3.0",
     "@awesome-cordova-plugins/http": "^6.4.0",
     "@fontsource/poppins": "^5.0.8",
