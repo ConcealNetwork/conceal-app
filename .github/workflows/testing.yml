@@ -15,13 +15,11 @@ jobs:
         node-version: [20.8.0]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - uses: browser-actions/setup-chrome@v1
-    - run: chrome --latest
     - name: Install dependencies
       run: npm run ci
     - name: Run tests
