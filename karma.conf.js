@@ -10,6 +10,7 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
+      require('karma-chrome-launcher'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
@@ -41,6 +42,7 @@ module.exports = function (config) {
     customLaunchers: {
       ChromeHeadlessCI: {
         base: 'ChromeHeadless',
+        chromeDataDir: path.resolve(__dirname, '.chrome'),
         flags: ['--no-sandbox']
       }
     },
