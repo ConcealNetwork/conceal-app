@@ -20,8 +20,8 @@
     "watch": "ng build --watch --configuration development",
     "firebase": "ng build --configuration development && firebase deploy",
     "test": "ng test",
-    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCustom",
-    "ci": "npm install --legacy-peer-deps"
+    "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
+    "install": "npm install --legacy-peer-deps"
   },
   "private": true,
   "dependencies": {

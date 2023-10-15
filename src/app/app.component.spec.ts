@@ -29,6 +29,19 @@ class HeaderStubComponent {}
 })
 class FooterStubComponent {} // Add this stub component
 
+@Component({
+  selector: 'app-mobile-header',
+  template: ''
+})
+class MobileHeaderStubComponent {}
+
+@Component({
+  selector: 'app-mobile-footer',
+  template: ''
+})
+class MobileFooterStubComponent {}
+
+
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
@@ -36,7 +49,7 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppComponent, SidenavStubComponent, HeaderStubComponent, FooterStubComponent ], // Add FooterStubComponent here
+      declarations: [ AppComponent, SidenavStubComponent, HeaderStubComponent, FooterStubComponent, MobileHeaderStubComponent, MobileFooterStubComponent ], // Add FooterStubComponent here
       imports: [ BrowserAnimationsModule, MatSidenavModule, RouterTestingModule ],
       providers: [
         ThemingService,
