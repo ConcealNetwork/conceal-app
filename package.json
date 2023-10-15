@@ -21,7 +21,7 @@
     "firebase": "ng build --configuration development && firebase deploy",
     "test": "ng test",
     "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
-    "install": "npm install --legacy-peer-deps"
+    "ci": "npm install --legacy-peer-deps"
   },
   "private": true,
   "dependencies": {
