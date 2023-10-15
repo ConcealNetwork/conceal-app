@@ -16,7 +16,7 @@
     "ng": "ng",
     "start": "ng serve --open --host 0.0.0.0 --disable-host-check",
     "build": "ng build --configuration production",
-    "deploy": "ng build --configuration cordova --base-href . --output-path ../conceal-app-cordova/www/",
+    "deploy": "ng build --configuration production --base-href . --output-path ../conceal-app-cordova/www/",
     "watch": "ng build --watch --configuration development",
     "firebase": "ng build --configuration development && firebase deploy",
     "test": "ng test",
