@@ -34,7 +34,7 @@
     "@angular/material": "^16.2.8",
     "@angular/platform-browser": "^16.2.9",
     "@angular/platform-browser-dynamic": "^16.2.9",
-    "@angular/router": "^16.2.9",
+    "@angular/router": "^16.2.10",
     "@angular/service-worker": "^16.2.9",
     "@auth0/angular-jwt": "^5.1.2",
     "@awesome-cordova-plugins/clipboard": "^6.4.0",
