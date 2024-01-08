@@ -43,7 +43,7 @@
     "@fontsource/poppins": "^5.0.8",
     "@ngbracket/ngx-layout": "^17.0.0",
     "angularx-qrcode": "^17.0.0",
-    "ethers": "^6.8.0",
+    "ethers": "^6.9.2",
     "moment": "^2.29.4",
     "ngx-pipes": "^3.2.2",
     "rxjs": "~7.8.1",
