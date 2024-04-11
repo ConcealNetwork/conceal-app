@@ -33,7 +33,7 @@
     "@angular/forms": "^17.3.3",
     "@angular/material": "^17.3.3",
     "@angular/platform-browser": "^17.3.3",
-    "@angular/platform-browser-dynamic": "^17.3.3",
+    "@angular/platform-browser-dynamic": "^17.3.4",
     "@angular/router": "^17.3.3",
     "@angular/service-worker": "^17.3.3",
     "@auth0/angular-jwt": "^5.2.0",
