@@ -42,7 +42,7 @@
     "@awesome-cordova-plugins/http": "^6.7.0",
     "@fontsource/poppins": "^5.0.14",
     "@ngbracket/ngx-layout": "^17.0.1",
-    "angularx-qrcode": "^17.0.0",
+    "angularx-qrcode": "^17.0.1",
     "ethers": "^6.13.0",
     "moment": "^2.30.1",
     "ngx-pipes": "^3.2.2",
