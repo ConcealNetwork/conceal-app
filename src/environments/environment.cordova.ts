@@ -2,7 +2,7 @@ export const environment = {
   production: true,
 	worker: false,
   environment: 'PROD',
-	version: '4.0.1',
+	version: '4.2.6',
 	api: 'https://bridge.conceal.network/backend',
   walletAPI: 'https://api.wallet.conceal.network/api',
   coinStats: 'https://api.coinstats.app',
