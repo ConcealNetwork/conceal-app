@@ -49,7 +49,7 @@
     "rxjs": "~7.8.1",
     "tslib": "^2.6.3",
     "typescript": "^5.4.5",
-    "zone.js": "~0.14.7"
+    "zone.js": "~0.14.8"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.0.5",
