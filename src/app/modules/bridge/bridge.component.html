@@ -1,78 +1,82 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center" fxFill fxLayoutAlign.xs="center stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
 
-	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
-		<h1 class="headline">Conceal <strong>Bridge</strong></h1>
-		<p class="description">Bridge between networks while keeping your privacy</p>
-	</div>
+  <div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-xs>
+    <h1 class="headline">Conceal <strong>Bridge</strong></h1>
+    <p class="description">Bridge between networks while keeping your privacy</p>
+  </div>
 
-	<div class="swap" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
+  <div class="swap" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
 
-		<mat-card id="cards" class="help mat-elevation-z8" fxHide fxShow.gt-xs fxLayout="column" fxLayoutAlign="start stretch">
+    <mat-card id="cards" class="help mat-elevation-z8" fxHide fxShow.gt-xs fxLayout="column" fxLayoutAlign="start stretch">
 
-			<div fxLayout="column" fxLayoutAlign="space-evenly">
-				<mat-nav-list>
-					<a href="https://concealnetwork.medium.com/the-anatomy-of-wrapped-ccx-97b2a8c008d9" rel="noreferrer" target="_blank" mat-list-item>Introduction</a>
-					<a href="https://concealnetwork.medium.com/conceal-bridge-user-guide-2ad03eee4963" rel="noreferrer" target="_blank" mat-list-item>User Guide</a>
-					<a href="https://conceal.network/support/index.php?a=add&category=10" rel="noreferrer" target="_blank" mat-list-item>Support</a>
-					<a href="https://explorer.conceal.network/index.html#funds" rel="noreferrer" target="_blank" mat-list-item>Proof of Assets</a>
-					<a href="https://conceal.network/tc.html" rel="noreferrer" target="_blank" mat-list-item>Terms & Conditions</a>
-					<a href="https://metamask.io/download.html" rel="noreferrer" target="_blank" mat-list-item>Get MetaMask</a>
-				</mat-nav-list>
-			</div>
-		</mat-card>
+      <div fxLayout="column" fxLayoutAlign="space-evenly">
+        <mat-nav-list>
+          <a href="https://concealnetwork.medium.com/the-anatomy-of-wrapped-ccx-97b2a8c008d9" rel="noreferrer" target="_blank" mat-list-item>Introduction</a>
+          <a href="https://concealnetwork.medium.com/conceal-bridge-user-guide-2ad03eee4963" rel="noreferrer" target="_blank" mat-list-item>User Guide</a>
+          <a href="https://conceal.network/support/index.php?a=add&category=10" rel="noreferrer" target="_blank" mat-list-item>Support</a>
+          <a href="https://explorer.conceal.network/index.html#funds" rel="noreferrer" target="_blank" mat-list-item>Proof of Assets</a>
+          <a href="https://conceal.network/tc.html" rel="noreferrer" target="_blank" mat-list-item>Terms & Conditions</a>
+          <a href="https://metamask.io/download.html" rel="noreferrer" target="_blank" mat-list-item>Get MetaMask</a>
+        </mat-nav-list>
+      </div>
+    </mat-card>
 
-		<mat-card id="cards" class="action mat-elevation-z8" fxLayout="column" fxLayoutAlign.xs="start">
-			<mat-card-content>
-				<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px">
-					<div class="networks" fxLayout="column" fxFlex>
-						<div fxLayout="column" fxLayoutAlign="center stretch">
-							<div fxLayout="column">
-								<h2 class="title">From</h2>
-							</div>
-							<div>
-								<div fxLayout="row" fxLayoutAlign="center stretch">
-									<img src="./assets/images/branding/{{fromControl.value}}.png" width="128" height="128">
-								</div>
-								<mat-form-field class="bridge-field" fxLayout.xs="column" color="accent" appearance="fill">
-									<mat-label>From Network</mat-label>
-									<mat-select [formControl]="fromControl" (selectionChange)="changeNetwork($event.value, 'from')" name="from">
-										<mat-option *ngFor="let from of fromNetwork" [value]="from.value">
-											{{from.viewValue}}
-										</mat-option>
-									</mat-select>
-								</mat-form-field>
-							</div>
-						</div>
-					</div>
-					<div class="networks" fxLayout="column" fxFlex>
-						<div fxLayout="column" fxLayoutAlign="center stretch">
-							<div fxLayout="column">
-								<h2 class="title">To</h2>
-							</div>
-							<div>
-								<div fxLayout="row" fxLayoutAlign="center stretch">
-									<img src="./assets/images/branding/{{toControl.value}}.png" width="128" height="128">
-								</div>
-								<mat-form-field class="bridge-field" fxLayout.xs="column" color="accent" appearance="fill">
-									<mat-label>To Network</mat-label>
-									<mat-select [formControl]="toControl" (selectionChange)="changeNetwork($event.value, 'to')" name="to">
-										<mat-option *ngFor="let to of toNetwork" [value]="to.value">
-											{{to.viewValue}}
-										</mat-option>
-									</mat-select>
-								</mat-form-field>
-							</div>
-						</div>
-					</div>
-				</div>
-			</mat-card-content>
-			<mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
-				<div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-					<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value!, this.toControl.value!)">Swap these assets</button>
-				</div>
-			</mat-card-actions>
-		</mat-card>
+    <mat-card id="cards" class="action mat-elevation-z8" fxLayout="column" fxLayoutAlign.xs="start">
+      <mat-card-content>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="15px">
+          <div class="networks" fxLayout="column" fxFlex>
+            <div fxLayout="column" fxLayoutAlign="center stretch">
+              <div fxLayout="column">
+                <h2 class="title">From</h2>
+              </div>
+              <div>
+                <div fxLayout="row" fxLayoutAlign="center stretch">
+                  <img src="./assets/images/branding/{{fromControl.value}}.png" width="128" height="128">
+                </div>
+                <mat-form-field class="bridge-field" fxLayout.xs="column" color="accent" appearance="fill">
+                  <mat-label>From Network</mat-label>
+                  <mat-select [formControl]="fromControl" (selectionChange)="changeNetwork($event.value, 'from')" name="from">
+                    @for (from of fromNetwork; track from) {
+                      <mat-option [value]="from.value">
+                        {{from.viewValue}}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="networks" fxLayout="column" fxFlex>
+            <div fxLayout="column" fxLayoutAlign="center stretch">
+              <div fxLayout="column">
+                <h2 class="title">To</h2>
+              </div>
+              <div>
+                <div fxLayout="row" fxLayoutAlign="center stretch">
+                  <img src="./assets/images/branding/{{toControl.value}}.png" width="128" height="128">
+                </div>
+                <mat-form-field class="bridge-field" fxLayout.xs="column" color="accent" appearance="fill">
+                  <mat-label>To Network</mat-label>
+                  <mat-select [formControl]="toControl" (selectionChange)="changeNetwork($event.value, 'to')" name="to">
+                    @for (to of toNetwork; track to) {
+                      <mat-option [value]="to.value">
+                        {{to.viewValue}}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions fxLayout="column" fxLayoutAlign="stretch">
+        <div class="actions" fxLayout="row wrap" fxLayout.lt-md="column" fxFlex="noshrink" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+          <button fxFlex fxFlex="noshrink" color="accent" mat-flat-button [disabled]="(this.fromControl.value === 'ccx') && (this.toControl.value === 'ccx')" (click)="submit(this.fromControl.value!, this.toControl.value!)">Swap these assets</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
 
-	</div>
+  </div>
 
 </div>

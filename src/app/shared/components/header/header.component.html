@@ -1,85 +1,89 @@
 <mat-toolbar class="header" color="primary" role="heading" fxLayout="row">
 
-	<a routerLink="/">
-		<h1>Conceal Network</h1>
-	</a>
+  <a routerLink="/">
+    <h1>Conceal Network</h1>
+  </a>
 
-	<div class="links" fxLayoutGap="8px">
-		<button class="navlink" mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</button>
-		<!-- <button class="navlink" mat-button [matMenuTriggerFor]="wallets" [class.active]="this.router.url.includes('wallets')">Wallets</button> -->
-		<!--
-			<mat-menu #wallets="matMenu">
-			<button mat-menu-item routerLink="/wallets/cloud" routerLinkActive="active">
-				<mat-icon [class.active]="this.router.url == '/wallets/cloud'">account_balance_wallet</mat-icon>
-				Cloud Wallet
-			</button>
-			<button mat-menu-item routerLink="/wallets" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-				<mat-icon [class.active]="this.router.url == '/wallets'">search</mat-icon>
-				Discover
-			</button>
-		</mat-menu>
-		<button class="navlink" mat-button [matMenuTriggerFor]="deposits" [class.active]="this.router.url.includes('deposits')">Deposits</button>
-		<mat-menu #deposits="matMenu">
-			<button mat-menu-item routerLink="/deposits/cloud" routerLinkActive="active">
-				<mat-icon [class.active]="this.router.url == '/deposits/cloud'">savings</mat-icon>
-				Cloud Deposits
-			</button>
-			<button mat-menu-item routerLink="/deposits" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-				<mat-icon [class.active]="this.router.url == '/deposits'">search</mat-icon>
-				Discover
-			</button>
-		</mat-menu>
-		<button class="navlink" mat-button [matMenuTriggerFor]="messages" [class.active]="this.router.url == '/messages' || this.router.url == '/messages/cloud'">Messages</button>
-		<mat-menu #messages="matMenu">
-			<button mat-menu-item routerLink="/messages/cloud" routerLinkActive="active">
-				<mat-icon [class.active]="this.router.url == '/messages/cloud'">mail_lock</mat-icon>
-				Cloud Messages
-			</button>
-			<button mat-menu-item routerLink="/messages" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-				<mat-icon [class.active]="this.router.url == '/messages'">search</mat-icon>
-				Discover
-			</button>
-		</mat-menu>
-		<mat-menu #id="matMenu">
-			<button mat-menu-item routerLink="/id/cloud" routerLinkActive="active">
-				<mat-icon [class.active]="this.router.url == '/id/cloud'">portrait</mat-icon>
-				Cloud ID
-			</button>
-			<button mat-menu-item routerLink="/id" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-				<mat-icon [class.active]="this.router.url == '/id'">search</mat-icon>
-				Discover
-			</button>
-		</mat-menu>
-		-->
-		<a class="navlink" mat-button href="https://wallet.conceal.network" target="_blank">Wallet</a>
-		<button class="navlink" mat-button routerLink="/bridge" routerLinkActive="active">Bridge</button>
-		<!-- <a class="navlink" mat-button href="https://conceal.network/clive" target="_blank">Live</a> -->
-		<a class="navlink" mat-button href="https://explorer.conceal.network" target="_blank">Explorer</a>
+  <div class="links" fxLayoutGap="8px">
+    <button class="navlink" mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</button>
+    <!-- <button class="navlink" mat-button [matMenuTriggerFor]="wallets" [class.active]="this.router.url.includes('wallets')">Wallets</button> -->
+    <!--
+    <mat-menu #wallets="matMenu">
+      <button mat-menu-item routerLink="/wallets/cloud" routerLinkActive="active">
+        <mat-icon [class.active]="this.router.url == '/wallets/cloud'">account_balance_wallet</mat-icon>
+        Cloud Wallet
+      </button>
+      <button mat-menu-item routerLink="/wallets" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon [class.active]="this.router.url == '/wallets'">search</mat-icon>
+        Discover
+      </button>
+    </mat-menu>
+    <button class="navlink" mat-button [matMenuTriggerFor]="deposits" [class.active]="this.router.url.includes('deposits')">Deposits</button>
+    <mat-menu #deposits="matMenu">
+      <button mat-menu-item routerLink="/deposits/cloud" routerLinkActive="active">
+        <mat-icon [class.active]="this.router.url == '/deposits/cloud'">savings</mat-icon>
+        Cloud Deposits
+      </button>
+      <button mat-menu-item routerLink="/deposits" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon [class.active]="this.router.url == '/deposits'">search</mat-icon>
+        Discover
+      </button>
+    </mat-menu>
+    <button class="navlink" mat-button [matMenuTriggerFor]="messages" [class.active]="this.router.url == '/messages' || this.router.url == '/messages/cloud'">Messages</button>
+    <mat-menu #messages="matMenu">
+      <button mat-menu-item routerLink="/messages/cloud" routerLinkActive="active">
+        <mat-icon [class.active]="this.router.url == '/messages/cloud'">mail_lock</mat-icon>
+        Cloud Messages
+      </button>
+      <button mat-menu-item routerLink="/messages" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon [class.active]="this.router.url == '/messages'">search</mat-icon>
+        Discover
+      </button>
+    </mat-menu>
+    <mat-menu #id="matMenu">
+      <button mat-menu-item routerLink="/id/cloud" routerLinkActive="active">
+        <mat-icon [class.active]="this.router.url == '/id/cloud'">portrait</mat-icon>
+        Cloud ID
+      </button>
+      <button mat-menu-item routerLink="/id" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon [class.active]="this.router.url == '/id'">search</mat-icon>
+        Discover
+      </button>
+    </mat-menu>
+    -->
+    <a class="navlink" mat-button href="https://wallet.conceal.network" target="_blank">Wallet</a>
+    <button class="navlink" mat-button routerLink="/bridge" routerLinkActive="active">Bridge</button>
+    <!-- <a class="navlink" mat-button href="https://conceal.network/clive" target="_blank">Live</a> -->
+    <a class="navlink" mat-button href="https://explorer.conceal.network" target="_blank">Explorer</a>
 
-	</div>
+  </div>
 
-	<span class="fill-space"></span>
+  <span class="fill-space"></span>
 
-	<div class="options" fxLayoutGap="15px">
-		<button *ngIf="activeTheme == 'light-theme'" mat-icon-button mdTooltip="Change theme" matTooltip="Dark Mode" (click)="changeTheme('dark-theme')">
-			<mat-icon aria-hidden="false">dark_mode</mat-icon>
-		</button>
-		<button *ngIf="activeTheme == 'dark-theme'" mat-icon-button mdTooltip="Change theme" matTooltip="Light Mode" (click)="changeTheme('light-theme')">
-			<mat-icon aria-hidden="false">light_mode</mat-icon>
-		</button>
-		<a mat-icon-button aria-label="conceal updates" matTooltip="Conceal Updates" routerLink="/media" routerLinkActive="active">
-			<mat-icon aria-hidden="false">newspaper</mat-icon>
-		</a>
-		<button mat-icon-button aria-label="settings" matTooltip="Settings" routerLink="/settings" routerLinkActive="active">
-			<mat-icon aria-hidden="false">settings</mat-icon>
-		</button>
-		<!--
-		<button class="auth" *ngIf="isLoggedIn" mat-button color="accent" aria-label="logout" matTooltip="Logout" (click)="logout()">
-			<span class="orange button-text">Logout</span>
-		</button>
-		<button class="auth" *ngIf="!isLoggedIn" mat-button color="accent" aria-label="login" matTooltip="Login" (click)="login()">
-			<span class="orange button-text">Login</span>
-		</button> -->
-	</div>
+  <div class="options" fxLayoutGap="15px">
+    @if (activeTheme == 'light-theme') {
+      <button mat-icon-button mdTooltip="Change theme" matTooltip="Dark Mode" (click)="changeTheme('dark-theme')">
+        <mat-icon aria-hidden="false">dark_mode</mat-icon>
+      </button>
+    }
+    @if (activeTheme == 'dark-theme') {
+      <button mat-icon-button mdTooltip="Change theme" matTooltip="Light Mode" (click)="changeTheme('light-theme')">
+        <mat-icon aria-hidden="false">light_mode</mat-icon>
+      </button>
+    }
+    <a mat-icon-button aria-label="conceal updates" matTooltip="Conceal Updates" routerLink="/media" routerLinkActive="active">
+      <mat-icon aria-hidden="false">newspaper</mat-icon>
+    </a>
+    <button mat-icon-button aria-label="settings" matTooltip="Settings" routerLink="/settings" routerLinkActive="active">
+      <mat-icon aria-hidden="false">settings</mat-icon>
+    </button>
+    <!--
+    <button class="auth" *ngIf="isLoggedIn" mat-button color="accent" aria-label="logout" matTooltip="Logout" (click)="logout()">
+      <span class="orange button-text">Logout</span>
+    </button>
+    <button class="auth" *ngIf="!isLoggedIn" mat-button color="accent" aria-label="login" matTooltip="Login" (click)="login()">
+      <span class="orange button-text">Login</span>
+    </button> -->
+  </div>
 
 </mat-toolbar>
