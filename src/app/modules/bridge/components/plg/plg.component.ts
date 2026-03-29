@@ -14,9 +14,10 @@ import { APIService } from '../../services/api.service';
 import { DataService } from '../../services/data.service';
 
 @Component({
-  selector: 'app-plg',
-  templateUrl: './plg.component.html',
-  styleUrls: ['./plg.component.scss']
+    selector: 'app-plg',
+    templateUrl: './plg.component.html',
+    styleUrls: ['./plg.component.scss'],
+    standalone: false
 })
 
 export class PlgSwapComponent implements OnInit, OnDestroy {

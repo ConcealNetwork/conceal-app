@@ -12,32 +12,37 @@ import { of } from 'rxjs';
 
 // Add these stub components
 @Component({
-  selector: 'app-sidenav',
-  template: ''
+    selector: 'app-sidenav',
+    template: '',
+    standalone: false
 })
 class SidenavStubComponent {}
 
 @Component({
-  selector: 'app-header',
-  template: ''
+    selector: 'app-header',
+    template: '',
+    standalone: false
 })
 class HeaderStubComponent {}
 
 @Component({
-  selector: 'app-footer',
-  template: ''
+    selector: 'app-footer',
+    template: '',
+    standalone: false
 })
 class FooterStubComponent {} // Add this stub component
 
 @Component({
-  selector: 'app-mobile-header',
-  template: ''
+    selector: 'app-mobile-header',
+    template: '',
+    standalone: false
 })
 class MobileHeaderStubComponent {}
 
 @Component({
-  selector: 'app-mobile-footer',
-  template: ''
+    selector: 'app-mobile-footer',
+    template: '',
+    standalone: false
 })
 class MobileFooterStubComponent {}
 

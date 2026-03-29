@@ -14,9 +14,10 @@ import { APIService } from '../../services/api.service';
 import { DataService } from '../../services/data.service';
 
 @Component({
-  selector: 'app-bsc',
-  templateUrl: './bsc.component.html',
-  styleUrls: ['./bsc.component.scss']
+    selector: 'app-bsc',
+    templateUrl: './bsc.component.html',
+    styleUrls: ['./bsc.component.scss'],
+    standalone: false
 })
 
 export class BscSwapComponent implements OnInit, OnDestroy {

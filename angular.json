@@ -94,10 +94,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "conceal-app:build:production"
+              "buildTarget": "conceal-app:build:production"
             },
             "development": {
-              "browserTarget": "conceal-app:build:development"
+              "buildTarget": "conceal-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -105,7 +105,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "conceal-app:build"
+            "buildTarget": "conceal-app:build"
           }
         },
         "test": {

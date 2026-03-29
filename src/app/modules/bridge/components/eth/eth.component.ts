@@ -14,9 +14,10 @@ import { APIService } from '../../services/api.service';
 import { DataService } from '../../services/data.service';
 
 @Component({
-  selector: 'app-eth',
-  templateUrl: './eth.component.html',
-  styleUrls: ['./eth.component.scss']
+    selector: 'app-eth',
+    templateUrl: './eth.component.html',
+    styleUrls: ['./eth.component.scss'],
+    standalone: false
 })
 
 export class EthSwapComponent implements OnInit, OnDestroy {

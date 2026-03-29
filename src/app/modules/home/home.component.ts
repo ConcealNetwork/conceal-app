@@ -6,21 +6,22 @@ import { trigger, transition, query, style, stagger, animate } from '@angular/an
 import { ThemingService } from 'src/app/shared/services/theming.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-	animations: [
-		trigger('transition', [
-			transition(':enter', [
-				query('#cards', [
-					style({ opacity: 0}),
-					stagger(100, [
-						animate('0.4s', style({ opacity: 1 }))
-					])
-				], {optional: true})
-			])
-		])
-	]
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    animations: [
+        trigger('transition', [
+            transition(':enter', [
+                query('#cards', [
+                    style({ opacity: 0 }),
+                    stagger(100, [
+                        animate('0.4s', style({ opacity: 1 }))
+                    ])
+                ], { optional: true })
+            ])
+        ])
+    ],
+    standalone: false
 })
 
 export class HomeComponent implements OnInit {

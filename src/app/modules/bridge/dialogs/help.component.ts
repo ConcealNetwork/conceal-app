@@ -4,9 +4,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 // Dialogs
 @Component({
-  selector: 'help',
-  templateUrl: 'help.component.html',
-	styleUrls: ['./help.component.scss'],
+    selector: 'help',
+    templateUrl: 'help.component.html',
+    styleUrls: ['./help.component.scss'],
+    standalone: false
 })
 
 export class HelpDialog {

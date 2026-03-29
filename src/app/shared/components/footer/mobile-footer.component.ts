@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-mobile-footer',
-  templateUrl: './mobile-footer.component.html',
-  styleUrls: ['./mobile-footer.component.scss']
+    selector: 'app-mobile-footer',
+    templateUrl: './mobile-footer.component.html',
+    styleUrls: ['./mobile-footer.component.scss'],
+    standalone: false
 })
 export class MobileFooterComponent implements OnInit {
 

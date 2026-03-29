@@ -12,31 +12,32 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
-  selector: 'app-media',
-  templateUrl: './media.component.html',
-  styleUrls: ['./media.component.scss'],
-	animations: [
-		trigger('listAnimation1', [
-			transition('* => *', [ // each time the binding value changes
-				query(':enter', [
-					style({ opacity: 0 }),
-					stagger(100, [
-						animate('0.4s', style({ opacity: 1 }))
-					])
-				], {optional: true})
-			])
-		]),
-		trigger('listAnimation2', [
-			transition('* => *', [ // each time the binding value changes
-				query(':enter', [
-					style({ opacity: 0 }),
-					stagger(100, [
-						animate('0.4s', style({ opacity: 1 }))
-					])
-				], {optional: true})
-			])
-		])
-	]
+    selector: 'app-media',
+    templateUrl: './media.component.html',
+    styleUrls: ['./media.component.scss'],
+    animations: [
+        trigger('listAnimation1', [
+            transition('* => *', [
+                query(':enter', [
+                    style({ opacity: 0 }),
+                    stagger(100, [
+                        animate('0.4s', style({ opacity: 1 }))
+                    ])
+                ], { optional: true })
+            ])
+        ]),
+        trigger('listAnimation2', [
+            transition('* => *', [
+                query(':enter', [
+                    style({ opacity: 0 }),
+                    stagger(100, [
+                        animate('0.4s', style({ opacity: 1 }))
+                    ])
+                ], { optional: true })
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class MediaComponent implements OnInit {
 
