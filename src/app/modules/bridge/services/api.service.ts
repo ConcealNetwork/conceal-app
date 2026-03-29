@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
