@@ -4,9 +4,10 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-mobile-header',
-  templateUrl: './mobile-header.component.html',
-  styleUrls: ['./mobile-header.component.scss']
+    selector: 'app-mobile-header',
+    templateUrl: './mobile-header.component.html',
+    styleUrls: ['./mobile-header.component.scss'],
+    standalone: false
 })
 export class MobileHeaderComponent implements OnInit {
 

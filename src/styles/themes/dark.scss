@@ -1,3 +1,4 @@
+@mixin apply() {
 .mat-drawer-container {
 	background-color: #303030;
 }
@@ -137,7 +138,7 @@ mat-card {
 }
 
 .mat-mdc-outlined-button {
-    --mdc-outlined-button-outline-color: rgba(255, 255, 255, 0.12);
+    --mat-button-outlined-outline-color: rgba(255, 255, 255, 0.12);
 }
 
 .mat-drawer.mat-drawer-end {
@@ -187,4 +188,5 @@ mat-card {
 ::placeholder {
 	color: #888 !important;
 	opacity: 1;
+}
 }

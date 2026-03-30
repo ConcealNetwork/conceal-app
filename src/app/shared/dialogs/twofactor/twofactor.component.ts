@@ -5,17 +5,18 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 // Dialogs
 @Component({
-  selector: 'twofa',
-  templateUrl: 'twofactor.component.html',
-	styleUrls: ['./twofactor.component.scss'],
-	animations: [
-		trigger('transition', [
-			transition(':enter', [
-				style({ opacity: 0}),
-				animate('0.3s ease-in', style({ opacity: 1}))
-			])
-		])
-	]
+    selector: 'twofa',
+    templateUrl: 'twofactor.component.html',
+    styleUrls: ['./twofactor.component.scss'],
+    animations: [
+        trigger('transition', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate('0.3s ease-in', style({ opacity: 1 }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 
 export class TwoFactorDialog {

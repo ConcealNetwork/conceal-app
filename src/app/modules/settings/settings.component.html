@@ -1,175 +1,188 @@
-<app-loader *ngIf="this.isLoading"></app-loader>
+@if (this.isLoading) {
+  <app-loader></app-loader>
+}
 
-<div class="container" fxLayout="column" fxLayoutAlign="center center" fxFill fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" *ngIf="!this.isLoading">
-
-	<div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-sm>
-		<h1 class="headline">Application <strong>Settings</strong></h1>
-		<p class="description">Configure various options and settings for the Conceal App</p>
-	</div>
-
-	<div class="modules" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
-
-		<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
-
-			<!-- General settings -->
-			<mat-card id="cards" class="general mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start">
-
-				<mat-card-header fxLayout="column">
-					<h2 class="title">General Settings</h2>
-				</mat-card-header>
-
-				<mat-card-content fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
-					<form fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" [formGroup]="hub">
-						<mat-form-field hintLabel="Select preferred currency" color="accent" appearance="fill" fxFlex>
-							<mat-label>Currency</mat-label>
-							<mat-select #currency name="currency" formControlName="currency">
-								<mat-option [value]="item.name | lowercase" *ngFor="let item of this.currencies">
-									<img class="icon" width="16" [src]="item.imageUrl" />
-									{{ item.symbol }} {{ item.name | uppercase }}
-								</mat-option>
-							</mat-select>
-							<mat-error *ngIf="hub.controls['currency'].hasError('required')">
-								Currency is <strong>required</strong>
-							</mat-error>
-						</mat-form-field>
-
-						<mat-form-field hintLabel="Select preferred theme" color="accent" appearance="fill" fxFlex>
-							<mat-label>Theme</mat-label>
-							<mat-select #mode name="mode" formControlName="mode">
-								<mat-option [value]="item.value | lowercase" *ngFor="let item of this.modes">
-									{{ item.name }}
-								</mat-option>
-							</mat-select>
-							<mat-error *ngIf="hub.controls['mode'].hasError('required')">
-								This setting is <strong>required</strong>
-							</mat-error>
-						</mat-form-field>
-
-						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px" fxFlex="noshrink">
-							<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('hub')">Clear</button>
-							<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="changeSettings()" [disabled]="!hub.valid">Apply</button>
-						</div>
-
-					</form>
-				</mat-card-content>
-
-			</mat-card>
-
-			<!-- Account settings -->
-			<mat-card id="cards" class="account mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start" *ngIf="isLoggedIn">
-
-				<mat-card-header fxLayout="column">
-					<h2 class="title">Account Settings</h2>
-				</mat-card-header>
-
-				<mat-card-content fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
-					<form fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" [formGroup]="cloud">
-
-						<mat-form-field hintLabel="Your username" appearance="fill" color="accent" fxFlex *ngIf="this.cloud.controls['username']">
-							<mat-label>Username</mat-label>
-							<input matInput type="text" name="username" minlength="4" maxlength="24" formControlName="username" autocomplete="username">
-							<mat-error *ngIf="cloud.controls['username'].hasError('minlength') || cloud.controls['username'].hasError('maxlength')">
-								Username should be at least <strong>4 characters</strong>
-							</mat-error>
-							<mat-error *ngIf="cloud.controls['username'].hasError('pattern')">
-								Please enter a valid username
-							</mat-error>
-							<mat-error *ngIf="cloud.controls['username'].hasError('required')">
-								Username is <strong>required</strong>
-							</mat-error>
-						</mat-form-field>
-
-						<mat-form-field hintLabel="Your email address" appearance="fill" color="accent" fxFlex *ngIf="this.cloud.controls['email']">
-							<mat-label>Email Address</mat-label>
-							<input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="email" autocomplete="email">
-							<mat-error *ngIf="cloud.controls['email'].hasError('email') && !cloud.controls['email'].hasError('required')">
-								Please enter a valid email address
-							</mat-error>
-							<mat-error *ngIf="cloud.controls['email'].hasError('required')">
-								Email address is <strong>required</strong>
-							</mat-error>
-						</mat-form-field>
-
-						<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px" fxFlex="noshrink">
-							<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('cloud')">Clear</button>
-							<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="changeEmail(this.accountButtonLabel)" [disabled]="!cloud.valid">{{this.accountButtonLabel}}</button>
-						</div>
-
-						<p class="title">Users may choose between <strong>username</strong> and <strong>email</strong> based logins. While usernames may provide greater privacy, resetting your password will not be possible.</p>
-						<button fxFlex fxFlex="noshrink" color="accent" mat-stroked-button type="button" (click)="changeLoginMethod(loginMethodLabel)">{{this.loginMethodLabel}}</button>
-
-					</form>
-				</mat-card-content>
-
-			</mat-card>
-
-			<!-- Security settings -->
-			<mat-card id="cards" class="security mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start" *ngIf="isLoggedIn">
-
-				<mat-card-header fxLayout="column">
-					<h2 class="title">Security Settings</h2>
-				</mat-card-header>
-
-				<mat-card-content fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
-
-						<div fxLayout="row wrap" fxLayoutGap="15px grid" fxFlex="noshrink">
-							<h4 class="subheading orange">Change your authentication settings</h4>
-							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex fxFlex="noshrink" color="warn" mat-flat-button type="button" [disabled]="this.passwordReset">Reset Password</button>
-							</div>
-							<div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
-								<button fxFlex fxFlex="noshrink" color="warn" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button" (click)="this.show2fa = !this.show2fa">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
-							</div>
-						</div>
-
-					<!-- twofa -->
-					<fieldset fxLayout="column" fxFlex="noshrink" *ngIf="isLoggedIn && this.show2fa">
-						<legend fxLayout="row" fxLayoutAlign="space-between center">
-							<mat-icon class="orange" aria-hidden="false">qr_code_scanner</mat-icon>
-							Two-Factor
-						</legend>
-						<form fxLayout="column" fxLayoutGap="15px" [formGroup]="twofa">
-							<p fxFlex class="title" *ngIf="!this.hasTwoFa">Scan or enter your secret code with your authentication app to set up your account.</p>
-							<div fxLayout="row" fxLayout.lt-md="column" fxFlex fxFlex="noshrink" fxLayoutAlign="center center" fxLayoutGap="15px" *ngIf="!this.hasTwoFa">
-								<img class="qrcode" [src]="this.secretQR">
-								<div class="secret">{{this.secret}}</div>
-							</div>
-							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px" *ngIf="!this.hasTwoFa">
-								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="copy(this.secret, 'Copied secret to clipboard')">Copy Secret Key</button>
-							</div>
-							<p class="title">Enter the code from your authenticator app to {{this.hasTwoFa ? 'disable' : 'enable'}} two-factor authentication.</p>
-							<mat-form-field fxFlex hintLabel="6 Numbers" color="accent" appearance="fill">
-								<mat-label>Two-factor Code</mat-label>
-								<input matInput minlength="6" maxlength="6" placeholder="00000" formControlName="code">
-								<button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste()">
-									<mat-icon>content_paste</mat-icon>
-								</button>
-								<mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
-								<mat-error *ngIf="twofa.controls['code'].hasError('minlength') || twofa.controls['code'].hasError('maxlength')">
-									2FA code should be <strong>6 numbers</strong>
-								</mat-error>
-								<mat-error *ngIf="twofa.controls['code'].hasError('pattern')">
-									2FA code should be <strong>numbers only</strong>
-								</mat-error>
-								<mat-error *ngIf="twofa.controls['code'].hasError('required')">
-									2FA Code is <strong>required</strong>
-								</mat-error>
-							</mat-form-field>
-
-							<div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px" fxFlex="noshrink">
-								<button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('twofa')">Clear</button>
-								<button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="change2fa(this.hasTwoFa)" [disabled]="!twofa.valid">{{this.hasTwoFa ? 'Disable' : 'Enable'}}</button>
-							</div>
-
-						</form>
-					</fieldset>
-
-				</mat-card-content>
-
-			</mat-card>
-
-		</div>
-
-	</div>
-
-</div>
+@if (!this.isLoading) {
+  <div class="container" fxLayout="column" fxLayoutAlign="center center" fxFill fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
+    <div fxLayout="column" fxLayoutAlign="center center" fxHide fxShow.gt-sm>
+      <h1 class="headline">Application <strong>Settings</strong></h1>
+      <p class="description">Configure various options and settings for the Conceal App</p>
+    </div>
+    <div class="modules" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
+        <!-- General settings -->
+        <mat-card id="cards" class="general mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start">
+          <mat-card-header fxLayout="column">
+            <h2 class="title">General Settings</h2>
+          </mat-card-header>
+          <mat-card-content fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
+            <form fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" [formGroup]="hub">
+              <mat-form-field hintLabel="Select preferred currency" color="accent" appearance="fill" fxFlex>
+                <mat-label>Currency</mat-label>
+                <mat-select #currency name="currency" formControlName="currency">
+                  @for (item of this.currencies; track item) {
+                    <mat-option [value]="item.name | lowercase">
+                      <img class="icon" width="16" [src]="item.imageUrl" />
+                      {{ item.symbol }} {{ item.name | uppercase }}
+                    </mat-option>
+                  }
+                </mat-select>
+                @if (hub.controls['currency'].hasError('required')) {
+                  <mat-error>
+                    Currency is <strong>required</strong>
+                  </mat-error>
+                }
+              </mat-form-field>
+              <mat-form-field hintLabel="Select preferred theme" color="accent" appearance="fill" fxFlex>
+                <mat-label>Theme</mat-label>
+                <mat-select #mode name="mode" formControlName="mode">
+                  @for (item of this.modes; track item) {
+                    <mat-option [value]="item.value | lowercase">
+                      {{ item.name }}
+                    </mat-option>
+                  }
+                </mat-select>
+                @if (hub.controls['mode'].hasError('required')) {
+                  <mat-error>
+                    This setting is <strong>required</strong>
+                  </mat-error>
+                }
+              </mat-form-field>
+              <div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px" fxFlex="noshrink">
+                <button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('hub')">Clear</button>
+                <button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="changeSettings()" [disabled]="!hub.valid">Apply</button>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+        <!-- Account settings -->
+        @if (isLoggedIn) {
+          <mat-card id="cards" class="account mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start">
+            <mat-card-header fxLayout="column">
+              <h2 class="title">Account Settings</h2>
+            </mat-card-header>
+            <mat-card-content fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
+              <form fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" [formGroup]="cloud">
+                @if (this.cloud.controls['username']) {
+                  <mat-form-field hintLabel="Your username" appearance="fill" color="accent" fxFlex>
+                    <mat-label>Username</mat-label>
+                    <input matInput type="text" name="username" minlength="4" maxlength="24" formControlName="username" autocomplete="username">
+                    @if (cloud.controls['username'].hasError('minlength') || cloud.controls['username'].hasError('maxlength')) {
+                      <mat-error>
+                        Username should be at least <strong>4 characters</strong>
+                      </mat-error>
+                    }
+                    @if (cloud.controls['username'].hasError('pattern')) {
+                      <mat-error>
+                        Please enter a valid username
+                      </mat-error>
+                    }
+                    @if (cloud.controls['username'].hasError('required')) {
+                      <mat-error>
+                        Username is <strong>required</strong>
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                }
+                @if (this.cloud.controls['email']) {
+                  <mat-form-field hintLabel="Your email address" appearance="fill" color="accent" fxFlex>
+                    <mat-label>Email Address</mat-label>
+                    <input matInput type="email" name="username" placeholder="you@youremail.com" formControlName="email" autocomplete="email">
+                    @if (cloud.controls['email'].hasError('email') && !cloud.controls['email'].hasError('required')) {
+                      <mat-error>
+                        Please enter a valid email address
+                      </mat-error>
+                    }
+                    @if (cloud.controls['email'].hasError('required')) {
+                      <mat-error>
+                        Email address is <strong>required</strong>
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                }
+                <div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px" fxFlex="noshrink">
+                  <button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('cloud')">Clear</button>
+                  <button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="changeEmail(this.accountButtonLabel)" [disabled]="!cloud.valid">{{this.accountButtonLabel}}</button>
+                </div>
+                <p class="title">Users may choose between <strong>username</strong> and <strong>email</strong> based logins. While usernames may provide greater privacy, resetting your password will not be possible.</p>
+                <button fxFlex fxFlex="noshrink" color="accent" mat-stroked-button type="button" (click)="changeLoginMethod(loginMethodLabel)">{{this.loginMethodLabel}}</button>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        }
+        <!-- Security settings -->
+        @if (isLoggedIn) {
+          <mat-card id="cards" class="security mat-elevation-z8" fxFlex fxLayout="column" fxLayoutAlign="start">
+            <mat-card-header fxLayout="column">
+              <h2 class="title">Security Settings</h2>
+            </mat-card-header>
+            <mat-card-content fxLayout="column" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px">
+              <div fxLayout="row wrap" fxLayoutGap="15px grid" fxFlex="noshrink">
+                <h4 class="subheading orange">Change your authentication settings</h4>
+                <div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+                  <button fxFlex fxFlex="noshrink" color="warn" mat-flat-button type="button" [disabled]="this.passwordReset">Reset Password</button>
+                </div>
+                <div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+                  <button fxFlex fxFlex="noshrink" color="warn" [ngClass]="this.hasTwoFa ? 'disable' : 'enable'" mat-flat-button type="button" (click)="this.show2fa = !this.show2fa">{{this.hasTwoFa ? 'Disable' : 'Enable'}} 2FA</button>
+                </div>
+              </div>
+              <!-- twofa -->
+              @if (isLoggedIn && this.show2fa) {
+                <fieldset fxLayout="column" fxFlex="noshrink">
+                  <legend fxLayout="row" fxLayoutAlign="space-between center">
+                    <mat-icon class="orange" aria-hidden="false">qr_code_scanner</mat-icon>
+                    Two-Factor
+                  </legend>
+                  <form fxLayout="column" fxLayoutGap="15px" [formGroup]="twofa">
+                    @if (!this.hasTwoFa) {
+                      <p fxFlex class="title">Scan or enter your secret code with your authentication app to set up your account.</p>
+                    }
+                    @if (!this.hasTwoFa) {
+                      <div fxLayout="row" fxLayout.lt-md="column" fxFlex fxFlex="noshrink" fxLayoutAlign="center center" fxLayoutGap="15px">
+                        <img class="qrcode" [src]="this.secretQR">
+                        <div class="secret">{{this.secret}}</div>
+                      </div>
+                    }
+                    @if (!this.hasTwoFa) {
+                      <div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxFlex="noshrink" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+                        <button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="button" (click)="copy(this.secret, 'Copied secret to clipboard')">Copy Secret Key</button>
+                      </div>
+                    }
+                    <p class="title">Enter the code from your authenticator app to {{this.hasTwoFa ? 'disable' : 'enable'}} two-factor authentication.</p>
+                    <mat-form-field fxFlex hintLabel="6 Numbers" color="accent" appearance="fill">
+                      <mat-label>Two-factor Code</mat-label>
+                      <input matInput minlength="6" maxlength="6" placeholder="00000" formControlName="code">
+                      <button type="button" matSuffix mat-icon-button color="accent" aria-label="paste from clipboard" (click)="paste()">
+                        <mat-icon>content_paste</mat-icon>
+                      </button>
+                      <mat-hint align="end">{{twofa.value?.length || 0}}/6</mat-hint>
+                      @if (twofa.controls['code'].hasError('minlength') || twofa.controls['code'].hasError('maxlength')) {
+                        <mat-error>
+                          2FA code should be <strong>6 numbers</strong>
+                        </mat-error>
+                      }
+                      @if (twofa.controls['code'].hasError('pattern')) {
+                        <mat-error>
+                          2FA code should be <strong>numbers only</strong>
+                        </mat-error>
+                      }
+                      @if (twofa.controls['code'].hasError('required')) {
+                        <mat-error>
+                          2FA Code is <strong>required</strong>
+                        </mat-error>
+                      }
+                    </mat-form-field>
+                    <div class="actions" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="start stretch" fxLayoutGap="15px" fxFlex="noshrink">
+                      <button fxFlex fxFlex="noshrink" color="warn" mat-stroked-button type="button" (click)="clear('twofa')">Clear</button>
+                      <button fxFlex fxFlex="noshrink" color="accent" mat-flat-button type="submit" (click)="change2fa(this.hasTwoFa)" [disabled]="!twofa.valid">{{this.hasTwoFa ? 'Disable' : 'Enable'}}</button>
+                    </div>
+                  </form>
+                </fieldset>
+              }
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    </div>
+  </div>
+}

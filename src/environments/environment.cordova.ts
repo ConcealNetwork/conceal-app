@@ -8,13 +8,15 @@ export const environment = {
   coinStats: 'https://api.coinstats.app',
   gecko: 'https://api.coingecko.com',
   rss2json: 'https://api.rss2json.com',
-  nitter: 'https://de.nttr.stream',
+  nitter: 'https://farside.link/nitter',
 	interval: 60000,
 	defaultFee: 0.001000,
 	depositBlocksPerMonth: 21900,
 	walletLimit: 2,
 	idValue: 20.001,
 	currency: 'usd',
+	// Optional backend endpoint returning Bi-Weekly Dev Updates from Discord
+	discordUpdatesUrl: '',
 	interestRates: [
 		[0.24, 0.33, 0.41],
 		[0.50, 0.67, 0.83],

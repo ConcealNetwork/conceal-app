@@ -6,16 +6,24 @@
 
   <mat-sidenav-content fxLayout="column">
 
-		<app-header *ngIf="!getThemingService().isSmallScreen"></app-header> <!-- header -->
-		<app-mobile-header *ngIf="getThemingService().isSmallScreen"></app-mobile-header> <!-- mobile header -->
+    @if (!getThemingService().isSmallScreen) {
+      <app-header></app-header>
+      } <!-- header -->
+      @if (getThemingService().isSmallScreen) {
+        <app-mobile-header></app-mobile-header>
+        } <!-- mobile header -->
 
-    <main #main class="container">
-			<router-outlet></router-outlet> <!-- content -->
-    </main>
+        <main #main class="container">
+          <router-outlet></router-outlet> <!-- content -->
+        </main>
 
-		<app-mobile-footer *ngIf="getThemingService().isSmallScreen" (sidenavToggle)="sidenav.toggle()"></app-mobile-footer> <!-- mobile footer -->
-		<app-footer *ngIf="!getThemingService().isSmallScreen"></app-footer> <!-- mobile footer -->
+        @if (getThemingService().isSmallScreen) {
+          <app-mobile-footer (sidenavToggle)="sidenav.toggle()"></app-mobile-footer>
+          } <!-- mobile footer -->
+          @if (!getThemingService().isSmallScreen) {
+            <app-footer></app-footer>
+            } <!-- mobile footer -->
 
-  </mat-sidenav-content>
+          </mat-sidenav-content>
 
-</mat-sidenav-container>
+        </mat-sidenav-container>

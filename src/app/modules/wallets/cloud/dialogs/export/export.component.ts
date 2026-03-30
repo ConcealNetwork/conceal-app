@@ -74,7 +74,7 @@ export class ExportDialog {
 	submit() {
 		if (this.export.valid) {
 			this.isLoading = true;
-			this.cloudService.getWalletKeys(this.data.address, this.export.value.code).subscribe((data: any) => {
+			this.cloudService.getWalletKeys(this.data.address, this.export.value['code']).subscribe((data: any) => {
 				this.isLoading = false;
 				if (data.result === 'success') {
 					if(!this.themingService.isSmallScreen) {

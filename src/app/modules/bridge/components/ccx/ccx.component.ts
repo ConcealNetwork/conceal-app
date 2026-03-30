@@ -11,9 +11,10 @@ import { APIService } from '../../services/api.service';
 import { DataService } from '../../services/data.service';
 
 @Component({
-  selector: 'app-ccx',
-  templateUrl: './ccx.component.html',
-  styleUrls: ['./ccx.component.scss']
+    selector: 'app-ccx',
+    templateUrl: './ccx.component.html',
+    styleUrls: ['./ccx.component.scss'],
+    standalone: false
 })
 
 export class CcxSwapComponent implements OnInit {

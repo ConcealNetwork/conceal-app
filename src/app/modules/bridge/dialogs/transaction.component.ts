@@ -3,9 +3,10 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'transaction',
-  templateUrl: 'transaction.component.html',
-	styleUrls: ['./transaction.component.scss'],
+    selector: 'transaction',
+    templateUrl: 'transaction.component.html',
+    styleUrls: ['./transaction.component.scss'],
+    standalone: false
 })
 
 export class TransactionDialog {

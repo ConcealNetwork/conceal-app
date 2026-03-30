@@ -3,7 +3,7 @@ import { SharedModule } from 'src/app/shared.module';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { QRCodeModule } from 'angularx-qrcode';
+// QR code module temporarily disabled due to missing export in current version
 
 import { BridgeRoutingModule } from './bridge-routing.module';
 import { BridgeComponent } from './bridge.component';
@@ -45,8 +45,7 @@ import { EthersService } from './services/ethers.service';
     BridgeRoutingModule,
 		MaterialModule,
 		FormsModule,
-		ReactiveFormsModule,
-		QRCodeModule
+		ReactiveFormsModule
   ],
 	providers: [
 		DialogService,

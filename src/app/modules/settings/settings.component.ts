@@ -12,21 +12,22 @@ import { ThemingService } from 'src/app/shared/services/theming.service';
 import { CordovaService } from 'src/app/shared/services/cordova.service';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss'],
-	animations: [
-		trigger('transition', [
-			transition(':enter', [
-				query('#cards', [
-					style({ opacity: 0 }),
-					stagger(100, [
-						animate('0.4s', style({ opacity: 1 }))
-					])
-				], {optional: true})
-			])
-		])
-	]
+    selector: 'app-settings',
+    templateUrl: './settings.component.html',
+    styleUrls: ['./settings.component.scss'],
+    animations: [
+        trigger('transition', [
+            transition(':enter', [
+                query('#cards', [
+                    style({ opacity: 0 }),
+                    stagger(100, [
+                        animate('0.4s', style({ opacity: 1 }))
+                    ])
+                ], { optional: true })
+            ])
+        ])
+    ],
+    standalone: false
 })
 
 export class SettingsComponent implements OnInit {

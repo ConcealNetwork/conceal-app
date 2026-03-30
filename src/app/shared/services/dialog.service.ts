@@ -28,6 +28,19 @@ export class DialogService {
 		public themingService: ThemingService
 	) { }
 
+	openConfirmationDialog(_deposit:any): void {
+		// Placeholder until implemented
+		// Using console.warn to surface missing implementation without breaking runtime
+		// eslint-disable-next-line no-console
+		console.warn('DialogService.openConfirmationDialog is not implemented yet.');
+	}
+
+	openPendingDialog(): void {
+		// Placeholder until implemented
+		// eslint-disable-next-line no-console
+		console.warn('DialogService.openPendingDialog is not implemented yet.');
+	}
+
 	// openConfirmationDialog(deposit:any): void {
 	// 	const dialogRef = this.dialog.open(ConfirmationDialog, {
 	// 		width: this.themingService.exportDialogWidth,

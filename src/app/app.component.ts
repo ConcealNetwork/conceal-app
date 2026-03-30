@@ -13,9 +13,10 @@ import { filter, map } from 'rxjs/operators';
 import { ThemingService } from './shared/services/theming.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 
 export class AppComponent implements OnInit, OnDestroy {

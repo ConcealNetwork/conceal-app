@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "src/app/modules/bridge/**",
+    "src/app/modules/deposits/**",
+    "src/app/modules/authenticator/**",
+    "src/app/modules/id/**",
+    "src/app/modules/live/**",
+    "src/app/modules/wallets/**",
+    "src/app/modules/messages/**"
+  ]
+}

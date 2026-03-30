@@ -12,21 +12,22 @@ interface Networks {
 }
 
 @Component({
-  selector: 'app-bridge',
-  templateUrl: './bridge.component.html',
-  styleUrls: ['./bridge.component.scss'],
-	animations: [
-		trigger('transition', [
-			transition(':enter', [
-				query('#cards', [
-					style({ opacity: 0}),
-					stagger(100, [
-						animate('0.4s', style({ opacity: 1 }))
-					])
-				], {optional: true})
-			])
-		])
-	]
+    selector: 'app-bridge',
+    templateUrl: './bridge.component.html',
+    styleUrls: ['./bridge.component.scss'],
+    animations: [
+        trigger('transition', [
+            transition(':enter', [
+                query('#cards', [
+                    style({ opacity: 0 }),
+                    stagger(100, [
+                        animate('0.4s', style({ opacity: 1 }))
+                    ])
+                ], { optional: true })
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class BridgeComponent implements OnInit {
 

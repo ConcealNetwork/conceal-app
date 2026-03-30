@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { QRCodeModule } from 'angularx-qrcode';
-
 import { SharedModule } from 'src/app/shared.module';
 import { MaterialModule } from 'src/app/material.module';
 
@@ -28,8 +26,7 @@ import { CodeDialog } from './dialogs/code/code.component';
     ReactiveFormsModule,
     CloudRoutingModule,
 		SharedModule,
-		MaterialModule,
-		QRCodeModule
+		MaterialModule
   ]
 })
 export class CloudModule { }

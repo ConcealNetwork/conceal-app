@@ -14,9 +14,10 @@ import { APIService } from '../../services/api.service';
 import { DataService } from '../../services/data.service';
 
 @Component({
-  selector: 'app-avax',
-  templateUrl: './avax.component.html',
-  styleUrls: ['./avax.component.scss']
+    selector: 'app-avax',
+    templateUrl: './avax.component.html',
+    styleUrls: ['./avax.component.scss'],
+    standalone: false
 })
 
 export class AvaxSwapComponent implements OnInit, OnDestroy {

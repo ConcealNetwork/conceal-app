@@ -1,44 +1,48 @@
 <aside fxLayout="column" fxLayoutGap="10px">
 
-		<div fxLayout="column" fxLayoutGap="10px">
-			<!--
-			<a mat-stroked-button class="link" color="accent" (click)="close()" routerLink="/bridge" routerLinkActive="active">Bridge</a>
-			<a mat-button class="link" (click)="close()" routerLink="/pay" routerLinkActive="active">Pay</a>
-			<a mat-button class="link" (click)="close()" routerLink="/explorer" routerLinkActive="active">Explorer</a>
-			-->
-			<a mat-stroked-button class="link" color="accent" (click)="close()" routerLink="/media" routerLinkActive="active">Updates</a>
-		</div>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <!--
+    <a mat-stroked-button class="link" color="accent" (click)="close()" routerLink="/bridge" routerLinkActive="active">Bridge</a>
+    <a mat-button class="link" (click)="close()" routerLink="/pay" routerLinkActive="active">Pay</a>
+    <a mat-button class="link" (click)="close()" routerLink="/explorer" routerLinkActive="active">Explorer</a>
+    -->
+    <a mat-stroked-button class="link" color="accent" (click)="close()" routerLink="/media" routerLinkActive="active">Updates</a>
+  </div>
 
-		<div class="fill-space"></div>
+  <div class="fill-space"></div>
 
-		<div fxLayout="row" fxLayoutAlign="space-around">
-			<div class="version">Version: <span class="orange">{{this.version}}</span></div>
-		</div>
+  <div fxLayout="row" fxLayoutAlign="space-around">
+    <div class="version">Version: <span class="orange">{{this.version}}</span></div>
+  </div>
 
-		<div fxLayout="row" fxLayoutAlign="space-around">
-			<div class="item copyright">Copyright © {{this.year}} All rights reserved <strong>Conceal Network.</strong></div>
-		</div>
+  <div fxLayout="row" fxLayoutAlign="space-around">
+    <div class="item copyright">Copyright © {{this.year}} All rights reserved <strong>Conceal Network.</strong></div>
+  </div>
 
-		<div fxLayout="row" fxLayoutAlign="space-around">
-			<div class="item copyright"><a href="https://conceal.network/tc/index.html" class="orange" target="_blank">Terms & Conditions</a><br /><a href="https://conceal.network/privacy/index.html" class="orange" target="_blank">Privacy Policy</a></div>
-		</div>
+  <div fxLayout="row" fxLayoutAlign="space-around">
+    <div class="item copyright"><a href="https://conceal.network/tc" class="orange" target="_blank">Terms & Conditions</a><br /><a href="https://conceal.network/privacy" class="orange" target="_blank">Privacy Policy</a></div>
+  </div>
 
-		<div fxLayout="row" fxLayoutAlign="space-around">
-			<a mat-icon-button (click)="close()" routerLink="/settings" routerLinkActive="active">
-				<mat-icon>settings</mat-icon>
-			</a>
-			<a mat-icon-button (click)="changeTheme('dark-theme')" *ngIf="activeTheme == 'light-theme'">
-				<mat-icon>dark_mode</mat-icon>
-			</a>
-			<a mat-icon-button (click)="changeTheme('light-theme')" *ngIf="activeTheme == 'dark-theme'">
-				<mat-icon>light_mode</mat-icon>
-			</a>
-			<!-- <a mat-icon-button (click)="logout()" *ngIf="isLoggedIn">
-				<mat-icon>logout</mat-icon>
-			</a>
-			<a mat-icon-button (click)="login()" *ngIf="!isLoggedIn">
-				<mat-icon>login</mat-icon>
-			</a> -->
-		</div>
+  <div fxLayout="row" fxLayoutAlign="space-around">
+    <a mat-icon-button (click)="close()" routerLink="/settings" routerLinkActive="active">
+      <mat-icon>settings</mat-icon>
+    </a>
+    @if (activeTheme == 'light-theme') {
+      <a mat-icon-button (click)="changeTheme('dark-theme')">
+        <mat-icon>dark_mode</mat-icon>
+      </a>
+    }
+    @if (activeTheme == 'dark-theme') {
+      <a mat-icon-button (click)="changeTheme('light-theme')">
+        <mat-icon>light_mode</mat-icon>
+      </a>
+    }
+    <!-- <a mat-icon-button (click)="logout()" *ngIf="isLoggedIn">
+    <mat-icon>logout</mat-icon>
+  </a>
+  <a mat-icon-button (click)="login()" *ngIf="!isLoggedIn">
+    <mat-icon>login</mat-icon>
+  </a> -->
+</div>
 
 </aside>

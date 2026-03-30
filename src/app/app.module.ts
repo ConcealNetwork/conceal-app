@@ -6,7 +6,7 @@ import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 // 3rd Party
 import { JwtModule } from "@auth0/angular-jwt";
@@ -34,48 +34,42 @@ export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
 
-@NgModule({
-	declarations: [
-		AppComponent,
-    HeaderComponent,
-    SidenavComponent,
-		FooterComponent,
-    MobileFooterComponent,
-		MobileHeaderComponent,
-		TwoFactorDialog
-	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		MaterialModule,
-		SharedModule,
-		HttpClientModule,
-		BrowserAnimationsModule,
-		ServiceWorkerModule.register('ngsw-worker.js', {
-			enabled: !isDevMode() || environment.worker,
-			// Register the ServiceWorker as soon as the application is stable
-			// or after 30 seconds (whichever comes first).
-			registrationStrategy: 'registerWhenStable:30000'
-		}),
-		JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ["api.wallet.conceal.network"],
-        headerName: "token",
-        authScheme: ""
-      },
-    }),
-	],
-	providers: [
-		ThemingService,
-		CordovaService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorService,
-      multi: true
-    }
-  ],
-	bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent,
+        SidenavComponent,
+        FooterComponent,
+        MobileFooterComponent,
+        MobileHeaderComponent,
+        TwoFactorDialog
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        MaterialModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode() || environment.worker,
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                allowedDomains: ["api.wallet.conceal.network"],
+                headerName: "token",
+                authScheme: ""
+            },
+        })], providers: [
+        ThemingService,
+        CordovaService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpInterceptorService,
+            multi: true
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 
 export class AppModule { }

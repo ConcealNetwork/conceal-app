@@ -13,6 +13,42 @@
 
 	}
 
+	// Center timeline line and alternating tiles
+	.timeline {
+		position: relative;
+	}
+
+	.timeline-tile {
+		// Center tiles by default; pair rows will shift as a group on larger screens
+		margin-left: 3%;
+		margin-right: 3%;
+		@media (min-width: 960px) {
+			flex: 0 0 44%;
+			max-width: 44%;
+			width: 44%;
+			margin-left: 3%;
+			margin-right: 3%;
+		}
+	}
+
+	// Pair rows: alternate slight horizontal offset per row
+	.tile-row {
+		@media (min-width: 960px) {
+			// Reduce decentering so first/last tiles don't leave the viewport
+			&.left { transform: translateX(-3%); }
+			&.right { transform: translateX(3%); }
+		}
+	}
+
+	// Zig-zag (quinconce) layout: on larger screens offset every other tile by 33%
+	.tile-card {
+		@media (min-width: 960px) {
+			&.offset-33 {
+				margin-left: 33%;
+			}
+		}
+	}
+
 	.headline {
 		font-size: 3.6rem;
     line-height: 1.1em;
