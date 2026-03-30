@@ -106,8 +106,8 @@ export class SendDialog {
 	formAuthorise: FormGroup = new FormGroup({});
 
 	setAmount(percent:number) {
-		this.formTransaction.controls.amount.patchValue((percent / 100) * this.wallet.balance, { emitEvent: true });
-		this.formTransaction.controls.amount.markAsTouched();
+		this.formTransaction.controls['amount'].patchValue((percent / 100) * this.wallet.balance, { emitEvent: true });
+		this.formTransaction.controls['amount'].markAsTouched();
 	}
 
 	close() {
@@ -116,12 +116,12 @@ export class SendDialog {
 
 	review() {
 		if (this.formTransaction.valid) {
-			this.formConfirm.controls.amount.patchValue(this.formTransaction.value.amount, { emitEvent: true });
-			this.formConfirm.controls.fee.patchValue(this.fee, { emitEvent: true });
-			this.formConfirm.controls.toAddress.patchValue(this.formTransaction.value.toAddress, { emitEvent: true });
-			this.formConfirm.controls.fromAddress.patchValue(this.wallet.address, { emitEvent: true });
-			this.formConfirm.controls.paymentID.patchValue(this.formTransaction.value.paymentID, { emitEvent: true });
-			this.formConfirm.controls.message.patchValue(this.formTransaction.value.message, { emitEvent: true });
+			this.formConfirm.controls['amount'].patchValue(this.formTransaction.value['amount'], { emitEvent: true });
+			this.formConfirm.controls['fee'].patchValue(this.fee, { emitEvent: true });
+			this.formConfirm.controls['toAddress'].patchValue(this.formTransaction.value['toAddress'], { emitEvent: true });
+			this.formConfirm.controls['fromAddress'].patchValue(this.wallet.address, { emitEvent: true });
+			this.formConfirm.controls['paymentID'].patchValue(this.formTransaction.value['paymentID'], { emitEvent: true });
+			this.formConfirm.controls['message'].patchValue(this.formTransaction.value['message'], { emitEvent: true });
 			this.formConfirm.disable({emitEvent: false});
 			this.transaction = true;
 		}
@@ -135,13 +135,13 @@ export class SendDialog {
 		if (this.formAuthorise.valid) {
 			this.isLoading = true;
 			this.cloudService.createTransaction(
-				this.formConfirm.value.amount.toFixed(6),
-				this.formConfirm.value.fromAddress,
-				this.formConfirm.value.toAddress,
-				this.formConfirm.value.paymentID || '',
-				this.formConfirm.value.message || '',
-				this.formAuthorise.value.code || '',
-				this.formAuthorise.value.password || ''
+				this.formConfirm.value['amount'].toFixed(6),
+				this.formConfirm.value['fromAddress'],
+				this.formConfirm.value['toAddress'],
+				this.formConfirm.value['paymentID'] || '',
+				this.formConfirm.value['message'] || '',
+				this.formAuthorise.value['code'] || '',
+				this.formAuthorise.value['password'] || ''
 			).subscribe((data: any) => {
 				if (data.result === 'success') {
 					this.snackbarService.openSnackBar('Transaction successfully sent!', 'Dismiss');
@@ -165,9 +165,9 @@ export class SendDialog {
 		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
 			this.clipboard.paste().then(
 				(resolve: string) => {
-					if (item == 'toAddress') {this.formTransaction.controls.toAddress.setValue(resolve)}
-					if (item == 'paymentID') {this.formTransaction.controls.paymentID.setValue(resolve)}
-					if (item == 'twofa') {this.formAuthorise.controls.twofaFormControl.setValue(resolve)}
+					if (item == 'toAddress') {this.formTransaction.controls['toAddress'].setValue(resolve)}
+					if (item == 'paymentID') {this.formTransaction.controls['paymentID'].setValue(resolve)}
+					if (item == 'twofa') {this.formAuthorise.controls['twofaFormControl'].setValue(resolve)}
 						this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
 					},
 					(reject: string) => {
@@ -178,9 +178,9 @@ export class SendDialog {
 			if (navigator.clipboard) {
 				navigator.clipboard.readText()
 				.then(text => {
-					if (item == 'toAddress') {this.formTransaction.controls.toAddress.setValue(text)}
-					if (item == 'paymentID') {this.formTransaction.controls.paymentID.setValue(text)}
-					if (item == 'twofa') {this.formAuthorise.controls.twofaFormControl.setValue(text)}
+					if (item == 'toAddress') {this.formTransaction.controls['toAddress'].setValue(text)}
+					if (item == 'paymentID') {this.formTransaction.controls['paymentID'].setValue(text)}
+					if (item == 'twofa') {this.formAuthorise.controls['twofaFormControl'].setValue(text)}
 					this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
 				})
 				.catch(err => {
