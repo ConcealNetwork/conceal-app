@@ -165,9 +165,12 @@ export class SendDialog {
 		if (this.cordovaService.onCordova && (this.cordovaService.device.platform === 'iOS' || this.cordovaService.device.platform === 'Android')) {
 			this.clipboard.paste().then(
 				(resolve: string) => {
-					if (item == 'toAddress') {this.formTransaction.controls['toAddress'].setValue(resolve)}
-					if (item == 'paymentID') {this.formTransaction.controls['paymentID'].setValue(resolve)}
-					if (item == 'twofa') {this.formAuthorise.controls['twofaFormControl'].setValue(resolve)}
+					if (item == 'toAddress') { this.formTransaction.controls['toAddress'].setValue(resolve) }
+					if (item == 'paymentID') { this.formTransaction.controls['paymentID'].setValue(resolve) }
+					if (item == 'twofa') {
+						const twofaKey = this.formAuthorise.contains('code') ? 'code' : 'password';
+						this.formAuthorise.controls[twofaKey].setValue(resolve);
+					}
 						this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
 					},
 					(reject: string) => {
@@ -178,9 +181,12 @@ export class SendDialog {
 			if (navigator.clipboard) {
 				navigator.clipboard.readText()
 				.then(text => {
-					if (item == 'toAddress') {this.formTransaction.controls['toAddress'].setValue(text)}
-					if (item == 'paymentID') {this.formTransaction.controls['paymentID'].setValue(text)}
-					if (item == 'twofa') {this.formAuthorise.controls['twofaFormControl'].setValue(text)}
+					if (item == 'toAddress') { this.formTransaction.controls['toAddress'].setValue(text) }
+					if (item == 'paymentID') { this.formTransaction.controls['paymentID'].setValue(text) }
+					if (item == 'twofa') {
+						const twofaKey = this.formAuthorise.contains('code') ? 'code' : 'password';
+						this.formAuthorise.controls[twofaKey].setValue(text);
+					}
 					this.snackbarService.openSnackBar('Copied text from clipboard', 'Dismiss');
 				})
 				.catch(err => {

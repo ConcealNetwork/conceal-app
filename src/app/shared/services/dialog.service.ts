@@ -29,11 +29,16 @@ export class DialogService {
 	) { }
 
 	openConfirmationDialog(_deposit:any): void {
-		// No-op placeholder to satisfy callers when confirmation dialog is not implemented
+		// Placeholder until implemented
+		// Using console.warn to surface missing implementation without breaking runtime
+		// eslint-disable-next-line no-console
+		console.warn('DialogService.openConfirmationDialog is not implemented yet.');
 	}
 
 	openPendingDialog(): void {
-		// No-op placeholder to satisfy callers when pending dialog is not implemented
+		// Placeholder until implemented
+		// eslint-disable-next-line no-console
+		console.warn('DialogService.openPendingDialog is not implemented yet.');
 	}
 
 	// openConfirmationDialog(deposit:any): void {

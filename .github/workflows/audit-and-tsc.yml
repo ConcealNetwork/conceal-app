@@ -7,7 +7,7 @@ on:
     branches: [ development ]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   audit-and-tsc:
