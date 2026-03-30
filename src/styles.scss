@@ -3,9 +3,17 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
+// Load local modules first (Sass requires @use before any other rules)
+@use './styles/themes/light' as light;
+@use './styles/themes/dark' as dark;
+@use './styles/cards';
+@use './styles/buttons';
+@use './styles/fields';
+@use './styles/tables';
+@use './styles/elevations';
 
-// Import fonts
-@import "@fontsource/poppins";
+// Import fonts (CSS). Consider moving to angular.json "styles" for zero Sass @import.
+@import url("@fontsource/poppins/index.css");
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -45,22 +53,9 @@ body {
 	font-family: "Poppins";
 }
 
-// import light theme
-.light-theme {
-	@import './styles/themes/light.scss';
-}
-
-// import dark theme
-.dark-theme {
-	@import './styles/themes/dark.scss';
-}
-
-// import custom styles
-@import './styles/cards.scss';
-@import './styles/buttons.scss';
-@import './styles/fields.scss';
-@import './styles/tables.scss';
-@import './styles/elevations.scss';
+// apply theme mixins
+.light-theme { @include light.apply(); }
+.dark-theme { @include dark.apply(); }
 
 .orange {
 	color: #faa933;

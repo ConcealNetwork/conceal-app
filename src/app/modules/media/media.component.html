@@ -9,7 +9,30 @@
       <p class="description">Get the latest conceal project news and updates</p>
     </div>
     <div class="articles" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px" [@listAnimation1]="posts.length">
-      @for (item of posts.slice(0, this.limit) | orderByImpure: '-pubDate'; track item; let i = $index) {
+      <!-- Disabled for now; keep for future use
+      <mat-expansion-panel class="pannel mat-elevation-z6" (opened)="loadDiscordUpdates()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Bi-Weekly ⚙️ Dev Update 🛠️
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        @if (!discordUpdates.length) {
+          <p class="text">No updates yet. Configure environment.discordUpdatesUrl to enable.</p>
+        } @else {
+          <div fxLayout="column" fxLayoutGap="10px">
+            @for (d of discordUpdates; track d.id) {
+              <div class="discord-item">
+                <div class="date">{{ d.createdAt | date: 'medium' }}</div>
+                <div class="content">{{ d.content }}</div>
+              </div>
+            }
+          </div>
+        }
+      </mat-expansion-panel>
+      -->
+      <!-- Twitter section -->
+      <h2 class="headline" fxHide fxShow.gt-xs>Twitter</h2>
+      @for (item of twitterPosts.slice(0, this.twitterLimit) | orderByImpure: '-pubDate'; track item; let i = $index) {
         <mat-expansion-panel class="pannel mat-elevation-z6" [expanded]="i == 0 && this.expanded">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -19,9 +42,26 @@
           <p [innerHTML]="item.description | stripTags: '[a, p, br, ol, ul, h1, h2, h3, h4, strong]'" class="text"></p>
         </mat-expansion-panel>
       }
-      @if (this.limit !== 10) {
+      @if (this.twitterLimit < twitterPosts.length) {
         <div fxHide fxShow.gt-xs fxLayout="column" fxLayoutAlign="center center">
-          <button class="more" mat-stroked-button color="accent" (click)="setLimit(10)">Show more articles...</button>
+          <button class="more" mat-stroked-button color="accent" (click)="showAllTwitter()">Show more tweets...</button>
+        </div>
+      }
+      <!-- Medium section -->
+      <h2 class="headline" fxHide fxShow.gt-xs>Medium</h2>
+      @for (item of mediumPosts.slice(0, this.mediumLimit) | orderByImpure: '-pubDate'; track item; let i = $index) {
+        <mat-expansion-panel class="pannel mat-elevation-z6" [expanded]="i == 0 && this.expanded">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{item.title | shorten: 125: '...'}} {{item.index}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p [innerHTML]="item.description | stripTags: '[a, p, br, ol, ul, h1, h2, h3, h4, strong]'" class="text"></p>
+        </mat-expansion-panel>
+      }
+      @if (this.mediumLimit < mediumPosts.length) {
+        <div fxHide fxShow.gt-xs fxLayout="column" fxLayoutAlign="center center">
+          <button class="more" mat-stroked-button color="accent" (click)="showAllMedium()">Show more articles...</button>
         </div>
       }
     </div>

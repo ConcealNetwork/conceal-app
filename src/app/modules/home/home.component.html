@@ -8,75 +8,53 @@
       <h1 class="headline">Conceal <strong>App</strong></h1>
       <p class="description">Bringing the conceal ecosystem together in one place</p>
     </div>
-    <div class="modules" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
-      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
-        <mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
-          <mat-card-header fxLayout="column">
-            <h2 class="title">Web Wallet</h2>
-          </mat-card-header>
-          <mat-card-content>
-            <p fxFlex class="text">
-              <mat-icon class="module_icon orange" aria-hidden="false">lock</mat-icon>
-              The Conceal Web Wallet runs in your Browser on any device, Mobile, PC or Mac!
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-              <a color="accent" mat-stroked-button fxFlex href="https://wallet.conceal.network" target="_blank">Web Wallet</a>
-            </div>
-          </mat-card-actions>
-        </mat-card>
-        <mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
-          <mat-card-header fxLayout="column">
-            <h2 class="title">Conceal Bridge</h2>
-          </mat-card-header>
-          <mat-card-content>
-            <p fxFlex class="text">
-              <mat-icon class="module_icon orange" aria-hidden="false">swap_horizontal_circle</mat-icon>
-              Facilitating the communication between two blockchain networks and aiding in the exchange of our wrapped conceal coins.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-              <button color="accent" mat-flat-button fxFlex routerLink="/bridge">Launch Bridge</button>
-            </div>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" fxFill>
-        <mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
-          <mat-card-header fxLayout="column">
-            <h2 class="title">Conceal Explorer</h2>
-          </mat-card-header>
-          <mat-card-content>
-            <p fxFlex class="text">
-              <mat-icon class="module_icon orange" aria-hidden="false">explore</mat-icon>
-              Access key network metrics such as circulating supply, total supply, total banked, transactions, block height and more.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-              <a color="accent" mat-stroked-button fxFlex href="https://explorer.conceal.network" target="_blank">Conceal Explorer</a>
-            </div>
-          </mat-card-actions>
-        </mat-card>
-        <!-- <mat-card id="cards" class="mat-elevation-z8" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between">
-        <mat-card-header fxLayout="column">
-          <h2 class="title">Conceal Live</h2>
-        </mat-card-header>
-        <mat-card-content>
-          <p fxFlex class="text">
-            <mat-icon class="module_icon orange" aria-hidden="false">chat</mat-icon>
-            Powerful privacy protected communications, peer-to-peer and end-to-end encrypted audio, video and messages.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
-            <a color="accent" mat-stroked-button fxFlex href="https://conceal.network/clive" target="_blank">Conceal Live</a>
-          </div>
-        </mat-card-actions>
-      </mat-card> -->
+    <div class="modules timeline" fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="25px" fxLayoutGap.lt-sm="15px" @transition>
+      @for (row of tileRows; track row[0]?.title; let r = $index) {
+        <div class="tile-row" [class.left]="r % 2 === 0" [class.right]="r % 2 === 1" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center stretch" fxLayoutGap="25px">
+          @for (tile of row; track tile.title) {
+            <mat-card
+              id="cards"
+              class="mat-elevation-z8 timeline-tile"
+              fxFlex.lt-md="100"
+              fxFlex.gt-sm="48"
+              fxLayout="column"
+              fxLayoutAlign="space-between">
+              <mat-card-header fxLayout="column">
+                <h2 class="title">{{ tile.title }}</h2>
+              </mat-card-header>
+              <mat-card-content>
+                <p fxFlex class="text">
+                  <mat-icon class="module_icon orange" aria-hidden="false">{{ tile.icon }}</mat-icon>
+                  {{ tile.description }}
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <div class="actions" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px">
+                  @if (tile.href) {
+                    <a
+                      color="accent"
+                      mat-stroked-button
+                      fxFlex
+                      [href]="tile.href"
+                      [attr.target]="tile.target || '_blank'">
+                      {{ tile.actionLabel }}
+                    </a>
+                  } @else if (tile.route) {
+                    <button
+                      color="accent"
+                      mat-flat-button
+                      fxFlex
+                      [routerLink]="tile.enabled ? tile.route : null"
+                      [disabled]="!tile.enabled">
+                      {{ tile.actionLabel }}
+                    </button>
+                  }
+                </div>
+              </mat-card-actions>
+            </mat-card>
+          }
+        </div>
+      }
     </div>
   </div>
-</div>
 }

@@ -6,7 +6,7 @@ export const environment = {
   production: false,
 	worker: false,
   environment: 'DEV',
-	version: '4.2.6',
+	version: '4.2.7',
 	api: 'https://bridge.conceal.network/testing/backend',
   walletAPI: 'https://api.wallet.conceal.network/api',
   coinStats: 'https://api.coinstats.app',
@@ -19,6 +19,8 @@ export const environment = {
 	walletLimit: 2,
 	idValue: 20.001,
 	currency: 'usd',
+	// Optional backend endpoint returning Bi-Weekly Dev Updates from Discord
+	discordUpdatesUrl: '',
 	interestRates: [
 		[0.24, 0.33, 0.41],
 		[0.50, 0.67, 0.83],

@@ -12,6 +12,12 @@
 			max-width: 1400px;
 		}
 
+		// Ensure all expansion panels share the same width
+		.pannel {
+			width: 100%;
+			align-self: stretch;
+		}
+
 	}
 
 	.headline {
@@ -64,6 +70,20 @@
 	.more {
 		padding-left: 1rem;
 		padding-right: 1rem;
+	}
+
+	/* Normalize expansion header size and prevent multi-line growth */
+	::ng-deep .mat-expansion-panel-header {
+		min-height: 56px;
+		height: 56px;
+	}
+	::ng-deep .mat-expansion-panel-header .mat-content {
+		overflow: hidden;
+	}
+	::ng-deep .mat-expansion-panel-header-title {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.mat-card-actions {

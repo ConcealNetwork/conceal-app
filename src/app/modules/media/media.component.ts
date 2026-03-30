@@ -2,14 +2,17 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-import * as moment from 'moment';
+import moment from 'moment';
 
 // Services
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ThemingService } from 'src/app/shared/services/theming.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-media',
@@ -43,9 +46,16 @@ export class MediaComponent implements OnInit {
 
 	// Variables
 	isLoading: boolean = true;
-	limit: number = 4;
+	// Combined (kept for potential reuse)
 	posts: any = [];
+	// Separate feeds and limits
+	twitterPosts: any[] = [];
+	mediumPosts: any[] = [];
+	twitterLimit: number = 5;
+	mediumLimit: number = 5;
 	expanded: boolean = true;
+	discordUpdates: Array<{ id: string; content: string; createdAt: string }> = [];
+	discordLoaded: boolean = false;
 
   constructor(
 		private apiService: ApiService,
@@ -67,7 +77,8 @@ export class MediaComponent implements OnInit {
 		]).subscribe((state: BreakpointState) => {
 			if (state.matches) {
 				if (state.breakpoints[Breakpoints.XSmall]) {
-					this.limit = 10;
+					this.mediumLimit = Math.min(10, this.mediumPosts.length || 10);
+					this.twitterLimit = Math.min(10, this.twitterPosts.length || 10);
 					this.expanded = false;
 				}
 			}
@@ -82,51 +93,53 @@ export class MediaComponent implements OnInit {
 		return moment(time);
 	}
 
-	setLimit(number:number) {
-		this.limit = number;
+	loadDiscordUpdates() {
+		if (this.discordLoaded) {
+			return;
+		}
+		this.discordLoaded = true;
+		if (!environment.discordUpdatesUrl) {
+			return;
+		}
+		fetch(environment.discordUpdatesUrl, { method: 'GET' })
+			.then(r => r.json())
+			.then((items: Array<{ id: string; content: string; createdAt: string }>) => {
+				if (Array.isArray(items)) {
+					this.discordUpdates = items.sort((a, b) =>
+						new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+					);
+				}
+			})
+			.catch(() => {
+				// best-effort; no UI error
+			});
 	}
 
+	setLimit(number:number) { this.mediumLimit = number; }
+	setTwitterLimit(number:number) { this.twitterLimit = number; }
+	showAllMedium() { this.mediumLimit = this.mediumPosts.length; }
+	showAllTwitter() { this.twitterLimit = this.twitterPosts.length; }
+
 	getArticles() {
-		let medium = this.apiService.getMediumArticles().subscribe((data:any) => {
-			if (data) {
-				for (let i = 0; i < data.items.length; i++) {
-					// add an new object in array of objects
-					this.posts.push({
-						author: data.items[i].author,
-						title: data.items[i].title,
-						description: data.items[i].description,
-						pubDate: data.items[i].pubDate,
-						link: data.items[i].link,
-						thumbnail: data.items[i].thumbnail,
-						source: 'Medium'
-					});
-				}
+		const medium$ = this.apiService.getMediumArticles().pipe(catchError(() => of(null)));
+		const twitter$ = this.apiService.getTwitterArticles().pipe(catchError(() => of(null)));
+
+		forkJoin([medium$, twitter$]).subscribe(([medium, twitter]: any[]) => {
+			try {
+				this.mediumPosts = Array.isArray(medium?.items) ? medium.items.map((it: any) => ({
+					author: it.author, title: it.title, description: it.description, pubDate: it.pubDate, link: it.link, thumbnail: it.thumbnail, source: 'Medium'
+				})) : [];
+				this.twitterPosts = Array.isArray(twitter?.items) ? twitter.items.map((it: any) => ({
+					author: it.author, title: it.title, description: it.description, pubDate: it.pubDate, link: it.link, thumbnail: it.thumbnail, source: 'Twitter'
+				})) : [];
+				this.posts = [...this.mediumPosts, ...this.twitterPosts].sort((a: any, b: any) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+			} finally {
 				this.isLoading = false;
-			} else {
-				this.isLoading = false;
-				this.snackbarService.openSnackBar('Could not retrieve medium articles', 'Dismiss');
 			}
-		})
-		// let twitter = this.apiService.getTwitterArticles().subscribe((data:any) => {
-		// 	if (data) {
-		// 		for (let i = 0; i < data.items.length; i++) {
-		// 			// add an new object in array of objects
-		// 			this.posts.push({
-		// 				author: data.items[i].author,
-		// 				title: data.items[i].title,
-		// 				description: data.items[i].description,
-		// 				pubDate: data.items[i].pubDate,
-		// 				link: data.items[i].link,
-		// 				thumbnail: data.items[i].thumbnail,
-		// 				source: 'Twitter'
-		// 			});
-		// 		}
-		// 		this.isLoading = false;
-		// 	} else {
-		// 		this.isLoading = false;
-		// 		this.snackbarService.openSnackBar('Could not retrieve twitter articles', 'Dismiss');
-		// 	}
-		// })
+		}, () => {
+			this.isLoading = false;
+			this.snackbarService.openSnackBar('Could not retrieve social data', 'Dismiss');
+		});
 		// let youtube = this.apiService.getYouTubePosts().subscribe((data:any) => {
 		// 	if (data) {
 		// 		for (let i = 0; i < data.items.length; i++) {
@@ -167,12 +180,6 @@ export class MediaComponent implements OnInit {
 		// 	}
 		// })
 		// call wallets and deposits
-		Promise.all([medium]).catch(err => {
-			if(err) {
-				this.isLoading = false;
-				this.snackbarService.openSnackBar('Could not all social data', 'Dismiss');
-			}
-		});
 	}
 
 }

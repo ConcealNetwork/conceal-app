@@ -1,7 +1,6 @@
 // Default Cards
 mat-card {
 	padding: 3px;
-
 	.mat-mdc-card-header {
 		padding-top: 10px;
 		padding-bottom: 10px;
@@ -12,7 +11,7 @@ mat-card {
 	mat-card-header {
 		min-height: 60px;
 		margin-bottom: 0px;
-		border-radius: 2px;
+		border-radius: 4px;
 		h2 {
 			font-size: 1.2rem;
 			font-weight: 400;

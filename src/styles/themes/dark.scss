@@ -1,3 +1,4 @@
+@mixin apply() {
 .mat-drawer-container {
 	background-color: #303030;
 }
@@ -187,4 +188,5 @@ mat-card {
 ::placeholder {
 	color: #888 !important;
 	opacity: 1;
+}
 }
