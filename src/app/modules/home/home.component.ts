@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
 			description: 'A secure 2FA app that leverages the Conceal blockchain to securely backup your 2FA shared keys using a built-in lite wallet.',
 			icon: 'security',
 			actionLabel: 'Conceal Authenticator',
-			href: 'https://authenticator.conceal.network',
+			href: 'https://conceal.network/labs#authenticator',
 			target: '_blank'
 		},
         {
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
             description: 'The Conceal MarketPlace is a platform where Concealers can trade goods using their CCX.',
             icon: 'store',
             actionLabel: 'Conceal MarketPlace',
-			href: 'https://marketplace.conceal.network',
+			href: 'https://conceal.network/marketplace',
 			target: '_blank'
 		}
 	];
