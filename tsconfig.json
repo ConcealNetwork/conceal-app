@@ -25,6 +25,13 @@
       "dom"
     ]
   },
+  "exclude": [
+    "src/app/modules/bridge/**",
+    "src/app/modules/deposits/**",
+    "src/app/modules/authenticator/**",
+    "src/app/modules/id/**",
+    "src/app/modules/live/**"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

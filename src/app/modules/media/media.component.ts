@@ -5,8 +5,6 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import moment from 'moment';
-
 // Services
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ThemingService } from 'src/app/shared/services/theming.service';
@@ -90,7 +88,7 @@ export class MediaComponent implements OnInit {
 	}
 
 	toDate(time: number) {
-		return moment(time);
+		return new Date(time);
 	}
 
 	loadDiscordUpdates() {

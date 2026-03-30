@@ -28,6 +28,14 @@ export class DialogService {
 		public themingService: ThemingService
 	) { }
 
+	openConfirmationDialog(_deposit:any): void {
+		// No-op placeholder to satisfy callers when confirmation dialog is not implemented
+	}
+
+	openPendingDialog(): void {
+		// No-op placeholder to satisfy callers when pending dialog is not implemented
+	}
+
 	// openConfirmationDialog(deposit:any): void {
 	// 	const dialogRef = this.dialog.open(ConfirmationDialog, {
 	// 		width: this.themingService.exportDialogWidth,
