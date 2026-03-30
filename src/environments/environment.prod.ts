@@ -5,10 +5,8 @@ export const environment = {
 	version: '4.2.7',
 	api: 'https://bridge.conceal.network/backend',
   walletAPI: 'https://api.wallet.conceal.network/api',
-  coinStats: 'https://api.coinstats.app',
   gecko: 'https://api.coingecko.com',
   rss2json: 'https://api.rss2json.com',
-  nitter: 'https://farside.link/nitter',
 	interval: 60000,
 	defaultFee: 0.001000,
 	depositBlocksPerMonth: 21900,
@@ -17,6 +15,10 @@ export const environment = {
 	currency: 'usd',
 	// Optional backend endpoint returning Bi-Weekly Dev Updates from Discord
 	discordUpdatesUrl: '',
+	exchanges: [
+		{ name: 'NonKyc.io', url: 'https://NonKyc.io' },
+		{ name: 'NonLogs', url: 'https://nonlogs.io/' },
+	],
 	interestRates: [
 		[0.24, 0.33, 0.41],
 		[0.50, 0.67, 0.83],
