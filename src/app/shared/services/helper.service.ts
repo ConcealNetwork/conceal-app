@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // 3rd Party
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Injectable({
 	providedIn: 'root'
