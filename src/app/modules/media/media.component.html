@@ -9,7 +9,7 @@
       <p class="description">Get the latest conceal project news and updates</p>
     </div>
     <div class="articles" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px" [@listAnimation1]="posts.length">
-      <h2 class="headline" fxHide fxShow.gt-xs>Market</h2>
+      <h2 class="headline" fxShow fxShow.gt-xs>Market</h2>
       <mat-expansion-panel class="pannel mat-elevation-z6" [expanded]="false">
         <mat-expansion-panel-header>
           <mat-panel-title class="market-header-row">
@@ -38,7 +38,7 @@
         </div>
       </mat-expansion-panel>
       @if (substackFeedUrl) {
-        <h2 class="headline" fxHide fxShow.gt-xs>Substack</h2>
+        <h2 class="headline" fxShow fxShow.gt-xs>Substack</h2>
         @for (item of substackPosts.slice(0, this.substackLimit) | orderByImpure: '-pubDate'; track item.link; let i = $index) {
           <mat-expansion-panel class="pannel mat-elevation-z6" [expanded]="i == 0 && this.expanded">
             <mat-expansion-panel-header>
@@ -81,7 +81,7 @@
         }
       </mat-expansion-panel>
       -->
-      <h2 class="headline" fxHide fxShow.gt-xs>Medium</h2>
+      <h2 class="headline" fxShow fxShow.gt-xs>Medium</h2>
       @for (item of mediumPosts.slice(0, this.mediumLimit) | orderByImpure: '-pubDate'; track item; let i = $index) {
         <mat-expansion-panel class="pannel mat-elevation-z6" [expanded]="i == 0 && this.expanded">
           <mat-expansion-panel-header>
