@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
-import { from } from 'rxjs';
+import { from, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 /** Matches settings template + CoinGecko `vs_currencies` (lowercase symbol). */
@@ -24,6 +24,33 @@ function mapCoinGeckoMarketToCurrency(c: any): CurrencyOption {
 		symbol: String(c.symbol || '').toUpperCase(),
 		imageUrl: c.image,
 	};
+}
+
+/** Same shape as rss2json `items` entries for media list. */
+export type RssArticleItem = {
+	author: string;
+	title: string;
+	description: string;
+	pubDate: string;
+	link: string;
+	thumbnail: string;
+	source: string;
+};
+
+/** rss2json.com `items` → media list rows (Substack uses this path; direct RSS from the browser hits CORS). */
+function mapRss2JsonResponseToArticleItems(data: any, sourceLabel: string): RssArticleItem[] {
+	if (!data || data.status !== 'ok' || !Array.isArray(data.items)) {
+		return [];
+	}
+	return data.items.map((it: any) => ({
+		author: it.author ?? '',
+		title: it.title ?? '',
+		description: it.description ?? '',
+		pubDate: it.pubDate ?? '',
+		link: it.link ?? '',
+		thumbnail: it.thumbnail ?? '',
+		source: sourceLabel,
+	}));
 }
 
 function mergeCurrencies(rows: any[]): CurrencyOption[] {
@@ -83,6 +110,28 @@ export class ApiService {
 		} else {
 			return from(this.http.get(`${this.rss2json}/v1/api.json?rss_url=https://medium.com/feed/@concealnetwork`, {}, {})).pipe(map((data: any) => JSON.parse(data?.data)));
 		}
+	}
+
+	/**
+	 * Substack feed via rss2json (same idea as Medium). A direct `HttpClient` GET to
+	 * `*.substack.com/feed` from the app origin is blocked by CORS, so the RSS is fetched server-side.
+	 * Set `environment.substackFeedUrl` to e.g. `https://yoursubstack.substack.com/feed`.
+	 */
+	getSubstackArticles() {
+		const feedUrl = environment.substackFeedUrl?.trim();
+		if (!feedUrl) {
+			return of({ items: [] as RssArticleItem[] });
+		}
+		const rss2jsonUrl = `${this.rss2json}/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+		if (!this.cordovaService.onCordova) {
+			return this.httpclient.get<any>(rss2jsonUrl).pipe(
+				map((data) => ({ items: mapRss2JsonResponseToArticleItems(data, 'Substack') })),
+			);
+		}
+		return from(this.http.get(rss2jsonUrl, {}, {})).pipe(
+			map((res: any) => JSON.parse(res?.data)),
+			map((data) => ({ items: mapRss2JsonResponseToArticleItems(data, 'Substack') })),
+		);
 	}
 
 	getRedditPosts() {

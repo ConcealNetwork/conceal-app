@@ -37,6 +37,29 @@
           }
         </div>
       </mat-expansion-panel>
+      @if (substackFeedUrl) {
+        <h2 class="headline" fxHide fxShow.gt-xs>Substack</h2>
+        @for (item of substackPosts.slice(0, this.substackLimit) | orderByImpure: '-pubDate'; track item.link; let i = $index) {
+          <mat-expansion-panel class="pannel mat-elevation-z6" [expanded]="i == 0 && this.expanded">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{item.title | shorten: 125: '...'}} {{item.index}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p [innerHTML]="item.description | stripTags: '[a, p, br, ol, ul, h1, h2, h3, h4, strong]'" class="text"></p>
+            @if (item.link) {
+              <p class="article-external-link">
+                <a [href]="item.link" target="_blank" rel="noopener noreferrer">Read full article</a>
+              </p>
+            }
+          </mat-expansion-panel>
+        }
+        @if (this.substackLimit < substackPosts.length) {
+          <div fxHide fxShow.gt-xs fxLayout="column" fxLayoutAlign="center center">
+            <button class="more" mat-stroked-button color="accent" (click)="showAllSubstack()">Show more articles...</button>
+          </div>
+        }
+      }
       <!-- Disabled for now; keep for future use
       <mat-expansion-panel class="pannel mat-elevation-z6" (opened)="loadDiscordUpdates()">
         <mat-expansion-panel-header>
@@ -67,6 +90,11 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <p [innerHTML]="item.description | stripTags: '[a, p, br, ol, ul, h1, h2, h3, h4, strong]'" class="text"></p>
+          @if (item.link) {
+            <p class="article-external-link">
+              <a [href]="item.link" target="_blank" rel="noopener noreferrer">Read full article</a>
+            </p>
+          }
         </mat-expansion-panel>
       }
       @if (this.mediumLimit < mediumPosts.length) {

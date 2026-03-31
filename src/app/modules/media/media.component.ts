@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { of } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 // Services
@@ -47,7 +47,10 @@ export class MediaComponent implements OnInit {
 	posts: any = [];
 	mediumPosts: any[] = [];
 	mediumLimit: number = 5;
+	substackPosts: any[] = [];
+	substackLimit: number = 5;
 	expanded: boolean = true;
+	readonly substackFeedUrl: string = environment.substackFeedUrl ?? '';
 	discordUpdates: Array<{ id: string; content: string; createdAt: string }> = [];
 	discordLoaded: boolean = false;
 	currency: string = environment.currency;
@@ -78,6 +81,7 @@ export class MediaComponent implements OnInit {
 			if (state.matches) {
 				if (state.breakpoints[Breakpoints.XSmall]) {
 					this.mediumLimit = Math.min(10, this.mediumPosts.length || 10);
+					this.substackLimit = Math.min(10, this.substackPosts.length || 10);
 					this.expanded = false;
 				}
 			}
@@ -116,6 +120,7 @@ export class MediaComponent implements OnInit {
 
 	setLimit(number:number) { this.mediumLimit = number; }
 	showAllMedium() { this.mediumLimit = this.mediumPosts.length; }
+	showAllSubstack() { this.substackLimit = this.substackPosts.length; }
 
 	loadMarketPrice(): void {
 		this.apiService.getPrice(this.currency).pipe(catchError(() => of(null))).subscribe((data: any) => {
@@ -125,18 +130,35 @@ export class MediaComponent implements OnInit {
 	}
 
 	getArticles() {
-		this.apiService.getMediumArticles().pipe(catchError(() => of(null))).subscribe((medium: any) => {
-			try {
-				this.mediumPosts = Array.isArray(medium?.items) ? medium.items.map((it: any) => ({
-					author: it.author, title: it.title, description: it.description, pubDate: it.pubDate, link: it.link, thumbnail: it.thumbnail, source: 'Medium'
-				})) : [];
-				this.posts = [...this.mediumPosts].sort((a: any, b: any) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
-			} finally {
+		forkJoin({
+			medium: this.apiService.getMediumArticles().pipe(catchError(() => of(null))),
+			substack: this.apiService.getSubstackArticles().pipe(catchError(() => of({ items: [] }))),
+		}).subscribe({
+			next: ({ medium, substack }) => {
+				try {
+					this.mediumPosts = Array.isArray(medium?.items)
+						? medium.items.map((it: any) => ({
+								author: it.author,
+								title: it.title,
+								description: it.description,
+								pubDate: it.pubDate,
+								link: it.link,
+								thumbnail: it.thumbnail,
+								source: 'Medium',
+							}))
+						: [];
+					this.substackPosts = Array.isArray(substack?.items) ? substack.items : [];
+					this.posts = [...this.mediumPosts, ...this.substackPosts].sort(
+						(a: any, b: any) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
+					);
+				} finally {
+					this.isLoading = false;
+				}
+			},
+			error: () => {
 				this.isLoading = false;
-			}
-		}, () => {
-			this.isLoading = false;
-			this.snackbarService.openSnackBar('Could not retrieve social data', 'Dismiss');
+				this.snackbarService.openSnackBar('Could not retrieve social data', 'Dismiss');
+			},
 		});
 		// let youtube = this.apiService.getYouTubePosts().subscribe((data:any) => {
 		// 	if (data) {

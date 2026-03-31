@@ -19,6 +19,8 @@ export const environment = {
 	currency: 'usd',
 	// Optional backend endpoint returning Bi-Weekly Dev Updates from Discord
 	discordUpdatesUrl: '',
+	/** Direct RSS URL (no rss2json). Example: `https://yourname.substack.com/feed` */
+	substackFeedUrl: 'https://concealnetwork.substack.com/feed',
 	exchanges: [
 		{ name: 'NonKyc.io', url: 'https://NonKyc.io' },
 		{ name: 'NonLogs', url: 'https://nonlogs.io/' },
