@@ -157,6 +157,8 @@
 		overflow: hidden;
 	}
 	::ng-deep .mat-expansion-panel-header-title {
+		display: block;
+		max-width: 100%;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
