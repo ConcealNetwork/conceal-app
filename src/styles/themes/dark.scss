@@ -136,7 +136,9 @@ mat-card {
 .mat-header-row {
 	background: #333 !important;
 }
-
+.mat-expansion-panel-header-title {
+	color: #fafafa;
+}
 .mat-mdc-outlined-button {
     --mat-button-outlined-outline-color: rgba(255, 255, 255, 0.12);
 }
