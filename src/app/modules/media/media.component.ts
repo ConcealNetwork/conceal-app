@@ -44,16 +44,19 @@ export class MediaComponent implements OnInit {
 
 	// Variables
 	isLoading: boolean = true;
-	// Combined (kept for potential reuse)
 	posts: any = [];
-	// Separate feeds and limits
-	twitterPosts: any[] = [];
 	mediumPosts: any[] = [];
-	twitterLimit: number = 5;
 	mediumLimit: number = 5;
+	substackPosts: any[] = [];
+	substackLimit: number = 5;
 	expanded: boolean = true;
+	readonly substackFeedUrl: string = environment.substackFeedUrl ?? '';
 	discordUpdates: Array<{ id: string; content: string; createdAt: string }> = [];
 	discordLoaded: boolean = false;
+	currency: string = environment.currency;
+	ccxFiatPrice: number | null = null;
+	/** From `environment.exchanges` (name + link). */
+	readonly exchanges: Array<{ name: string; url: string }> = environment.exchanges ?? [];
 
   constructor(
 		private apiService: ApiService,
@@ -68,6 +71,8 @@ export class MediaComponent implements OnInit {
 	}
 
   ngOnInit(): void {
+		this.currency = (localStorage.getItem('currency') ?? environment.currency).toLowerCase();
+		this.loadMarketPrice();
 		this.getArticles();
 		// watch for changes of the screen size
 		this.breakpointObserver.observe([
@@ -76,7 +81,7 @@ export class MediaComponent implements OnInit {
 			if (state.matches) {
 				if (state.breakpoints[Breakpoints.XSmall]) {
 					this.mediumLimit = Math.min(10, this.mediumPosts.length || 10);
-					this.twitterLimit = Math.min(10, this.twitterPosts.length || 10);
+					this.substackLimit = Math.min(10, this.substackPosts.length || 10);
 					this.expanded = false;
 				}
 			}
@@ -114,29 +119,46 @@ export class MediaComponent implements OnInit {
 	}
 
 	setLimit(number:number) { this.mediumLimit = number; }
-	setTwitterLimit(number:number) { this.twitterLimit = number; }
 	showAllMedium() { this.mediumLimit = this.mediumPosts.length; }
-	showAllTwitter() { this.twitterLimit = this.twitterPosts.length; }
+	showAllSubstack() { this.substackLimit = this.substackPosts.length; }
+
+	loadMarketPrice(): void {
+		this.apiService.getPrice(this.currency).pipe(catchError(() => of(null))).subscribe((data: any) => {
+			const v = data?.conceal?.[this.currency];
+			this.ccxFiatPrice = typeof v === 'number' && !Number.isNaN(v) ? v : null;
+		});
+	}
 
 	getArticles() {
-		const medium$ = this.apiService.getMediumArticles().pipe(catchError(() => of(null)));
-		const twitter$ = this.apiService.getTwitterArticles().pipe(catchError(() => of(null)));
-
-		forkJoin([medium$, twitter$]).subscribe(([medium, twitter]: any[]) => {
-			try {
-				this.mediumPosts = Array.isArray(medium?.items) ? medium.items.map((it: any) => ({
-					author: it.author, title: it.title, description: it.description, pubDate: it.pubDate, link: it.link, thumbnail: it.thumbnail, source: 'Medium'
-				})) : [];
-				this.twitterPosts = Array.isArray(twitter?.items) ? twitter.items.map((it: any) => ({
-					author: it.author, title: it.title, description: it.description, pubDate: it.pubDate, link: it.link, thumbnail: it.thumbnail, source: 'Twitter'
-				})) : [];
-				this.posts = [...this.mediumPosts, ...this.twitterPosts].sort((a: any, b: any) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
-			} finally {
+		forkJoin({
+			medium: this.apiService.getMediumArticles().pipe(catchError(() => of(null))),
+			substack: this.apiService.getSubstackArticles().pipe(catchError(() => of({ items: [] }))),
+		}).subscribe({
+			next: ({ medium, substack }) => {
+				try {
+					this.mediumPosts = Array.isArray(medium?.items)
+						? medium.items.map((it: any) => ({
+								author: it.author,
+								title: it.title,
+								description: it.description,
+								pubDate: it.pubDate,
+								link: it.link,
+								thumbnail: it.thumbnail,
+								source: 'Medium',
+							}))
+						: [];
+					this.substackPosts = Array.isArray(substack?.items) ? substack.items : [];
+					this.posts = [...this.mediumPosts, ...this.substackPosts].sort(
+						(a: any, b: any) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
+					);
+				} finally {
+					this.isLoading = false;
+				}
+			},
+			error: () => {
 				this.isLoading = false;
-			}
-		}, () => {
-			this.isLoading = false;
-			this.snackbarService.openSnackBar('Could not retrieve social data', 'Dismiss');
+				this.snackbarService.openSnackBar('Could not retrieve social data', 'Dismiss');
+			},
 		});
 		// let youtube = this.apiService.getYouTubePosts().subscribe((data:any) => {
 		// 	if (data) {

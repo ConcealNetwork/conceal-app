@@ -21,7 +21,7 @@
                 <mat-label>Currency</mat-label>
                 <mat-select #currency name="currency" formControlName="currency">
                   @for (item of this.currencies; track item) {
-                    <mat-option [value]="item.name | lowercase">
+                    <mat-option [value]="item.symbol | lowercase">
                       <img class="icon" width="16" [src]="item.imageUrl" />
                       {{ item.symbol }} {{ item.name | uppercase }}
                     </mat-option>

@@ -9,6 +9,57 @@
       <p class="description">Get the latest conceal project news and updates</p>
     </div>
     <div class="articles" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px" [@listAnimation1]="posts.length">
+      <h2 class="headline" fxHide fxShow.gt-xs>Market</h2>
+      <mat-expansion-panel class="pannel mat-elevation-z6" [expanded]="false">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="market-header-row">
+            <span class="market-header-row__label">CCX Price</span>
+            <span class="market-header-row__price">
+              @if (ccxFiatPrice != null) {
+                {{ ccxFiatPrice | number: '1.2-6' }} {{ currency | uppercase }}
+              }
+            </span>
+            <span class="market-header-row__source">source : Coingecko</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p class="text market-attribution">Exchanges:</p>
+        <div class="market-panel-body" fxLayout="column" fxLayoutGap="10px">
+          @if (exchanges.length) {
+            <ul class="exchange-list exchange-list--links">
+              @for (ex of exchanges; track ex.url) {
+                <li>
+                  <a [href]="ex.url" target="_blank" rel="noopener noreferrer">{{ ex.name }}</a>
+                </li>
+              }
+            </ul>
+          } @else {
+            <p class="text">No exchanges configured.</p>
+          }
+        </div>
+      </mat-expansion-panel>
+      @if (substackFeedUrl) {
+        <h2 class="headline" fxHide fxShow.gt-xs>Substack</h2>
+        @for (item of substackPosts.slice(0, this.substackLimit) | orderByImpure: '-pubDate'; track item.link; let i = $index) {
+          <mat-expansion-panel class="pannel mat-elevation-z6" [expanded]="i == 0 && this.expanded">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{item.title | shorten: 125: '...'}} {{item.index}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p [innerHTML]="item.description | stripTags: '[a, p, br, ol, ul, h1, h2, h3, h4, strong]'" class="text"></p>
+            @if (item.link) {
+              <p class="article-external-link">
+                <a [href]="item.link" target="_blank" rel="noopener noreferrer">Read full article</a>
+              </p>
+            }
+          </mat-expansion-panel>
+        }
+        @if (this.substackLimit < substackPosts.length) {
+          <div fxHide fxShow.gt-xs fxLayout="column" fxLayoutAlign="center center">
+            <button class="more" mat-stroked-button color="accent" (click)="showAllSubstack()">Show more articles...</button>
+          </div>
+        }
+      }
       <!-- Disabled for now; keep for future use
       <mat-expansion-panel class="pannel mat-elevation-z6" (opened)="loadDiscordUpdates()">
         <mat-expansion-panel-header>
@@ -30,24 +81,6 @@
         }
       </mat-expansion-panel>
       -->
-      <!-- Twitter section -->
-      <h2 class="headline" fxHide fxShow.gt-xs>Twitter</h2>
-      @for (item of twitterPosts.slice(0, this.twitterLimit) | orderByImpure: '-pubDate'; track item; let i = $index) {
-        <mat-expansion-panel class="pannel mat-elevation-z6" [expanded]="i == 0 && this.expanded">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{item.title | shorten: 125: '...'}} {{item.index}}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <p [innerHTML]="item.description | stripTags: '[a, p, br, ol, ul, h1, h2, h3, h4, strong]'" class="text"></p>
-        </mat-expansion-panel>
-      }
-      @if (this.twitterLimit < twitterPosts.length) {
-        <div fxHide fxShow.gt-xs fxLayout="column" fxLayoutAlign="center center">
-          <button class="more" mat-stroked-button color="accent" (click)="showAllTwitter()">Show more tweets...</button>
-        </div>
-      }
-      <!-- Medium section -->
       <h2 class="headline" fxHide fxShow.gt-xs>Medium</h2>
       @for (item of mediumPosts.slice(0, this.mediumLimit) | orderByImpure: '-pubDate'; track item; let i = $index) {
         <mat-expansion-panel class="pannel mat-elevation-z6" [expanded]="i == 0 && this.expanded">
@@ -57,6 +90,11 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <p [innerHTML]="item.description | stripTags: '[a, p, br, ol, ul, h1, h2, h3, h4, strong]'" class="text"></p>
+          @if (item.link) {
+            <p class="article-external-link">
+              <a [href]="item.link" target="_blank" rel="noopener noreferrer">Read full article</a>
+            </p>
+          }
         </mat-expansion-panel>
       }
       @if (this.mediumLimit < mediumPosts.length) {
